@@ -27,15 +27,32 @@
   text-decoration: none;
   text-align: center;
   border: none;
-  line-height: 36px;
+  height: 36px;
   padding: 0 16px;
-  margin: 20px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 .memberBtn:hover {
   background-color: #E4C600;
+  color: #2F2F2F;
+}
+
+.registerBtn {
+  font-size: 1rem;
+  border-radius: 8px;
+  background-color: rgba(47, 47, 47, 0.5);
   color: #ffffff;
+  text-decoration: none;
+  text-align: center;
+  border: none;
+  height: 36px;
+  padding: 0 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.registerBtn:hover {
+  background-color: #E4C600;
+  color: #2F2F2F;
 }
 
 .applicationBtn {
@@ -218,10 +235,16 @@ footer .footerContact {
   padding: 60px;
 }
 
+body {
+  font-family: "微軟正黑體", "Noto Sans TC ";
+  padding-top: 72px;
+  margin: 0;
+}
+
 .wrapper {
   max-width: 1200px;
+  padding-top: 72px;
   margin: 0 auto;
-  outline: 1px solid black;
 }
 
 header {
@@ -238,30 +261,64 @@ header .pageTitle {
 }
 
 nav {
-  max-width: 1200px;
+  width: 100%;
+  padding: 0 8vw;
   height: 72px;
   margin: 0 auto;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: #ffffff;
+}
+nav .logo {
+  height: 60px;
+}
+nav .navBar {
+  display: flex;
+  margin-left: auto;
 }
 nav ul {
-  width: 100%;
-  list-style: none;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
+  gap: 16px;
 }
 nav ul li {
-  height: 72px;
+  margin-right: 32px;
 }
 nav ul li a {
-  height: 100%;
-  padding: 0 30px;
+  line-height: 24px;
+  font-size: 16px;
   text-decoration: none;
-  display: flex;
-  align-items: center;
-  color: black;
+  color: #000000;
+  height: 24px;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 3px;
 }
-nav ul li:first-child {
-  margin-right: auto;
+nav ul li a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 1px;
+  background-color: #000000;
+  transition: width 0.5s ease-in-out;
+}
+nav ul li a:hover:after {
+  width: 100%;
+  left: 0;
+}
+nav .memberAction {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
 }
 
 .aboutBanner {

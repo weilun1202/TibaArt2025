@@ -1,5 +1,14 @@
-.wrapper{
+body {
+    font-family: $fontTC, $fontEG;
+    padding-top: 72px;
+    margin: 0;
+}
+
+
+.wrapper {
     max-width: 1200px;
+    padding-top: 72px;
     margin: 0 auto;
-    outline: 1px solid black;
+
+    // outline: 1px solid black;
 }
