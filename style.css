@@ -88,44 +88,20 @@
   padding: 0 16px;
 }
 
-form {
-  margin: 0 auto;
+.formA {
   padding: 20px;
-  position: relative;
 }
-form .formItem {
-  display: block;
-  font-size: 20px;
-  padding-bottom: 8px;
-}
-form input[type=text] {
-  box-sizing: border-box;
-  line-height: 48px;
-  font-size: 16px;
-  padding: 0 16px;
-}
-form .formHint {
-  position: absolute;
-  bottom: 0;
-  left: 150px;
-  font-size: 12px;
-  color: #C34E4E;
-}
-form .formHint5 {
-  color: #C34E4E;
-}
-
-.formA .form-group {
+.formA .formGroup {
   width: 500px;
   margin-bottom: 12px;
 }
-.formA .form-label {
+.formA .formLabel {
   font-size: 1.25rem;
   display: flex;
   align-items: center;
   margin-bottom: 8px;
 }
-.formA .formHint5 {
+.formA .formHint {
   color: #C34E4E;
   margin-left: 4px;
   font-size: 1rem;
