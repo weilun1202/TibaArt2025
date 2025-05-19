@@ -1,11 +1,13 @@
 header{
-    height: 200px;
+    height: 120px;
     background-color: $primaryGreen;
+    width: 100%;
 
     .pageTitle{
         font-size: map-get($font, h1);
         font-family: $fontTC;
-        // color: $secondaryGrey;
+        color: $fontWhite;
+        font-weight: bold;
 
         text-align: center;
         
