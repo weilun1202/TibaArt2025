@@ -1,0 +1,16 @@
+footer{
+    background-color: $primaryGreen;
+    // color: $secondaryGrey;
+
+    .footerContact{
+        max-width: 1200px;
+        margin: 0 auto;
+        text-align: center;
+        
+        justify-content: space-between;
+        align-items: center;
+
+        line-height: 24px;
+        padding: 60px;
+    }
+}

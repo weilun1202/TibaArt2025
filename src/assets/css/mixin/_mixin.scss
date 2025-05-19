@@ -1,0 +1,56 @@
+// 垂直、水平置中
+@mixin marginCenter{
+    display: flex;
+    // 垂直置中
+	align-items: center;
+    // 水平置中
+	justify-content: center;
+}
+
+// 商店頁籤
+@mixin shopTabButton {
+    font-size: map-get($font, h1);
+    line-height: 120px;
+    font-weight: bold;
+    color: $fontBlack;
+    opacity: 0.5;
+
+    &:hover {
+        color: $primaryGreen;
+        cursor: pointer;
+        opacity: 1;
+        border-bottom: 8px solid;
+    }
+}
+
+// 普通按鈕
+@mixin button(
+    $bg: $primaryGreen,
+    $color: $fontWhite,
+    $hover-bg: $buttonYellow,
+    $hover-color: $fontWhite
+) 
+{
+    font-size: map-get($font, h5);
+    border-radius: $spacing-2;
+    background-color: $bg;
+    color: $color;
+
+    text-decoration: none;
+    text-align: center;
+    border: none;
+
+    line-height: 48px;
+    padding: 0 $spacing-4;
+    margin: 20px;
+
+    cursor: pointer;
+
+    transition: all 0.3s ease;
+
+    &:hover {
+        background-color: $hover-bg;
+        color: $hover-color;
+    }
+}
+

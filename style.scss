@@ -1,0 +1,104 @@
+@import url('./src/assets/css/reset.css');
+
+//basic
+@import './src/assets/css/basic/breakpoint';
+@import './src/assets/css/basic/color';
+@import './src/assets/css/basic/font';
+@import './src/assets/css/basic/spacing';
+@import './src/assets/css/basic/var';
+
+// mixin
+@import './src/assets/css/mixin/mixin';
+
+// component
+@import './src/assets/css/component/btn';
+@import './src/assets/css/component/form';
+@import './src/assets/css/component/tab';
+
+// layout
+@import './src/assets/css/layout/footer';
+@import './src/assets/css/layout/wrapper';
+@import './src/assets/css/layout/header';
+@import './src/assets/css/layout/login';
+@import './src/assets/css/layout/nav';
+@import './src/assets/css/layout/sidebar';
+
+//page
+@import './src/assets/css/page/about';
+@import './src/assets/css/page/main';
+// @import 'sass/page/product';
+
+// plugin
+@import  './src/assets/css/plugin/bootstrap';
+
+*{
+    /* 避免圖片跑版(LOGO) */
+    box-sizing: border-box;
+}
+
+html {
+    font-size: $bodyfont;
+    $fontBlack: #2F2F2F;
+    font-family: $fontTC;
+    
+    background: linear-gradient(to top, #f6eee4, #ffffff);
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* 確保背景覆蓋整個視窗 */
+    height: 100%;
+    
+}
+
+body{
+    max-width: 1440px;
+    list-style: none;
+    margin: 0 auto;
+
+    /* 保證 body 撐滿畫面高度 */
+    min-height: 100vh;
+}
+
+
+h1{
+    font-size: map-get($font, h2);
+    color: rebeccapurple;
+    // padding: 10px;
+    // margin: 10px;
+}
+
+// 色階
+
+.colorbox {
+  display: flex;
+}
+
+@mixin bgColor($class , $bgc) {
+  @for $i from 0 through 9 {
+    @if $i ==0 {
+      .#{$class}{
+        background-color: $bgc;
+        width: 80px;
+        height: 60px;
+      }
+    }
+    @else {
+      .#{$class}#{$i * 100} {
+        background-color: lighten($bgc, $i * 7);
+        width: 80px;
+        height: 60px;
+      }
+    }
+  }
+}
+
+@include bgColor('primaryGreen', #2E5B4A);
+
+@include bgColor('logoColor1', $logoColor1);
+@include bgColor('logoColor2', $logoColor2);
+@include bgColor('logoColor3', $logoColor3);
+@include bgColor('logoColor4', $logoColor4);
+@include bgColor('logoColor5', $logoColor5);
+@include bgColor('logoColor6', $logoColor6);
+
+
+

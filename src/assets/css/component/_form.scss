@@ -1,0 +1,73 @@
+form{
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    // label
+    .formItem{ 
+        display: block;
+        font-size: 20px;
+        padding-bottom: 8px;
+    }
+    input[type="text"]{
+        box-sizing: border-box;
+        line-height: 48px;
+        // height: 48px;
+        font-size: 16px;
+        padding: 0 16px; // 左右 16px 內距
+    }
+    .formHint{
+        position: absolute;
+        bottom: 0;
+        left: 150px;
+        font-size: 12px;
+        color: $fontWarn;
+    }
+    .formHint5{
+        color: $fontWarn;
+    }
+}
+
+// -------------------------------------------------
+
+.formA{
+    // label
+    .form-group {
+        width: 500px;  //-------------控制大小
+        margin-bottom: $spacing-3;
+    }
+    .form-label {
+        font-size: map-get($font, h5);
+        display: flex;
+        align-items: center;
+        margin-bottom: $spacing-2;
+    }
+    .formHint5 {
+        color: $fontWarn;
+        margin-left: $spacing-1;
+        font-size: map-get($font, p);
+    }
+    input[type="text"],input[type="tel"], select {
+        width: 100%;
+        height: 48px;
+        padding: 0 $spacing-4;
+        font-size: map-get($font, p);
+        border-radius: $spacing-2;
+        border: 1px solid $fontBlack;
+        opacity: 0.5;
+        box-sizing: border-box;
+    }
+    .formError {
+        font-size: 12px;
+        color: $fontWarn;
+        margin-top: $spacing-1;
+        min-height: $spacing-4; /* 保留空間，即使沒有錯誤時也不跳動 */
+    }
+    .hidden {
+        visibility: hidden;
+    }
+
+}
+
+
+
+

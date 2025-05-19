@@ -1,0 +1,39 @@
+// 商店頁籤 shopTab
+.shopTab {
+    display: flex;
+    font-size: map-get($font, h1);
+    box-sizing: border-box;
+
+    .tabaShopTab {
+        margin-right: $spacing-5;
+        h1 {
+            @include shopTabButton;
+        }
+    }
+    .artSohopTab {
+        margin-left: $spacing-5;
+        h1 {
+            @include shopTabButton;
+        }
+    }
+}
+
+// 會員登入頁籤 memberTab
+.memberLoginTab{
+    display: flex;
+    font-size: map-get($font, h4);  // 24px
+
+    width: 450px;
+    outline: 1px solid black;
+    
+    justify-content: space-around;
+
+    .normalLoginTab,
+    .artistLoginTab{
+        padding: 25px;
+        &:hover{
+            color: $primaryGreen;
+            cursor: pointer;
+        }
+    }
+}

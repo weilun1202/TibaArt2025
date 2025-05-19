@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>測試 test</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+</head>
+<body>
+
+    <nav>
+        <ul>
+            <li class="logo"><a href="#"><img src="./src/assets/img/TibaArtLogo.svg" alt=""></a></li>
+            <li><a href="#">線上展覽</a></li>
+            <li><a href="#">贊助藝術家</a></li>
+            <li><a href="#">展覽申請</a></li>
+            <li><a href="#">線上商城</a></li>
+            <li><a href="#">關於我們</a></li>
+            <li><a href="#">會員登入</a></li> 
+        </ul>
+    </nav>
+
+    <header>
+        <div class="pageTitle">測試用而已(依照Figma設定，之後可以調整)</div> 
+    </header>
+
+    <div class="wrapper">
+        <!-- <div class="box"></div> -->
+
+        <br>
+        <br>
+    
+        <h1>普通按鈕</h1>
+        <button type="button" class="btn">加入購物車</button>
+        
+        <br>
+        <br>
+
+        <h1>會員按紐</h1>
+        <button class="memberBtn">登入會員</button>
+    
+        <br>
+        <br>
+
+        <h1>申請按鈕</h1>
+    
+        <a href="#" download class="applicationBtn">
+            <span class="text">
+                申請檔範例&nbsp;
+                <i class="fa-solid fa-file-arrow-down iconStyle"></i>
+            </span>
+        </a>
+    
+        <br>
+    
+        <button type="submit" class="uploadBtn">
+            <span class="text">
+                申請檔上傳&nbsp;
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+            </span>
+        </button>
+        <!-- <p>申請檔上傳 為了和「申請檔範例」的大小一致，所以暫時調整為 font-size: 28px;</p> -->
+    
+        <br>
+        <br>
+    
+        <h1>綠界</h1>
+    
+        <a href="#" class="ecpayBtn">
+            <img src="./src/assets/img/ecpay_logo.svg" alt="ecpay_logo.svg">
+        </a>
+    
+    
+        <br>
+        <br>
+    
+        <!-- shopTab -->
+    
+        <h1>商店頁籤 Tab</h1>
+    
+        <div class="shopTab">
+            <div class="tabaShopTab">
+                <h1>緯藝周邊商品</h1>
+            </div>
+            <div class="artSohopTab">
+                <h1>藝術家原創商品</h1>
+            </div>
+        </div>
+        
+        <br>
+        <br>
+        <br>
+    
+        <h1>會員登入頁籤 Tab</h1>
+        <!-- memberTab -->
+        <div class="memberLoginTab">
+            <div class="normalLoginTab">
+                <h4>一般會員登入</h4>
+            </div>
+            <div class="artistLoginTab">
+                <h4>藝術家會員登入</h4>
+            </div>
+        </div>
+
+        <br>
+        <br>
+
+        <h1>Form 樣式 1 part.2</h1>
+        <br>
+        <br>
+
+        <form action="" class="formA">
+    
+            <div class="form-group">
+                <label for="email" class="form-label">
+                    帳號 (信箱)<span class="formHint5">*</span>
+                </label>
+                <input type="text" id="email" name="email" placeholder="請輸入電子郵件">
+                <span class="formError hidden">格式錯誤</span>
+            </div>
+    
+            <div class="form-group">
+                <label for="name" class="form-label">
+                    姓名<span class="formHint5">*</span>
+                </label>
+                <input type="text" id="name" name="name" placeholder="請輸入姓名">
+                <span class="formError hidden">格式錯誤</span>
+            </div>
+    
+            <div class="form-group">
+                <label for="tel" class="form-label">
+                    手機<span class="formHint5">*</span>
+                </label>
+                <input type="tel" id="tel" name="tel" minlength="10" maxlength="10" placeholder="請輸入手機號碼">
+                <span class="formError hidden">格式錯誤</span>
+            </div>
+        
+            <div class="form-group">
+                <label for="subject" class="form-label">
+                    展覽選擇<span class="formHint5">*</span>
+                </label>
+                <select id="subject" name="subject">
+                    <option value="">請選擇</option>
+                    <option value="expo">展覽 01</option>
+                    <option value="expo">展覽 02</option>
+                    <option value="expo">展覽 03</option>
+                    <option value="expo">展覽 04</option>
+                </select>
+                <span class="formError hidden">格式錯誤</span>
+            </div>
+    
+        </form>
+    
+        <p>建議：原本的必填，可以改用「 * 」代替，放在 label </p>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+
+
+
+
+
+
+
+    </div>
+
+    <h1>色階</h1>
+
+    <br>
+
+    <div class="container">
+
+        <div class="colorbox">
+            <div class="primaryGreen"></div>
+            <div class="primaryGreen100"></div>
+            <div class="primaryGreen200"></div>
+            <div class="primaryGreen300"></div>
+            <div class="primaryGreen400"></div>
+            <div class="primaryGreen500"></div>
+            <div class="primaryGreen600"></div>
+            <div class="primaryGreen700"></div>
+            <div class="primaryGreen800"></div>
+            <div class="primaryGreen900"></div>
+        </div>
+
+        <br>   
+        <hr>    
+        <br>
+
+        <!-- test -->
+
+        <div class="colorbox">
+            <div class="logoColor1"></div>
+            <div class="logoColor1100"></div>
+            <div class="logoColor1200"></div>
+            <div class="logoColor1300"></div>
+            <div class="logoColor1400"></div>
+            <div class="logoColor1500"></div>
+            <div class="logoColor1600"></div>
+            <div class="logoColor1700"></div>
+            <div class="logoColor1800"></div>
+            <div class="logoColor1900"></div>
+        </div>
+
+        <div class="colorbox">
+            <div class="logoColor2"></div>
+            <div class="logoColor2100"></div>
+            <div class="logoColor2200"></div>
+            <div class="logoColor2300"></div>
+            <div class="logoColor2400"></div>
+            <div class="logoColor2500"></div>
+            <div class="logoColor2600"></div>
+            <div class="logoColor2700"></div>
+            <div class="logoColor2800"></div>
+            <div class="logoColor2900"></div>
+        </div>
+
+        <div class="colorbox">
+            <div class="logoColor3"></div>
+            <div class="logoColor3100"></div>
+            <div class="logoColor3200"></div>
+            <div class="logoColor3300"></div>
+            <div class="logoColor3400"></div>
+            <div class="logoColor3500"></div>
+            <div class="logoColor3600"></div>
+            <div class="logoColor3700"></div>
+            <div class="logoColor3800"></div>
+            <div class="logoColor3900"></div>
+        </div>
+
+        <div class="colorbox">
+            <div class="logoColor4"></div>
+            <div class="logoColor4100"></div>
+            <div class="logoColor4200"></div>
+            <div class="logoColor4300"></div>
+            <div class="logoColor4400"></div>
+            <div class="logoColor4500"></div>
+            <div class="logoColor4600"></div>
+            <div class="logoColor4700"></div>
+            <div class="logoColor4800"></div>
+            <div class="logoColor4900"></div>
+        </div>
+
+        <div class="colorbox">
+            <div class="logoColor5"></div>
+            <div class="logoColor5100"></div>
+            <div class="logoColor5200"></div>
+            <div class="logoColor5300"></div>
+            <div class="logoColor5400"></div>
+            <div class="logoColor5500"></div>
+            <div class="logoColor5600"></div>
+            <div class="logoColor5700"></div>
+            <div class="logoColor5800"></div>
+            <div class="logoColor5900"></div>
+        </div>
+
+        <div class="colorbox">
+            <div class="logoColor6"></div>
+            <div class="logoColor6100"></div>
+            <div class="logoColor6200"></div>
+            <div class="logoColor6300"></div>
+            <div class="logoColor6400"></div>
+            <div class="logoColor6500"></div>
+            <div class="logoColor6600"></div>
+            <div class="logoColor6700"></div>
+            <div class="logoColor6800"></div>
+            <div class="logoColor6900"></div>
+        </div>
+        
+        
+    </div>
+
+    <br>
+    <br>
+    <br>
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+nav{
+    max-width: 1200px;
+    height: 72px;
+    margin: 0 auto;
+    ul{
+        width: 100%;
+        list-style: none;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+        li{
+            height: 72px;
+            a{
+                height: 100%;
+                padding: 0 30px;
+                text-decoration: none;
+                display: flex;
+                align-items: center;
+                color: black;
+            }
+            &:first-child{
+                margin-right: auto;
+            }
+            
+        }
+    }
+}
