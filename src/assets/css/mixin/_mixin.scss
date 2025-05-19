@@ -9,8 +9,8 @@
 
 // 商店頁籤
 @mixin shopTabButton {
-    font-size: map-get($font, h1);
-    line-height: 120px;
+    font-size: map-get($font, h3);
+    // line-height: 120px;
     font-weight: bold;
     color: $fontBlack;
     opacity: 0.5;
@@ -19,7 +19,7 @@
         color: $primaryGreen;
         cursor: pointer;
         opacity: 1;
-        border-bottom: 8px solid;
+        border-bottom: 4px solid;
     }
 }
 
