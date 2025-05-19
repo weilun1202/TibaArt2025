@@ -288,6 +288,7 @@ nav ul li:first-child {
   border-radius: 8px;
   border: 1px solid #29786A;
   color: #29786A;
+  padding: 8px 12px;
 }
 
 .searchInput:focus {
@@ -298,8 +299,8 @@ nav ul li:first-child {
 
 .searchButton {
   position: absolute;
-  right: 24px;
-  top: 60%;
+  right: 56px;
+  top: 82%;
   transform: translateY(-50%);
   background-color: transparent;
   border: none;

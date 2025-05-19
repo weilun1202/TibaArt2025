@@ -12,6 +12,7 @@
     border-radius: 8px;
     border: 1px solid $primaryGreen;
     color: $primaryGreen;
+    padding: 8px 12px;
 }
 
 .searchInput:focus {
@@ -22,8 +23,8 @@
 
 .searchButton {
     position: absolute;
-    right: 24px;
-    top: 60%;
+    right: 56px;
+    top: 82%;
     transform: translateY(-50%);
     background-color: transparent;
     border: none;
