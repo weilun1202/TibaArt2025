@@ -1,10 +1,11 @@
-.shopTab{
+.shopTab {
     padding: 20px;
-    
+
 }
 
 .searchContainer {
     margin-left: auto;
+
 }
 
 .searchInput {
@@ -22,7 +23,7 @@
 }
 
 .searchButton {
-    position: absolute;
+    position: relative;
     right: 56px;
     top: 82%;
     transform: translateY(-50%);
@@ -43,16 +44,16 @@
     width: calc(33.333% - 40px);
     margin: 0 20px 40px;
     border: 1px solid #29786A;
-    padding:20px;
+    padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .item:hover {
     transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
 }
 
 .itemImage {
@@ -103,7 +104,7 @@
     justify-content: flex-end;
 }
 
-.btn{
+.btn {
     margin: 0px;
 }
 
