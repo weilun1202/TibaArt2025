@@ -3,7 +3,7 @@
     display: flex;
     font-size: map-get($font, h1);
     box-sizing: border-box;
-
+    align-items: center;
     .tabaShopTab {
         margin-right: $spacing-5;
         h1 {
