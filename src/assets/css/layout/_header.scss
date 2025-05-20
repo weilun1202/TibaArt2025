@@ -1,18 +1,17 @@
-header{
+header {
     height: 120px;
     background-color: $primaryGreen;
-    width: 100%;
 
-    .pageTitle{
+    .pageTitle {
         font-size: map-get($font, h1);
         font-family: $fontTC;
         color: $fontWhite;
         font-weight: bold;
 
         text-align: center;
-        
+
         position: relative;
         top: 50%;
         transform: translate(0, -50%);
-    }   
+    }
 }

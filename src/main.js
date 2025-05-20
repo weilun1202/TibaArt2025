@@ -1,4 +1,5 @@
-import './assets/main.css'
+// Vue 專案內建樣式，先註解掉，避免被影響
+// import './assets/main.css'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'

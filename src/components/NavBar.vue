@@ -42,9 +42,4 @@ const goToRegister = () => {
 
 <style scoped>
 /* 你可以把 nav 的 CSS 加在這裡或保留在全域 */
-@media (hover: hover) {
-  a:hover {
-    background-color: transparent !important;
-  }
-}
 </style>
