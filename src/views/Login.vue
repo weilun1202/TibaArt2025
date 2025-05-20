@@ -9,28 +9,104 @@
         <img src="../assets/img/LoginImg.jpg" alt="">
         
         <div class="loginContainer">
-          <div class="tabs">
-            <button class="tab-button active" @click="showTab('general')">一般會員登入</button>
-            <button class="tab-button" @click="showTab('artist')">藝術家會員登入</button>
+          <!-- Tabs -->
+          <div class="memberLoginTab">
+            <div
+              class="generalLoginTab"
+              :class="{ active: currentTab === 'general' }, { bgGeneral: currentTab === 'general' }"
+              @click="currentTab = 'general'"
+            >
+              <h4>一般會員登入</h4>
+            </div>
+            <div
+              class="artistLoginTab"
+              :class="{ active: currentTab === 'artist' }, { bgArtist: currentTab === 'artist' }"
+              @click="currentTab = 'artist'"
+            >
+              <h4>藝術家會員登入</h4>
+            </div>
           </div>
-          <div id="general-login" class="tab-content active">
-            
-            <form action="" class="formA">
-                <div class="formGroup">
-                  <label for="name" class="formLabel">帳號（您的電子郵件</label>
-                  <input type="text" id="name" name="name" placeholder="輸入 E-mail">
+
+          <!-- 一般會員登入 -->
+          <div id="generalLogin" class="tabContent" v-if="currentTab === 'general'" :class="{ bgGeneral: currentTab === 'general' }">
+            <form class="formA" @submit.prevent="submitGeneral">
+              <div class="formGroup">
+                <label for="account" class="formLabel">帳號（您的電子信箱）</label>
+                <input
+                  type="email"
+                  id="account"
+                  name="account"
+                  placeholder="輸入 E-mail"
+                  v-model="general.email"
+                />
+                <span class="formError hidden">格式錯誤</span>
+              </div>
+
+              <div class="formGroup">
+                <label for="password" class="formLabel">密碼</label>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  placeholder="輸入密碼"
+                  v-model="general.password"
+                />
+                <div class="reminder">
                   <span class="formError hidden">格式錯誤</span>
+                  <a href="#" class="passForget">忘記密碼</a>
                 </div>
-              
-                <div class="formGroup">
-                    <label for="email" class="formLabel">密碼</label>
-                    <input type="password" id="password" name="password" placeholder="輸入密碼">
-                    <span class="formError hidden">格式錯誤</span>
-                </div>
-            </form>
+              </div>
 
+              <div class="btnGroup">
+                <button class="btn" type="submit">確定登入</button>
+                <button class="btn" type="button">註冊會員</button>
+              </div>
+            </form>
           </div>
 
+          <!-- 藝術家登入 -->
+          <div id="artistLogin" class="tabContent" v-if="currentTab === 'artist'" :class="{ bgArtist: currentTab === 'artist' }">
+            <form class="formA" @submit.prevent="submitArtist">
+              <div class="formGroup">
+                <label for="artistEmail" class="formLabel">帳號（您的電子信箱）</label>
+                <input
+                  type="email"
+                  id="artistEmail"
+                  placeholder="輸入 E-mail"
+                  v-model="artist.email"
+                />
+                <span class="formError hidden">格式錯誤</span>
+              </div>
+
+              <div class="formGroup">
+                <label for="artistPassword" class="formLabel">密碼</label>
+                <input
+                  type="password"
+                  id="artistPassword"
+                  placeholder="輸入密碼"
+                  v-model="artist.password"
+                />
+                <div class="reminder">
+                  <span class="formError hidden">格式錯誤</span>
+                  <a href="#" class="passForget">忘記密碼</a>
+                </div>
+              </div>
+
+              <div class="btnGroup">
+                <button class="btn" type="submit">確定登入</button>
+                <button class="btn" type="button">註冊藝術家會員</button>
+              </div>
+            </form>
+          </div>
+          
+          <!-- 第三方登入區塊 -->
+          <div class="thirdPartyLogin">
+            <div class="separator">或使用以下方式登入</div>
+            <div class="socialButtons">
+              <button class="btn socialBtn google"><font-awesome-icon :icon="['fab', 'google']" /></button>
+              <button class="btn socialBtn facebook"><font-awesome-icon :icon="['fab', 'facebook']" /></button>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -40,19 +116,103 @@
 
 <script setup>
 
+import { ref } from 'vue'
+
+const currentTab = ref('general')
+
+const general = ref({
+  email: '',
+  password: ''
+})
+
+const artist = ref({
+  email: '',
+  password: ''
+})
+
+const submitGeneral = () => {
+  console.log('一般會員登入資料:', general.value)
+  // 可加上 axios.post() 送出資料
+}
+
+const submitArtist = () => {
+  console.log('藝術家會員登入資料:', artist.value)
+  // 可加上 axios.post() 送出資料
+}
+
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+defineProps()
+
 </script>
 
 <style lang="scss" scoped>
 /* 可以把額外的 CSS 加在這裡或保留在全域 */
 @import '/style.scss';
 
-.loginPage{
+.loginPage {
   max-width: 1200px;
+  margin: 0 auto;
+  padding: 120px 0 ;
   display: flex;
   justify-content: center;
-  gap: $spacing-5;
-}
+  gap: $spacing-10;
 
+  .formA{
+    border: 1.5px solid $fontBlack;
+    border-radius: 0 0 $spacing-2 $spacing-2;
+    // border-top: none;
+  }
+
+  .reminder{
+    display: flex;
+    justify-content: space-between;
+  }
+    .passForget{
+      font-size: map-get($font, pwar);
+      margin-top: $spacing-1;
+      min-height: $spacing-4;
+      // text-decoration: none;
+      color: $fontBlack;
+      // border-bottom: 1px solid $fontBlack;
+    }
+
+  .btnGroup{
+    display: flex;
+    justify-content: center;
+    gap: $spacing-10;
+  }
+
+  .tabContent{
+    // border: 1.5px solid $fontBlack;
+    border-radius: 0 0 $spacing-2 $spacing-2;
+  }
+
+  .bgGeneral,
+  .bgGeneral a{
+    background-color: $logoColor3;
+    color: $fontWhite;
+  }
+
+  .bgArtist{
+    color: $fontBlack;
+    background-color: $logoColor6;
+  }
+
+  .separator{
+    text-align: center;
+    font-size: map-get($font, h5);
+    margin: $spacing-6;
+  }
+
+  .socialButtons{
+    display: flex;
+    justify-content: center;
+    gap: $spacing-10;
+  }
+
+  
+
+}
 
 </style>
 

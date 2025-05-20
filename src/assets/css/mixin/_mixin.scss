@@ -28,7 +28,7 @@
     $bg: $primaryGreen,
     $color: $fontWhite,
     $hover-bg: $buttonYellow,
-    $hover-color: $fontWhite
+    $hover-color: $fontBlack
 ) 
 {
     font-size: map-get($font, h5);
@@ -42,7 +42,7 @@
 
     line-height: 48px;
     padding: 0 $spacing-4;
-    margin: 20px;
+    // margin: 20px;
 
     cursor: pointer;
 
