@@ -1,36 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>商品詳細資訊</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-</head>
-
-<body>
-    <nav>
-        <ul>
-            <li class="logo"><a href="#"><img src="./src/assets/img/TibaArtLogo.svg" alt=""></a></li>
-            <li><a href="#">線上展覽</a></li>
-            <li><a href="#">贊助藝術家</a></li>
-            <li><a href="#">展覽申請</a></li>
-            <li><a href="#">線上商城</a></li>
-            <li><a href="#">關於我們</a></li>
-            <li><a href="#">會員登入</a></li>
-        </ul>
-    </nav>
-
+<template>
+  <div>
     <header>
-        <div class="pageTitle">緯藝線上商城</div>
+      <div class="pageTitle">商品詳細資訊</div>
     </header>
-
-    <div class="wrapper">
-
-        <div class="shopTab">
+    <div class="wrapper2">
+      <!-- Wrapper 不設 1200px 寬（例如展覽、關於我們頁面應該會滿版），想要限制內容在 1200 的再自己包一個 div 限制 1200  -->
+      <!-- 以下供大家編輯 -->
+       <div class="shopTab">
             <div class="tabaShopTab">
                 <h1>商品詳細資訊</h1>
             </div>
@@ -47,14 +23,14 @@
 
         <div class="productContainer">
             <div class="productImg">
-                <img src="./src/assets/img/itemMug.jpg" alt="緯藝馬克杯">
+                <img src="@/assets/img/itemMug.jpg" alt="緯藝馬克杯">
             </div>
             <div class="productInfo">
                 <h1 class="productName">緯藝馬克杯</h1>
                 <p class="productDescription">材質：基材<br>
                     種類：磁器<br>
                     規格：325ml<br>
-                    產地：日本
+                    產地：日本</p>
                 <p class="productPrice">價格：NT$ 280</p>
 
                 <div class="quantity">
@@ -69,17 +45,17 @@
 
                 <div class="actions">
                     <button type="button" class="btn">加入購物車</button>
-                    <a href="#" class="continueShopping">繼續選購其他商品</a>
+                    <p class="continueShopping"><router-link to="/shop">繼續選購其他商品</router-link></p>
                 </div>
             </div>
         </div>
 
         <div class="recommend">
             <span class="recoTitle">您或許會喜歡</span>
-            <ul class="itemContainer">
+            <ul class="itemList">
                 <li class="item">
                     <a href="#" class="itemImage">
-                        <img src="./src/assets/img/itemBag.jpg" alt="緯藝帆布袋">
+                        <img src="@/assets/img/itemBag.jpg" alt="緯藝帆布袋">
                     </a>
                     <div class="itemInfo">
                         <div class="itemDetails">
@@ -94,7 +70,7 @@
 
                 <li class="item">
                     <a href="#" class="itemImage">
-                        <img src="./src/assets/img/itemCoaster.jpg" alt="緯藝杯墊">
+                        <img src="@/assets/img/itemCoaster.jpg" alt="緯藝杯墊">
                     </a>
                     <div class="itemInfo">
                         <div class="itemDetails">
@@ -109,7 +85,7 @@
 
                 <li class="item">
                     <a href="#" class="itemImage">
-                        <img src="./src/assets/img/itemBookmark.jpg" alt="緯藝書籤">
+                        <img src="@/assets/img/itemBookmark.jpg" alt="緯藝書籤">
                     </a>
                     <div class="itemInfo">
                         <div class="itemDetails">
@@ -126,6 +102,9 @@
         </div>
 
     </div>
-</body>
+  </div>
+</template>
 
-</html>
+<script setup>
+
+</script>
