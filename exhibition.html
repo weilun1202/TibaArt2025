@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+
+    <title>線上展覽</title>
+</head>
+
+<body>
+    <style>
+        /* 容器：分四欄，欄間距 1rem */
+        .masonry {
+            column-count: 4;
+            column-gap: 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 0;
+        }
+
+        /* 每個項目設定 */
+        .masonry .item {
+            display: inline-block;
+            /* 必要，才能在多欄中正確換行 */
+            width: 100%;
+            /* 撐滿欄寬 */
+            margin-bottom: 1rem;
+            /* 欄間垂直間距 */
+            background: #87ceeb;
+            /* 隨意底色 */
+            border-radius: 4px;
+            box-sizing: border-box;
+            padding: 0.5rem;
+            color: #fff;
+            font-size: 14px;
+            text-align: center;
+        }
+    </style>
+    </head>
+
+    <body>
+        <nav>
+            <ul>
+                <li class="logo"><a href="#"><img src="./src/assets/img/TibaArtLogo.svg" alt=""></a></li>
+                <li><a href="#">線上展覽</a></li>
+                <li><a href="#">贊助藝術家</a></li>
+                <li><a href="#">展覽申請</a></li>
+                <li><a href="#">線上商城</a></li>
+                <li><a href="#">關於我們</a></li>
+                <li><a href="#">會員登入</a></li>
+            </ul>
+        </nav>
+
+        <header>
+            <div class="pageTitle">線上展覽</div>
+        </header>
+
+
+        <div class="masonry" id="masonry">
+            <!-- 空的 div，後續用 JS 設定高度和文字 -->
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+
+        </div>
+
+        <footer>
+            <p>TEL：02-12345678</p>
+            <p>E-mail：tibaart101@mail.tw</p>
+            <p>© Copyright 緯藝基金會  All Rights Reserved.</p>
+            <p>本網站為緯育TibaMe【第95期】前端工程師專業技術養成班學員作品，僅供學習、展示之用途。</p>
+        </footer>
+
+
+
+
+        <script>
+            // 隨機高度設定範圍（100px～250px）
+            const minH = 100;
+            const maxH = 250;
+
+            const items = document.querySelectorAll('#masonry .item');
+            items.forEach((item, idx) => {
+                const h = Math.floor(Math.random() * (maxH - minH + 1)) + minH;
+                item.style.height = h + 'px';
+                item.textContent = `Item ${idx + 1}`;
+            });
+        </script>
+    </body>
+
+</html>
