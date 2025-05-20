@@ -6,27 +6,31 @@
       </header>
       <!-- Wrapper 不設 1200px 寬（例如展覽、關於我們頁面應該會滿版），想要限制內容在 1200 的再自己包一個 div 限制 1200  -->
       <!-- 以下供大家編輯 -->
-       
-      <!-- 商店分類 -->
-      <div class="shopTab">
-        <div class="tabaShopTab" :class="{ active: activeTab === 'tiba' }" @click="setActiveTab('tiba')">
-          <h1>緯藝周邊商品</h1>
+      
+      <div class="wrap">
+        <!-- 商店分類 -->
+        <div class="shopTab">
+          <div class="tibaShopTab" :class="{ active: activeTab == 'tiba' }" @click="setActiveTab('tiba')">
+            <h1>緯藝周邊商品</h1>
+          </div>
+          <div class="artShopTab" :class="{ active: activeTab == 'artist' }" @click="setActiveTab('artist')">
+            <h1>藝術家原創商品</h1>
+          </div>
+          <div class="searchContainer">
+            <form class="searchBar" @submit.prevent="searchItems">
+              <input type="text" class="searchInput" v-model="searchQuery" placeholder="Search..." required>
+              <button type="submit" class="searchButton">
+                <font-awesome-icon :icon="['fas', 'magnifying-glass']" />
+              </button>
+            </form>
+          </div>
         </div>
-        <div class="artSohopTab" :class="{ active: activeTab === 'artist' }" @click="setActiveTab('artist')">
-          <h1>藝術家原創商品</h1>
-        </div>
-        <div class="searchContainer">
-          <form class="searchBar" @submit.prevent="searchItems">
-            <input type="text" class="searchInput" v-model="searchQuery" placeholder="Search..." required>
-            <button type="submit" class="searchButton">
-              <font-awesome-icon :icon="['fas', 'magnifying-glass']" />
-            </button>
-          </form>
-        </div>
+
+        <!-- 商品列表 -->
+        <itemList :items="filteredItems" @add-to-cart="handleAddToCart" />
+
       </div>
 
-      <!-- 商品列表 -->
-      <itemList :items="filteredItems" @add-to-cart="handleAddToCart" />
     </div>
   </div>
 </template>
@@ -97,7 +101,7 @@ const items = ref([
 // 計算屬性
 const filteredItems = computed(() => {
   return items.value
-    .filter(item => item.category === activeTab.value)
+    .filter(item => item.category == activeTab.value)
     .filter(item => {
       if (!searchQuery.value) return true;
       return item.name.toLowerCase().includes(searchQuery.value.toLowerCase());
@@ -105,6 +109,7 @@ const filteredItems = computed(() => {
 });
 
 // 方法
+
 const setActiveTab = (tab) => {
   activeTab.value = tab;
 };

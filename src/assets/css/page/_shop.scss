@@ -1,15 +1,18 @@
 .shopTab {
-    padding: 20px;
-
+    padding: 60px 20px 60px;
 }
 
 .searchContainer {
     margin-left: auto;
+}
 
+.searchBar {
+    display: flex;
+    justify-content: center; 
 }
 
 .searchInput {
-    max-width: 300px;
+    max-width: 400px;
     height: 32px;
     border-radius: 8px;
     border: 1px solid $primaryGreen;
@@ -56,16 +59,14 @@
 }
 
 .itemImage {
-    width: 100%;
-    height: 200px;
+    aspect-ratio: 4/3;
     overflow: hidden;
     display: block;
     text-decoration: none;
-    color: inherit;
 }
 
 .itemImage img {
-    height: 200px;
+    height: 100%;
     width: 100%;
     object-fit: cover;
     transition: transform 0.3s ease;

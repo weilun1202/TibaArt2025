@@ -4,18 +4,29 @@
     font-size: map-get($font, h1);
     box-sizing: border-box;
     align-items: center;
-    .tabaShopTab {
-        margin-right: $spacing-5;
+    gap: 40px;
+
+    .tibaShopTab {
+        display: flex;
+        justify-content: center; 
         h1 {
             @include shopTabButton;
         }
     }
-    .artSohopTab {
-        margin-left: $spacing-5;
+
+    .artShopTab {
+        display: flex;
+        justify-content: center; 
+
         h1 {
             @include shopTabButton;
         }
     }
+
+    @media (max-width: 740px) {
+        gap: 20px;
+    }
+
 }
 
 // 會員登入頁籤 memberTab

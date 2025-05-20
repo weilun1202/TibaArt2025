@@ -1,18 +1,22 @@
 .productContainer {
     display: flex;
-    max-width: 1000px;
-    margin: 20px auto;
-    padding: 20px;
+    margin: 0 auto;
+    padding: 0 20px 20px;
 }
 
 .productImg {
     flex: 1;
     margin-right: 40px;
+    overflow: hidden;
+    display: block;
+    text-decoration: none;
 }
 
 .productImg img {
+    // display: block;
     width: 100%;
-    display: block;
+    height: 100%;
+    object-fit: cover;
 }
 
 .productInfo {
@@ -20,17 +24,18 @@
     display: flex;
     flex-direction: column;
     line-height: 2;
+    align-self: center;
 }
 
 .productName {
-    font-size: 24px;
+    font-size: map-get($font, h4);
     font-weight: bold;
     margin-bottom: 10px;
     color: $fontBlack;
 }
 
 .productDescription {
-    margin-bottom: 15px;
+    margin-bottom: map-get($font, p);
     color: #555;
 }
 
@@ -53,8 +58,6 @@
     align-items: center;
     margin-bottom: 20px;
 }
-
-
 
 .quantity p {
     margin: 0 20px 0 0;
@@ -87,19 +90,18 @@
 .actions {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 10px;
+    align-items: flex-end;
 }
 
-.continueShopping {
+.continueShopping a {
+    display: block;
     color: $primaryGreen;
-    padding: 10px 0;
     font-size: map-get($font, p);
     cursor: pointer;
     text-decoration: none;
-
 }
 
-.continueShopping:hover {
+.continueShopping a:hover {
     color: $buttonYellow;
 }
 .recommend{
@@ -107,7 +109,7 @@
 }
 
 .recoTitle{
-    font-size: map-get($font, h2);
+    font-size: map-get($font, h3);
     font-weight: bold;
     color: $primaryGreen;
     display: block;
@@ -129,5 +131,8 @@
 
     .actions {
         flex-direction: column;
+        align-items: center;
+        margin: 20px 0;
+        gap:10px;
     }
 }
