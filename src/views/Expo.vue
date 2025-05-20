@@ -19,3 +19,9 @@
 
 </script>
 
+<style scoped>
+/* 可以把額外的 CSS 加在這裡或保留在全域 */
+@import '/style.scss';
+
+</style>
+
