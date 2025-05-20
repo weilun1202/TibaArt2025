@@ -4,12 +4,14 @@ import Expo from '@/views/Expo.vue'
 import Sponsor from '@/views/Sponsor.vue'
 import Application from '@/views/Application.vue'
 import Shop from '@/views/Shop.vue'
+import Product from '@/views/Product.vue'
 import Cart from '@/views/Cart.vue'
+import OrderConfirm from '@/views/OrderConfirm.vue'
+
 import About from '@/views/About.vue'
 import Login from '@/views/Login.vue'
 import Register from '@/views/Register.vue'
 import Admin from '../views/Admin.vue'
-
 
 
 const routes = [
@@ -19,11 +21,17 @@ const routes = [
   { path: '/application', name: 'Application', component: Application },
   { path: '/shop', name: 'Shop', component: Shop },
   { path: '/cart', name: 'Cart', component: Cart },
+  { path: '/orderConfirm', component: OrderConfirm },
   { path: '/about', name: 'About', component: About },
   { path: '/login', name: 'Login', component: Login },
   { path: '/register', name: 'Register', component: Register },
-  { path: '/admin', name: 'Admin', component: Admin }
-
+  { path: '/admin', name: 'Admin', component: Admin },
+  {
+    path: '/product/:id', 
+    name: 'product',
+    component: Product,
+    props: true
+  }
 
 ]
 

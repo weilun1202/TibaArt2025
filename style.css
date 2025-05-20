@@ -199,33 +199,32 @@
 
 footer {
   background-color: #29786A;
+  padding: 32px;
+}
+footer p {
+  color: #ffffff;
+  text-align: center;
+  line-height: 20px;
+}
+footer a {
+  color: #ffffff;
 }
 footer .footerContact {
-  max-width: 1200px;
-  margin: 0 auto;
-  text-align: center;
-  justify-content: space-between;
-  align-items: center;
-  line-height: 24px;
-  padding: 60px;
-}
-
-body {
-  font-family: "微軟正黑體", "Noto Sans TC ";
-  padding-top: 72px;
-  margin: 0;
+  margin-bottom: 8px;
 }
 
 .wrapper {
-  max-width: 1200px;
-  padding-top: 72px;
   margin: 0 auto;
+}
+
+.wrapper2 {
+  margin: 0 auto;
+  max-width: 1200px;
 }
 
 header {
   height: 120px;
   background-color: #29786A;
-  width: 100%;
 }
 header .pageTitle {
   font-size: 3rem;
@@ -298,6 +297,49 @@ nav .memberAction {
   align-items: center;
   gap: 12px;
 }
+nav .cartIcon {
+  position: relative;
+  color: #2F2F2F;
+  font-size: 1.25rem;
+  margin-left: 24px;
+}
+nav .cartIcon:hover {
+  color: #E4C600;
+}
+nav .cartIcon .cartCount {
+  position: absolute;
+  top: 8px;
+  right: -8px;
+  background-color: #29786A;
+  color: white;
+  font-size: 12px;
+  border-radius: 50%;
+  padding: 3px 5px;
+}
+
+.backNav {
+  background-color: #29786A;
+  width: 250px;
+  height: 100vh;
+  color: #ffffff;
+  position: fixed;
+}
+
+.backUser {
+  padding: 50px;
+}
+
+.backMenu ul li a {
+  display: block;
+  text-decoration: none;
+  color: #ffffff;
+  line-height: 50px;
+  padding-left: 50px;
+}
+.backMenu ul li a:hover {
+  background-color: #E4C600;
+  color: #2F2F2F;
+}
 
 .aboutBanner {
   padding: 60px;
@@ -342,7 +384,8 @@ nav .memberAction {
 }
 
 .searchInput {
-  height: 36px;
+  max-width: 300px;
+  height: 32px;
   border-radius: 8px;
   border: 1px solid #29786A;
   color: #29786A;
@@ -357,9 +400,7 @@ nav .memberAction {
 
 .searchButton {
   position: relative;
-  right: 56px;
-  top: 82%;
-  transform: translateY(-50%);
+  transform: translateY(10%);
   background-color: transparent;
   border: none;
   color: #29786A;
@@ -367,7 +408,7 @@ nav .memberAction {
   cursor: pointer;
 }
 
-.itemContainer {
+.itemList {
   list-style: none;
   display: flex;
   flex-wrap: wrap;
@@ -698,7 +739,6 @@ nav .memberAction {
     flex-direction: column;
   }
 }
-<<<<<<< HEAD
 .donateForm {
   text-align: center;
   margin: 0 auto;
@@ -797,7 +837,8 @@ nav .memberAction {
 }
 .faqToggle:checked ~ .faqText {
   grid-template-rows: 1fr;
-=======
+}
+
 .order {
   display: flex;
   flex-direction: column;
@@ -818,7 +859,6 @@ nav .memberAction {
 .order .goBack {
   display: flex;
   gap: 20px;
->>>>>>> 427655402e6517711f54f68dbc93dc222889c9ca
 }
 
 * {
@@ -828,18 +868,16 @@ nav .memberAction {
 
 html {
   font-size: 16px;
-  font-family: "微軟正黑體";
+  font-family: "微軟正黑體", "Noto Sans TC ";
   background: linear-gradient(to top, #f6eee4, #ffffff);
   background-repeat: no-repeat;
   background-size: cover;
   /* 確保背景覆蓋整個視窗 */
-  height: 100%;
 }
 
 body {
-  max-width: 1440px;
   list-style: none;
-  margin: 0 auto;
+  padding-top: 72px;
   /* 保證 body 撐滿畫面高度 */
   min-height: 100vh;
 }
