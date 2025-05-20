@@ -1,17 +1,19 @@
-nav{
+nav {
     max-width: 1200px;
     height: 72px;
     margin: 0 auto;
-    ul{
+
+    ul {
         width: 100%;
         list-style: none;
         display: flex;
         justify-content: flex-end;
         align-items: center;
 
-        li{
+        li {
             height: 72px;
-            a{
+
+            a {
                 height: 100%;
                 padding: 0 30px;
                 text-decoration: none;
@@ -19,10 +21,44 @@ nav{
                 align-items: center;
                 color: black;
             }
-            &:first-child{
+
+            &:first-child {
                 margin-right: auto;
             }
-            
+
+        }
+    }
+}
+
+// 後台導覽列
+
+.backNav {
+    background-color: $primaryGreen;
+    width: 250px;
+    height: 100vh;
+    color: $fontWhite;
+    position: fixed;
+}
+
+.backUser {
+    padding: 50px;
+}
+
+.backMenu {
+    ul {
+        li {
+            a {
+                display: block;
+                text-decoration: none;
+                color: $fontWhite;
+                line-height: 50px;
+                padding-left: 50px;
+
+                &:hover {
+                    background-color: $buttonYellow;
+                    color: $fontBlack;
+                }
+            }
         }
     }
 }

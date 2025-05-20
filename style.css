@@ -241,6 +241,30 @@ nav ul li:first-child {
   margin-right: auto;
 }
 
+.backNav {
+  background-color: #29786A;
+  width: 250px;
+  height: 100vh;
+  color: #ffffff;
+  position: fixed;
+}
+
+.backUser {
+  padding: 50px;
+}
+
+.backMenu ul li a {
+  display: block;
+  text-decoration: none;
+  color: #ffffff;
+  line-height: 50px;
+  padding-left: 50px;
+}
+.backMenu ul li a:hover {
+  background-color: #E4C600;
+  color: #2F2F2F;
+}
+
 .aboutBanner {
   padding: 60px;
   max-width: 1200px;
