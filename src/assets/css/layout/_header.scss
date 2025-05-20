@@ -2,6 +2,9 @@ header {
     height: 120px;
     background-color: $primaryGreen;
 
+        border: 1px solid black;
+
+
     .pageTitle {
         font-size: map-get($font, h1);
         font-family: $fontTC;

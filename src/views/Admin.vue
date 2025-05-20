@@ -9,7 +9,7 @@
 // 可根據需求加入邏輯
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 @import '/style.scss';
 
 .admin-page {

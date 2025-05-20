@@ -1,4 +1,4 @@
-/* Vue 專案內建樣式，不要引用 */
+/* Vue 專案內建樣式，已經先在 main.js 上停止引用 */
 
 @import './base.css';
 
