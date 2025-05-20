@@ -1,0 +1,25 @@
+.order {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px;
+    gap: 40px;
+
+    img {
+        width: 200px;
+    }
+
+    span {
+        font-weight: bold;
+    }
+
+    p {
+        text-align: center;
+        line-height: 1.5;
+    }
+
+    .goBack {
+        display: flex;
+        gap: 20px;
+    }
+}

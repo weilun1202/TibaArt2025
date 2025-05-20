@@ -29,46 +29,48 @@
 @import './src/assets/css/page/shop';
 @import './src/assets/css/page/shopItem';
 @import './src/assets/css/page/cart';
+<<<<<<< HEAD
 @import './src/assets/css/page/donate';
 
+=======
+@import './src/assets/css/page/orderConfirm';
+>>>>>>> 427655402e6517711f54f68dbc93dc222889c9ca
 // @import 'sass/page/product';
 
 // plugin
-@import  './src/assets/css/plugin/bootstrap';
+@import './src/assets/css/plugin/bootstrap';
 
-*{
-    /* 避免圖片跑版(LOGO) */
-    box-sizing: border-box;
+* {
+  /* 避免圖片跑版(LOGO) */
+  box-sizing: border-box;
 }
 
 html {
-    font-size: $bodyfont;
-    $fontBlack: #2F2F2F;
-    font-family: $fontTC;
-    
-    background: linear-gradient(to top, #f6eee4, #ffffff);
-    background-repeat: no-repeat;
-    background-size: cover;
-    /* 確保背景覆蓋整個視窗 */
-    height: 100%;
-    
+  font-size: $bodyfont;
+  font-family: $fontTC, $fontEG;
+
+  $fontBlack: #2F2F2F;
+
+  background: linear-gradient(to top, #f6eee4, #ffffff);
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* 確保背景覆蓋整個視窗 */
 }
 
-body{
-    max-width: 1440px;
-    list-style: none;
-    margin: 0 auto;
+body {
+  list-style: none;
+  padding-top: 72px;
 
-    /* 保證 body 撐滿畫面高度 */
-    min-height: 100vh;
+  /* 保證 body 撐滿畫面高度 */
+  min-height: 100vh;
 }
 
 
-h1{
-    font-size: map-get($font, h2);
-    color: rebeccapurple;
-    // padding: 10px;
-    // margin: 10px;
+h1 {
+  font-size: map-get($font, h2);
+  color: rebeccapurple;
+  // padding: 10px;
+  // margin: 10px;
 }
 
 // 色階
@@ -80,12 +82,13 @@ h1{
 @mixin bgColor($class , $bgc) {
   @for $i from 0 through 9 {
     @if $i ==0 {
-      .#{$class}{
+      .#{$class} {
         background-color: $bgc;
         width: 80px;
         height: 60px;
       }
     }
+
     @else {
       .#{$class}#{$i * 100} {
         background-color: lighten($bgc, $i * 7);
@@ -104,6 +107,3 @@ h1{
 @include bgColor('logoColor4', $logoColor4);
 @include bgColor('logoColor5', $logoColor5);
 @include bgColor('logoColor6', $logoColor6);
-
-
-

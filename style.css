@@ -27,15 +27,32 @@
   text-decoration: none;
   text-align: center;
   border: none;
-  line-height: 36px;
+  height: 36px;
   padding: 0 16px;
-  margin: 20px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 .memberBtn:hover {
   background-color: #E4C600;
+  color: #2F2F2F;
+}
+
+.registerBtn {
+  font-size: 1rem;
+  border-radius: 8px;
+  background-color: rgba(47, 47, 47, 0.5);
   color: #ffffff;
+  text-decoration: none;
+  text-align: center;
+  border: none;
+  height: 36px;
+  padding: 0 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.registerBtn:hover {
+  background-color: #E4C600;
+  color: #2F2F2F;
 }
 
 .applicationBtn {
@@ -193,8 +210,15 @@ footer .footerContact {
   padding: 60px;
 }
 
+body {
+  font-family: "微軟正黑體", "Noto Sans TC ";
+  padding-top: 72px;
+  margin: 0;
+}
+
 .wrapper {
   max-width: 1200px;
+  padding-top: 72px;
   margin: 0 auto;
 }
 
@@ -215,30 +239,64 @@ header .pageTitle {
 }
 
 nav {
-  max-width: 1200px;
+  width: 100%;
+  padding: 0 8vw;
   height: 72px;
   margin: 0 auto;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: #ffffff;
+}
+nav .logo {
+  height: 60px;
+}
+nav .navBar {
+  display: flex;
+  margin-left: auto;
 }
 nav ul {
-  width: 100%;
-  list-style: none;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
+  gap: 16px;
 }
 nav ul li {
-  height: 72px;
+  margin-right: 32px;
 }
 nav ul li a {
-  height: 100%;
-  padding: 0 30px;
+  line-height: 24px;
+  font-size: 16px;
   text-decoration: none;
-  display: flex;
-  align-items: center;
-  color: black;
+  color: #000000;
+  height: 24px;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 3px;
 }
-nav ul li:first-child {
-  margin-right: auto;
+nav ul li a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 1px;
+  background-color: #000000;
+  transition: width 0.5s ease-in-out;
+}
+nav ul li a:hover:after {
+  width: 100%;
+  left: 0;
+}
+nav .memberAction {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
 }
 
 .aboutBanner {
@@ -298,7 +356,7 @@ nav ul li:first-child {
 }
 
 .searchButton {
-  position: absolute;
+  position: relative;
   right: 56px;
   top: 82%;
   transform: translateY(-50%);
@@ -521,13 +579,6 @@ nav ul li:first-child {
     flex-direction: column;
   }
 }
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 20px;
-  background-color: #f5f5f5;
-}
-
 .cartContainer {
   display: flex;
   max-width: 1200px;
@@ -547,7 +598,8 @@ body {
 }
 
 .card {
-  background: white;
+  border: 1px solid #29786A;
+  background: #ffffff;
   border-radius: 8px;
   padding: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -556,32 +608,23 @@ body {
 .cartItem {
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
-  padding-bottom: 20px;
   border-bottom: 1px solid #eee;
 }
 
 .cartItem img {
-  width: 80px;
-  height: 80px;
+  width: 200px;
+  height: 170px;
   -o-object-fit: cover;
      object-fit: cover;
   border-radius: 4px;
   margin-right: 20px;
 }
 
-.itemDetails {
+.cartDetails {
   flex: 1;
-}
-
-.itemDetails h3 {
-  margin: 0 0 10px;
-  font-size: 18px;
-}
-
-.item-details p {
-  margin: 5px 0;
-  color: #666;
+  display: flex;
+  flex-direction: column;
+  line-height: 2;
 }
 
 .quantity-control {
@@ -655,6 +698,7 @@ body {
     flex-direction: column;
   }
 }
+<<<<<<< HEAD
 .donateForm {
   text-align: center;
   margin: 0 auto;
@@ -753,6 +797,28 @@ body {
 }
 .faqToggle:checked ~ .faqText {
   grid-template-rows: 1fr;
+=======
+.order {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+  gap: 40px;
+}
+.order img {
+  width: 200px;
+}
+.order span {
+  font-weight: bold;
+}
+.order p {
+  text-align: center;
+  line-height: 1.5;
+}
+.order .goBack {
+  display: flex;
+  gap: 20px;
+>>>>>>> 427655402e6517711f54f68dbc93dc222889c9ca
 }
 
 * {

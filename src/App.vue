@@ -1,9 +1,31 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-</script>
+<!-- 重要頁面，動之前要討論、通知 -->
 
 <template>
+  <NavBar />
+  <router-view />
+  <Footer />
+</template>
+
+<script setup>
+import NavBar from './components/NavBar.vue'
+import Footer from './components/Footer.vue'
+</script>
+
+<style lang="scss">
+@import '/style.scss';
+@import '/src/assets/css/layout/nav';
+
+</style>
+
+
+<!-- 原先預設首頁內容 -->
+
+<!-- <script setup>
+import { RouterLink, RouterView } from 'vue-router'
+import HelloWorld from './components/HelloWorld.vue'
+</script> -->
+
+<!-- <template>
   <header>
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
@@ -82,4 +104,4 @@ nav a:first-of-type {
     margin-top: 1rem;
   }
 }
-</style>
+</style> -->

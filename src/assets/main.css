@@ -1,3 +1,5 @@
+/* Vue 專案內建樣式，不要引用 */
+
 @import './base.css';
 
 #app {
