@@ -11,10 +11,11 @@ import router from './router'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 // 把需要的 icon 加進 library
 library.add(faCartShopping)
-
+library.add(faMagnifyingGlass);
 
 
 const app = createApp(App)
