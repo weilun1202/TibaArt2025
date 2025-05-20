@@ -920,6 +920,52 @@ nav .cartIcon .cartCount:first-child {
   grid-template-rows: 1fr;
 }
 
+.applicationWrapper {
+  max-width: 1200px;
+  height: 1000px;
+  margin: 0 auto;
+  display: flex;
+}
+
+.applicationImg {
+  width: 600px;
+}
+.applicationImg img {
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  text-align: center;
+}
+
+.applicationSection {
+  width: 600px;
+  margin: 24px;
+}
+.applicationSection .applicationContent .applicationTitle {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #2F2F2F;
+  margin: 20px 0;
+}
+.applicationSection .applicationText {
+  font-size: 1.5rem;
+  color: #2F2F2F;
+  margin: 24px 0;
+}
+
+.applicationArea {
+  margin: 0 auto;
+  width: 500px;
+  display: flex;
+  /* 水平置中 applicationAreaBtn */
+  justify-content: center;
+}
+.applicationArea .applicationAreaBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 水平置中每個 a 元素 */
+}
+
 .order {
   display: flex;
   flex-direction: column;
