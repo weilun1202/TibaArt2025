@@ -1,0 +1,110 @@
+.donateForm{
+    text-align: center;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* 水平置中 */
+    align-items: center;     /* 垂直置中 */
+}
+
+// 贊助標題
+.donateItem{
+    font-size: map-get($font, h1);
+    color: $fontBlack;
+    padding-bottom: $spacing-8;
+}
+
+// 收據提示字
+.formReceipt{
+    font-size: map-get($font, pwar);
+    color: $fontBlack;
+    opacity: .5;
+    margin-right: 355px;
+    padding: $spacing-1 0;
+}
+.pay{
+    padding: 0 100px;
+}
+
+.faq{
+    padding-top: 60px;
+    text-align: center;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* 水平置中 */
+    align-items: center;     /* 垂直置中 */ 
+    width: 500px;
+}
+
+// ------ 常見問題 -----
+
+.faqItem{
+    width: 480px;
+    padding: 1rem;
+    border-bottom: 1px solid $fontWhite;
+}
+
+.faqTitle {
+    font-size: map-get($font, h4);
+    display: flex;
+    align-items: center;
+    padding-bottom: $spacing-2;
+    cursor: pointer;
+
+    .materialIcons {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+
+        i {
+        transition: opacity 0.3s ease;
+        }
+
+        .fa-plus {
+        display: inline;
+        }
+
+        .fa-minus {
+        display: none;
+        }
+    }
+}
+.faqText {
+    font-size: map-get($font, p);
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: .4s ease-in-out;
+    > * {
+        overflow: hidden;
+    }
+    p{
+        text-align: left;
+        margin-top: 8px;
+    }
+}
+
+/* radio or checkbox */
+.faqToggle {
+    display: none;
+    &:checked ~ .faqTitle .materialIcons {
+        ~ .faqTitle{
+            padding-bottom: .5rem;
+        }
+        .fa-plus {
+        display: none;
+        }
+
+        .fa-minus {
+        display: inline;
+        }
+        ~ .faqText{
+            grid-template-rows: 1fr;
+        }
+    }
+    &:checked ~ .faqText {
+        grid-template-rows: 1fr;
+    }
+}
+
+

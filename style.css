@@ -655,6 +655,106 @@ body {
     flex-direction: column;
   }
 }
+.donateForm {
+  text-align: center;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* 水平置中 */
+  align-items: center; /* 垂直置中 */
+}
+
+.donateItem {
+  font-size: 3rem;
+  color: #2F2F2F;
+  padding-bottom: 32px;
+}
+
+.formReceipt {
+  font-size: 0.75rem;
+  color: #2F2F2F;
+  opacity: 0.5;
+  margin-right: 355px;
+  padding: 4px 0;
+}
+
+.pay {
+  padding: 0 100px;
+}
+
+.faq {
+  padding-top: 60px;
+  text-align: center;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* 水平置中 */
+  align-items: center; /* 垂直置中 */
+  width: 500px;
+}
+
+.faqItem {
+  width: 480px;
+  padding: 1rem;
+  border-bottom: 1px solid #ffffff;
+}
+
+.faqTitle {
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  padding-bottom: 8px;
+  cursor: pointer;
+}
+.faqTitle .materialIcons {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+.faqTitle .materialIcons i {
+  transition: opacity 0.3s ease;
+}
+.faqTitle .materialIcons .fa-plus {
+  display: inline;
+}
+.faqTitle .materialIcons .fa-minus {
+  display: none;
+}
+
+.faqText {
+  font-size: 1rem;
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: 0.4s ease-in-out;
+}
+.faqText > * {
+  overflow: hidden;
+}
+.faqText p {
+  text-align: left;
+  margin-top: 8px;
+}
+
+/* radio or checkbox */
+.faqToggle {
+  display: none;
+}
+.faqToggle:checked ~ .faqTitle .materialIcons ~ .faqTitle {
+  padding-bottom: 0.5rem;
+}
+.faqToggle:checked ~ .faqTitle .materialIcons .fa-plus {
+  display: none;
+}
+.faqToggle:checked ~ .faqTitle .materialIcons .fa-minus {
+  display: inline;
+}
+.faqToggle:checked ~ .faqTitle .materialIcons ~ .faqText {
+  grid-template-rows: 1fr;
+}
+.faqToggle:checked ~ .faqText {
+  grid-template-rows: 1fr;
+}
+
 * {
   /* 避免圖片跑版(LOGO) */
   box-sizing: border-box;
