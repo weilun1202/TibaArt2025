@@ -30,20 +30,24 @@
 }
 
 // 會員登入頁籤 memberTab
-.memberLoginTab{
+.memberLoginTab {
     display: flex;
-    font-size: map-get($font, h4);  // 24px
+    font-size: map-get($font, h4); // 24px
 
-    width: 450px;
-    outline: 1px solid black;
-    
-    justify-content: space-around;
+    width: 100%;
+    justify-content: center;
 
-    .normalLoginTab,
-    .artistLoginTab{
-        padding: 25px;
-        &:hover{
-            color: $primaryGreen;
+    .generalLoginTab,
+    .artistLoginTab {
+
+        width: 50%;
+        text-align: center;
+        padding: 20px;
+        border: 1.5px solid $fontBlack;
+        border-bottom: none;
+        border-radius: $spacing-2 $spacing-2 0 0;
+
+        &:hover {
             cursor: pointer;
         }
     }

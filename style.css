@@ -10,13 +10,12 @@
   border: none;
   line-height: 48px;
   padding: 0 16px;
-  margin: 20px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 .btn:hover {
   background-color: #E4C600;
-  color: #ffffff;
+  color: #2F2F2F;
 }
 
 .memberBtn {
@@ -131,6 +130,16 @@
   font-size: 1rem;
 }
 .formA input[type=text], .formA input[type=tel], .formA select {
+  width: 100%;
+  height: 48px;
+  padding: 0 16px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #2F2F2F;
+  opacity: 0.5;
+  box-sizing: border-box;
+}
+.formA input {
   width: 100%;
   height: 48px;
   padding: 0 16px;
@@ -286,17 +295,20 @@
 .memberLoginTab {
   display: flex;
   font-size: 1.5rem;
-  width: 450px;
-  outline: 1px solid black;
-  justify-content: space-around;
+  width: 100%;
+  justify-content: center;
 }
-.memberLoginTab .normalLoginTab,
+.memberLoginTab .generalLoginTab,
 .memberLoginTab .artistLoginTab {
-  padding: 25px;
+  width: 50%;
+  text-align: center;
+  padding: 20px;
+  border: 1.5px solid #2F2F2F;
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
 }
-.memberLoginTab .normalLoginTab:hover,
+.memberLoginTab .generalLoginTab:hover,
 .memberLoginTab .artistLoginTab:hover {
-  color: #29786A;
   cursor: pointer;
 }
 
