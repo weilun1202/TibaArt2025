@@ -7,18 +7,18 @@ import AdminLayout from '@/layouts/AdminLayout.vue'
 
 
 // views
-import Home from '@/views/Home.vue'
-import Expo from '@/views/Expo.vue'
-import Sponsor from '@/views/Sponsor.vue'
-import Application from '@/views/Application.vue'
-import Shop from '@/views/Shop.vue'
-import Product from '@/views/Product.vue'
-import Cart from '@/views/Cart.vue'
-import OrderConfirm from '@/views/OrderConfirm.vue'
+import Home from '@/views/frontend/Home.vue'
+import Expo from '@/views/frontend/Expo.vue'
+import Sponsor from '@/views/frontend/Sponsor.vue'
+import Application from '@/views/frontend/Application.vue'
+import Shop from '@/views/frontend/Shop.vue'
+import Product from '@/views/frontend/Product.vue'
+import Cart from '@/views/frontend/Cart.vue'
+import OrderConfirm from '@/views/frontend/OrderConfirm.vue'
 
-import About from '@/views/About.vue'
-import Login from '@/views/Login.vue'
-import Register from '@/views/Register.vue'
+import About from '@/views/frontend/About.vue'
+import Login from '@/views/frontend/Login.vue'
+import Register from '@/views/frontend/Register.vue'
 import Admin from '@/views/backend/Admin.vue'
 
 
