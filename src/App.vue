@@ -1,14 +1,17 @@
 <!-- 重要頁面，動之前要討論、通知 -->
 
 <template>
-  <NavBar />
-  <router-view />
-  <Footer />
+  <template v-if="$route.path.includes('admin')">
+    <AdminLayout></AdminLayout>
+  </template>
+  <template v-else>
+    <FrontLayout></FrontLayout>
+  </template>
 </template>
 
 <script setup>
-import NavBar from './components/NavBar.vue'
-import Footer from './components/Footer.vue'
+  import FrontLayout from "@/layouts/FrontLayout.vue";
+  import AdminLayout from "@/layouts/AdminLayout.vue";
 </script>
 
 <style lang="scss">
