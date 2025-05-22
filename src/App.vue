@@ -1,17 +1,20 @@
 <!-- 重要頁面，動之前要討論、通知 -->
 
 <template>
-  <template v-if="$route.path.includes('admin')">
+  <!-- <template v-if="$route.path.includes('admin')">
     <AdminLayout></AdminLayout>
   </template>
   <template v-else>
     <FrontLayout></FrontLayout>
-  </template>
+  </template> -->
+
+    <router-view />
+
 </template>
 
 <script setup>
-  import FrontLayout from "@/layouts/FrontLayout.vue";
-  import AdminLayout from "@/layouts/AdminLayout.vue";
+  // import FrontLayout from "@/layouts/FrontLayout.vue";
+  // import AdminLayout from "@/layouts/AdminLayout.vue";
 </script>
 
 <style lang="scss">

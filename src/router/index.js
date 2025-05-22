@@ -3,7 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 //layouts
 import FrontLayout from '@/layouts/FrontLayout.vue'
 import AdminLayout from '@/layouts/AdminLayout.vue'
-import EmptyLayout from '@/layouts/EmptyLayout.vue'
+// import EmptyLayout from '@/layouts/EmptyLayout.vue'
 
 
 // views
@@ -22,17 +22,12 @@ import Register from '@/views/Register.vue'
 import Admin from '@/views/backend/Admin.vue'
 
 
-const routes = [{
-  path: '/',
-  component: EmptyLayout,
-  children: [
-    { path: '', name: 'Home', component: Home }
-  ]
-},
+const routes = [
 {
   path: '/',
   component: FrontLayout,
   children: [
+    { path: '/', name: 'Home', component: Home },
     { path: 'expo', name: 'Expo', component: Expo },
     { path: 'sponsor', name: 'Sponsor', component: Sponsor },
     { path: 'application', name: 'Application', component: Application },
@@ -51,7 +46,7 @@ const routes = [{
   ]
 },
 {
-  path: '/',
+  path: '/admin',
   component: AdminLayout,
   children: [
     { path: '', name: 'Admin', component: Admin },
