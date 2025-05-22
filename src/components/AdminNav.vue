@@ -20,9 +20,11 @@
 </template>
 
 <script setup>
+   
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+@import '/style.scss';
 .backNav {
     background-color: $primaryGreen;
     width: 250px;
