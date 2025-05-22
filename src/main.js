@@ -14,7 +14,7 @@ import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { faGoogle } from '@fortawesome/free-brands-svg-icons'
 import { faFacebook } from '@fortawesome/free-brands-svg-icons'
-
+import { faFileArrowDown, faCloudArrowUp } from '@fortawesome/free-solid-svg-icons'
 
 
 // 把需要的 icon 加進 library
@@ -22,7 +22,8 @@ library.add(faCartShopping);
 library.add(faMagnifyingGlass);
 library.add(faGoogle);
 library.add(faFacebook);
-
+library.add(faCloudArrowUp);
+library.add(faFileArrowDown);
 
 
 const app = createApp(App)
