@@ -1,37 +1,58 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '@/views/Home.vue'
-import Expo from '@/views/Expo.vue'
-import Sponsor from '@/views/Sponsor.vue'
-import Application from '@/views/Application.vue'
-import Shop from '@/views/Shop.vue'
-import Product from '@/views/Product.vue'
-import Cart from '@/views/Cart.vue'
-import OrderConfirm from '@/views/OrderConfirm.vue'
 
-import About from '@/views/About.vue'
-import Login from '@/views/Login.vue'
-import Register from '@/views/Register.vue'
+//layouts
+import FrontLayout from '@/layouts/FrontLayout.vue'
+import AdminLayout from '@/layouts/AdminLayout.vue'
+// import EmptyLayout from '@/layouts/EmptyLayout.vue'
+
+
+// views
+import Home from '@/views/frontend/Home.vue'
+import Expo from '@/views/frontend/Expo.vue'
+import Sponsor from '@/views/frontend/Sponsor.vue'
+import Application from '@/views/frontend/Application.vue'
+import Shop from '@/views/frontend/Shop.vue'
+import Product from '@/views/frontend/Product.vue'
+import Cart from '@/views/frontend/Cart.vue'
+import OrderConfirm from '@/views/frontend/OrderConfirm.vue'
+
+import About from '@/views/frontend/About.vue'
+import Login from '@/views/frontend/Login.vue'
+import Register from '@/views/frontend/Register.vue'
 import Admin from '@/views/backend/Admin.vue'
 
 
 const routes = [
-  { path: '/', name: 'Home', component: Home },
-  { path: '/expo', name: 'Expo', component: Expo },
-  { path: '/sponsor', name: 'Sponsor', component: Sponsor },
-  { path: '/application', name: 'Application', component: Application },
-  { path: '/shop', name: 'Shop', component: Shop },
-  { path: '/cart', name: 'Cart', component: Cart },
-  { path: '/orderConfirm', component: OrderConfirm },
-  { path: '/about', name: 'About', component: About },
-  { path: '/login', name: 'Login', component: Login },
-  { path: '/register', name: 'Register', component: Register },
-  { path: '/admin', name: 'Admin', component: Admin },
-  {
-    path: '/product/:id',
-    name: 'product',
-    component: Product,
-    props: true
-  }
+{
+  path: '/',
+  component: FrontLayout,
+  children: [
+    { path: '/', name: 'Home', component: Home },
+    { path: 'expo', name: 'Expo', component: Expo },
+    { path: 'sponsor', name: 'Sponsor', component: Sponsor },
+    { path: 'application', name: 'Application', component: Application },
+    { path: 'shop', name: 'Shop', component: Shop },
+    { path: 'cart', name: 'Cart', component: Cart },
+    { path: 'orderConfirm', component: OrderConfirm },
+    { path: 'about', name: 'About', component: About },
+    { path: 'login', name: 'Login', component: Login },
+    { path: 'register', name: 'Register', component: Register },
+    {
+      path: '/product/:id',
+      name: 'product',
+      component: Product,
+      props: true
+    }
+  ]
+},
+{
+  path: '/admin',
+  component: AdminLayout,
+  children: [
+    { path: '', name: 'Admin', component: Admin },
+  ]
+}
+
 
 ]
 

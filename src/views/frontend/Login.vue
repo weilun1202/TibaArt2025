@@ -94,7 +94,6 @@
 
               <div class="btnGroup">
                 <button class="btn" type="submit">確定登入</button>
-                <button class="btn" type="button">註冊藝術家會員</button>
               </div>
             </form>
           </div>
@@ -160,7 +159,7 @@ defineProps()
   .formA{
     border: 1.5px solid $fontBlack;
     border-radius: 0 0 $spacing-2 $spacing-2;
-    // border-top: none;
+    border-top: none;
   }
 
   .reminder{

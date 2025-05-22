@@ -1,100 +1,100 @@
-nav {
-    width: 100%;
-    padding: 0 8vw;
-    height: 72px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-    background-color: $fontWhite;
+// nav {
+//     width: 100%;
+//     padding: 0 8vw;
+//     height: 72px;
+//     margin: 0 auto;
+//     display: flex;
+//     align-items: center;
+//     position: fixed;
+//     top: 0;
+//     left: 0;
+//     right: 0;
+//     z-index: 1000;
+//     background-color: $fontWhite;
 
-    .logo {
-        height: 60px;
-    }
+//     .logo {
+//         height: 60px;
+//     }
 
-    .navBar {
-        display: flex;
-        margin-left: auto;
-    }
+//     .navBar {
+//         display: flex;
+//         margin-left: auto;
+//     }
 
-    ul {
-        // width: 100%;
-        // list-style: none;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: $spacing-4;
+//     ul {
+//         // width: 100%;
+//         // list-style: none;
+//         display: flex;
+//         justify-content: center;
+//         align-items: center;
+//         gap: $spacing-4;
 
-        li {
-            margin-right: $spacing-8;
+//         li {
+//             margin-right: $spacing-8;
 
-            a {
-                line-height: 24px;
-                font-size: 16px;
-                text-decoration: none;
-                color: #000000;
-                height: 24px;
+//             a {
+//                 line-height: 24px;
+//                 font-size: 16px;
+//                 text-decoration: none;
+//                 color: #000000;
+//                 height: 24px;
 
-                position: relative;
-                display: inline-block;
-                padding-bottom: 3px;
+//                 position: relative;
+//                 display: inline-block;
+//                 padding-bottom: 3px;
 
-                &::after {
-                    content: '';
-                    position: absolute;
-                    left: 0;
-                    bottom: -4px;
-                    width: 0;
-                    height: 1px;
-                    background-color: #000000;
-                    transition: width 0.5s ease-in-out;
+//                 &::after {
+//                     content: '';
+//                     position: absolute;
+//                     left: 0;
+//                     bottom: -4px;
+//                     width: 0;
+//                     height: 1px;
+//                     background-color: #000000;
+//                     transition: width 0.5s ease-in-out;
 
-                }
+//                 }
 
-                &:hover:after {
-                    width: 100%;
-                    left: 0;
-                }
-            }
-        }
-    }
+//                 &:hover:after {
+//                     width: 100%;
+//                     left: 0;
+//                 }
+//             }
+//         }
+//     }
 
-    .memberAction {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: $spacing-3;
-        // border: 1px solid black;
-    }
+//     .memberAction {
+//         display: flex;
+//         justify-content: center;
+//         align-items: center;
+//         gap: $spacing-3;
+//         // border: 1px solid black;
+//     }
 
-    .cartIcon {
-        position: relative;
-        color: $fontBlack;
-        font-size: map-get($font, h5);
-        margin-left: $spacing-6;
+//     .cartIcon {
+//         position: relative;
+//         color: $fontBlack;
+//         font-size: map-get($font, h5);
+//         margin-left: $spacing-6;
 
-        &:hover {
-            color: $buttonYellow;
-        }
+//         &:hover {
+//             color: $buttonYellow;
+//         }
 
-        .cartCount {
-            position: absolute;
-            top: 8px;
-            right: -8px;
-            background-color: $primaryGreen;
-            color: white;
-            font-size: 12px;
-            border-radius: 50%;
-            padding: 3px 5px;
+//         .cartCount {
+//             position: absolute;
+//             top: 8px;
+//             right: -8px;
+//             background-color: $primaryGreen;
+//             color: white;
+//             font-size: 12px;
+//             border-radius: 50%;
+//             padding: 3px 5px;
 
-            &:first-child {
-                margin-right: auto;
-            }
+//             &:first-child {
+//                 margin-right: auto;
+//             }
 
-        }
-    }
-}
+//         }
+//     }
+// }

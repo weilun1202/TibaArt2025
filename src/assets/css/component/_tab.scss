@@ -37,14 +37,29 @@
     width: 100%;
     justify-content: center;
 
-    .generalLoginTab,
-    .artistLoginTab {
+    .generalLoginTab {
 
         width: 50%;
         text-align: center;
         padding: 20px;
         border: 1.5px solid $fontBlack;
         border-bottom: none;
+        border-right: none;
+        border-radius: $spacing-2 $spacing-2 0 0;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+     .artistLoginTab {
+
+        width: 50%;
+        text-align: center;
+        padding: 20px;
+        border: 1.5px solid $fontBlack;
+        border-bottom: none;
+        border-left: none;
         border-radius: $spacing-2 $spacing-2 0 0;
 
         &:hover {
