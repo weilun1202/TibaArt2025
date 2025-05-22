@@ -4,24 +4,60 @@
       <header>
         <div class="pageTitle">線上展覽</div>
       </header>
-      <!-- Wrapper 不設 1200px 寬（例如展覽、關於我們頁面應該會滿版），想要限制內容在 1200 的再自己包一個 div 限制 1200  -->
-      <!-- 以下供大家編輯 -->
-       <p>test4</p>
-
-
-
-
+      <!-- 內容全寬，若要限制寬度再另外包 div -->
+      <div class="masonry" id="masonry">
+        <div
+          v-for="item in items"
+          :key="item.id"
+          class="item"
+          :style="{ height: item.height + 'px' }"
+        >
+          Item {{ item.id }}
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
 
+const minH = 100;
+const maxH = 250;
+const count = 17; // 項目個數，可依需求調整
+const items = ref([]);
+
+onMounted(() => {
+  items.value = Array.from({ length: count }, (_, idx) => {
+    const height = Math.floor(Math.random() * (maxH - minH + 1)) + minH;
+    return {
+      id: idx + 1,
+      height,
+    };
+  });
+});
 </script>
 
-<style lang="scss" scoped>
-/* 可以把額外的 CSS 加在這裡或保留在全域 */
-@import '/style.scss';
+<style scoped>
+/* 多欄式瀑布流佈局 */
+.masonry {
+  column-count: 4;
+  column-gap: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 0;
+}
 
+.masonry .item {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 1rem;
+  background: #87ceeb;
+  border-radius: 4px;
+  box-sizing: border-box;
+  padding: 0.5rem;
+  color: #fff;
+  font-size: 14px;
+  text-align: center;
+}
 </style>
-
