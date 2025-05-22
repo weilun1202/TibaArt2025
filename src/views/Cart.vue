@@ -34,63 +34,71 @@
             <!-- 右邊-->
             <div class="rightPanel">
                     <!-- 訂購人資訊 -->
-                    <div class="card">
+                    <div class="card2">
                         <h2 class="cardTitle">訂購人資訊</h2>
-                        <div class="form-group">
-                            <label>姓名</label>
-                            <input placeholder="請輸入姓名">
+                        <div class="form">
+                            <div class="form-group">
+                                <label>姓名</label>
+                                <input placeholder="請輸入姓名">
+                            </div>
+                            <div class="form-group">
+                                <label>電話</label>
+                                <input placeholder="請輸入電話">
+                            </div>
+                            <div class="form-group">
+                                <label>地址</label>
+                                <input placeholder="請輸入地址">
+                            </div>
+                            <div class="form-group">
+                                <label>發票類型</label>
+                                <input placeholder="請選擇">
+                            </div>
+                            <div class="form-group">
+                                <label>載具</label>
+                                <input placeholder="請輸入載具號碼">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label>電話</label>
-                            <input placeholder="請輸入電話">
-                        </div>
-                        <div class="form-group">
-                            <label>地址</label>
-                            <input placeholder="請輸入地址">
-                        </div>
-                        <div class="form-group">
-                            <label>發票類型</label>
-                            <input placeholder="請選擇">
-                        </div>
-                        <div class="form-group">
-                            <label>載具</label>
-                            <input placeholder="請輸入載具號碼">
-                        </div>
+
                     </div>
 
                     <!-- 收件人資訊 -->
-                    <div class="card">
+                    <div class="card2">
                         <h2 class="cardTitle">收件人資訊</h2>
-                        <div class="form-group">
-                            <label>同訂購人</label>
-                            <input type="checkbox">
+                        <div class="form">
+                            <div class="formGroup">
+                                <label>同訂購人</label>
+                                <input type="checkbox">
+                            </div>
+                            <div class="formGroup">
+                                <label>姓名</label>
+                                <input placeholder="請輸入姓名">
+                            </div>
+                            <div class="formGroup">
+                                <label>電話</label>
+                                <input placeholder="請輸入電話">
+                            </div>
+                            <div class="formGroup">
+                                <label>地址</label>
+                                <input placeholder="請輸入地址">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label>姓名</label>
-                            <input placeholder="請輸入姓名">
-                        </div>
-                        <div class="form-group">
-                            <label>電話</label>
-                            <input placeholder="請輸入電話">
-                        </div>
-                        <div class="form-group">
-                            <label>地址</label>
-                            <input placeholder="請輸入地址">
-                        </div>
+
 
                     </div>
 
                     <!-- 確認訂單 -->
-                    <div class="card">
+                    <div class="card2">
                         <h2 class="cardTitle">確認訂單</h2>
-                        <div class="order-summary">
-                            <p><span>商品總額</span><span>NT$500</span></p>
-                            <p><span>運費</span><span>NT$60</span></p>
-                            <p><span>折扣</span><span>NT$0</span></p>
-                            <hr>
-                            <p><span>總計</span><span>NT$560</span></p>
+                        <div class="form">
+                            <div class="order-summary">
+                                <p><span>商品總額</span><span>NT$500</span></p>
+                                <p><span>運費</span><span>NT$60</span></p>
+                                <p><span>折扣</span><span>NT$0</span></p>
+                                <hr>
+                                <p><span>總計</span><span>NT$560</span></p>
+                            </div>
+                            <button class="btn"><router-link to="/orderConfirm">確認購買</router-link></button>
                         </div>
-                        <button class="btn"><router-link to="/orderConfirm">確認購買</router-link></button>
                     </div>
                 </div>
             </div>

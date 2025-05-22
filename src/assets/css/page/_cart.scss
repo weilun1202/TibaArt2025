@@ -73,22 +73,57 @@
     font-size: 14px;
 }
 
-.form-group {
-    margin-bottom: 15px;
+// 右側欄
+.card2 {
+    border: 1px solid $primaryGreen;
+    background: #ffffff;
+    border-radius: 8px;
+    // padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
+.cardTitle {
+    background-color: $primaryGreen;
+    border-radius: 6px 6px 0 0;
+    font-size: map-get($font, h4);
+    color: $fontWhite;
+    height: 60px;
+    line-height: 60px;
+    padding:  0 0 0 20px;
 }
 
-.form-group input {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+.form {
+    padding:20px; 
+    display: flex;
+    flex-direction: column;
+
+    label {
+        display: inline-block;
+        width: 100px;
+    }
+
+    .formGroup input {
+        margin-bottom: 10px;
 }
+    
+}
+
+// .formGroup {
+//     padding-bottom: 20px;
+
+// }
+
+// .formGroup label {
+//     display: block;
+//     font-weight: bold;
+// }
+
+// .formGroup input {
+//     width: 100%;
+//     padding: 8px;
+//     border: 1px solid #ddd;
+//     border-radius: 4px;
+// }
 
 .order-summary {
     margin-top: 20px;
