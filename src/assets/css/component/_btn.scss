@@ -76,11 +76,25 @@
     align-items: center;
     margin: 20px; // ========================
 
+    width: 250px;
+
     .text {
         font-size: map-get($font, h3);
         line-height: 80px;
         padding: 0 $spacing-4;
+        
     }
+    .fa-file-arrow-down:before{
+        font-size: 36px;
+    }
+    .fa-cloud-arrow-up:before{
+        font-size: 32px;
+
+    }
+}
+
+.iconStyle {
+    margin-left: 5px;
 }
 
 // 上傳 uploadBtn
@@ -103,11 +117,6 @@
         padding: 0 $spacing-4;
     }
 }
-
-.iconStyle {
-    color: $fontWhite;
-}
-
 
 // 綠界
 .ecpayBtn {
