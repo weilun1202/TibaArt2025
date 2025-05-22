@@ -11,7 +11,7 @@ import OrderConfirm from '@/views/OrderConfirm.vue'
 import About from '@/views/About.vue'
 import Login from '@/views/Login.vue'
 import Register from '@/views/Register.vue'
-import Admin from '../views/Admin.vue'
+import Admin from '@/views/backend/Admin.vue'
 
 
 const routes = [
@@ -27,7 +27,7 @@ const routes = [
   { path: '/register', name: 'Register', component: Register },
   { path: '/admin', name: 'Admin', component: Admin },
   {
-    path: '/product/:id', 
+    path: '/product/:id',
     name: 'product',
     component: Product,
     props: true
