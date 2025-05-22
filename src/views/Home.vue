@@ -25,38 +25,36 @@
 /* 可以把額外的 CSS 加在這裡或保留在全域 */
 @import '/style.scss';
 
-.wrapper{
+.wrapper {
   background-color: $primaryGreen;
 }
 
-.tempoBtn{
-    display: flex;
-    justify-content: center;
-    gap: $spacing-10;
+.tempoBtn {
+  display: flex;
+  justify-content: center;
+  gap: $spacing-10;
 
-    .entryLink,
-    .adminLink {
-      display: block;
-      width: 240px;
-      height: 240px;
-      line-height: 240px;
-      text-align: center;
-      padding: 0 24px;
+  .entryLink,
+  .adminLink {
+    display: block;
+    width: 240px;
+    height: 240px;
+    line-height: 240px;
+    text-align: center;
+    padding: 0 24px;
 
-      text-decoration: none;
-      color: $logoColor4;
-      font-size: map-get($font, h2);
-      background-color: $logoColor6;
-      border-radius: 50%;
+    text-decoration: none;
+    color: $logoColor4;
+    font-size: map-get($font, h2);
+    background-color: $logoColor6;
+    border-radius: 50%;
 
-      &:hover{
+    &:hover {
       background-color: $logoColor4;
       color: $fontWhite;
-      }
-
     }
 
+  }
+
 }
-
 </style>
-
