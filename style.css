@@ -368,18 +368,18 @@ header .pageTitle {
   justify-content: center;
 }
 
-.wrapper {
+.about .wrapper {
   overflow: hidden;
   position: relative;
   padding: 1rem 0;
 }
-.wrapper .timeline {
+.about .wrapper .timeline {
   display: flex;
   padding: 0;
   margin: 0;
   list-style: none;
 }
-.wrapper .timeline li {
+.about .wrapper .timeline li {
   flex: 0 0 auto;
   width: 260px;
   margin-right: 16px;
@@ -388,7 +388,7 @@ header .pageTitle {
   padding: 1em;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
-.wrapper .timeline li img {
+.about .wrapper .timeline li img {
   width: 100%;
   border-radius: 4px;
   margin-bottom: 0.5em;
@@ -724,40 +724,65 @@ header .pageTitle {
   border: 1px solid #29786A;
   background: #ffffff;
   border-radius: 8px;
+  margin-bottom: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .cardTitle {
   background-color: #29786A;
   border-radius: 6px 6px 0 0;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
+  font-weight: 600;
   color: #ffffff;
-  height: 60px;
-  line-height: 60px;
+  height: 50px;
+  line-height: 50px;
   padding: 0 0 0 20px;
 }
 
 .form {
-  padding: 20px;
+  padding: 20px 20px 0 20px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 .form label {
   display: inline-block;
-  width: 100px;
+  width: 70px;
+  margin-right: 16px;
+  -moz-text-align-last: justify;
+       text-align-last: justify;
+  font-size: 1rem;
 }
-.form .formGroup input {
-  margin-bottom: 10px;
+.form input {
+  width: 70%;
+  height: 30px;
+  margin-bottom: 20px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #29786A;
+  color: #29786A;
+}
+.form .checkbox {
+  width: auto;
+  height: 20px;
+  line-height: 20px;
 }
 
-.order-summary {
-  margin-top: 20px;
+.form2 {
+  padding: 20px 20px 0 20px;
+  text-align: center;
 }
 
-.order-summary p {
+.orderSummary p {
+  font-size: 1rem;
   display: flex;
   justify-content: space-between;
-  margin: 10px 0;
+  margin-bottom: 20px;
+}
+
+.orderSummary .total {
+  font-size: 1.5rem;
+  padding: 10px 0;
 }
 
 .btn a {
@@ -769,6 +794,12 @@ header .pageTitle {
 
 .btn a:hover {
   color: #2F2F2F;
+  display: flex;
+}
+
+.ecpay {
+  display: block;
+  margin: 20px auto;
 }
 
 @media (max-width: 768px) {
