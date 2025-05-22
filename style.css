@@ -72,10 +72,10 @@
   line-height: 80px;
   padding: 0 16px;
 }
-.applicationBtn .fa-file-arrow-down:before {
+.applicationBtn .file-arrow-down:before {
   font-size: 36px;
 }
-.applicationBtn .fa-cloud-arrow-up:before {
+.applicationBtn .cloud-arrow-up:before {
   font-size: 32px;
 }
 
@@ -288,16 +288,27 @@
   width: 100%;
   justify-content: center;
 }
-.memberLoginTab .generalLoginTab,
+.memberLoginTab .generalLoginTab {
+  width: 50%;
+  text-align: center;
+  padding: 20px;
+  border: 1.5px solid #2F2F2F;
+  border-bottom: none;
+  border-right: none;
+  border-radius: 8px 8px 0 0;
+}
+.memberLoginTab .generalLoginTab:hover {
+  cursor: pointer;
+}
 .memberLoginTab .artistLoginTab {
   width: 50%;
   text-align: center;
   padding: 20px;
   border: 1.5px solid #2F2F2F;
   border-bottom: none;
+  border-left: none;
   border-radius: 8px 8px 0 0;
 }
-.memberLoginTab .generalLoginTab:hover,
 .memberLoginTab .artistLoginTab:hover {
   cursor: pointer;
 }
@@ -343,38 +354,44 @@ header .pageTitle {
   transform: translate(0, -50%);
 }
 
-.aboutBanner {
-  padding: 60px;
-  max-width: 1200px;
-  margin: 0 auto;
+.pageTitle {
+  padding: 1em;
+  font-size: 1.5em;
+}
+
+.intro {
+  padding: 2em;
+}
+
+.top {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.aboutBanner .aboutBannerTitle {
-  max-width: 50%;
-}
-.aboutBanner .aboutBannerTitle h1 {
-  font-size: 3rem;
-  margin-bottom: 30px;
-}
-.aboutBanner .aboutBannerTitle p {
-  font-family: "Noto Sans TC ";
-  font-size: 1rem;
-}
-.aboutBanner img {
-  height: 400px;
+  justify-content: center;
 }
 
-.aboutTitle {
-  font-size: 3rem;
-  text-align: center;
-  padding: 60px 0;
+.wrapper {
+  overflow: hidden;
+  position: relative;
+  padding: 1rem 0;
 }
-
-.aboutTxt {
-  margin: 0 auto;
-  max-width: 900px;
+.wrapper .timeline {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.wrapper .timeline li {
+  flex: 0 0 auto;
+  width: 260px;
+  margin-right: 16px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  padding: 1em;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+.wrapper .timeline li img {
+  width: 100%;
+  border-radius: 4px;
+  margin-bottom: 0.5em;
 }
 
 .shopTab {
@@ -703,21 +720,34 @@ header .pageTitle {
   font-size: 14px;
 }
 
-.form-group {
-  margin-bottom: 15px;
+.card2 {
+  border: 1px solid #29786A;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.form-group label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
+.cardTitle {
+  background-color: #29786A;
+  border-radius: 6px 6px 0 0;
+  font-size: 1.5rem;
+  color: #ffffff;
+  height: 60px;
+  line-height: 60px;
+  padding: 0 0 0 20px;
 }
 
-.form-group input {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+.form {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.form label {
+  display: inline-block;
+  width: 100px;
+}
+.form .formGroup input {
+  margin-bottom: 10px;
 }
 
 .order-summary {
