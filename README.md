@@ -3,6 +3,7 @@
 
 ※※※※ 比較重要的搜尋 ※※※※
 使用 ctrl + F 尋找
+vue3 開發目前遇到的狀況(5/22)
 標籤命名規則
 系統設計 (basic)
 系統設計 (component)
@@ -12,9 +13,29 @@
 
 
 
+# 日期：2025 / 05 / 22
+## 更新者：偉倫
+## 項目：vue3 開發目前遇到的狀況(5/22)
 
+#### 問題簡述 → 解法 / 癥結點
 
+### 重新整理跑版 → 檔名問題
+位於src > views > Application.vue 在重新整理後，讀取到最上層的 application.html
+把 application.html 改名或刪除即可
 
+#### 重複 footer → 重複引入
+
+#### wrapper 跑版 → class 重複命名
+
+#### FortAwesome icon 引用 (※ 重要)
+必須先到 src > mani.js import
+
+例如：
+// Font Awesome 相關導入
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+// 把需要的 icon 加進 library
+library.add(faMagnifyingGlass);
 
 
 
