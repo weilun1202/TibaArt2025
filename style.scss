@@ -39,6 +39,7 @@
 // plugin
 @import './src/assets/css/plugin/bootstrap';
 
+
 * {
   /* 避免圖片跑版(LOGO) */
   box-sizing: border-box;
@@ -72,35 +73,36 @@ h1 {
 
 // 色階
 
-// .colorbox {
-//   display: flex;
-// }
+.colorbox {
+  display: flex;
+}
 
-// @mixin bgColor($class , $bgc) {
-//   @for $i from 0 through 9 {
-//     @if $i ==0 {
-//       .#{$class} {
-//         background-color: $bgc;
-//         width: 80px;
-//         height: 60px;
-//       }
-//     }
+@mixin bgColor($class , $bgc) {
+  @for $i from 0 through 9 {
+    @if $i ==0 {
+      .#{$class} {
+        background-color: $bgc;
+        width: 80px;
+        height: 60px;
+      }
+    }
 
-//     @else {
-//       .#{$class}#{$i * 100} {
-//         background-color: lighten($bgc, $i * 7);
-//         width: 80px;
-//         height: 60px;
-//       }
-//     }
-//   }
-// }
+    @else {
+      .#{$class}#{$i * 100} {
+        background-color: lighten($bgc, $i * 7);
+        
+        width: 80px;
+        height: 60px;
+      }
+    }
+  }
+}
 
-// @include bgColor('primaryGreen', #2E5B4A);
+@include bgColor('primaryGreen', #2E5B4A);
 
-// @include bgColor('logoColor1', $logoColor1);
-// @include bgColor('logoColor2', $logoColor2);
-// @include bgColor('logoColor3', $logoColor3);
-// @include bgColor('logoColor4', $logoColor4);
-// @include bgColor('logoColor5', $logoColor5);
-// @include bgColor('logoColor6', $logoColor6);
+@include bgColor('logoColor1', $logoColor1);
+@include bgColor('logoColor2', $logoColor2);
+@include bgColor('logoColor3', $logoColor3);
+@include bgColor('logoColor4', $logoColor4);
+@include bgColor('logoColor5', $logoColor5);
+@include bgColor('logoColor6', $logoColor6);
