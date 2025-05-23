@@ -37,23 +37,23 @@
                     <div class="card2">
                         <h2 class="cardTitle">訂購人資訊</h2>
                         <div class="form">
-                            <div class="form-group">
+                            <div class="formGroup">
                                 <label>姓名</label>
                                 <input placeholder="請輸入姓名">
                             </div>
-                            <div class="form-group">
+                            <div class="formGroup">
                                 <label>電話</label>
                                 <input placeholder="請輸入電話">
                             </div>
-                            <div class="form-group">
+                            <div class="formGroup">
                                 <label>地址</label>
                                 <input placeholder="請輸入地址">
                             </div>
-                            <div class="form-group">
+                            <div class="formGroup">
                                 <label>發票類型</label>
                                 <input placeholder="請選擇">
                             </div>
-                            <div class="form-group">
+                            <div class="formGroup">
                                 <label>載具</label>
                                 <input placeholder="請輸入載具號碼">
                             </div>
@@ -67,7 +67,7 @@
                         <div class="form">
                             <div class="formGroup">
                                 <label>同訂購人</label>
-                                <input type="checkbox">
+                                <input type="checkbox" class="checkbox">
                             </div>
                             <div class="formGroup">
                                 <label>姓名</label>
@@ -82,22 +82,21 @@
                                 <input placeholder="請輸入地址">
                             </div>
                         </div>
-
-
                     </div>
 
                     <!-- 確認訂單 -->
                     <div class="card2">
                         <h2 class="cardTitle">確認訂單</h2>
-                        <div class="form">
-                            <div class="order-summary">
+                        <div class="form2">
+                            <div class="orderSummary">
                                 <p><span>商品總額</span><span>NT$500</span></p>
                                 <p><span>運費</span><span>NT$60</span></p>
                                 <p><span>折扣</span><span>NT$0</span></p>
                                 <hr>
-                                <p><span>總計</span><span>NT$560</span></p>
+                                <p class="total"><span>總計</span><span>NT$560</span></p>
                             </div>
                             <button class="btn"><router-link to="/orderConfirm">確認購買</router-link></button>
+                            <img class="ecpay" src="@/assets/img/ecpay_logo.svg" alt="">
                         </div>
                     </div>
                 </div>

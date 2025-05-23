@@ -78,65 +78,72 @@
     border: 1px solid $primaryGreen;
     background: #ffffff;
     border-radius: 8px;
-    // padding: 20px;
+    margin-bottom: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .cardTitle {
     background-color: $primaryGreen;
     border-radius: 6px 6px 0 0;
-    font-size: map-get($font, h4);
+    font-size: map-get($font, h5);
+    font-weight: 600;
     color: $fontWhite;
-    height: 60px;
-    line-height: 60px;
+    height: 50px;
+    line-height: 50px;
     padding:  0 0 0 20px;
 }
 
 .form {
-    padding:20px; 
+    padding:20px 20px 0 20px; 
     display: flex;
     flex-direction: column;
+    justify-content: center;
 
     label {
         display: inline-block;
-        width: 100px;
+        width: 70px;
+        margin-right: 16px;
+        text-align-last: justify;
+        font-size:map-get($font, p);
     }
 
-    .formGroup input {
-        margin-bottom: 10px;
-}
-    
-}
+    input {
+        width:70%;
+        height: 30px;
+        margin-bottom: 20px;
+        font-size:map-get($font, p);
+        border-radius: 8px;
+        border:1px solid $primaryGreen;
+        color: $primaryGreen;
+    }
 
-// .formGroup {
-//     padding-bottom: 20px;
-
-// }
-
-// .formGroup label {
-//     display: block;
-//     font-weight: bold;
-// }
-
-// .formGroup input {
-//     width: 100%;
-//     padding: 8px;
-//     border: 1px solid #ddd;
-//     border-radius: 4px;
-// }
-
-.order-summary {
-    margin-top: 20px;
+    .checkbox {
+        width: auto;
+        height: 20px;
+        line-height: 20px;
+    }
 }
 
-.order-summary p {
+.form2 {
+    padding:20px 20px 0 20px; 
+    text-align: center;
+}
+
+.orderSummary p {
+    font-size:map-get($font, p);
     display: flex;
     justify-content: space-between;
-    margin: 10px 0;
+    margin-bottom: 20px;
 }
 
+.orderSummary .total {
+    font-size: map-get($font, h4);
+    padding: 10px 0;
+}
+
+
 .btn a {
-    display: block;
+    display:block;
     color: $fontWhite;
     cursor: pointer;
     text-decoration: none;
@@ -144,7 +151,15 @@
 
 .btn a:hover {
     color: $fontBlack;
-;
+    display: flex;
+
+}
+
+.ecpay {
+    display:block;
+    margin: 20px auto; // 水平置中
+
+
 
 }
 

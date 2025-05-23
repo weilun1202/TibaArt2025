@@ -288,16 +288,27 @@
   width: 100%;
   justify-content: center;
 }
-.memberLoginTab .generalLoginTab,
+.memberLoginTab .generalLoginTab {
+  width: 50%;
+  text-align: center;
+  padding: 20px;
+  border: 1.5px solid #2F2F2F;
+  border-bottom: none;
+  border-right: none;
+  border-radius: 8px 8px 0 0;
+}
+.memberLoginTab .generalLoginTab:hover {
+  cursor: pointer;
+}
 .memberLoginTab .artistLoginTab {
   width: 50%;
   text-align: center;
   padding: 20px;
   border: 1.5px solid #2F2F2F;
   border-bottom: none;
+  border-left: none;
   border-radius: 8px 8px 0 0;
 }
-.memberLoginTab .generalLoginTab:hover,
 .memberLoginTab .artistLoginTab:hover {
   cursor: pointer;
 }
@@ -343,38 +354,44 @@ header .pageTitle {
   transform: translate(0, -50%);
 }
 
-.aboutBanner {
-  padding: 60px;
-  max-width: 1200px;
-  margin: 0 auto;
+.pageTitle {
+  padding: 1em;
+  font-size: 1.5em;
+}
+
+.intro {
+  padding: 2em;
+}
+
+.top {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.aboutBanner .aboutBannerTitle {
-  max-width: 50%;
-}
-.aboutBanner .aboutBannerTitle h1 {
-  font-size: 3rem;
-  margin-bottom: 30px;
-}
-.aboutBanner .aboutBannerTitle p {
-  font-family: "Noto Sans TC ";
-  font-size: 1rem;
-}
-.aboutBanner img {
-  height: 400px;
+  justify-content: center;
 }
 
-.aboutTitle {
-  font-size: 3rem;
-  text-align: center;
-  padding: 60px 0;
+.about .wrapper {
+  overflow: hidden;
+  position: relative;
+  padding: 1rem 0;
 }
-
-.aboutTxt {
-  margin: 0 auto;
-  max-width: 900px;
+.about .wrapper .timeline {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.about .wrapper .timeline li {
+  flex: 0 0 auto;
+  width: 260px;
+  margin-right: 16px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  padding: 1em;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+.about .wrapper .timeline li img {
+  width: 100%;
+  border-radius: 4px;
+  margin-bottom: 0.5em;
 }
 
 .shopTab {
@@ -703,31 +720,69 @@ header .pageTitle {
   font-size: 14px;
 }
 
-.form-group {
-  margin-bottom: 15px;
+.card2 {
+  border: 1px solid #29786A;
+  background: #ffffff;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.form-group label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
+.cardTitle {
+  background-color: #29786A;
+  border-radius: 6px 6px 0 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #ffffff;
+  height: 50px;
+  line-height: 50px;
+  padding: 0 0 0 20px;
 }
 
-.form-group input {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+.form {
+  padding: 20px 20px 0 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.form label {
+  display: inline-block;
+  width: 70px;
+  margin-right: 16px;
+  -moz-text-align-last: justify;
+       text-align-last: justify;
+  font-size: 1rem;
+}
+.form input {
+  width: 70%;
+  height: 30px;
+  margin-bottom: 20px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #29786A;
+  color: #29786A;
+}
+.form .checkbox {
+  width: auto;
+  height: 20px;
+  line-height: 20px;
 }
 
-.order-summary {
-  margin-top: 20px;
+.form2 {
+  padding: 20px 20px 0 20px;
+  text-align: center;
 }
 
-.order-summary p {
+.orderSummary p {
+  font-size: 1rem;
   display: flex;
   justify-content: space-between;
-  margin: 10px 0;
+  margin-bottom: 20px;
+}
+
+.orderSummary .total {
+  font-size: 1.5rem;
+  padding: 10px 0;
 }
 
 .btn a {
@@ -739,6 +794,12 @@ header .pageTitle {
 
 .btn a:hover {
   color: #2F2F2F;
+  display: flex;
+}
+
+.ecpay {
+  display: block;
+  margin: 20px auto;
 }
 
 @media (max-width: 768px) {
