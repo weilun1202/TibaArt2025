@@ -19,6 +19,8 @@ import OrderConfirm from '@/views/frontend/OrderConfirm.vue'
 import About from '@/views/frontend/About.vue'
 import Login from '@/views/frontend/Login.vue'
 import Register from '@/views/frontend/Register.vue'
+import RegisterOK from '@/views/frontend/RegisterOK.vue'
+
 
 //backend
 import Admin from '@/views/backend/Admin.vue'
@@ -46,6 +48,8 @@ const routes = [
       { path: 'about', name: 'About', component: About },
       { path: 'login', name: 'Login', component: Login },
       { path: 'register', name: 'Register', component: Register },
+      { path: 'registerok', name: 'RegisterOK', component: RegisterOK },
+
       {
         path: '/product/:id',
         name: 'product',
