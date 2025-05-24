@@ -1,18 +1,28 @@
 <template>
-  <div>
+  <div class="about">
     <!-- 關於我們 介紹 -->
-    <header>
-      <div class="pageTitle">關於我們</div>
-    </header>
-    <section class="intro">
-      <h1>理念</h1>
-      <p>
-        緯藝基金會（TibaArt）致力於串連藝術與社會的緯度，開啟一個多元、包容且具前瞻性的創作平台……
-      </p>
-    </section>
 
-    <!-- 大事記 瀑布水平滾動區塊 -->
     <section class="wrapper" ref="wrapper">
+      <header>
+        <div class="pageTitle">關於我們</div>
+      </header>
+
+      <!-- <div class="top">
+        <div class="top-text">
+          <h2>緯藝基金會 TibaArt </h2>
+          <p>Weaving Art, Connecting Worlds.</p>
+        </div>
+        <img src="/src/assets/img/aboutBanner.jpg" alt="">
+      </div>  -->
+
+      <section class="intro">
+
+        <h1>理念</h1>
+        <p>
+          緯藝基金會（TibaArt）致力於串連藝術與社會的緯度，開啟一個多元、包容且具前瞻性的創作平台。我們相信，藝術不僅是表達，更是一種關係的建立——在人與人之間，在地方與世界之間，在當下與未來之間。TibaArt
+          的成立旨在支持具潛力的新銳藝術家、推動跨領域合作，並深耕社群文化，讓藝術成為生活的一部分。透過展演、駐村、教育計畫與數位策展等方式，我們希望拓展觀者的視野，激發創作者的勇氣，並促進藝術資源的公平流動。我們期望與各界共創一個既自由又有溫度的藝術生態，讓每一份創作都能找到屬於它的聽眾與場域。
+        </p>
+      </section>
       <h1>大事記</h1>
       <ul class="timeline" ref="timeline">
         <li>
@@ -60,7 +70,6 @@
           <strong>2010 — 開放藝術家自行上傳作品</strong><br>
           推出「開放投稿平台」，讓藝術家能自主上傳自己的展覽與創作，真正走向平臺化管理。
         </li>
-
       </ul>
     </section>
   </div>
@@ -97,25 +106,8 @@ onMounted(() => {
 })
 </script>
 
-<style scoped>
+<!-- <style scoped>
 /* 基本排版 */
-body {
-  margin: 0;
-  font-family: Tahoma, Geneva, Verdana, sans-serif;
-}
-
-nav ul {
-  display: flex;
-  list-style: none;
-  padding: 0;
-  background: #333;
-}
-
-nav li a {
-  color: #fff;
-  padding: 0.5em 1em;
-  text-decoration: none;
-}
 
 .pageTitle {
   padding: 1em;
@@ -156,4 +148,4 @@ nav li a {
   border-radius: 4px;
   margin-bottom: 0.5em;
 }
-</style>
+</style> -->
