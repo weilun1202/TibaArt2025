@@ -1,6 +1,7 @@
 <template>
   <nav class="navWrapper">
-    <router-link to="/"><img class="logo" src="@/assets/img/TibaArtLogo.svg" alt="" /></router-link>
+    <router-link to="/" @click="closeMenu"><img class="logo" src="@/assets/img/TibaArtLogo.svg" alt="" /></router-link>
+
     <div class="navBar">
       <ul>
         <li><router-link to="/expo">線上展覽</router-link></li>
@@ -13,12 +14,30 @@
         <button class="memberBtn" @click="goToLogin">會員登入</button>
         <button class="registerBtn" @click="goToRegister">註冊會員</button>
       </div>
-      <!-- <router-link to="/cart" class="cartIcon">
-        <font-awesome-icon :icon="['fas', 'cart-shopping']" />
-        <span class="cartCount">0</span>
-      </router-link>   -->
     </div>
-    <router-link to="/cart" class="cartIcon">
+
+    <div class="dropdown" :class="{ active: menuOpen }">
+      <ul>
+        <li><router-link to="/expo" @click="closeMenu">線上展覽</router-link></li>
+        <li><router-link to="/sponsor" @click="closeMenu">贊助藝術家</router-link></li>
+        <li><router-link to="/application" @click="closeMenu">展覽申請</router-link></li>
+        <li><router-link to="/shop" @click="closeMenu">線上商城</router-link></li>
+        <li><router-link to="/about" @click="closeMenu">關於我們</router-link></li>
+        <li><router-link to="/Login" @click="closeMenu">會員登入</router-link></li>
+        <li><router-link to="/Register" @click="closeMenu">註冊會員</router-link></li>
+      </ul>
+    </div>
+
+    <!-- 漢堡選單按鈕 -->
+    <div class="menuToggle" :class="{ active: menuOpen }" @click="toggleMenu">
+      <div class="burger">
+        <div class="bar bar1"></div>
+        <div class="bar bar2"></div>
+        <div class="bar bar3"></div>
+      </div>
+    </div>
+
+    <router-link to="/cart" class="cartIcon" @click="closeMenu">
         <font-awesome-icon :icon="['fas', 'cart-shopping']" />
         <span class="cartCount">0</span>
     </router-link>  
@@ -38,14 +57,24 @@ const goToRegister = () => {
   router.push('/Register') // 導向 Register.vue
 }
 
+import { ref } from 'vue';
+
+const menuOpen = ref(false)
+const toggleMenu = () => {
+  menuOpen.value = !menuOpen.value
+}
+
+function closeMenu() {
+  menuOpen.value = false
+}
+
 </script>
 
 <style lang="scss" scoped>
 @import '/style.scss';
-/* 你可以把 nav 的 CSS 加在這裡或保留在全域 */
 nav {
     width: 100%;
-    padding: 0 8vw;
+    padding: 0 5vw;
     height: 72px;
     margin: 0 auto;
     display: flex;
@@ -64,6 +93,11 @@ nav {
     .navBar {
         display: flex;
         margin-left: auto;
+
+        @media (max-width: 1080px) {
+        display: none;
+    }
+
     }
 
     ul {
@@ -77,6 +111,10 @@ nav {
         li {
             margin-right: $spacing-8;
 
+            @media (max-width: 1080px) {
+                 margin-right: 0;
+            }
+
             a {
                 line-height: 24px;
                 font-size: 16px;
@@ -88,22 +126,42 @@ nav {
                 display: inline-block;
                 padding-bottom: 3px;
 
+                // border: 1px solid #000;
+
+                @media (max-width: 1080px) {
+                  height: auto;
+                  line-height: 0;
+                }
+
                 &::after {
-                    content: '';
-                    position: absolute;
-                    left: 0;
-                    bottom: -4px;
-                    width: 0;
-                    height: 1px;
-                    background-color: #000000;
-                    transition: width 0.5s ease-in-out;
+                  content: '';
+                  position: absolute;
+                  left: 0;
+                  bottom: -4px;
+                  width: 0;
+                  height: 1px;
+                  background-color: #000000;
+                  transition: width 0.5s ease-in-out;
+
+                  @media (max-width: 1080px) {
+                    left: -50vw;
+                  }
 
                 }
 
                 &:hover:after {
                     width: 100%;
-                    left: 0;
+
+                  @media (max-width: 1080px) {
+                    background-color: #176066;
+                    width: 150vw;
                 }
+
+                }
+
+                
+
+
             }
         }
     }
@@ -143,4 +201,91 @@ nav {
         }
     }
 }
+
+.menuToggle{
+    display: none;
+    width: auto;
+    margin-left: auto;
+}
+
+@media (max-width: 1080px) {
+    .menuToggle {
+        display: block;
+    }
+}
+
+.bar {
+    width: 26px;
+    height: 2.5px;
+    background-color: #000;
+    margin: 6px 12px;
+    border-radius: 3px;
+    transition: all 0.3s ease-in-out;
+}
+
+.menuToggle.active .bar1 {
+  transform: rotate(-45deg) translate(-6px, 6px);
+}
+
+.menuToggle.active .bar2 {
+  opacity: 0;
+}
+
+.menuToggle.active .bar3 {
+  transform: rotate(45deg) translate(-6px, -6px);
+}
+
+.dropdown {
+    display: none;
+    position: absolute;
+    top: 72px;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 72px);
+    overflow: auto;
+    background-image: linear-gradient(to top, #f6eee4, #ffffff);;
+    margin: 0;
+
+  ul{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    li a {
+      display: block;
+      text-decoration: none;
+      color: #000;
+      font-size: 20px;
+      padding: 36px;
+      text-align: center;
+      transition: background-color 0.3s, color 0.3s;
+
+      &:hover {
+        // background-color: #FFC857;
+        color: #176066;
+      }
+
+    }
+
+  }
+
+  .memberAction{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+
+}
+
+@media (max-width: 1080px) {
+    .dropdown.active {
+        display: block;
+    }
+}
+
+
+
 </style>

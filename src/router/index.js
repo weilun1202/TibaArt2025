@@ -19,39 +19,41 @@ import OrderConfirm from '@/views/frontend/OrderConfirm.vue'
 import About from '@/views/frontend/About.vue'
 import Login from '@/views/frontend/Login.vue'
 import Register from '@/views/frontend/Register.vue'
+import RegisterOK from '@/views/frontend/RegisterOK.vue'
 import Admin from '@/views/backend/Admin.vue'
 
 
 const routes = [
-{
-  path: '/',
-  component: FrontLayout,
-  children: [
-    { path: '/', name: 'Home', component: Home },
-    { path: 'expo', name: 'Expo', component: Expo },
-    { path: 'sponsor', name: 'Sponsor', component: Sponsor },
-    { path: 'application', name: 'Application', component: Application },
-    { path: 'shop', name: 'Shop', component: Shop },
-    { path: 'cart', name: 'Cart', component: Cart },
-    { path: 'orderConfirm', component: OrderConfirm },
-    { path: 'about', name: 'About', component: About },
-    { path: 'login', name: 'Login', component: Login },
-    { path: 'register', name: 'Register', component: Register },
-    {
-      path: '/product/:id',
-      name: 'product',
-      component: Product,
-      props: true
-    }
-  ]
-},
-{
-  path: '/admin',
-  component: AdminLayout,
-  children: [
-    { path: '', name: 'Admin', component: Admin },
-  ]
-}
+  {
+    path: '/',
+    component: FrontLayout,
+    children: [
+      { path: '/', name: 'Home', component: Home },
+      { path: 'expo', name: 'Expo', component: Expo },
+      { path: 'sponsor', name: 'Sponsor', component: Sponsor },
+      { path: 'application', name: 'Application', component: Application },
+      { path: 'shop', name: 'Shop', component: Shop },
+      { path: 'cart', name: 'Cart', component: Cart },
+      { path: 'orderConfirm', component: OrderConfirm },
+      { path: 'about', name: 'About', component: About },
+      { path: 'login', name: 'Login', component: Login },
+      { path: 'register', name: 'Register', component: Register },
+      { path: 'registerok', name: 'RegisterOK', component: RegisterOK },
+      {
+        path: '/product/:id',
+        name: 'product',
+        component: Product,
+        props: true
+      }
+    ]
+  },
+  {
+    path: '/admin',
+    component: AdminLayout,
+    children: [
+      { path: '', name: 'Admin', component: Admin },
+    ]
+  }
 
 
 ]

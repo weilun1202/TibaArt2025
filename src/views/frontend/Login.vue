@@ -6,7 +6,7 @@
       </header>
       <div class="loginPage">
         
-        <img src="../assets/img/LoginImg.jpg" alt="">
+        <img src="/src/assets/img/LoginImg.jpg" alt="">
         
         <div class="loginContainer">
           <!-- Tabs -->

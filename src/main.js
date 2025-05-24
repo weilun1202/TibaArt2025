@@ -26,6 +26,7 @@ library.add(faCloudArrowUp);
 library.add(faFileArrowDown);
 
 
+
 const app = createApp(App)
 app.component('font-awesome-icon', FontAwesomeIcon)  // 註冊元件
 

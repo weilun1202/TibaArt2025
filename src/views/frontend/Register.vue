@@ -8,6 +8,8 @@
       <!-- 以下供大家編輯 -->
        <p>test7</p>
 
+        <router-link to="/registerok">註冊成功</router-link>
+
 
 
 
