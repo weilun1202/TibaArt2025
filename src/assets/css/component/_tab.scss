@@ -8,7 +8,8 @@
 
     .tibaShopTab {
         display: flex;
-        justify-content: center; 
+        justify-content: center;
+
         h1 {
             @include shopTabButton;
         }
@@ -16,7 +17,7 @@
 
     .artShopTab {
         display: flex;
-        justify-content: center; 
+        justify-content: center;
 
         h1 {
             @include shopTabButton;
@@ -37,6 +38,14 @@
     width: 100%;
     justify-content: center;
 
+    @media (max-width: 560px) {
+        font-size: map-get($font, h5);
+    }
+
+    @media (max-width: 420px) {
+        font-size: map-get($font, p);
+    }
+
     .generalLoginTab {
 
         width: 50%;
@@ -52,7 +61,7 @@
         }
     }
 
-     .artistLoginTab {
+    .artistLoginTab {
 
         width: 50%;
         text-align: center;

@@ -84,7 +84,9 @@ nav {
     left: 0;
     right: 0;
     z-index: 1000;
-    background-color: $fontWhite;
+    // background-color: $fontWhite;
+    background-image: linear-gradient(to bottom, #f6eee4, #f9f6f3, #ffffff);
+
 
     .logo {
         height: 60px;
@@ -247,6 +249,7 @@ nav {
     margin: 0;
 
   ul{
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;

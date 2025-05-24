@@ -29,7 +29,7 @@
 
           <!-- 一般會員登入 -->
           <div id="generalLogin" class="tabContent" v-if="currentTab === 'general'" :class="{ bgGeneral: currentTab === 'general' }">
-            <form class="formA" @submit.prevent="submitGeneral">
+            <div class="formA" @submit.prevent="submitGeneral">
               <div class="formGroup">
                 <label for="account" class="formLabel">帳號（您的電子信箱）</label>
                 <input
@@ -61,12 +61,12 @@
                 <button class="btn" type="submit">確定登入</button>
                 <button class="btn" type="button">註冊會員</button>
               </div>
-            </form>
+            </div>
           </div>
 
           <!-- 藝術家登入 -->
           <div id="artistLogin" class="tabContent" v-if="currentTab === 'artist'" :class="{ bgArtist: currentTab === 'artist' }">
-            <form class="formA" @submit.prevent="submitArtist">
+            <div class="formA" @submit.prevent="submitArtist">
               <div class="formGroup">
                 <label for="artistEmail" class="formLabel">帳號（您的電子信箱）</label>
                 <input
@@ -95,7 +95,7 @@
               <div class="btnGroup">
                 <button class="btn" type="submit">確定登入</button>
               </div>
-            </form>
+            </div>
           </div>
           
           <!-- 第三方登入區塊 -->
@@ -156,10 +156,48 @@ defineProps()
   justify-content: center;
   gap: $spacing-10;
 
+  @media (max-width: 1110px) {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  img{
+    @media (max-width: 1110px) {
+    order: 2;
+    }
+
+    @media (max-width: 560px) {
+      width: 90vw;
+    }
+  }
+
   .formA{
     border: 1.5px solid $fontBlack;
     border-radius: 0 0 $spacing-2 $spacing-2;
     border-top: none;
+
+    @media (max-width: 560px) {
+      width: 90vw;
+    }
+
+    @media (max-width: 470px) {
+      width: 86vw;
+    }
+
+    .formGroup{
+      @media (max-width: 560px) {
+      width: 100%;
+    }
+    }
+
+     .formLabel {
+        
+        @media (max-width: 560px) {
+            font-size: map-get($font, p);
+
+        }
+    }
+
   }
 
   .reminder{

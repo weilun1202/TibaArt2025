@@ -1,21 +1,27 @@
-.formA{
+.formA {
     padding: 20px;
+
     .formGroup {
-        width: 500px;  //-------------控制大小
+        width: 500px; //-------------控制大小
         margin-bottom: $spacing-3;
     }
+
     .formLabel {
         font-size: map-get($font, h5);
         display: flex;
         align-items: center;
         margin-bottom: $spacing-2;
     }
+
     .formHint {
         color: $fontWarn;
         margin-left: $spacing-1;
         font-size: map-get($font, p);
     }
-    input[type="text"],input[type="tel"], select {
+
+    input[type="text"],
+    input[type="tel"],
+    select {
         width: 100%;
         height: 48px;
         padding: 0 $spacing-4;
@@ -41,16 +47,14 @@
         font-size: 12px;
         color: $fontWarn;
         margin-top: $spacing-1;
-        min-height: $spacing-4; /* 保留空間，即使沒有錯誤時也不跳動 */
+        min-height: $spacing-4;
+        /* 保留空間，即使沒有錯誤時也不跳動 */
     }
+
     .hidden {
         visibility: hidden;
     }
 
-    
+
 
 }
-
-
-
-
