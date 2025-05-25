@@ -36,7 +36,7 @@ import AdminArtist from '@/views/backend/AdminArtist.vue'
 import AdminArtwork from '@/views/backend/AdminArtwork.vue'
 import AdminExpo from '@/views/backend/AdminExpo.vue'
 import AdminProduct from '@/views/backend/AdminProduct.vue'
-import AdminProductDetail from '@/views/backend/AdminProductDetail.vue'
+import AdminOrder from '@/views/backend/AdminOrder.vue'
 import AdminDonate from '@/views/backend/AdminDonate.vue'
 
 
@@ -84,13 +84,13 @@ const routes = [
     component: AdminLayout,
     children: [
       { path: '', name: 'Admin', component: Admin },
-      { path: 'member', name: 'AdminMember', component: AdminMember },
-      { path: 'artist', name: 'AdminArtist', component: AdminArtist },
-      { path: 'artwork', name: 'AdminArtwork', component: AdminArtwork },
-      { path: 'expo', name: 'AdminExpo', component: AdminExpo },
-      { path: 'product', name: 'AdminProduct', component: AdminProduct },
-      { path: 'productdetail', name: 'AdminProductDetail', component: AdminProductDetail },
-      { path: 'donate', name: 'AdminDonate', component: AdminDonate },
+      { path: 'member', name: 'AdminMember', component: AdminMember, meta: { title: '一般會員管理' } },
+      { path: 'artist', name: 'AdminArtist', component: AdminArtist, meta: { title: '藝術家會員管理' } },
+      { path: 'artwork', name: 'AdminArtwork', component: AdminArtwork, meta: { title: '作品管理' } },
+      { path: 'expo', name: 'AdminExpo', component: AdminExpo, meta: { title: '展覽資訊管理' } },
+      { path: 'product', name: 'AdminProduct', component: AdminProduct, meta: { title: '商品管理' } },
+      { path: 'order', name: 'AdminOrder', component: AdminOrder, meta: { title: '訂單管理' } },
+      { path: 'donate', name: 'AdminDonate', component: AdminDonate, meta: { title: '贊助管理' } },
     ]
   }
 
