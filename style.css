@@ -309,13 +309,256 @@ header .pageTitle {
   transform: translate(0, -50%);
 }
 
-.about .wrapper .timeline {
+.frontNav {
+  width: 100%;
+  padding: 0 9vw;
+  height: 72px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-image: linear-gradient(to bottom, #f6eee4, #f9f6f3, #ffffff);
+}
+@media (max-width: 1200px) {
+  .frontNav {
+    padding: 0 4vw;
+  }
+}
+.frontNav .logo {
+  height: 60px;
+}
+.frontNav .navBar {
+  display: flex;
+  margin-left: auto;
+}
+@media (max-width: 1200px) {
+  .frontNav .navBar {
+    display: none;
+  }
+}
+.frontNav ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+.frontNav ul li {
+  margin-right: 32px;
+}
+@media (max-width: 1200px) {
+  .frontNav ul li {
+    margin-right: 0;
+  }
+}
+.frontNav ul li a {
+  line-height: 24px;
+  font-size: 16px;
+  text-decoration: none;
+  color: #000000;
+  height: 24px;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 3px;
+}
+@media (max-width: 1200px) {
+  .frontNav ul li a {
+    height: auto;
+    line-height: 0;
+  }
+}
+.frontNav ul li a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 1px;
+  background-color: #000000;
+  transition: width 0.5s ease-in-out;
+}
+@media (max-width: 1200px) {
+  .frontNav ul li a::after {
+    left: -50vw;
+  }
+}
+.frontNav ul li a:hover:after {
+  width: 100%;
+}
+@media (max-width: 1200px) {
+  .frontNav ul li a:hover:after {
+    background-color: #176066;
+    width: 150vw;
+  }
+}
+.frontNav .memberAction {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+.frontNav .cartIcon {
+  position: relative;
+  color: #2F2F2F;
+  font-size: 1.25rem;
+  margin-left: 24px;
+}
+.frontNav .cartIcon:hover {
+  color: #E4C600;
+}
+.frontNav .cartIcon .cartCount {
+  position: absolute;
+  top: 8px;
+  right: -8px;
+  background-color: #29786A;
+  color: white;
+  font-size: 12px;
+  border-radius: 50%;
+  padding: 3px 5px;
+}
+.frontNav .cartIcon .cartCount:first-child {
+  margin-right: auto;
+}
+
+.menuToggle {
+  display: none;
+  width: auto;
+  margin-left: auto;
+}
+
+@media (max-width: 1200px) {
+  .menuToggle {
+    display: block;
+  }
+}
+.bar {
+  width: 26px;
+  height: 2.5px;
+  background-color: #000;
+  margin: 6px 12px;
+  border-radius: 3px;
+  transition: all 0.3s ease-in-out;
+}
+
+.menuToggle.active .bar1 {
+  transform: rotate(-45deg) translate(-6px, 6px);
+}
+
+.menuToggle.active .bar2 {
+  opacity: 0;
+}
+
+.menuToggle.active .bar3 {
+  transform: rotate(45deg) translate(-6px, -6px);
+}
+
+.dropdown {
+  display: none;
+  position: absolute;
+  top: 72px;
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 72px);
+  overflow: auto;
+  background-image: linear-gradient(to top, #f6eee4, #ffffff);
+  margin: 0;
+}
+.dropdown ul {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.dropdown ul li a {
+  display: block;
+  text-decoration: none;
+  color: #000;
+  font-size: 20px;
+  padding: 36px;
+  text-align: center;
+  transition: background-color 0.3s, color 0.3s;
+}
+.dropdown ul li a:hover {
+  color: #176066;
+}
+.dropdown .memberAction {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 1200px) {
+  .dropdown.active {
+    display: block;
+  }
+}
+.about {
+  /* 通用容器寬度置中 */
+  /* Banner 橫向排版 */
+  /* Intro 區塊 */
+}
+.about .banner,
+.about .intro {
+  width: 1200px;
+  margin: 0 auto;
+}
+.about .banner {
+  display: flex;
+  align-items: center; /* 讓文字與圖片垂直置中 */
+  justify-content: space-between;
+  gap: 20px; /* 文字與圖片間距 */
+  padding: 40px 0; /* 上下留白 */
+}
+.about .banner-text {
+  /* 文字區塊約 35% 寬度，可依設計調整 */
+  flex: 0 0 35%;
+}
+.about .banner-text h2 {
+  margin: 0;
+  font-size: 2.5rem;
+  line-height: 1.2;
+}
+.about .banner-text p {
+  margin: 0.5rem 0 0;
+  font-size: 1rem;
+  color: #666;
+}
+.about .banner img {
+  /* 圖片占剩餘寬度，並保持比例 */
+  flex: 0 0 65%;
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.about .intro {
+  padding: 40px 0;
+}
+.about .intro h1 {
+  margin: 0 0 1rem;
+  font-size: 3rem;
+  text-align: center;
+}
+.about .intro p {
+  margin: 0;
+  line-height: 1.6;
+  color: #333;
+  text-align: justify;
+}
+.about .history h1 {
+  text-align: center;
+}
+.about .timeline {
   display: flex;
   padding: 0;
   margin: 0;
   list-style: none;
 }
-.about .wrapper .timeline li {
+.about .timeline li {
   flex: 0 0 auto;
   width: 260px;
   margin-right: 16px;
@@ -324,7 +567,7 @@ header .pageTitle {
   padding: 1em;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
-.about .wrapper .timeline li img {
+.about .timeline li img {
   width: 100%;
   border-radius: 4px;
   margin-bottom: 0.5em;
