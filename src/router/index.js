@@ -17,10 +17,14 @@ import Product from '@/views/frontend/Product.vue'
 import Cart from '@/views/frontend/Cart.vue'
 import OrderConfirm from '@/views/frontend/OrderConfirm.vue'
 import About from '@/views/frontend/About.vue'
-import Login from '@/views/frontend/Login.vue'
-import Register from '@/views/frontend/Register.vue'
-import RegisterOK from '@/views/frontend/RegisterOK.vue'
-
+import MemLogin from '@/views/frontend/MemLogin.vue'
+import MemReg from '@/views/frontend/MemReg.vue'
+import MemRegOK from '@/views/frontend/MemRegOK.vue'
+import MemForgetPass from '@/views/frontend/MemForgetPass.vue'
+import MemHome from '@/views/frontend/MemHome.vue'
+import MemExpo from '@/views/frontend/MemExpo.vue'
+import MemOrder from '@/views/frontend/MemOrder.vue'
+import MemSponsor from '@/views/frontend/MemSponsor.vue'
 
 //backend
 import Admin from '@/views/backend/Admin.vue'
@@ -46,9 +50,14 @@ const routes = [
       { path: 'cart', name: 'Cart', component: Cart },
       { path: 'orderConfirm', component: OrderConfirm },
       { path: 'about', name: 'About', component: About },
-      { path: 'login', name: 'Login', component: Login },
-      { path: 'register', name: 'Register', component: Register },
-      { path: 'registerok', name: 'RegisterOK', component: RegisterOK },
+      { path: 'memLogin', name: 'MemLogin', component: MemLogin },
+      { path: 'memReg', name: 'MemReg', component: MemReg },
+      { path: 'memRegOK', name: 'MemRegOK', component: MemRegOK },
+      { path: 'memForgetPass', name: 'MemForgetPass', component: MemForgetPass },
+      { path: 'memHome', name: 'MemHome', component: MemHome },
+      { path: 'memExpo', name: 'MemExpo', component: MemExpo },
+      { path: 'memOrder', name: 'MemOrder', component: MemOrder },
+      { path: 'memSponsor', name: 'MemSponsor', component: MemSponsor },
 
       {
         path: '/product/:id',
