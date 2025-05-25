@@ -111,6 +111,11 @@
   padding: 0 16px;
 }
 
+.socialBtn {
+  border-radius: 50%;
+  background-color: #163F52;
+}
+
 .formA {
   padding: 20px;
 }
