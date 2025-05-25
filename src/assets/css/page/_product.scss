@@ -1,3 +1,11 @@
+.subTitle h1{
+    color: $primaryGreen;
+    font-size: map-get($font, h2);
+    font-weight: bold;
+    // border-bottom: 4px solid $primaryGreen;
+    line-height: 48px;
+}
+
 .productContainer {
     display: flex;
     margin: 0 auto;
@@ -117,9 +125,23 @@
     text-align: center;
 }
 
+@media screen and (max-width: 820px) {
+    .productImg {
+        flex: 1.6; 
+    }
+}
 
+@media screen and (max-width: 760px) {
+    .subTitle h1{
+        font-size: map-get($font, h3); 
+        line-height: 36px;
+    }
+}
 
-@media (max-width: 600px) {
+@media screen and (max-width: 640px) {
+    .subTitle{
+        margin: 0 auto;
+    }
     .productContainer {
         flex-direction: column;
     }
@@ -129,10 +151,15 @@
         margin-bottom: 15px;
     }
 
-    .actions {
+    .productInfo {
+        flex: 1;
+        display: flex;
         flex-direction: column;
-        align-items: center;
-        margin: 20px 0;
-        gap:10px;
+        line-height: 2;
+        align-self: auto;
+    }
+
+    .recoTitle{
+        margin: 60px auto 40px;
     }
 }

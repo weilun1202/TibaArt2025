@@ -4,20 +4,23 @@
 
 .searchContainer {
     margin-left: auto;
+    position: relative;
+    z-index: 10;
 }
 
 .searchBar {
     display: flex;
-    justify-content: center; 
+    justify-content: flex-end;
+    height: 32px;
 }
 
 .searchInput {
     max-width: 400px;
-    height: 32px;
     border-radius: 8px;
     border: 1px solid $primaryGreen;
     color: $primaryGreen;
     padding: 8px 12px;
+    transition: width 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
 
 .searchInput:focus {
@@ -28,12 +31,13 @@
 
 .searchButton {
     position: relative;
-    transform: translateY(10%);
+    transform: translateY(5%);
     background-color: transparent;
     border: none;
     color: $primaryGreen;
     font-size: map-get($font, h5);
     cursor: pointer;
+    z-index: 2;
 }
 
 .itemList {
@@ -89,8 +93,7 @@
 
 .itemName {
     font-weight: bold;
-    font-size: 24px;
-    /* color: #333; */
+    font-size: map-get($font, h4);
 }
 
 .itemPrice {
@@ -109,14 +112,105 @@
 }
 
 /* 響應式設計 */
-@media (max-width: 992px) {
+
+@media screen and (max-width: 1200px) {
+   .wrap {
+        margin: 0 20px;
+    }
+}
+
+@media screen and (max-width: 992px) {
     .item {
         width: calc(50% - 40px);
     }
 }
 
-@media (max-width: 576px) {
+@media screen and (max-width: 760px) {
+    .shopTab {
+        padding: 50px 20px 40px;
+    }
+}
+    
+
+@media screen and (max-width: 700px) {
+    .item {
+        padding:16px;
+    }
+    
+    .itemName {
+        font-weight: bold;
+        font-size: map-get($font, h5);
+    }
+    
+    .itemPrice {
+        font-weight: bold;
+        color: $fontWarn;
+        font-size: map-get($font, p);
+    }
+    
+    .btn {
+        font-size: map-get($font, p);
+        line-height: 38px;
+    }
+}
+
+@media screen and (max-width: 634px) {
+    .searchInput {
+        position: absolute; // 不佔空間
+        right: 0; 
+        top: 0; 
+        
+        width: 0; // 初始隱藏輸入框
+        padding: 0; // 移除填充以防止水平滾動問題
+        border: none;
+        opacity: 0;
+        pointer-events: none; // 隱藏時防止互動
+    }
+    
+    .searchInput.expanded {
+        width: 140px; 
+        right: 32px; // 根據實際按鈕大小調整，例如：如果按鈕寬度是32px，right設為32px使其剛好在按鈕左側展開
+        padding: 8px 12px; 
+        border: 1px solid $primaryGreen; 
+        opacity: 1; 
+        pointer-events: auto; // 允許互動
+    }
+    
+    .searchBar {
+        position: static; // 確保它在媒體查詢外是靜態定位
+    }
+    
     .item {
         width: calc(100% - 40px);
+        padding:20px;
+    }
+    
+    .itemName {
+        font-weight: bold;
+        font-size: map-get($font, h4);
+    }
+    
+    .itemPrice {
+        font-weight: bold;
+        color: $fontWarn;
+        font-size: map-get($font, h5);
+    }
+    
+    .btn {
+        font-size: map-get($font, h5);
+        line-height: 48px;
+    }
+}
+
+@media screen and (max-width: 520px) {
+    .shopTab {
+        padding: 40px 20px 30px;
+    }
+}
+
+@media screen and (max-width: 390px) {
+    .btn {
+        font-size: map-get($font, p);
+        line-height: 38px;
     }
 }
