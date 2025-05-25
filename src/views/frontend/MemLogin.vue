@@ -59,7 +59,7 @@
 
               <div class="btnGroup">
                 <button class="btn" type="submit"
-                @click="$router.push('/memHome')"
+                @click="$router.push('/member')"
                 >確定登入</button>
                 <button class="btn" type="button"
                 @click="$router.push('/memReg')"
@@ -98,7 +98,7 @@
 
               <div class="btnGroup">
                 <button class="btn" type="submit"
-                @click="$router.push('/memHome')"
+                @click="$router.push('/member')"
                 >確定登入</button>
               </div>
             </div>

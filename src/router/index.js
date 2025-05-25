@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 //layouts
 import FrontLayout from '@/layouts/FrontLayout.vue'
 import AdminLayout from '@/layouts/AdminLayout.vue'
+import MemberLayout from '@/layouts/MemberLayout.vue'
 // import EmptyLayout from '@/layouts/EmptyLayout.vue'
 
 
@@ -21,10 +22,12 @@ import MemLogin from '@/views/frontend/MemLogin.vue'
 import MemReg from '@/views/frontend/MemReg.vue'
 import MemRegOK from '@/views/frontend/MemRegOK.vue'
 import MemForgetPass from '@/views/frontend/MemForgetPass.vue'
-import MemHome from '@/views/frontend/MemHome.vue'
-import MemExpo from '@/views/frontend/MemExpo.vue'
-import MemOrder from '@/views/frontend/MemOrder.vue'
-import MemSponsor from '@/views/frontend/MemSponsor.vue'
+
+//frontend/member
+import MemHome from '@/views/frontend/member/MemHome.vue'
+import MemExpo from '@/views/frontend/member/MemExpo.vue'
+import MemOrder from '@/views/frontend/member/MemOrder.vue'
+import MemSponsor from '@/views/frontend/member/MemSponsor.vue'
 
 //backend
 import Admin from '@/views/backend/Admin.vue'
@@ -54,17 +57,26 @@ const routes = [
       { path: 'memReg', name: 'MemReg', component: MemReg },
       { path: 'memRegOK', name: 'MemRegOK', component: MemRegOK },
       { path: 'memForgetPass', name: 'MemForgetPass', component: MemForgetPass },
-      { path: 'memHome', name: 'MemHome', component: MemHome },
-      { path: 'memExpo', name: 'MemExpo', component: MemExpo },
-      { path: 'memOrder', name: 'MemOrder', component: MemOrder },
-      { path: 'memSponsor', name: 'MemSponsor', component: MemSponsor },
-
+      // { path: 'memHome', name: 'MemHome', component: MemHome },
+      // { path: 'memExpo', name: 'MemExpo', component: MemExpo },
+      // { path: 'memOrder', name: 'MemOrder', component: MemOrder },
+      // { path: 'memSponsor', name: 'MemSponsor', component: MemSponsor },
       {
         path: '/product/:id',
         name: 'product',
         component: Product,
         props: true
       }
+    ]
+  },
+  {
+    path: '/member',
+    component: MemberLayout,
+    children: [
+      { path: '', name: 'MemHome', component: MemHome },
+      { path: 'memExpo', name: 'MemExpo', component: MemExpo },
+      { path: 'memOrder', name: 'MemOrder', component: MemOrder },
+      { path: 'memSponsor', name: 'MemSponsor', component: MemSponsor },
     ]
   },
   {

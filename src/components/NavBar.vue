@@ -1,5 +1,5 @@
 <template>
-  <nav class="navWrapper">
+  <nav class="frontNav">
     <router-link to="/" @click="closeMenu"><img class="logo" src="@/assets/img/TibaArtLogo.svg" alt="" /></router-link>
 
     <div class="navBar">
@@ -70,9 +70,9 @@ function closeMenu() {
 
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '/style.scss';
-nav {
+.frontNav {
     width: 100%;
     padding: 0 9vw;
     height: 72px;
@@ -162,8 +162,6 @@ nav {
                 }
 
                 }
-
-                
 
 
             }
