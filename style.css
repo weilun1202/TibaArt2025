@@ -129,7 +129,9 @@
   margin-left: 4px;
   font-size: 1rem;
 }
-.formA input[type=text], .formA input[type=tel], .formA select {
+.formA input[type=text],
+.formA input[type=tel],
+.formA select {
   width: 100%;
   height: 48px;
   padding: 0 16px;
@@ -153,7 +155,8 @@
   font-size: 12px;
   color: #C34E4E;
   margin-top: 4px;
-  min-height: 16px; /* 保留空間，即使沒有錯誤時也不跳動 */
+  min-height: 16px;
+  /* 保留空間，即使沒有錯誤時也不跳動 */
 }
 .formA .hidden {
   visibility: hidden;
@@ -288,6 +291,16 @@
   width: 100%;
   justify-content: center;
 }
+@media (max-width: 560px) {
+  .memberLoginTab {
+    font-size: 1.25rem;
+  }
+}
+@media (max-width: 420px) {
+  .memberLoginTab {
+    font-size: 1rem;
+  }
+}
 .memberLoginTab .generalLoginTab {
   width: 50%;
   text-align: center;
@@ -354,25 +367,6 @@ header .pageTitle {
   transform: translate(0, -50%);
 }
 
-.pageTitle {
-  padding: 1em;
-  font-size: 1.5em;
-}
-
-.intro {
-  padding: 2em;
-}
-
-.top {
-  display: flex;
-  justify-content: center;
-}
-
-.about .wrapper {
-  overflow: hidden;
-  position: relative;
-  padding: 1rem 0;
-}
 .about .wrapper .timeline {
   display: flex;
   padding: 0;
@@ -905,6 +899,130 @@ header .pageTitle {
 }
 .faqToggle:checked ~ .faqText {
   grid-template-rows: 1fr;
+}
+
+.parent {
+  margin-top: 60px;
+  margin-bottom: 60px;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(12, 1fr);
+  grid-column-gap: 12px;
+  grid-row-gap: 12px;
+}
+
+.div1 {
+  height: 160px;
+  background-color: aqua;
+  grid-area: 1/1/3/3;
+}
+
+.div2 {
+  height: 160px;
+  background-color: aqua;
+  grid-area: 1/3/3/6;
+}
+
+.div3 {
+  height: 160px;
+  background-color: aqua;
+  grid-area: 1/6/3/8;
+}
+
+.div4 {
+  height: 160px;
+  background-color: aqua;
+  grid-area: 1/8/3/11;
+}
+
+.div5 {
+  height: 160px;
+  background-color: aqua;
+  grid-area: 3/1/5/4;
+}
+
+.div6 {
+  height: 160px;
+  background-color: aqua;
+  grid-area: 3/4/5/6;
+}
+
+.div7 {
+  height: 160px;
+  background-color: aqua;
+  grid-area: 3/6/5/9;
+}
+
+.div8 {
+  height: 160px;
+  background-color: aqua;
+  grid-area: 3/9/5/11;
+}
+
+.div9 {
+  height: 160px;
+  background-color: aqua;
+  grid-area: 5/1/7/3;
+}
+
+.div10 {
+  height: 160px;
+  background-color: aqua;
+  grid-area: 5/3/7/5;
+}
+
+.div11 {
+  height: 160px;
+  background-color: aqua;
+  grid-area: 5/5/7/8;
+}
+
+.div12 {
+  height: 160px;
+  background-color: aqua;
+  grid-area: 5/8/7/11;
+}
+
+.div13 {
+  height: 160px;
+  background-color: aqua;
+  grid-area: 7/1/9/5;
+}
+
+.div14 {
+  height: 160px;
+  background-color: aqua;
+  grid-area: 7/5/9/7;
+}
+
+.div15 {
+  height: 160px;
+  background-color: aqua;
+  grid-area: 7/7/9/11;
+}
+
+.div16 {
+  height: 160px;
+  background-color: aqua;
+  grid-area: 9/1/11/4;
+}
+
+.div17 {
+  height: 160px;
+  background-color: aqua;
+  grid-area: 9/4/11/6;
+}
+
+.div18 {
+  height: 160px;
+  background-color: aqua;
+  grid-area: 9/6/11/9;
+}
+
+.div19 {
+  height: 160px;
+  background-color: aqua;
+  grid-area: 9/9/11/11;
 }
 
 .applicationWrapper {

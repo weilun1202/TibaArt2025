@@ -1,24 +1,8 @@
-.pageTitle {
-    padding: 1em;
-    font-size: 1.5em;
-}
-
-// 介紹段落
-.intro {
-    padding: 2em;
-}
-
-.top {
-    display: flex;
-    justify-content: center;
-}
 
 // 大事記水平滾動區塊
-.about {
+.about {  
+    // 介紹段落
     .wrapper {
-        overflow: hidden;
-        position: relative;
-        padding: 1rem 0;
 
         .timeline {
             display: flex;
