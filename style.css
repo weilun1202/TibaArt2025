@@ -129,7 +129,9 @@
   margin-left: 4px;
   font-size: 1rem;
 }
-.formA input[type=text], .formA input[type=tel], .formA select {
+.formA input[type=text],
+.formA input[type=tel],
+.formA select {
   width: 100%;
   height: 48px;
   padding: 0 16px;
@@ -153,7 +155,8 @@
   font-size: 12px;
   color: #C34E4E;
   margin-top: 4px;
-  min-height: 16px; /* 保留空間，即使沒有錯誤時也不跳動 */
+  min-height: 16px;
+  /* 保留空間，即使沒有錯誤時也不跳動 */
 }
 .formA .hidden {
   visibility: hidden;
@@ -166,26 +169,20 @@
   align-items: center;
   gap: 40px;
 }
-.shopTab .tibaShopTab {
-  display: flex;
-  justify-content: center;
-}
-.shopTab .tibaShopTab h1 {
+.shopTab .tibaShopTab, .shopTab .artShopTab {
   font-size: 2rem;
   line-height: 40px;
   font-weight: bold;
-  color: #2F2F2F;
   opacity: 0.5;
   position: relative;
   display: inline-block;
   padding-bottom: 3px;
-}
-.shopTab .tibaShopTab h1:hover {
-  color: #29786A;
   cursor: pointer;
-  opacity: 1;
 }
-.shopTab .tibaShopTab h1::after {
+.shopTab .tibaShopTab h1, .shopTab .artShopTab h1 {
+  color: #29786A;
+}
+.shopTab .tibaShopTab::after, .shopTab .artShopTab::after {
   content: "";
   position: absolute;
   left: 0;
@@ -195,90 +192,33 @@
   background-color: #29786A;
   transition: width 0.5s ease-in-out;
 }
-.shopTab .tibaShopTab h1:hover:after {
+.shopTab .tibaShopTab:hover:after, .shopTab .artShopTab:hover:after {
   width: 100%;
   left: 0;
 }
-.shopTab .tibaShopTab h1.active {
-  color: #29786A;
+.shopTab .tibaShopTab.active, .shopTab .artShopTab.active {
   opacity: 1;
 }
-@media (max-width: 740px) {
-  .shopTab .tibaShopTab h1 {
-    font-size: 1.5rem;
-    line-height: 34px;
-  }
-}
-@media (max-width: 600px) {
-  .shopTab .tibaShopTab h1 {
-    font-size: 1.25rem;
-    line-height: 30px;
-  }
-}
-@media (max-width: 543px) {
-  .shopTab .tibaShopTab h1 {
-    font-size: 1.25rem;
-    line-height: 30px;
-  }
-}
-.shopTab .artShopTab {
-  display: flex;
-  justify-content: center;
-}
-.shopTab .artShopTab h1 {
-  font-size: 2rem;
-  line-height: 40px;
-  font-weight: bold;
-  color: #2F2F2F;
-  opacity: 0.5;
-  position: relative;
-  display: inline-block;
-  padding-bottom: 3px;
-}
-.shopTab .artShopTab h1:hover {
-  color: #29786A;
-  cursor: pointer;
-  opacity: 1;
-}
-.shopTab .artShopTab h1::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -4px;
-  width: 0;
-  height: 4px;
-  background-color: #29786A;
-  transition: width 0.5s ease-in-out;
-}
-.shopTab .artShopTab h1:hover:after {
+.shopTab .tibaShopTab.active::after, .shopTab .artShopTab.active::after {
   width: 100%;
   left: 0;
 }
-.shopTab .artShopTab h1.active {
-  color: #29786A;
-  opacity: 1;
-}
-@media (max-width: 740px) {
-  .shopTab .artShopTab h1 {
-    font-size: 1.5rem;
-    line-height: 34px;
+@media screen and (max-width: 760px) {
+  .shopTab {
+    gap: 30px;
   }
-}
-@media (max-width: 600px) {
-  .shopTab .artShopTab h1 {
-    font-size: 1.25rem;
+  .shopTab h1 {
+    font-size: 2rem;
     line-height: 30px;
   }
 }
-@media (max-width: 543px) {
-  .shopTab .artShopTab h1 {
-    font-size: 1.25rem;
-    line-height: 30px;
-  }
-}
-@media (max-width: 740px) {
+@media screen and (max-width: 520px) {
   .shopTab {
     gap: 20px;
+  }
+  .shopTab h1 {
+    font-size: 1.5rem;
+    line-height: 20px;
   }
 }
 
@@ -287,6 +227,16 @@
   font-size: 1.5rem;
   width: 100%;
   justify-content: center;
+}
+@media (max-width: 560px) {
+  .memberLoginTab {
+    font-size: 1.25rem;
+  }
+}
+@media (max-width: 420px) {
+  .memberLoginTab {
+    font-size: 1rem;
+  }
 }
 .memberLoginTab .generalLoginTab {
   width: 50%;
@@ -400,20 +350,23 @@ header .pageTitle {
 
 .searchContainer {
   margin-left: auto;
+  position: relative;
+  z-index: 10;
 }
 
 .searchBar {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
+  height: 32px;
 }
 
 .searchInput {
   max-width: 400px;
-  height: 32px;
   border-radius: 8px;
   border: 1px solid #29786A;
   color: #29786A;
   padding: 8px 12px;
+  transition: width 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
 
 .searchInput:focus {
@@ -424,12 +377,13 @@ header .pageTitle {
 
 .searchButton {
   position: relative;
-  transform: translateY(10%);
+  transform: translateY(5%);
   background-color: transparent;
   border: none;
   color: #29786A;
   font-size: 1.25rem;
   cursor: pointer;
+  z-index: 2;
 }
 
 .itemList {
@@ -486,8 +440,7 @@ header .pageTitle {
 
 .itemName {
   font-weight: bold;
-  font-size: 24px;
-  /* color: #333; */
+  font-size: 1.5rem;
 }
 
 .itemPrice {
@@ -506,16 +459,97 @@ header .pageTitle {
 }
 
 /* 響應式設計 */
-@media (max-width: 992px) {
+@media screen and (max-width: 1200px) {
+  .wrap {
+    margin: 0 20px;
+  }
+}
+@media screen and (max-width: 992px) {
   .item {
     width: calc(50% - 40px);
   }
 }
-@media (max-width: 576px) {
-  .item {
-    width: calc(100% - 40px);
+@media screen and (max-width: 760px) {
+  .shopTab {
+    padding: 50px 20px 40px;
   }
 }
+@media screen and (max-width: 700px) {
+  .item {
+    padding: 16px;
+  }
+  .itemName {
+    font-weight: bold;
+    font-size: 1.25rem;
+  }
+  .itemPrice {
+    font-weight: bold;
+    color: #C34E4E;
+    font-size: 1rem;
+  }
+  .btn {
+    font-size: 1rem;
+    line-height: 38px;
+  }
+}
+@media screen and (max-width: 634px) {
+  .searchInput {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 0;
+    padding: 0;
+    border: none;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .searchInput.expanded {
+    width: 140px;
+    right: 32px;
+    padding: 8px 12px;
+    border: 1px solid #29786A;
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .searchBar {
+    position: static;
+  }
+  .item {
+    width: calc(100% - 40px);
+    padding: 20px;
+  }
+  .itemName {
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+  .itemPrice {
+    font-weight: bold;
+    color: #C34E4E;
+    font-size: 1.25rem;
+  }
+  .btn {
+    font-size: 1.25rem;
+    line-height: 48px;
+  }
+}
+@media screen and (max-width: 520px) {
+  .shopTab {
+    padding: 40px 20px 30px;
+  }
+}
+@media screen and (max-width: 390px) {
+  .btn {
+    font-size: 1rem;
+    line-height: 38px;
+  }
+}
+.subTitle h1 {
+  color: #29786A;
+  font-size: 2.5rem;
+  font-weight: bold;
+  line-height: 48px;
+}
+
 .productContainer {
   display: flex;
   margin: 0 auto;
@@ -635,7 +669,21 @@ header .pageTitle {
   text-align: center;
 }
 
-@media (max-width: 600px) {
+@media screen and (max-width: 820px) {
+  .productImg {
+    flex: 1.6;
+  }
+}
+@media screen and (max-width: 760px) {
+  .subTitle h1 {
+    font-size: 2rem;
+    line-height: 36px;
+  }
+}
+@media screen and (max-width: 640px) {
+  .subTitle {
+    margin: 0 auto;
+  }
   .productContainer {
     flex-direction: column;
   }
@@ -643,11 +691,15 @@ header .pageTitle {
     margin-right: 0;
     margin-bottom: 15px;
   }
-  .actions {
+  .productInfo {
+    flex: 1;
+    display: flex;
     flex-direction: column;
-    align-items: center;
-    margin: 20px 0;
-    gap: 10px;
+    line-height: 2;
+    align-self: auto;
+  }
+  .recoTitle {
+    margin: 60px auto 40px;
   }
 }
 .cartContainer {
@@ -679,6 +731,7 @@ header .pageTitle {
 .cartItem {
   display: flex;
   align-items: center;
+  position: relative;
 }
 
 .cartItem img {
@@ -691,33 +744,51 @@ header .pageTitle {
 }
 
 .cartDetails {
-  flex: 1;
   display: flex;
   flex-direction: column;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 .cartDetails .cardName {
   font-size: 1.25rem;
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-bottom: 16px;
 }
 .cartDetails .productDescription {
   font-size: 1rem;
-  margin-bottom: 10px;
 }
 .cartDetails .productPrice {
-  font-size: 1rem;
+  font-size: 1.25rem;
+  font-weight: normal;
   color: #C34E4E;
-  margin-bottom: 10px;
 }
 .cartDetails .quantity {
-  margin-bottom: 10px;
+  margin-bottom: 0px;
 }
 
 .removeBtn {
-  color: #C34E4E;
+  background-color: #29786A;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.5rem;
   cursor: pointer;
-  font-size: 14px;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+.removeBtn p {
+  position: relative;
+  top: -3px;
+}
+
+.removeBtn:hover {
+  background-color: #E4C600;
+  color: #2F2F2F;
 }
 
 .card2 {
@@ -732,7 +803,7 @@ header .pageTitle {
   background-color: #29786A;
   border-radius: 6px 6px 0 0;
   font-size: 1.25rem;
-  font-weight: 600;
+  font-weight: 400;
   color: #ffffff;
   height: 50px;
   line-height: 50px;
@@ -741,31 +812,37 @@ header .pageTitle {
 
 .form {
   padding: 20px 20px 0 20px;
+}
+.form .formGroup {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
 }
 .form label {
-  display: inline-block;
-  width: 70px;
-  margin-right: 16px;
+  flex: 1;
+  font-size: 1rem;
+  color: #29786A;
+  text-align: justify;
   -moz-text-align-last: justify;
        text-align-last: justify;
-  font-size: 1rem;
+  padding-right: 10px;
 }
-.form input {
-  width: 70%;
-  height: 30px;
-  margin-bottom: 20px;
+.form input, .form .invoiceType {
+  flex: 2;
   font-size: 1rem;
   border-radius: 8px;
   border: 1px solid #29786A;
   color: #29786A;
+  padding: 8px 12px;
+  transition: width 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
-.form .checkbox {
-  width: auto;
-  height: 20px;
-  line-height: 20px;
+.form input:focus, .form .invoiceType:focus {
+  border-color: #29786A;
+  box-shadow: 0 4px 15px rgba(41, 120, 106, 0.3);
+  outline: none;
+}
+.form .checkbox:focus {
+  box-shadow: 0 4px 15px rgba(41, 120, 106, 0);
 }
 
 .form2 {
@@ -802,9 +879,46 @@ header .pageTitle {
   margin: 20px auto;
 }
 
-@media (max-width: 768px) {
-  .container {
+@media screen and (max-width: 992px) {
+  .leftPanel {
+    flex: 1.5;
+  }
+}
+@media screen and (max-width: 920px) {
+  .cartContainer {
     flex-direction: column;
+  }
+  .form label {
+    flex: 0.5;
+    padding-right: 20px;
+  }
+}
+@media screen and (max-width: 640px) {
+  .cartItem {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .cartItem img {
+    height: 100%;
+    width: 100%;
+    -o-object-fit: cover;
+       object-fit: cover;
+  }
+  .cartItem .cartDetails {
+    margin-top: 20px;
+  }
+}
+@media screen and (max-width: 530px) {
+  .form label {
+    flex: 0.8;
+    padding-right: 10px;
+  }
+}
+@media screen and (max-width: 422px) {
+  .formGroup {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
   }
 }
 .donateForm {
