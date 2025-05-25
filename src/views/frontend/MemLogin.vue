@@ -53,13 +53,17 @@
                 />
                 <div class="reminder">
                   <span class="formError hidden">格式錯誤</span>
-                  <a href="#" class="passForget">忘記密碼</a>
+                  <router-link to="/memForgetPass" class="passForget">忘記密碼</router-link>
                 </div>
               </div>
 
               <div class="btnGroup">
-                <button class="btn" type="submit">確定登入</button>
-                <button class="btn" type="button">註冊會員</button>
+                <button class="btn" type="submit"
+                @click="$router.push('/member')"
+                >確定登入</button>
+                <button class="btn" type="button"
+                @click="$router.push('/memReg')"
+                >註冊會員</button>
               </div>
             </div>
           </div>
@@ -88,12 +92,14 @@
                 />
                 <div class="reminder">
                   <span class="formError hidden">格式錯誤</span>
-                  <a href="#" class="passForget">忘記密碼</a>
+                  <router-link to="/memForgetPass" class="passForget">忘記密碼</router-link>
                 </div>
               </div>
 
               <div class="btnGroup">
-                <button class="btn" type="submit">確定登入</button>
+                <button class="btn" type="submit"
+                @click="$router.push('/member')"
+                >確定登入</button>
               </div>
             </div>
           </div>
@@ -102,8 +108,8 @@
           <div class="thirdPartyLogin">
             <div class="separator">或使用以下方式登入</div>
             <div class="socialButtons">
-              <button class="btn socialBtn google"><font-awesome-icon :icon="['fab', 'google']" /></button>
-              <button class="btn socialBtn facebook"><font-awesome-icon :icon="['fab', 'facebook']" /></button>
+              <button class="btn socialBtn google" aria-label="使用 Google 登入"><font-awesome-icon :icon="['fab', 'google']" /></button>
+              <button class="btn socialBtn facebook" aria-label="使用 Facebook 登入"><font-awesome-icon :icon="['fab', 'facebook']" /></button>
             </div>
           </div>
         </div>

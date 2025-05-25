@@ -8,54 +8,58 @@
       <!-- 以下供大家編輯 -->
         <div class="wrap">
             <div id="cart" class="cartContainer">
-            <!-- 左邊：購物車商品 -->
-            <div class="leftPanel">
-                <div class="card">
-                    <div class="cartItem">
-                        <img src="@/assets/img/itemMug.jpg" alt="商品圖片">
-                        <div class="cartDetails">
-                            <h3 class="cardName">緯藝馬克杯</h3>
-                            <p class="productDescription">材質：磁器、規格：325ml</p>
-                            <p class="productPrice">價格：NT$500</p>
-                            <div class="quantity">
-                                <p class="productDescription">數量: </p>
-                                <div class="selectQuan">
-                                    <button type="button" class="addMinus">-</button>
-                                    <input type="number" id="quantity" value="1" min="1">
-                                    <button type="button" class="addMinus">+</button>
+                <!-- 左邊：購物車商品 -->
+                <div class="leftPanel">
+                    <div class="card">
+                        <div class="cartItem">
+                            <img src="@/assets/img/itemMug.jpg" alt="商品圖片">
+                            <div class="cartDetails">
+                                <h3 class="cardName">緯藝馬克杯</h3>
+                                <p class="productDescription">材質：磁器、規格：325ml</p>
+                                <p class="productPrice">價格：NT$500</p>
+                                <div class="quantity">
+                                    <p class="productDescription">數量: </p>
+                                    <div class="selectQuan">
+                                        <button type="button" class="addMinus">-</button>
+                                        <input type="number" id="quantity" value="1" min="1">
+                                        <button type="button" class="addMinus">+</button>
+                                    </div>
                                 </div>
                             </div>
-                            <p class="removeBtn">移除</p>
+                            <button class="removeBtn"><p>-</p></button>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- 右邊-->
-            <div class="rightPanel">
+                <!-- 右邊-->
+                <div class="rightPanel">
                     <!-- 訂購人資訊 -->
                     <div class="card2">
                         <h2 class="cardTitle">訂購人資訊</h2>
                         <div class="form">
                             <div class="formGroup">
                                 <label>姓名</label>
-                                <input placeholder="請輸入姓名">
+                                <input type="text" placeholder="請輸入姓名">
                             </div>
                             <div class="formGroup">
                                 <label>電話</label>
-                                <input placeholder="請輸入電話">
+                                <input type="tel" placeholder="請輸入電話">
                             </div>
                             <div class="formGroup">
                                 <label>地址</label>
-                                <input placeholder="請輸入地址">
+                                <input type="text" placeholder="請輸入地址">
                             </div>
                             <div class="formGroup">
                                 <label>發票類型</label>
-                                <input placeholder="請選擇">
+                                <select class="invoiceType">
+                                    <option value="">請選擇</option>
+                                    <option value="">紙本發票</option>
+                                    <option value="">電子發票</option>
+                                </select>
                             </div>
                             <div class="formGroup">
                                 <label>載具</label>
-                                <input placeholder="請輸入載具號碼">
+                                <input type="text" placeholder="請輸入載具號碼">
                             </div>
                         </div>
 

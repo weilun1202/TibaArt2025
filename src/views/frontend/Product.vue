@@ -9,18 +9,18 @@
         <!-- Wrapper 不設 1200px 寬（例如展覽、關於我們頁面應該會滿版），想要限制內容在 1200 的再自己包一個 div 限制 1200  -->
         <!-- 以下供大家編輯 -->
         <div class="shopTab">
-                <div class="tibaShopTab">
+                <div class="subTitle">
                     <h1>商品資訊</h1>
                 </div>
 
-                <div class="searchContainer">
+                <!-- <div class="searchContainer">
                     <form class="searchBar" action="#" method="get">
                         <input type="text" class="searchInput" placeholder="Search..." required>
                         <button type="submit" class="searchButton">
                             <font-awesome-icon :icon="['fas', 'magnifying-glass']" />
                         </button>
                     </form>
-                </div>
+                </div> -->
             </div>
 
             <div class="productContainer">
@@ -46,7 +46,7 @@
 
                     <div class="actions">
                         <button type="button" class="btn">加入購物車</button>
-                        <p class="continueShopping"><router-link to="/shop">繼續選購其他商品</router-link></p>
+                        <p class="continueShopping"><router-link to="/shop">回商品列表</router-link></p>
                     </div>
                 </div>
             </div>

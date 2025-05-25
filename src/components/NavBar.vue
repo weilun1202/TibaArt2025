@@ -1,5 +1,5 @@
 <template>
-  <nav class="navWrapper">
+  <nav class="frontNav">
     <router-link to="/" @click="closeMenu"><img class="logo" src="@/assets/img/TibaArtLogo.svg" alt="" /></router-link>
 
     <div class="navBar">
@@ -23,8 +23,8 @@
         <li><router-link to="/application" @click="closeMenu">展覽申請</router-link></li>
         <li><router-link to="/shop" @click="closeMenu">線上商城</router-link></li>
         <li><router-link to="/about" @click="closeMenu">關於我們</router-link></li>
-        <li><router-link to="/Login" @click="closeMenu">會員登入</router-link></li>
-        <li><router-link to="/Register" @click="closeMenu">註冊會員</router-link></li>
+        <li><router-link to="/MemLogin" @click="closeMenu">會員登入</router-link></li>
+        <li><router-link to="/MemReg" @click="closeMenu">註冊會員</router-link></li>
       </ul>
     </div>
 
@@ -51,10 +51,10 @@ defineProps()
 import { useRouter } from 'vue-router'
 const router = useRouter()
 const goToLogin = () => {
-  router.push('/Login') // 導向 Login.vue
+  router.push('/MemLogin') 
 }
 const goToRegister = () => {
-  router.push('/Register') // 導向 Register.vue
+  router.push('/MemReg') 
 }
 
 import { ref } from 'vue';
@@ -70,11 +70,11 @@ function closeMenu() {
 
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '/style.scss';
-nav {
+.frontNav {
     width: 100%;
-    padding: 0 5vw;
+    padding: 0 9vw;
     height: 72px;
     margin: 0 auto;
     display: flex;
@@ -84,9 +84,11 @@ nav {
     left: 0;
     right: 0;
     z-index: 1000;
-    // background-color: $fontWhite;
     background-image: linear-gradient(to bottom, #f6eee4, #f9f6f3, #ffffff);
 
+    @media (max-width: 1200px) {
+         padding: 0 4vw;
+    }
 
     .logo {
         height: 60px;
@@ -96,7 +98,7 @@ nav {
         display: flex;
         margin-left: auto;
 
-        @media (max-width: 1080px) {
+        @media (max-width: 1200px) {
         display: none;
     }
 
@@ -113,7 +115,7 @@ nav {
         li {
             margin-right: $spacing-8;
 
-            @media (max-width: 1080px) {
+            @media (max-width: 1200px) {
                  margin-right: 0;
             }
 
@@ -130,7 +132,7 @@ nav {
 
                 // border: 1px solid #000;
 
-                @media (max-width: 1080px) {
+                @media (max-width: 1200px) {
                   height: auto;
                   line-height: 0;
                 }
@@ -145,7 +147,7 @@ nav {
                   background-color: #000000;
                   transition: width 0.5s ease-in-out;
 
-                  @media (max-width: 1080px) {
+                  @media (max-width: 1200px) {
                     left: -50vw;
                   }
 
@@ -154,14 +156,12 @@ nav {
                 &:hover:after {
                     width: 100%;
 
-                  @media (max-width: 1080px) {
+                  @media (max-width: 1200px) {
                     background-color: #176066;
                     width: 150vw;
                 }
 
                 }
-
-                
 
 
             }
@@ -210,7 +210,7 @@ nav {
     margin-left: auto;
 }
 
-@media (max-width: 1080px) {
+@media (max-width: 1200px) {
     .menuToggle {
         display: block;
     }
@@ -283,7 +283,7 @@ nav {
 
 }
 
-@media (max-width: 1080px) {
+@media (max-width: 1200px) {
     .dropdown.active {
         display: block;
     }

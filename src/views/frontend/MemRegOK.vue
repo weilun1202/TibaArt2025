@@ -2,7 +2,7 @@
   <div>
     <div class="wrapper">
       <header>
-        <div class="pageTitle"></div>
+        <div class="pageTitle">註冊信箱驗證</div>
       </header>
       <!-- 以下供大家編輯 -->
       <div class="registerOK">
@@ -12,7 +12,9 @@
                   <p>為了確保註冊為您本人我們將發送驗證連結至您註冊的信箱，24小時內為有效的驗證時間，請至您的信箱確認，謝謝。驗證完成後您將成為緯藝基金會之會員，之後您可以進行購物、展覽申請，享受我們的會員服務，打造自己的藝術人生！</p>
 
               <div class="backToHome">
-                  <button type="button" class="btn"><router-link to="/">回到首頁</router-link></button>
+                  <button type="button" class="btn"
+                  @click="$router.push('/')"
+                  >回到首頁</button>
               </div>
         </div>
       </div>
