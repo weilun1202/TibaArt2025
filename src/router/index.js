@@ -11,6 +11,7 @@ import MemberLayout from '@/layouts/MemberLayout.vue'
 //frontend
 import Home from '@/views/frontend/Home.vue'
 import Expo from '@/views/frontend/Expo.vue'
+import ExpoArea from '@/views/frontend/ExpoArea.vue'
 import Sponsor from '@/views/frontend/Sponsor.vue'
 import Application from '@/views/frontend/Application.vue'
 import Shop from '@/views/frontend/Shop.vue'
@@ -47,6 +48,7 @@ const routes = [
     children: [
       { path: '/', name: 'Home', component: Home },
       { path: 'expo', name: 'Expo', component: Expo },
+      { path: 'expoArea', name: 'ExpoArea', component: ExpoArea },
       { path: 'sponsor', name: 'Sponsor', component: Sponsor },
       { path: 'application', name: 'Application', component: Application },
       { path: 'shop', name: 'Shop', component: Shop },
