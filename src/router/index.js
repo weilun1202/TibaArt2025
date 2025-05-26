@@ -71,7 +71,7 @@ const routes = [
     path: '/admin',
     component: AdminLayout,
     children: [
-      { path: '', name: 'Admin', component: Admin },
+      { path: '', name: 'Admin', component: Admin, meta: { title: '後台首頁' } },
       { path: 'member', name: 'AdminMember', component: AdminMember, meta: { title: '一般會員管理' } },
       { path: 'artist', name: 'AdminArtist', component: AdminArtist, meta: { title: '藝術家會員管理' } },
       { path: 'artwork', name: 'AdminArtwork', component: AdminArtwork, meta: { title: '作品管理' } },
