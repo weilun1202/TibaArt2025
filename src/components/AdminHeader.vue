@@ -27,6 +27,7 @@ router.push('/admin')
 <style lang="scss" scoped>
 @import '/style.scss';
 .adminHeader{
+  background-color: #fff;
   display: flex;
   justify-content: space-between;
   align-items: center;
