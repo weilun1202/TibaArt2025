@@ -1,5 +1,5 @@
 <template>
-  <div>
+
     <div class="wrapper">
       <header>
         <div class="pageTitle">展區欣賞</div>
@@ -18,7 +18,6 @@
         rem, eos natus nam officiis nobis asperiores sequi porro explicabo?
       </p>
     </div>
-  </div>
 </template>
 
 <script setup>
