@@ -6,20 +6,21 @@
       </header>
       <!-- Wrapper 不設 1200px 寬（例如展覽、關於我們頁面應該會滿版），想要限制內容在 1200 的再自己包一個 div 限制 1200  -->
       <!-- 以下供大家編輯 -->
-      
+
       <div class="wrap">
         <!-- 商店分類 -->
         <div class="shopTab">
           <div class="tibaShopTab" :class="{ active: activeTab == 'tiba' }" @click="setActiveTab('tiba')">
-            <h1>緯藝周邊商品</h1>
+            <h1>緯藝周邊</h1>
           </div>
           <div class="artShopTab" :class="{ active: activeTab == 'artist' }" @click="setActiveTab('artist')">
-            <h1>藝術家原創商品</h1>
+            <h1>藝術家原創</h1>
           </div>
           <div class="searchContainer">
             <form class="searchBar" @submit.prevent="searchItems">
-              <input type="text" class="searchInput" v-model="searchQuery" placeholder="Search..." required>
-              <button type="submit" class="searchButton">
+              <input type="text" class="searchInput" :class="{ 'expanded': isSearchInputExpanded }"
+                v-model="searchQuery" placeholder="Search..." required>
+              <button type="button" class="searchButton" @click="toggleSearchInput">
                 <font-awesome-icon :icon="['fas', 'magnifying-glass']" />
               </button>
             </form>
@@ -27,7 +28,7 @@
         </div>
 
         <!-- 商品列表 -->
-        <itemList :items="filteredItems" @add-to-cart="handleAddToCart" />
+        <itemList :items="filteredItems" @add-to-cart="AddToCart" />
 
       </div>
 
@@ -36,11 +37,8 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
-
+import { ref, computed, watch, nextTick } from 'vue';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-defineProps()
-
 import { useRouter } from 'vue-router';
 import itemList from '@/components/itemList.vue';
 
@@ -50,6 +48,9 @@ const router = useRouter();
 // 反應式狀態
 const activeTab = ref('tiba');
 const searchQuery = ref('');
+const actualSearchQuery = ref(''); // 實際用於過濾的查詢詞，只有在點擊搜尋後更新
+const isSearchInputExpanded = ref(false);
+const searchInput = ref(null); // 用於獲取 input 元素的引用
 
 // 商品數據
 const items = ref([
@@ -86,14 +87,14 @@ const items = ref([
     id: 5,
     name: '藝術家油畫',
     price: 3500,
-    image: new URL('@/assets/img/itemMug.jpg', import.meta.url).href, // 使用臨時圖片，實際應該替換
+    image: new URL('@/assets/img/itemPainting.jpg', import.meta.url).href, 
     category: 'artist'
   },
   {
     id: 6,
     name: '藝術家雕塑',
-    price: 4800,
-    image: new URL('@/assets/img/itemBag.jpg', import.meta.url).href, // 使用臨時圖片，實際應該替換
+    price: 18000,
+    image: new URL('@/assets/img/itemSculpture.jpg', import.meta.url).href,
     category: 'artist'
   }
 ]);
@@ -109,17 +110,34 @@ const filteredItems = computed(() => {
 });
 
 // 方法
-
 const setActiveTab = (tab) => {
   activeTab.value = tab;
 };
 
 const searchItems = () => {
-  // 搜尋功能已經透過 computed property 實現
-  console.log('搜尋:', searchQuery.value);
+  // 關鍵：將使用者輸入的 searchQuery 賦值給 actualSearchQuery
+  actualSearchQuery.value = searchQuery.value;
+  console.log('搜尋:', actualSearchQuery.value);
+  isSearchInputExpanded.value = false;  // 搜尋後收起輸入框
 };
 
-const handleAddToCart = (item) => {
+const toggleSearchInput = () => {
+  isSearchInputExpanded.value = !isSearchInputExpanded.value;
+  // 當輸入框展開時，使其獲得焦點
+  if (isSearchInputExpanded.value) {
+    nextTick(() => {
+      if (searchInput.value) {
+        searchInput.value.focus();
+      }
+    });
+  } else {
+    // 當收起輸入框時，清除目前的輸入內容
+    // 但不觸發實際的搜尋
+    searchQuery.value = '';
+  }
+};
+
+const AddToCart = (item) => {
   // 處理從子組件傳來的加入購物車事件
   console.log('加入購物車:', item);
   // 可以在這裡實現將商品加入購物車的邏輯

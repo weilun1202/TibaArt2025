@@ -30,6 +30,7 @@ library.add(faPlus);
 library.add(faMinus)
 
 
+
 const app = createApp(App)
 app.component('font-awesome-icon', FontAwesomeIcon)  // 註冊元件
 

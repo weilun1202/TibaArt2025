@@ -6,7 +6,7 @@
       </header>
       <div class="loginPage">
         
-        <img src="../assets/img/LoginImg.jpg" alt="">
+        <img src="/src/assets/img/LoginImg.jpg" alt="">
         
         <div class="loginContainer">
           <!-- Tabs -->
@@ -29,7 +29,7 @@
 
           <!-- 一般會員登入 -->
           <div id="generalLogin" class="tabContent" v-if="currentTab === 'general'" :class="{ bgGeneral: currentTab === 'general' }">
-            <form class="formA" @submit.prevent="submitGeneral">
+            <div class="formA" @submit.prevent="submitGeneral">
               <div class="formGroup">
                 <label for="account" class="formLabel">帳號（您的電子信箱）</label>
                 <input
@@ -53,20 +53,24 @@
                 />
                 <div class="reminder">
                   <span class="formError hidden">格式錯誤</span>
-                  <a href="#" class="passForget">忘記密碼</a>
+                  <router-link to="/memForgetPass" class="passForget">忘記密碼</router-link>
                 </div>
               </div>
 
               <div class="btnGroup">
-                <button class="btn" type="submit">確定登入</button>
-                <button class="btn" type="button">註冊會員</button>
+                <button class="btn" type="submit"
+                @click="$router.push('/member')"
+                >確定登入</button>
+                <button class="btn" type="button"
+                @click="$router.push('/memReg')"
+                >註冊會員</button>
               </div>
-            </form>
+            </div>
           </div>
 
           <!-- 藝術家登入 -->
           <div id="artistLogin" class="tabContent" v-if="currentTab === 'artist'" :class="{ bgArtist: currentTab === 'artist' }">
-            <form class="formA" @submit.prevent="submitArtist">
+            <div class="formA" @submit.prevent="submitArtist">
               <div class="formGroup">
                 <label for="artistEmail" class="formLabel">帳號（您的電子信箱）</label>
                 <input
@@ -88,22 +92,24 @@
                 />
                 <div class="reminder">
                   <span class="formError hidden">格式錯誤</span>
-                  <a href="#" class="passForget">忘記密碼</a>
+                  <router-link to="/memForgetPass" class="passForget">忘記密碼</router-link>
                 </div>
               </div>
 
               <div class="btnGroup">
-                <button class="btn" type="submit">確定登入</button>
+                <button class="btn" type="submit"
+                @click="$router.push('/member')"
+                >確定登入</button>
               </div>
-            </form>
+            </div>
           </div>
           
           <!-- 第三方登入區塊 -->
           <div class="thirdPartyLogin">
             <div class="separator">或使用以下方式登入</div>
             <div class="socialButtons">
-              <button class="btn socialBtn google"><font-awesome-icon :icon="['fab', 'google']" /></button>
-              <button class="btn socialBtn facebook"><font-awesome-icon :icon="['fab', 'facebook']" /></button>
+              <button class="btn socialBtn google" aria-label="使用 Google 登入"><font-awesome-icon :icon="['fab', 'google']" /></button>
+              <button class="btn socialBtn facebook" aria-label="使用 Facebook 登入"><font-awesome-icon :icon="['fab', 'facebook']" /></button>
             </div>
           </div>
         </div>
@@ -156,10 +162,48 @@ defineProps()
   justify-content: center;
   gap: $spacing-10;
 
+  @media (max-width: 1110px) {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  img{
+    @media (max-width: 1110px) {
+    order: 2;
+    }
+
+    @media (max-width: 560px) {
+      width: 90vw;
+    }
+  }
+
   .formA{
     border: 1.5px solid $fontBlack;
     border-radius: 0 0 $spacing-2 $spacing-2;
     border-top: none;
+
+    @media (max-width: 560px) {
+      width: 90vw;
+    }
+
+    @media (max-width: 470px) {
+      width: 86vw;
+    }
+
+    .formGroup{
+      @media (max-width: 560px) {
+      width: 100%;
+    }
+    }
+
+     .formLabel {
+        
+        @media (max-width: 560px) {
+            font-size: map-get($font, p);
+
+        }
+    }
+
   }
 
   .reminder{

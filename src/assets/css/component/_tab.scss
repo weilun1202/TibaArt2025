@@ -6,27 +6,28 @@
     align-items: center;
     gap: 40px;
 
-    .tibaShopTab {
-        display: flex;
-        justify-content: center; 
-        h1 {
-            @include shopTabButton;
+    .tibaShopTab, .artShopTab {
+        h1{
+            color: $primaryGreen;
         }
+        @include shopTabButton;
     }
 
-    .artShopTab {
-        display: flex;
-        justify-content: center; 
-
-        h1 {
-            @include shopTabButton;
+    @media screen and (max-width: 760px) {
+        gap: 30px;
+        h1{
+            font-size: map-get($font, h3); 
+            line-height: 30px;
         }
     }
-
-    @media (max-width: 740px) {
+    
+    @media screen and (max-width: 520px) {
         gap: 20px;
+        h1{
+            font-size: map-get($font, h4); 
+            line-height: 20px;
+        }
     }
-
 }
 
 // 會員登入頁籤 memberTab
@@ -36,6 +37,14 @@
 
     width: 100%;
     justify-content: center;
+
+    @media (max-width: 560px) {
+        font-size: map-get($font, h5);
+    }
+
+    @media (max-width: 420px) {
+        font-size: map-get($font, p);
+    }
 
     .generalLoginTab {
 
@@ -52,7 +61,7 @@
         }
     }
 
-     .artistLoginTab {
+    .artistLoginTab {
 
         width: 50%;
         text-align: center;
