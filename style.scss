@@ -30,8 +30,11 @@
 @import './src/assets/css/page/shop';
 @import './src/assets/css/page/product';
 @import './src/assets/css/page/cart';
-@import './src/assets/css/page/donate';
+@import './src/assets/css/page/expo';
+@import './src/assets/css/page/expoArea';
+@import './src/assets/css/page/expoAreaPage';
 @import './src/assets/css/page/application';
+@import './src/assets/css/page/sponsor';
 
 @import './src/assets/css/page/orderConfirm';
 // @import 'sass/page/product';
@@ -77,32 +80,32 @@ h1 {
   display: flex;
 }
 
-@mixin bgColor($class , $bgc) {
-  @for $i from 0 through 9 {
-    @if $i ==0 {
-      .#{$class} {
-        background-color: $bgc;
-        width: 80px;
-        height: 60px;
-      }
-    }
+// @mixin bgColor($class , $bgc) {
+//   @for $i from 0 through 9 {
+//     @if $i ==0 {
+//       .#{$class} {
+//         background-color: $bgc;
+//         width: 80px;
+//         height: 60px;
+//       }
+//     }
 
-    @else {
-      .#{$class}#{$i * 100} {
-        background-color: lighten($bgc, $i * 7);
+//     @else {
+//       .#{$class}#{$i * 100} {
+//         background-color: lighten($bgc, $i * 7);
         
-        width: 80px;
-        height: 60px;
-      }
-    }
-  }
-}
+//         width: 80px;
+//         height: 60px;
+//       }
+//     }
+//   }
+// }
 
-@include bgColor('primaryGreen', #2E5B4A);
+// @include bgColor('primaryGreen', #2E5B4A);
 
-@include bgColor('logoColor1', $logoColor1);
-@include bgColor('logoColor2', $logoColor2);
-@include bgColor('logoColor3', $logoColor3);
-@include bgColor('logoColor4', $logoColor4);
-@include bgColor('logoColor5', $logoColor5);
-@include bgColor('logoColor6', $logoColor6);
+// @include bgColor('logoColor1', $logoColor1);
+// @include bgColor('logoColor2', $logoColor2);
+// @include bgColor('logoColor3', $logoColor3);
+// @include bgColor('logoColor4', $logoColor4);
+// @include bgColor('logoColor5', $logoColor5);
+// @include bgColor('logoColor6', $logoColor6);

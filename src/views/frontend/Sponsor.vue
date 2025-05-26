@@ -6,16 +6,290 @@
       </header>
       <!-- Wrapper 不設 1200px 寬（例如展覽、關於我們頁面應該會滿版），想要限制內容在 1200 的再自己包一個 div 限制 1200  -->
       <!-- 以下供大家編輯 -->
-       <p>test9</p>
+      
+      <div class="wrap">
+
+        <div class="formA donateForm">
+
+          <div class="formGroup">
+
+            <div class="donateItem">
+              欲贊助之展覽
+            </div>
+
+            <select id="subject" name="subject">
+              <option value="">請選擇</option>
+              <option value="expo">《 靜界焰光 》</option>
+              <option value="expo">《 進擊的魔關羽 》</option>
+              <option value="expo">《 美味堡的小秘密 》</option>
+              <option value="expo">展覽 04</option>
+            </select>
+
+          </div>
+
+          <div class="formGroup">
+            <div class="donateItem">
+              贊助金額
+            </div>
+
+            <div class="formCostChoice">
+              <button
+                class="btn"
+                v-for="(amount, index) in amounts"
+                :key="index"
+                @click="selectAmount(amount)"
+              >
+                {{ amount }} 元
+              </button>
+
+              <label for="cost" class="formLabel">
+                新臺幣
+                <span class="formHint">*</span>
+              </label>
+
+              <input
+                type="text"
+                id="cost"
+                name="cost"
+                placeholder="請選擇或輸入金額"
+                v-model="selectedAmount"
+              />
+              <span class="formError" v-if="errors.amount">{{ errors.amount }}</span>
+
+            </div>
+          </div>
+
+          <div class="formGroup">
+            <div class="donateItem">
+              贊助人資料
+            </div>
+
+            <label for="name" class="formLabel">
+              姓名<span class="formHint">*</span>
+            </label>
+
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="請輸入姓名"
+              v-model="name"
+            />
+            <span class="formError" v-if="errors.name">{{ errors.name }}</span>
+
+          </div>
+            
+          <div class="formGroup">
+            <label for="email" class="formLabel">
+              帳號 (信箱)<span class="formHint">*</span>
+            </label>
+
+            <div class="formReceipt">收據將以電子郵件方式寄出</div>
 
 
+
+            <input
+              type="text"
+              id="email"
+              name="email"
+              placeholder="請輸入電子郵件"
+              v-model="email"
+            />
+            <span class="formError" v-if="errors.email">{{ errors.email }}</span>
+
+          </div>
+
+          <div class="formGroup">
+            <label for="pay" class="formLabel">
+              付款方式<span class="formHint">*</span>
+            </label>
+
+            <a href="#" class="ecpayBtn pay">
+              <img src="../../assets/img/ecpay_logo.svg" alt="ecpay_logo.svg">
+            </a>
+
+          </div>
+
+          <!-- <button type="submit" class="btn formDonate" @click="handleSubmit">立刻贊助</button> -->
+
+          <button type="button" class="btn formDonate" @click="handleSubmit">
+            立刻贊助
+          </button>
+            
+        </div>
+        
+
+        <!-- ================================================== -->
+        <div class="faq">
+          <div class="donateItem">
+            常見問題
+          </div>
+
+          <!-- 1 -->
+          <div class="faqItem">
+            <input type="checkbox" id="faqCheckbox-1" name="faq" class="faqToggle" checked>
+
+            <label class="faqTitle" for="faqCheckbox-1">
+              <h4>贊助時間有限制嗎？</h4>
+
+              <span class="materialIcons">
+                <font-awesome-icon :icon="['fas', 'plus']" />
+                <font-awesome-icon :icon="['fas', 'minus']" />
+              </span>
+
+            </label>
+
+            <div class="faqText">
+              <p>只要作品還在網頁上，都可以進行贊助。</p>
+            </div>
+          </div>
+
+          <!-- 2 -->
+          <div class="faqItem">
+            <input type="checkbox" id="faqCheckbox-2" name="faq" class="faqToggle">
+
+            <label class="faqTitle" for="faqCheckbox-2">
+              <h4>我人不在台灣/不是台灣人可以贊助嗎？</h4>
+
+              <span class="materialIcons">
+                <font-awesome-icon :icon="['fas', 'plus']" />
+                <font-awesome-icon :icon="['fas', 'minus']" />
+              </span>
+
+            </label>
+
+            <div class="faqText">
+              <p>可以。</p>
+            </div>
+          </div>
+
+          <!-- 3 -->
+          <div class="faqItem">
+            <input type="checkbox" id="faqCheckbox-3" name="faq" class="faqToggle">
+
+            <label class="faqTitle" for="faqCheckbox-3">
+              <h4>我想要贊助，可以透過哪些方式呢？</h4>
+
+              <span class="materialIcons">
+                <font-awesome-icon :icon="['fas', 'plus']" />
+                <font-awesome-icon :icon="['fas', 'minus']" />
+              </span>
+
+            </label>
+
+            <div class="faqText">
+              <p>目前有提供綠界。</p>
+            </div>
+          </div>
+
+          <!-- 4 -->
+          <div class="faqItem">
+            <input type="checkbox" id="faqCheckbox-4" name="faq" class="faqToggle">
+
+            <label class="faqTitle" for="faqCheckbox-4">
+              <h4>我想取消贊助或退款，該怎麼做？</h4>
+              <span class="materialIcons">
+                <font-awesome-icon :icon="['fas', 'plus']" />
+                <font-awesome-icon :icon="['fas', 'minus']" />
+              </span>
+            </label>
+
+            <div class="faqText">
+              <p>請使用本公司的「聯絡我們」，我們會與您聯繫。</p>
+            </div>
+          </div>
+
+          <!-- 5 -->
+          <div class="faqItem">
+            <input type="checkbox" id="faqCheckbox-5" name="faq" class="faqToggle">
+
+            <label class="faqTitle" for="faqCheckbox-5">
+              <h4>贊助計畫會有收據嗎？</h4>
+              <span class="materialIcons">
+                <font-awesome-icon :icon="['fas', 'plus']" />
+                <font-awesome-icon :icon="['fas', 'minus']" />
+              </span>
+            </label>
+
+            <div class="faqText">
+              <p>贊助後，您會收到由緯藝基金會合作的金流公司所寄出的 Email 收款證明，此證明並非電子發票。</p>
+            </div>
+          </div>
+
+
+        </div>
+
+
+      </div>
 
 
     </div>
+
   </div>
+
 </template>
 
 <script setup>
+  import { ref } from 'vue'
+
+  // 所有金額選項
+  const amounts = [500, 1000, 1500, 2000]
+
+  // 被選擇的金額
+  const selectedAmount = ref('')
+
+  const name = ref('')
+  const email = ref('')
+
+  // 錯誤訊息狀態
+  const errors = ref({
+    amount: '',
+    name: '',
+    email: ''
+  })
+
+  // 點擊按鈕時設定金額
+  function selectAmount(amount) {
+    selectedAmount.value = amount
+    errors.value.amount = '' // 清除錯誤
+  }
+
+
+  // 驗證函數
+function validateForm() {
+  errors.value = {}
+
+  if (!name.value.trim()) {
+    errors.value.name = '姓名為必填'
+  }
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  if (!emailRegex.test(email.value)) {
+    errors.value.email = 'Email 格式不正確'
+  }
+
+  if (!selectedAmount.value) {
+    errors.value.amount = '請選擇或輸入金額'
+  }
+
+  return Object.keys(errors.value).length === 0
+}
+
+function handleSubmit(e) {
+  e.preventDefault()
+  if (validateForm()) {
+    // 成功送出邏輯
+    console.log('送出成功', { name: name.value, email: email.value, amount: selectedAmount.value })
+    alert('送出成功');
+  }
+}
+
+
+
+
+
+
+
 
 </script>
 
@@ -23,7 +297,14 @@
 /* 可以把額外的 CSS 加在這裡或保留在全域 */
 @import '/style.scss';
 
-
+.formCostChoice{
+  .btn{
+    margin: 0 8px;
+  }
+}
+.formLabel{
+  margin-top: 10px;
+}
 
 </style>
 

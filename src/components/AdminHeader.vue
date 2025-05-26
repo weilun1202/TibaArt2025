@@ -1,17 +1,27 @@
 <template>
 
   <div class="adminHeader">
-    <p>一般會員管理</p>
+    <span>{{ route.meta.title }}</span>
     <div class="adminHeaderBtn">
-      <button class="btn">回首頁</button>
+      <button class="btn" v-if="!isAdminHome" @click="goHome">回首頁</button>
       <button class="btn">登出</button>
     </div>
-    
-
   </div>
+
 </template>
 
 <script setup>
+import { useRoute, useRouter } from 'vue-router'
+import { computed } from 'vue'
+
+const route = useRoute()
+const router = useRouter()
+
+const isAdminHome = computed(() => route.name === 'Admin')
+
+function goHome() {
+router.push('/admin')
+}
 </script>
 
 <style lang="scss" scoped>
@@ -24,7 +34,7 @@
   height: 60px;
   border-bottom: 2px solid $primaryGreen;
   float: right;
-  p{
+  span{
     padding: $spacing-5;
     font-size: 20px;
     font-weight: 600;

@@ -7,23 +7,23 @@
         <div class="pageTitle">關於我們</div>
       </header>
 
-      <!-- <div class="top">
-        <div class="top-text">
-          <h2>緯藝基金會 TibaArt </h2>
+      <div class="banner">
+        <div class="banner-text">
+          <h2 >緯藝基金會 TibaArt </h2>
           <p>Weaving Art, Connecting Worlds.</p>
         </div>
         <img src="/src/assets/img/aboutBanner.jpg" alt="">
-      </div>  -->
+      </div> 
 
-      <section class="intro">
+      <div class="intro">
 
         <h1>理念</h1>
         <p>
           緯藝基金會（TibaArt）致力於串連藝術與社會的緯度，開啟一個多元、包容且具前瞻性的創作平台。我們相信，藝術不僅是表達，更是一種關係的建立——在人與人之間，在地方與世界之間，在當下與未來之間。TibaArt
           的成立旨在支持具潛力的新銳藝術家、推動跨領域合作，並深耕社群文化，讓藝術成為生活的一部分。透過展演、駐村、教育計畫與數位策展等方式，我們希望拓展觀者的視野，激發創作者的勇氣，並促進藝術資源的公平流動。我們期望與各界共創一個既自由又有溫度的藝術生態，讓每一份創作都能找到屬於它的聽眾與場域。
         </p>
-      </section>
-      <h1>大事記</h1>
+      </div>
+      <h1 class="history">大事記</h1>
       <ul class="timeline" ref="timeline">
         <li>
           <img src="" alt="1925 — 創始起源" />
@@ -76,34 +76,34 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+// import { ref, onMounted } from 'vue'
+// import { gsap } from 'gsap'
+// import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-gsap.registerPlugin(ScrollTrigger)
+// gsap.registerPlugin(ScrollTrigger)
 
-const wrapper = ref(null)
-const timeline = ref(null)
+// const wrapper = ref(null)
+// const timeline = ref(null)
 
-onMounted(() => {
-  if (!wrapper.value || !timeline.value) return
+// onMounted(() => {
+//   if (!wrapper.value || !timeline.value) return
 
-  const el = timeline.value
-  const width = el.scrollWidth - window.innerWidth
+//   const el = timeline.value
+//   const width = el.scrollWidth - window.innerWidth
 
-  gsap.to(el, {
-    x: -width,
-    ease: 'none',
-    scrollTrigger: {
-      trigger: wrapper.value,
-      start: 'top top',
-      end: () => `+=${width}`,
-      scrub: true,
-      pin: true,
-      anticipatePin: 1
-    }
-  })
-})
+//   gsap.to(el, {
+//     x: -width,
+//     ease: 'none',
+//     scrollTrigger: {
+//       trigger: wrapper.value,
+//       start: 'top top',
+//       end: () => `+=${width}`,
+//       scrub: true,
+//       pin: true,
+//       anticipatePin: 1
+//     }
+//   })
+// })
 </script>
 
 <!-- <style scoped>

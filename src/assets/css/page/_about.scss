@@ -1,25 +1,72 @@
-.pageTitle {
-    padding: 1em;
-    font-size: 1.5em;
-}
 
-// 介紹段落
-.intro {
-    padding: 2em;
-}
-
-.top {
-    display: flex;
-    justify-content: center;
-}
-
-// 大事記水平滾動區塊
 .about {
-    .wrapper {
-        overflow: hidden;
-        position: relative;
-        padding: 1rem 0;
 
+/* 通用容器寬度置中 */
+.banner,
+.intro {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+/* Banner 橫向排版 */
+.banner {
+  display: flex;
+  align-items: center;    /* 讓文字與圖片垂直置中 */
+  justify-content: space-between;
+  gap: 20px;               /* 文字與圖片間距 */
+  padding: 40px 0;         /* 上下留白 */
+}
+
+.banner-text {
+  /* 文字區塊約 35% 寬度，可依設計調整 */
+  flex: 0 0 35%;
+}
+
+.banner-text h2 {
+  margin: 0;
+  font-size: map-get($font, h2);
+  line-height: 1.2;
+}
+
+.banner-text p {
+  margin: 0.5rem 0 0;
+  font-size: map-get($font, p);
+  color: #666;
+}
+
+.banner img {
+  /* 圖片占剩餘寬度，並保持比例 */
+  flex: 0 0 65%;
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Intro 區塊 */
+.intro {
+  padding: 40px 0;
+}
+
+.intro h1 {
+  margin: 0 0 1rem;
+  font-size: map-get($font, h1);
+  text-align: center;
+}
+
+.intro p {
+  margin: 0;
+  line-height: 1.6;
+  color: #333;
+  text-align: justify;
+}
+
+    
+    
+    
+    // 大事記水平滾動區塊
+    .history h1{
+        text-align: center;
+    }
         .timeline {
             display: flex;
             padding: 0;
@@ -42,5 +89,5 @@
                 }
             }
         }
-    }
+    
 }
