@@ -6,18 +6,27 @@
       </header>
       <!-- Wrapper 不設 1200px 寬（例如展覽、關於我們頁面應該會滿版），想要限制內容在 1200 的再自己包一個 div 限制 1200  -->
       <!-- 以下供大家編輯 -->
+  
+     
 
-      <div class="tempoBtn">
-        <router-link to="/" class="entryLink">前台入口</router-link>
-        <router-link to="/admin" class="adminLink">後台入口</router-link>
+      <div class="justforfun">
+          <div class="tempoBtn">
+            <router-link to="/" class="entryLink">前台</router-link>
+          </div>        
+          <Flashy />
+          <div class="tempoBtn">
+            <router-link to="/admin" class="adminLink">後台</router-link>
+          </div>      
       </div>
 
+      
 
     </div>
   </div>
 </template>
 
 <script setup>
+import Flashy from '@/components/Flashy.vue'
 
 </script>
 
@@ -37,9 +46,9 @@
   .entryLink,
   .adminLink {
     display: block;
-    width: 240px;
-    height: 240px;
-    line-height: 240px;
+    width: 180px;
+    height: 180px;
+    line-height: 180px;
     text-align: center;
     padding: 0 24px;
 
@@ -55,6 +64,29 @@
     }
 
   }
+
+}
+
+.yo{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.justforfun{
+  display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing:border-box;
+}
+
+canvas{
+  width: 50%;
+  border-radius: 80% 0 80% 0;
 
 }
 </style>

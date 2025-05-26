@@ -254,6 +254,12 @@ defineProps()
   }
 
   
+  .socialBtn{
+    font-size: map-get($font, p);
+    line-height: 48px;
+
+  }
+
 
 }
 

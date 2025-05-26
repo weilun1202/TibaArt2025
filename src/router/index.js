@@ -57,10 +57,6 @@ const routes = [
       { path: 'memReg', name: 'MemReg', component: MemReg },
       { path: 'memRegOK', name: 'MemRegOK', component: MemRegOK },
       { path: 'memForgetPass', name: 'MemForgetPass', component: MemForgetPass },
-      // { path: 'memHome', name: 'MemHome', component: MemHome },
-      // { path: 'memExpo', name: 'MemExpo', component: MemExpo },
-      // { path: 'memOrder', name: 'MemOrder', component: MemOrder },
-      // { path: 'memSponsor', name: 'MemSponsor', component: MemSponsor },
       {
         path: '/product/:id',
         name: 'product',
