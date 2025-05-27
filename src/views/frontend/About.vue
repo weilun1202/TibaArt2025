@@ -9,11 +9,11 @@
 
       <div class="banner">
         <div class="banner-text">
-          <h2 >緯藝基金會 TibaArt </h2>
+          <h2>緯藝基金會 TibaArt </h2>
           <p>Weaving Art, Connecting Worlds.</p>
         </div>
         <img src="/src/assets/img/aboutBanner.jpg" alt="">
-      </div> 
+      </div>
 
       <div class="intro">
 
@@ -24,51 +24,52 @@
         </p>
       </div>
       <h1 class="history">大事記</h1>
+
       <ul class="timeline" ref="timeline">
         <li>
-          <img src="" alt="1925 — 創始起源" />
-          <strong>1925 — 創始起源</strong><br />
-          在台北大稻埕，藝術推手「林德熙」創立了「提拔藝文社」……
+          <img src="/src/assets/img/about-1925.png" alt="1925 — 創始起源" />
+          <h3>1925 創始起源</h3>
+          <span>在台北大稻埕，藝術推手「林德熙」創立了「提拔藝文社」</span>
         </li>
         <li>
-          <img src="" alt="1934 — 女性藝術崛起" />
-          <strong>1934 — 女性藝術崛起</strong><br />
-          開創「女性創作月」……
+          <img src="/src/assets/img/about-1934.png" alt="1934 — 女性藝術崛起" />
+          <h3>1934 女性藝術</h3>
+          <span>開創「女性創作月」，邀請多位女藝術家展出刺繡、攝影與詩集，打破當時藝術界男性壟斷的局面。</span>
         </li>
         <li>
-          <img src="" alt="1945 — 光復重建">
-          <strong>1945 — 光復重建</strong><br>
-          光復後，提拔藝回到台北，並成立「台灣青年藝術協會」，與台大、師大美術系合作培育學生。
+          <img src="/src/assets/img/about-1945.png" alt="1945 — 光復重建">
+          <h3>1945 光復重建</h3>
+          <span>光復後，提拔藝回到台北，並成立「台灣青年藝術協會」，與台大、師大美術系合作培育學生。</span>
         </li>
         <li>
-          <img src="" alt="1953 — 國際連結">
-          <strong>1953 — 國際連結</strong><br>
-          與國際日本水彩大會合辦「亞洲青年藝術家交流展」，並於香港設立分會。
+          <img src="/src/assets/img/about-1953.png" alt="1953 — 國際連結">
+          <h3>1953 國際連結</h3>
+          <span>與國際日本水彩大會合辦「亞洲青年藝術家交流展」，並於香港設立分會。</span>
         </li>
         <li>
-          <img src="" alt="1975 — 本土現代畫派興起">
-          <strong>1975 — 本土現代畫派興起</strong><br>
-          受到社會運動、解嚴思潮刺激，本土畫派崛起，畫風「新世代主義」逐漸形成。
+          <img src="/src/assets/img/about-1975.png" alt="1975 — 本土現代畫派興起">
+          <h3>1975 本土興起</h3>
+          <span>受到社會運動、解嚴思潮刺激，本土畫派崛起，畫風「新世代主義」逐漸形成。</span>
         </li>
         <li>
-          <img src="" alt="1984 — 數位典藏計畫啟動">
-          <strong>1984 — 數位典藏計畫啟動</strong><br>
-          配合「老藝檔案數位化計畫」，將 1925～1980 年代的資料典藏到資料庫。
+          <img src="/src/assets/img/about-1984.png" alt="1984 — 數位典藏計畫啟動">
+          <h3>1984 數位典藏</h3>
+          <span>配合「老藝檔案數位化計畫」，將 1925～1980 年代的資料典藏到資料庫。</span>
         </li>
         <li>
-          <img src="" alt="1995 — 登入網路時代">
-          <strong>1995 — 登入網路時代</strong><br>
-          正式上線「提拔藝資料網」，提供線上展覽、作品資料庫查詢與網路購物上架功能。
+          <img src="/src/assets/img/about-1995.png" alt="1995 — 登入網路時代">
+          <h3>1995 網路時代</h3>
+          <span>正式上線「提拔藝資料網」，提供線上展覽、作品資料庫查詢與網路購物上架功能。</span>
         </li>
         <li>
-          <img src="" alt="2000 — 線上虛擬展間初登場">
-          <strong>2000 — 線上虛擬展間初登場</strong><br>
-          利用 Flash 技術打造首個「360° 虛擬藝廊空間」，為策展開啟新里程碑。
+          <img src="/src/assets/img/about-2000.png" alt="2000 — 線上虛擬展間初登場">
+          <h3>2000 虛擬展間</h3>
+          <span>利用 Flash 技術打造首個「360° 虛擬藝廊空間」，為策展開啟新里程碑。</span>
         </li>
         <li>
-          <img src="" alt="2010 — 開放藝術家自行上傳作品">
-          <strong>2010 — 開放藝術家自行上傳作品</strong><br>
-          推出「開放投稿平台」，讓藝術家能自主上傳自己的展覽與創作，真正走向平臺化管理。
+          <img src="/src/assets/img/about-2010.png" alt="2010 — 開放藝術家自行上傳作品">
+          <h3>2010 開放上傳</h3>
+          <span>推出「開放投稿平台」，讓藝術家能自主上傳自己的展覽與創作，真正走向平臺化管理。</span>
         </li>
       </ul>
     </section>

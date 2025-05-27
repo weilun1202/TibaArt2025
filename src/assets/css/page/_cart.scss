@@ -50,28 +50,26 @@
         margin-bottom: 16px;
     }
 
-    .productDescription{
+    .productDescription {
         font-size: map-get($font, p);
-        
     }
 
-     .productPrice{
+    .productPrice {
         font-size: map-get($font, h5);
         font-weight: normal;
-
         color: $fontWarn;
-     }
+    }
 
-     .quantity{
+    .quantity {
         margin-bottom: 0px;
-     }
+    }
 }
 
 .removeBtn {
     background-color: $primaryGreen;
     color: white;
     border: none;
-    border-radius: 50%; 
+    border-radius: 50%;
     width: 40px;
     height: 40px;
     display: flex;
@@ -85,8 +83,8 @@
     right: 0px;
 
     p {
-        position: relative; 
-        top: -3px; 
+        position: relative;
+        top: -3px;
     }
 }
 
@@ -112,42 +110,66 @@
     color: $fontWhite;
     height: 50px;
     line-height: 50px;
-    padding:  0 0 0 20px;
+    padding: 0 0 0 20px;
 }
 
-.form{
-    padding:20px 20px 0 20px; 
-    
-    .formGroup{
+.form {
+    padding: 20px 20px 0 20px;
+    text-align: left;
+
+    .formGroup {
         display: flex;
         align-items: center;
         margin-bottom: 20px;
     }
-    
+
     label {
-        flex: 1; 
-        font-size:map-get($font, p);
-        color: $primaryGreen;
+        flex: 1;
+        font-size: map-get($font, p);
+        // color: $primaryGreen;
         text-align: justify;
         text-align-last: justify;
-        padding-right: 10px; 
+        padding-right: 12px;
     }
-    
-    input, .invoiceType {
-        flex: 2; 
-        font-size:map-get($font, p);
+
+    input,
+    .invoiceType {
+        flex: 2;
+        width: 80%;
+        font-size: 12px;
+        height: 32px;
         border-radius: 8px;
-        border:1px solid $primaryGreen;
+        border: 1px solid $primaryGreen;
         color: $primaryGreen;
-        padding: 8px 12px;
+        padding: 4px 8px;
         transition: width 0.3s ease-in-out, opacity 0.3s ease-in-out;
     }
-    
-    input:focus, .invoiceType:focus {
+
+    input:focus,
+    .invoiceType:focus {
         border-color: $primaryGreen;
         box-shadow: 0 4px 15px rgba($primaryGreen, 0.3);
         outline: none;
     }
+
+    .checkboxContainer {
+            flex: 2;
+            text-align: left; 
+            padding-left: 0; 
+        }
+
+        .checkbox {
+            width: auto;
+            padding: 0;
+            margin: 0;
+            margin-left: 0;
+            transform: scale(1.2);
+            accent-color: $primaryGreen;
+            
+            position: relative;
+            top: 1px;
+            left: 0;
+        }
 
     .checkbox:focus {
         box-shadow: 0 4px 15px rgba($primaryGreen, 0);
@@ -155,12 +177,12 @@
 }
 
 .form2 {
-    padding:20px 20px 0 20px; 
+    padding: 20px 20px 0 20px;
     text-align: center;
 }
 
 .orderSummary p {
-    font-size:map-get($font, p);
+    font-size: map-get($font, p);
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
@@ -172,7 +194,7 @@
 }
 
 .btn a {
-    display:block;
+    display: block;
     color: $fontWhite;
     cursor: pointer;
     text-decoration: none;
@@ -184,59 +206,107 @@
 }
 
 .ecpay {
-    display:block;
-    margin: 20px auto; // 水平置中
+    display: block;
+    margin: 20px auto; 
 }
 
-@media screen and (max-width: 992px) {
+@media (max-width: 992px) {
     .leftPanel {
         flex: 1.5;
     }
 }
 
-
-@media screen and (max-width: 920px) {
-    .cartContainer{
+@media (max-width: 920px) {
+    .cartContainer {
         flex-direction: column;
+        margin: 80px 40px;
     }
 
     .form label {
-        flex: 0.5; 
-        padding-right: 20px; 
+        flex: 0.5;
+        padding-right: 20px;
+    }
+
+    .form input,
+    .form .invoiceType {
+        font-size: map-get($font, p );
+        height: 36px;
+        padding: 8px 12px;
     }
 }
 
-@media screen and (max-width: 640px) {
+@media (max-width: 640px) {
+    .cartContainer {
+        margin: 80px 20px;
+    }
+
     .cartItem {
         flex-direction: column;
         align-items: flex-start;
-        
+
         img {
             height: 100%;
             width: 100%;
             object-fit: cover;
         }
 
-        .cartDetails{
+        .cartDetails {
             margin-top: 20px;
         }
-
     }
-
-
-
 }
 
-@media screen and (max-width: 530px) {
+@media (max-width: 530px) {
+
+    .cartDetails {
+        line-height: 1.2;
+        margin-bottom: 8px;
+
+        .productDescription {
+            font-size: map-get($font, p);
+        }
+
+        .quantity {
+            height:24px;
+        }
+    }
+
     .form label {
-        flex: .8; 
-        padding-right: 10px; 
+        flex: .8;
+        padding-right: 10px;
     }
 }
-@media screen and (max-width: 422px) {
-        .formGroup {
-            flex-direction: column;
-            align-items: flex-start;
-            justify-content:flex-start;
+
+@media (max-width: 422px) {
+    .formGroup {
+        flex-direction: column;
+
+        label {
+            text-align: left;
+            text-align-last: left;
+            width: 100%;
+            padding-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        input,
+        .invoiceType {
+            width: 100%;
+        }
     }
+    .formGroup:has(.checkbox) {    /* checkbox 的 formGroup 保持水平排列 */
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 4px;
+    }
+    .formGroup:has(.checkbox) label {
+        margin-bottom: 0;
+    }
+    .form .checkbox{
+        position: relative;
+        top: -4px;
+        left: 0;
+    }
+
 }

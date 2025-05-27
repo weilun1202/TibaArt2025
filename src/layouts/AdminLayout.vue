@@ -2,6 +2,7 @@
 <template>
   <AdminNav />
   <AdminHeader />
+  <router-view />
 </template>
 
 

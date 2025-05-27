@@ -16,22 +16,22 @@
             <div class="donateItem">
               欲贊助之展覽
             </div>
-
-            <select id="subject" name="subject">
+            <select id="subject" name="subject" v-model="subject" @change="errors.subject = ''">
               <option value="">請選擇</option>
-              <option value="expo">《 靜界焰光 》</option>
-              <option value="expo">《 進擊的魔關羽 》</option>
-              <option value="expo">《 美味堡的小秘密 》</option>
-              <option value="expo">展覽 04</option>
+              <option value="expo1">《 靜界焰光 》</option>
+              <option value="expo2">《 雪白世界 》</option>
+              <option value="expo3">《 白陽落櫻 》</option>
+              <option value="expo4">《 撕裂極光 》</option>
             </select>
+            <span class="formError" v-show="true">{{ errors.subject ? errors.subject : '\u00A0' }}</span>
 
           </div>
 
           <div class="formGroup">
+
             <div class="donateItem">
               贊助金額
             </div>
-
             <div class="formCostChoice">
               <button
                 class="btn"
@@ -41,12 +41,10 @@
               >
                 {{ amount }} 元
               </button>
-
               <label for="cost" class="formLabel">
                 新臺幣
                 <span class="formHint">*</span>
               </label>
-
               <input
                 type="text"
                 id="cost"
@@ -54,63 +52,65 @@
                 placeholder="請選擇或輸入金額"
                 v-model="selectedAmount"
               />
-              <span class="formError" v-if="errors.amount">{{ errors.amount }}</span>
-
+              <span class="formError" v-show="true">{{ errors.amount ? errors.amount : '\u00A0' }}</span>
             </div>
+
           </div>
 
           <div class="formGroup">
+
             <div class="donateItem">
               贊助人資料
             </div>
-
             <label for="name" class="formLabel">
               姓名<span class="formHint">*</span>
             </label>
-
             <input
               type="text"
               id="name"
               name="name"
               placeholder="請輸入姓名"
               v-model="name"
+              @input="errors.name = ''"
             />
-            <span class="formError" v-if="errors.name">{{ errors.name }}</span>
+            <span class="formError" v-show="true">{{ errors.name ? errors.name : '\u00A0' }}</span>
 
           </div>
             
           <div class="formGroup">
+
             <label for="email" class="formLabel">
               帳號 (信箱)<span class="formHint">*</span>
             </label>
-
             <div class="formReceipt">收據將以電子郵件方式寄出</div>
-
-
-
             <input
               type="text"
               id="email"
               name="email"
               placeholder="請輸入電子郵件"
               v-model="email"
+              @input="errors.email = ''"
             />
-            <span class="formError" v-if="errors.email">{{ errors.email }}</span>
+            <span class="formError" v-show="true">{{ errors.email ? errors.email : '\u00A0' }}</span>
 
           </div>
 
           <div class="formGroup">
-            <label for="pay" class="formLabel">
-              付款方式<span class="formHint">*</span>
-            </label>
 
-            <a href="#" class="ecpayBtn pay">
+            <label for="pay" class="formLabel">
+              付款方式
+              <!-- <span class="formHint">*</span> -->
+            </label>
+            <!-- <a href="#" class="ecpayBtn pay">
               <img src="../../assets/img/ecpay_logo.svg" alt="ecpay_logo.svg">
-            </a>
+            </a> -->
+            <div class="ecpayBtn">
+              <img src="../../assets/img/ecpay_logo.svg" alt="ecpay_logo.svg">
+            </div>
 
           </div>
 
-          <!-- <button type="submit" class="btn formDonate" @click="handleSubmit">立刻贊助</button> -->
+          <br>
 
           <button type="button" class="btn formDonate" @click="handleSubmit">
             立刻贊助
@@ -232,6 +232,8 @@
 <script setup>
   import { ref } from 'vue'
 
+  // 贊助展覽
+  const subject = ref('')
   // 所有金額選項
   const amounts = [500, 1000, 1500, 2000]
 
@@ -258,6 +260,10 @@
   // 驗證函數
 function validateForm() {
   errors.value = {}
+
+  if (!subject.value) {
+    errors.value.subject = '請選擇一個展覽'
+  }
 
   if (!name.value.trim()) {
     errors.value.name = '姓名為必填'
@@ -286,24 +292,34 @@ function handleSubmit(e) {
 
 
 
-
-
-
-
-
 </script>
 
 <style lang="scss" scoped>
 /* 可以把額外的 CSS 加在這裡或保留在全域 */
 @import '/style.scss';
 
+.formGroup .formError{
+  display: block;
+  min-height: 1.2em;
+  color: #C34E4E;
+  font-size: map-get($font, pwar);
+  margin-top: 4px;
+}
+
 .formCostChoice{
   .btn{
-    margin: 0 8px;
+    margin: 8px;
   }
 }
 .formLabel{
   margin-top: 10px;
+}
+.ecpayBtn{
+  margin: 0;
+  display: flex;
+  justify-content: center; /* 水平置中 */
+  align-items: center;     /* 垂直置中（若有高度） */
+  background-color: #fcfbf7;
 }
 
 </style>
