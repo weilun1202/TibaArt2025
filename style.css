@@ -308,6 +308,22 @@ header .pageTitle {
   top: 50%;
   transform: translate(0, -50%);
 }
+@media (max-width: 820px) {
+  header {
+    height: 100px;
+  }
+  header .pageTitle {
+    font-size: 2.5rem;
+  }
+}
+@media (max-width: 430px) {
+  header {
+    height: 80px;
+  }
+  header .pageTitle {
+    font-size: 2rem;
+  }
+}
 
 .frontNav {
   width: 100%;
@@ -694,22 +710,22 @@ header .pageTitle {
 }
 
 /* 響應式設計 */
-@media screen and (max-width: 1200px) {
+@media (max-width: 1200px) {
   .wrap {
     margin: 0 20px;
   }
 }
-@media screen and (max-width: 992px) {
+@media (max-width: 992px) {
   .item {
     width: calc(50% - 40px);
   }
 }
-@media screen and (max-width: 760px) {
+@media (max-width: 760px) {
   .shopTab {
     padding: 50px 20px 40px;
   }
 }
-@media screen and (max-width: 700px) {
+@media (max-width: 700px) {
   .item {
     padding: 16px;
   }
@@ -727,7 +743,7 @@ header .pageTitle {
     line-height: 38px;
   }
 }
-@media screen and (max-width: 634px) {
+@media (max-width: 664px) {
   .searchInput {
     position: absolute;
     right: 0;
@@ -767,12 +783,12 @@ header .pageTitle {
     line-height: 48px;
   }
 }
-@media screen and (max-width: 520px) {
+@media (max-width: 520px) {
   .shopTab {
     padding: 40px 20px 30px;
   }
 }
-@media screen and (max-width: 390px) {
+@media (max-width: 390px) {
   .btn {
     font-size: 1rem;
     line-height: 38px;
@@ -904,18 +920,18 @@ header .pageTitle {
   text-align: center;
 }
 
-@media screen and (max-width: 820px) {
+@media (max-width: 820px) {
   .productImg {
     flex: 1.6;
   }
 }
-@media screen and (max-width: 760px) {
+@media (max-width: 760px) {
   .subTitle h1 {
     font-size: 2rem;
     line-height: 36px;
   }
 }
-@media screen and (max-width: 640px) {
+@media (max-width: 662px) {
   .subTitle {
     margin: 0 auto;
   }
@@ -1047,6 +1063,7 @@ header .pageTitle {
 
 .form {
   padding: 20px 20px 0 20px;
+  text-align: left;
 }
 .form .formGroup {
   display: flex;
@@ -1056,25 +1073,44 @@ header .pageTitle {
 .form label {
   flex: 1;
   font-size: 1rem;
-  color: #29786A;
   text-align: justify;
   -moz-text-align-last: justify;
        text-align-last: justify;
-  padding-right: 10px;
+  padding-right: 12px;
 }
-.form input, .form .invoiceType {
+.form input,
+.form .invoiceType {
   flex: 2;
-  font-size: 1rem;
+  width: 80%;
+  font-size: 12px;
+  height: 32px;
   border-radius: 8px;
   border: 1px solid #29786A;
   color: #29786A;
-  padding: 8px 12px;
+  padding: 4px 8px;
   transition: width 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
-.form input:focus, .form .invoiceType:focus {
+.form input:focus,
+.form .invoiceType:focus {
   border-color: #29786A;
   box-shadow: 0 4px 15px rgba(41, 120, 106, 0.3);
   outline: none;
+}
+.form .checkboxContainer {
+  flex: 2;
+  text-align: left;
+  padding-left: 0;
+}
+.form .checkbox {
+  width: auto;
+  padding: 0;
+  margin: 0;
+  margin-left: 0;
+  transform: scale(1.2);
+  accent-color: #29786A;
+  position: relative;
+  top: 1px;
+  left: 0;
 }
 .form .checkbox:focus {
   box-shadow: 0 4px 15px rgba(41, 120, 106, 0);
@@ -1114,21 +1150,31 @@ header .pageTitle {
   margin: 20px auto;
 }
 
-@media screen and (max-width: 992px) {
+@media (max-width: 992px) {
   .leftPanel {
     flex: 1.5;
   }
 }
-@media screen and (max-width: 920px) {
+@media (max-width: 920px) {
   .cartContainer {
     flex-direction: column;
+    margin: 80px 40px;
   }
   .form label {
     flex: 0.5;
     padding-right: 20px;
   }
+  .form input,
+  .form .invoiceType {
+    font-size: 1rem;
+    height: 36px;
+    padding: 8px 12px;
+  }
 }
-@media screen and (max-width: 640px) {
+@media (max-width: 640px) {
+  .cartContainer {
+    margin: 80px 20px;
+  }
   .cartItem {
     flex-direction: column;
     align-items: flex-start;
@@ -1143,17 +1189,51 @@ header .pageTitle {
     margin-top: 20px;
   }
 }
-@media screen and (max-width: 530px) {
+@media (max-width: 530px) {
+  .cartDetails {
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .cartDetails .productDescription {
+    font-size: 1rem;
+  }
+  .cartDetails .quantity {
+    height: 24px;
+  }
   .form label {
     flex: 0.8;
     padding-right: 10px;
   }
 }
-@media screen and (max-width: 422px) {
+@media (max-width: 422px) {
   .formGroup {
     flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
+  }
+  .formGroup label {
+    text-align: left;
+    -moz-text-align-last: left;
+         text-align-last: left;
+    width: 100%;
+    padding-bottom: 10px;
+    letter-spacing: 1px;
+  }
+  .formGroup input,
+  .formGroup .invoiceType {
+    width: 100%;
+  }
+  .formGroup:has(.checkbox) { /* checkbox 的 formGroup 保持水平排列 */
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 4px;
+  }
+  .formGroup:has(.checkbox) label {
+    margin-bottom: 0;
+  }
+  .form .checkbox {
+    position: relative;
+    top: -4px;
+    left: 0;
   }
 }
 .parent {
@@ -1554,7 +1634,7 @@ header .pageTitle {
 .donateItem {
   font-size: 3rem;
   color: #2F2F2F;
-  padding-bottom: 32px;
+  padding: 32px 0;
 }
 
 .formReceipt {
