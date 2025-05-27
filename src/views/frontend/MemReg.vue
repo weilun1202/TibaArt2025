@@ -231,8 +231,14 @@ line-height: 200px;
     display: flex;
     justify-content: center;
     gap: $spacing-10;
+    
   }
 
+
+   .socialBtn{
+    font-size: map-get($font, p);
+    line-height: 48px;
+   }
 
 </style>
 

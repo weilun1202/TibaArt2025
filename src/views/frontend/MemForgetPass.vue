@@ -68,9 +68,20 @@
       line-height: 1.6;
     }
 
-    .formA{
+    .formA{ 
       padding: 0;
+
+      @media (max-width: 520px) {
+      width: 90vw;
     }
+
+     .formGroup{
+      @media (max-width: 520px) {
+      width: 100%;
+    }
+  }
+
+}
 
 }
 

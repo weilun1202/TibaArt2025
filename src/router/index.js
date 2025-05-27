@@ -12,6 +12,7 @@ import MemberLayout from '@/layouts/MemberLayout.vue'
 import Home from '@/views/frontend/Home.vue'
 import Expo from '@/views/frontend/Expo.vue'
 import ExpoArea from '@/views/frontend/ExpoArea.vue'
+import ExpoAreaPage from '@/views/frontend/ExpoAreaPage.vue'
 import Sponsor from '@/views/frontend/Sponsor.vue'
 import Application from '@/views/frontend/Application.vue'
 import Shop from '@/views/frontend/Shop.vue'
@@ -49,6 +50,7 @@ const routes = [
       { path: '/', name: 'Home', component: Home },
       { path: 'expo', name: 'Expo', component: Expo },
       { path: 'expoArea', name: 'ExpoArea', component: ExpoArea },
+      { path: 'expoAreaPage', name: 'ExpoAreaPage', component: ExpoAreaPage },
       { path: 'sponsor', name: 'Sponsor', component: Sponsor },
       { path: 'application', name: 'Application', component: Application },
       { path: 'shop', name: 'Shop', component: Shop },
@@ -59,10 +61,6 @@ const routes = [
       { path: 'memReg', name: 'MemReg', component: MemReg },
       { path: 'memRegOK', name: 'MemRegOK', component: MemRegOK },
       { path: 'memForgetPass', name: 'MemForgetPass', component: MemForgetPass },
-      // { path: 'memHome', name: 'MemHome', component: MemHome },
-      // { path: 'memExpo', name: 'MemExpo', component: MemExpo },
-      // { path: 'memOrder', name: 'MemOrder', component: MemOrder },
-      // { path: 'memSponsor', name: 'MemSponsor', component: MemSponsor },
       {
         path: '/product/:id',
         name: 'product',
