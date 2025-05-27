@@ -1331,7 +1331,7 @@ header .pageTitle {
 .donateItem {
   font-size: 3rem;
   color: #2F2F2F;
-  padding-bottom: 32px;
+  padding: 32px 0;
 }
 
 .formReceipt {
