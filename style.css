@@ -512,7 +512,7 @@ header .pageTitle {
   align-items: center; /* 讓文字與圖片垂直置中 */
   justify-content: space-between;
   gap: 20px; /* 文字與圖片間距 */
-  padding: 40px 0; /* 上下留白 */
+  padding: 32px 0; /* 上下留白 */
 }
 .about .banner-text {
   /* 文字區塊約 35% 寬度，可依設計調整 */
@@ -524,9 +524,9 @@ header .pageTitle {
   line-height: 1.2;
 }
 .about .banner-text p {
-  margin: 0.5rem 0 0;
+  margin: 8px 0 0;
   font-size: 1rem;
-  color: #666;
+  color: #2F2F2F;
 }
 .about .banner img {
   /* 圖片占剩餘寬度，並保持比例 */
@@ -536,10 +536,10 @@ header .pageTitle {
   display: block;
 }
 .about .intro {
-  padding: 40px 0;
+  padding: 32px 0;
 }
 .about .intro h1 {
-  margin: 0 0 1rem;
+  margin: 0 0 16px;
   font-size: 3rem;
   text-align: center;
   color: #2F2F2F;
@@ -547,7 +547,7 @@ header .pageTitle {
 .about .intro p {
   margin: 0;
   line-height: 1.6;
-  color: #333;
+  color: #2F2F2F;
   text-align: justify;
 }
 .about .history {
@@ -557,13 +557,13 @@ header .pageTitle {
 .about .timeline {
   display: flex;
   padding: 0;
-  margin: 60px;
+  margin: 32px;
   list-style: none;
 }
 .about .timeline li {
   flex: 0 0 auto;
   width: 260px;
-  margin-right: 16px;
+  margin-right: 32px;
 }
 .about .timeline li h3 {
   font-size: 2rem;
@@ -571,12 +571,12 @@ header .pageTitle {
 }
 .about .timeline li span {
   font-size: 1rem;
-  line-height: 1.8;
+  line-height: 1.6;
 }
 .about .timeline li img {
   width: 100%;
   border-radius: 4px;
-  margin-bottom: 0.5em;
+  margin-bottom: 8px;
 }
 
 .shopTab {
@@ -1157,8 +1157,8 @@ header .pageTitle {
   }
 }
 .parent {
-  margin-top: 60px;
-  margin-bottom: 60px;
+  margin-top: 32px;
+  margin-bottom: 32px;
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   grid-template-rows: repeat(12, 1fr);
@@ -1286,29 +1286,29 @@ header .pageTitle {
 }
 .expoArea .banner {
   max-width: 1200px;
-  margin: 60px auto;
+  margin: 32px auto;
   display: flex;
   flex-wrap: wrap;
   /* for RWD */
-  background-color: #f5f5f5;
+  background-color: #297868;
 }
 .expoArea .banner-text {
   flex: 1;
   min-width: 300px;
   box-sizing: border-box;
-  padding: 3rem 2rem;
-  background-color: #f9f9f9;
+  padding: 32px 12px;
+  background-color: #ffffff;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 .expoArea .banner-text h1 {
-  font-size: 1.8rem;
-  margin-bottom: 0.5rem;
+  font-size: 3rem;
+  margin-bottom: 8px;
 }
 .expoArea .banner-text p {
   line-height: 1.6;
-  margin-bottom: 1rem;
+  margin-bottom: 16px;
   color: #333;
 }
 .expoArea .banner-text button {
@@ -1338,7 +1338,7 @@ header .pageTitle {
     width: 100%;
   }
   .expoArea .banner-text {
-    padding: 2rem 1.5rem;
+    padding: 32px 24px;
     text-align: center;
     align-items: center;
   }
@@ -1349,30 +1349,30 @@ header .pageTitle {
 .expoArea .expoArea-intro {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 4rem 1rem;
+  padding: 32px 16px;
   text-align: center;
 }
 .expoArea .expoArea-intro h2 {
-  font-size: 1.8rem;
-  margin-bottom: 0.5rem;
+  font-size: 2.5rem;
+  margin-bottom: 8px;
 }
 .expoArea .expoArea-intro h3 {
-  font-size: 1.2rem;
-  color: #555;
-  margin-bottom: 0.5rem;
+  font-size: 2rem;
+  color: #2F2F2F;
+  margin-bottom: 8px;
 }
 .expoArea .expoArea-intro > p {
   max-width: 700px;
-  margin: 0 auto 2rem;
+  margin: 0 auto 32px;
   line-height: 1.6;
-  color: #333;
+  color: #2F2F2F;
 }
 .expoArea .expoArea-intro .expoArea-artist {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: flex-start;
-  gap: 2rem;
+  gap: 32px;
   text-align: left;
 }
 .expoArea .expoArea-intro .expoArea-artist img {
@@ -1382,11 +1382,11 @@ header .pageTitle {
 }
 .expoArea .expoArea-intro .expoArea-artist p {
   max-width: 500px;
-  font-size: 1rem;
+  font-size: 16px;
   line-height: 1.8;
   margin: 0;
   flex: 1;
-  color: #444;
+  color: #2F2F2F;
 }
 @media (max-width: 768px) {
   .expoArea .expoArea-intro .expoArea-artist {
@@ -1404,10 +1404,10 @@ header .pageTitle {
 .expoArea .expoArea-artwork {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem 1rem;
+  padding: 32px 16px;
   display: flex;
   flex-wrap: wrap;
-  gap: 2rem;
+  gap: 32px;
   list-style: none;
   padding-left: 0;
 }
@@ -1420,23 +1420,23 @@ header .pageTitle {
   border-radius: 4px;
 }
 .expoArea .expoArea-artwork .expoArea-card .title {
-  margin: 1rem 0 0.5rem;
+  margin: 16px 0 8px;
 }
 .expoArea .expoArea-artwork .expoArea-card .title h3 {
   margin: 0;
 }
 .expoArea .expoArea-artwork .expoArea-card .title p {
   margin: 0;
-  font-size: 0.9rem;
+  font-size: 16px;
   color: #666;
 }
 .expoArea .expoArea-artwork .expoArea-card > p {
   line-height: 1.6;
-  margin: 1rem 0;
-  color: #333;
+  margin: 16px 0;
+  color: #2F2F2F;
 }
 .expoArea .expoArea-artwork .expoArea-card a {
-  color: #333;
+  color: #2F2F2F;
   text-decoration: underline;
   font-weight: bold;
   display: inline-block;
@@ -1450,33 +1450,51 @@ header .pageTitle {
 .expoAreaPage .main {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 3rem 1rem;
+  padding: 32px 16px;
   text-align: center;
-  color: #333;
+  color: #2F2F2F;
 }
 .expoAreaPage .main img {
   width: 100%;
   height: auto;
   border-radius: 4px;
-  margin-bottom: 2rem;
+  margin-bottom: 32px;
+}
+.expoAreaPage .main .artwork-title {
+  display: flex;
+  justify-content: start;
+  align-items: baseline;
 }
 .expoAreaPage .main h2 {
-  font-size: 1.8rem;
-  margin-bottom: 0.5rem;
+  font-size: 2.5rem;
+  margin-bottom: 8px;
 }
-.expoAreaPage .main h3 {
-  font-size: 1.1rem;
+.expoAreaPage .main h5 {
+  font-size: 1.25rem;
   color: #666;
-  margin-bottom: 1rem;
+  margin-bottom: 16px;
 }
 .expoAreaPage .main p {
-  margin: 0.2rem 0;
+  margin: 4px 0;
   font-size: 1rem;
+  text-align: start;
   line-height: 1.6;
 }
 .expoAreaPage .main p:nth-of-type(3) {
-  margin-top: 1rem;
+  margin-top: 16px;
   font-weight: bold;
+}
+.expoAreaPage .main .btn {
+  display: inline-block;
+  align-self: center;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.expoAreaPage .main .btn:hover {
+  background-color: #E4C600;
+  color: #2F2F2F;
 }
 
 .applicationWrapper {

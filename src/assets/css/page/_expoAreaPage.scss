@@ -1,41 +1,62 @@
 .expoAreaPage {
-.wrapper{
 
-}
+
     .main {
+
         max-width: 1200px;
         margin: 0 auto;
-        padding: 3rem 1rem;
+        padding: $spacing-8 $spacing-4;
         text-align: center;
-        color: #333;
+        color: $fontBlack;
 
         img {
             width: 100%;
             height: auto;
-            border-radius: 4px;
-            margin-bottom: 2rem;
+            border-radius: $spacing-1;
+            margin-bottom: $spacing-8;
+        }
+
+        .artwork-title {
+            display: flex;
+            justify-content: start;
+            align-items: baseline;
         }
 
         h2 {
-            font-size: 1.8rem;
-            margin-bottom: 0.5rem;
+            font-size: map-get($font, h2);
+            margin-bottom: $spacing-2;
         }
 
-        h3 {
-            font-size: 1.1rem;
+        h5 {
+            font-size: map-get($font, h5);
             color: #666;
-            margin-bottom: 1rem;
+            margin-bottom: $spacing-4;
         }
 
         p {
-            margin: 0.2rem 0;
-            font-size: 1rem;
+            margin: $spacing-1 0;
+            font-size: map-get($font, p);
+            text-align: start;
             line-height: 1.6;
 
             &:nth-of-type(3) {
-                margin-top: 1rem;
+                margin-top: $spacing-4;
                 font-weight: bold;
             }
+        }
+
+        .btn {
+            display: inline-block;
+            align-self: center;
+            border: none;
+            border-radius: $spacing-1;
+            font-size: map-get($font, p);
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: $buttonYellow;
+            color: $fontBlack;
         }
 
     }

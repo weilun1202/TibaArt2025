@@ -15,8 +15,8 @@
   display: flex;
   align-items: center;    /* 讓文字與圖片垂直置中 */
   justify-content: space-between;
-  gap: 20px;               /* 文字與圖片間距 */
-  padding: 40px 0;         /* 上下留白 */
+  gap: $spacing-5;               /* 文字與圖片間距 */
+  padding: $spacing-8 0;         /* 上下留白 */
 }
 
 .banner-text {
@@ -31,9 +31,9 @@
 }
 
 .banner-text p {
-  margin: 0.5rem 0 0;
+  margin: $spacing-2 0 0;
   font-size: map-get($font, p);
-  color: #666;
+  color: $fontBlack;
 }
 
 .banner img {
@@ -46,11 +46,11 @@
 
 /* Intro 區塊 */
 .intro {
-  padding: 40px 0;
+  padding: $spacing-8 0;
 }
 
 .intro h1 {
-  margin: 0 0 1rem;
+  margin: 0 0 $spacing-4;
   font-size: map-get($font, h1);
   text-align: center;
   color:$fontBlack;
@@ -59,7 +59,7 @@
 .intro p {
   margin: 0;
   line-height: 1.6;
-  color: #333;
+  color: $fontBlack;
   text-align: justify;
 }
 
@@ -75,13 +75,13 @@
 
             display: flex;
             padding: 0;
-            margin: 60px ;
+            margin: $spacing-8 ;
             list-style: none;
 
             li {
                 flex: 0 0 auto;
                 width: 260px;
-                margin-right: 16px;
+                margin-right: $spacing-8;
 
                 h3{
                   font-size:map-get($font, h3);
@@ -89,12 +89,12 @@
                 }
                 span{
                   font-size:map-get($font, p);
-                  line-height: 1.8;
+                  line-height: 1.6;
                 }
                 img {
                     width: 100%;
-                    border-radius: 4px;
-                    margin-bottom: 0.5em;
+                    border-radius: $spacing-1;
+                    margin-bottom: $spacing-2;
                 }
             }
         }
