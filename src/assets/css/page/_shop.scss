@@ -113,26 +113,26 @@
 
 /* 響應式設計 */
 
-@media screen and (max-width: 1200px) {
+@media (max-width: 1200px) {
    .wrap {
         margin: 0 20px;
     }
 }
 
-@media screen and (max-width: 992px) {
+@media (max-width: 992px) {
     .item {
         width: calc(50% - 40px);
     }
 }
 
-@media screen and (max-width: 760px) {
+@media (max-width: 760px) {
     .shopTab {
         padding: 50px 20px 40px;
     }
 }
     
 
-@media screen and (max-width: 700px) {
+@media (max-width: 700px) {
     .item {
         padding:16px;
     }
@@ -154,7 +154,7 @@
     }
 }
 
-@media screen and (max-width: 634px) {
+@media (max-width: 664px) {
     .searchInput {
         position: absolute; // 不佔空間
         right: 0; 
@@ -202,13 +202,13 @@
     }
 }
 
-@media screen and (max-width: 520px) {
+@media (max-width: 520px) {
     .shopTab {
         padding: 40px 20px 30px;
     }
 }
 
-@media screen and (max-width: 390px) {
+@media (max-width: 390px) {
     .btn {
         font-size: map-get($font, p);
         line-height: 38px;

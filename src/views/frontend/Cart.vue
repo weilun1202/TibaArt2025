@@ -71,7 +71,9 @@
                         <div class="form">
                             <div class="formGroup">
                                 <label>同訂購人</label>
-                                <input type="checkbox" class="checkbox">
+                                <div class="checkboxContainer">
+                                    <input type="checkbox" class="checkbox">
+                                </div>
                             </div>
                             <div class="formGroup">
                                 <label>姓名</label>
