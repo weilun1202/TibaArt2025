@@ -15,7 +15,7 @@
                             <img src="@/assets/img/itemMug.jpg" alt="商品圖片">
                             <div class="cartDetails">
                                 <h3 class="cardName">緯藝馬克杯</h3>
-                                <p class="productDescription">材質：磁器、規格：325ml</p>
+                                <!-- <p class="productDescription">材質：磁器、規格：325ml</p> -->
                                 <p class="productPrice">價格：NT$500</p>
                                 <div class="quantity">
                                     <p class="productDescription">數量: </p>
@@ -29,6 +29,27 @@
                             <button class="removeBtn"><p>-</p></button>
                         </div>
                     </div>
+                    <div class="card">
+                        <div class="cartItem">
+                            <img src="@/assets/img/itemBookmark.jpg" alt="商品圖片">
+                            <div class="cartDetails">
+                                <h3 class="cardName">緯藝書籤</h3>
+                                <!-- <p class="productDescription">材質：磁器、規格：325ml</p> -->
+                                <p class="productPrice">價格：NT$200</p>
+                                <div class="quantity">
+                                    <p class="productDescription">數量: </p>
+                                    <div class="selectQuan">
+                                        <button type="button" class="addMinus">-</button>
+                                        <input type="number" id="quantity" value="1" min="1">
+                                        <button type="button" class="addMinus">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="removeBtn"><p>-</p></button>
+                        </div>
+                    </div>
+                    <p class="continueShopping"><router-link to="/shop">繼續選購商品</router-link></p>
+
                 </div>
 
                 <!-- 右邊-->
