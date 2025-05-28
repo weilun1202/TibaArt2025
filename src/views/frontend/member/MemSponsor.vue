@@ -2,12 +2,11 @@
 <div class="memWrap">
         <h2>展覽贊助記錄</h2>
 <div class="sponsorship-history">
-    <div class="sponsorship-list">
+    <div class="sponsorship-table">
       <div class="sponsorship-header">
         <div class="header-item exhibition-name-col">贊助展覽名稱</div>
         <div class="header-item sponsor-amount-col">贊助金額</div>
         <div class="header-item sponsor-time-col">贊助時間</div>
-        <div class="header-item sponsor-status-col">狀態</div>
       </div>
 
       <div v-if="loading" class="loading-message">
@@ -28,20 +27,11 @@
           </div>
           <div class="row-item sponsor-amount-col amount">{{ formatCurrency(record.sponsorAmount) }}</div>
           <div class="row-item sponsor-time-col">{{ formatDateTime(record.sponsorTime) }}</div>
-          <div class="row-item sponsor-status-col">
-            <span :class="['status-tag', getStatusTagClass(record.status)]">
-              {{ record.status }}
-            </span>
-          </div>
         </div>
       </div>
     </div>
   </div>
-
- </div>
-
-
-
+</div>
 </template>
 
 <script setup>
@@ -66,7 +56,7 @@ onMounted(() => {
 const fetchSponsorshipRecords = async () => {
   loading.value = true; // 開始載入時顯示載入狀態
   try {
-    // 實際應用中，會是類似 axios.get('/api/member/sponsorship-history') 的請求
+    // 實際應用中，會是類似 axios.get('/api/member/sponsorship-records') 的請求
     // 這裡使用 setTimeout 模擬非同步請求延遲
     setTimeout(() => {
       const fetchedRecords = [
@@ -75,26 +65,16 @@ const fetchSponsorshipRecords = async () => {
           exhibitionId: 'EXH001', // 展覽的 ID，用於點擊後跳轉到展覽詳情頁
           exhibitionName: '《靜界焰光》',
           sponsorAmount: 1500,
-          sponsorTime: '2025-05-15T10:00:00Z', // 後端傳來的日期時間通常是 ISO 格式
-          status: '已完成'
+          sponsorTime: '2025-05-01T00:00:00Z', // 後端傳來的日期時間通常是 ISO 格式
         },
-        {
-          id: 'SP002',
-          exhibitionId: 'EXH002',
-          exhibitionName: '《奇幻森林之旅》',
-          sponsorAmount: 500,
-          sponsorTime: '2025-04-20T14:30:00Z',
-          status: '已完成'
-        },
-        {
-          id: 'SP003',
-          exhibitionId: 'EXH003',
-          exhibitionName: '《城市光影交響》',
-          sponsorAmount: 200,
-          sponsorTime: '2025-05-25T08:00:00Z',
-          status: '處理中' // 模擬待處理的贊助
-        },
-        // 可以添加更多模擬贊助紀錄
+        // 根據圖片，暫時只顯示一條記錄，您可以自行添加更多
+        // {
+        //   id: 'SP002',
+        //   exhibitionId: 'EXH002',
+        //   exhibitionName: '《奇幻森林之旅》',
+        //   sponsorAmount: 800,
+        //   sponsorTime: '2025-04-25T14:30:00Z',
+        // },
       ];
       sponsorshipRecords.value = fetchedRecords;
     }, 800); // 模擬 800ms 延遲
@@ -126,25 +106,8 @@ const formatDateTime = (dateTimeString) => {
     day: '2-digit',
     hour: '2-digit',
     minute: '2-digit',
-    second: '2-digit',
-    hour12: false
+    hour12: false // 24小時制
   }).format(date);
-};
-
-// 根據贊助狀態返回對應的 CSS class
-const getStatusTagClass = (status) => {
-  switch (status) {
-    case '已完成':
-      return 'status-completed';
-    case '處理中':
-      return 'status-processing';
-    case '已退款':
-      return 'status-refunded';
-    case '已取消':
-      return 'status-cancelled';
-    default:
-      return '';
-  }
 };
 
 // 如果需要點擊展覽名稱跳轉到展覽詳情頁
@@ -172,7 +135,7 @@ const getStatusTagClass = (status) => {
 }
 
 .sponsorship-history {
-  max-width: 900px;
+  max-width: 700px; /* 調整最大寬度以符合圖片 */
   margin: 40px auto;
   padding: 30px;
   background-color: #ffffff;
@@ -187,10 +150,11 @@ h2 {
   font-size: 28px;
 }
 
-.sponsorship-list {
+.sponsorship-table {
   border: 1px solid #e0e0e0;
   border-radius: 6px;
   overflow: hidden;
+  font-size: 15px; /* 調整字體大小 */
 }
 
 .sponsorship-header,
@@ -204,7 +168,6 @@ h2 {
   background-color: #f8f8f8;
   font-weight: bold;
   color: #555;
-  font-size: 15px;
   padding: 12px 0;
 }
 
@@ -222,7 +185,7 @@ h2 {
   box-sizing: border-box;
 }
 
-/* 根據項目內容調整列寬 */
+/* 根據圖片調整列寬 */
 .exhibition-name-col {
   flex: 2; /* 展覽名稱佔據較大空間 */
   justify-content: flex-start; /* 內容靠左對齊 */
@@ -230,20 +193,15 @@ h2 {
 }
 
 .sponsor-amount-col {
-  flex: 0 0 120px; /* 贊助金額 */
+  flex: 1; /* 贊助金額 */
 }
 
 .sponsor-time-col {
-  flex: 0 0 180px; /* 贊助時間 */
-}
-
-.sponsor-status-col {
-  flex: 0 0 100px; /* 狀態 */
+  flex: 1.2; /* 贊助時間 */
 }
 
 .row-item {
   color: #333;
-  font-size: 15px;
   background-color: #fff;
   border-right: 1px solid #eee;
 }
@@ -253,45 +211,20 @@ h2 {
 }
 
 .exhibition-link {
-  color: #007bff;
+  color: #333; /* 預設顏色，與圖片接近 */
   text-decoration: none;
-  font-weight: bold;
+  font-weight: normal; /* 與圖片接近 */
   transition: color 0.3s ease;
 }
 
 .exhibition-link:hover {
-  color: #0056b3;
+  color: #007bff; /* hover 時可有藍色提示 */
   text-decoration: underline;
 }
 
 .amount {
-  color: #007bff;
-  font-weight: bold;
-}
-
-.status-tag {
-  display: inline-block;
-  padding: 5px 10px;
-  border-radius: 4px;
-  color: white;
-  font-size: 14px;
-  font-weight: bold;
-}
-
-.status-completed {
-  background-color: #28a745; /* 綠色 */
-}
-
-.status-processing {
-  background-color: #007bff; /* 藍色 */
-}
-
-.status-refunded {
-  background-color: #6c757d; /* 灰色 */
-}
-
-.status-cancelled {
-  background-color: #dc3545; /* 紅色 */
+  color: #333; /* 金額顏色與圖片接近 */
+  font-weight: normal; /* 金額字體與圖片接近 */
 }
 
 /* 載入中和無資料訊息 */
@@ -317,6 +250,5 @@ h2 {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
-
 
 </style>
