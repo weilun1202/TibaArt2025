@@ -23,7 +23,7 @@
     .applicationContent{
 
         .applicationTitle{
-            font-size: map-get($font, h3);
+            font-size: map-get($font, h4);
             font-weight: bold;
             color: $fontBlack;
             margin: $spacing-5 0;
@@ -32,7 +32,7 @@
     }
 
     .applicationText{
-        font-size: map-get($font, h4);
+        font-size: map-get($font, p);
         color: $fontBlack;
         margin: $spacing-6 0;
     }
