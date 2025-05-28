@@ -231,18 +231,19 @@
 
 <script setup>
   import { ref } from 'vue'
+  import { useRouter } from 'vue-router'
 
-  // 贊助展覽
-  const subject = ref('')
-  // 所有金額選項
-  const amounts = [500, 1000, 1500, 2000]
+  const router = useRouter()
 
-  // 被選擇的金額
-  const selectedAmount = ref('')
+  // 模擬登入狀態，實際可從 Vuex、Pinia、cookie 等取得
+  const isLoggedIn = ref(false)
 
+  // 表單資料
+  const subject = ref('')                  // 展覽選項
+  const amounts = [500, 1000, 1500, 2000]  // 所有金額選項
+  const selectedAmount = ref('')           // 被選擇的金額
   const name = ref('')
   const email = ref('')
-
   // 錯誤訊息狀態
   const errors = ref({
     amount: '',
@@ -257,39 +258,52 @@
   }
 
 
-  // 驗證函數
-function validateForm() {
-  errors.value = {}
+  // 驗證資料是否有誤
+  function validateForm() {
+    errors.value = {}
 
-  if (!subject.value) {
-    errors.value.subject = '請選擇一個展覽'
+    if (!subject.value) {
+      errors.value.subject = '請選擇一個展覽'
+    }
+
+    if (!name.value.trim()) {
+      errors.value.name = '姓名為必填'
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(email.value)) {
+      errors.value.email = 'Email 格式不正確'
+    }
+
+    if (!selectedAmount.value) {
+      errors.value.amount = '請選擇或輸入金額'
+    }
+
+    return Object.keys(errors.value).length === 0
   }
 
-  if (!name.value.trim()) {
-    errors.value.name = '姓名為必填'
-  }
+  // 引導登入
 
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-  if (!emailRegex.test(email.value)) {
-    errors.value.email = 'Email 格式不正確'
-  }
-
-  if (!selectedAmount.value) {
-    errors.value.amount = '請選擇或輸入金額'
-  }
-
-  return Object.keys(errors.value).length === 0
-}
-
+// function handleSubmit(e) {
+//   e.preventDefault()
+//   if (validateForm()) {
+//     // 成功送出邏輯
+//     console.log('送出成功', { name: name.value, email: email.value, amount: selectedAmount.value })
+//     alert('送出成功');
+//   }
+// }
 function handleSubmit(e) {
   e.preventDefault()
   if (validateForm()) {
-    // 成功送出邏輯
-    console.log('送出成功', { name: name.value, email: email.value, amount: selectedAmount.value })
-    alert('送出成功');
+    if (isLoggedIn.value) {
+      // 已登入，前往綠界
+      window.location.href = 'https://www.ecpay.com.tw/'
+    } else {
+      // 未登入，導向提醒頁
+      router.push('/sponsor-reminder')
+    }
   }
 }
-
 
 
 </script>
