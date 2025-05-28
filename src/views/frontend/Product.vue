@@ -83,21 +83,22 @@
                             </div>
                         </div>
                     </li>
+                        <li class="item">
+                            <a href="#" class="itemImage">
+                                <img src="@/assets/img/itemBookmark.jpg" alt="緯藝書籤">
+                            </a>
+                            <div class="itemInfo">
+                                <div class="itemDetails">
+                                    <div class="itemName">緯藝書籤</div>
+                                    <div class="itemPrice">NT$ 200</div>
+                                </div>
+                                <div class="itemActions">
+                                    <button type="button" class="btn">加入購物車</button>
+                                </div>
+                            </div>
+                        </li>
 
-                    <li class="item">
-                        <a href="#" class="itemImage">
-                            <img src="@/assets/img/itemBookmark.jpg" alt="緯藝書籤">
-                        </a>
-                        <div class="itemInfo">
-                            <div class="itemDetails">
-                                <div class="itemName">緯藝書籤</div>
-                                <div class="itemPrice">NT$ 200</div>
-                            </div>
-                            <div class="itemActions">
-                                <button type="button" class="btn">加入購物車</button>
-                            </div>
-                        </div>
-                    </li>
+
 
                 </ul>
             </div>

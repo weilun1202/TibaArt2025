@@ -197,6 +197,12 @@
   background-color: #29786A;
   transition: width 0.5s ease-in-out;
 }
+@media (max-width: 520px) {
+  .shopTab .tibaShopTab::after, .shopTab .artShopTab::after {
+    height: 3px;
+    bottom: -3px;
+  }
+}
 .shopTab .tibaShopTab:hover:after, .shopTab .artShopTab:hover:after {
   width: 100%;
   left: 0;
@@ -208,7 +214,7 @@
   width: 100%;
   left: 0;
 }
-@media screen and (max-width: 760px) {
+@media (max-width: 760px) {
   .shopTab {
     gap: 30px;
   }
@@ -217,13 +223,13 @@
     line-height: 30px;
   }
 }
-@media screen and (max-width: 520px) {
+@media (max-width: 520px) {
   .shopTab {
-    gap: 20px;
+    gap: 14px;
   }
   .shopTab h1 {
     font-size: 1.5rem;
-    line-height: 20px;
+    line-height: 24px;
   }
 }
 
@@ -893,6 +899,7 @@ header .pageTitle {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+  margin-top: 10px;
 }
 
 .continueShopping a {
@@ -931,7 +938,7 @@ header .pageTitle {
     line-height: 36px;
   }
 }
-@media (max-width: 662px) {
+@media (max-width: 664px) {
   .subTitle {
     margin: 0 auto;
   }
@@ -948,6 +955,13 @@ header .pageTitle {
     flex-direction: column;
     line-height: 2;
     align-self: auto;
+  }
+  .productInfo .productDescription,
+  .productInfo .productPrice {
+    margin-bottom: 4px;
+  }
+  .actions {
+    margin-top: 8px;
   }
   .recoTitle {
     margin: 60px auto 40px;

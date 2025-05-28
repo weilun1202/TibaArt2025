@@ -33,6 +33,11 @@
         height: 4px;
         background-color: $primaryGreen;
         transition: width 0.5s ease-in-out;
+
+        @media (max-width: 520px) {
+            height: 3px;
+            bottom: -3px;
+        }
     }
 
      &:hover:after {

@@ -89,7 +89,7 @@ const sortedData = computed(() => {
 .custom-table th,
 .custom-table td {
   border: 1px solid #ddd;
-  padding: 8px 12px;
+  padding: 16px 12px;
   text-align: left;
 }
 

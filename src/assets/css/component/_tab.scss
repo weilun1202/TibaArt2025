@@ -13,7 +13,7 @@
         @include shopTabButton;
     }
 
-    @media screen and (max-width: 760px) {
+    @media (max-width: 760px) {
         gap: 30px;
         h1{
             font-size: map-get($font, h3); 
@@ -21,11 +21,11 @@
         }
     }
     
-    @media screen and (max-width: 520px) {
-        gap: 20px;
+    @media (max-width: 520px) {
+        gap: 14px;
         h1{
             font-size: map-get($font, h4); 
-            line-height: 20px;
+            line-height: 24px;
         }
     }
 }
