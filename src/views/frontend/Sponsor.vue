@@ -99,22 +99,19 @@
 
             <label for="pay" class="formLabel">
               付款方式
-              <!-- <span class="formHint">*</span> -->
             </label>
-            <!-- <a href="#" class="ecpayBtn pay">
-              <img src="../../assets/img/ecpay_logo.svg" alt="ecpay_logo.svg">
-            </a> -->
-            <div class="ecpayBtn">
-              <img src="../../assets/img/ecpay_logo.svg" alt="ecpay_logo.svg">
-            </div>
-
+            <button type="button" class="btn formDonate" @click="handleSubmit">
+              立刻贊助
+            </button>
+            
           </div>
+          <div class="ecpayBtn">
+          </div>
+          <img src="../../assets/img/ecpay_logo.svg" alt="ecpay_logo.svg">
 
           <br>
 
-          <button type="button" class="btn formDonate" @click="handleSubmit">
-            立刻贊助
-          </button>
+          
             
         </div>
         
@@ -127,7 +124,7 @@
 
           <!-- 1 -->
           <div class="faqItem">
-            <input type="checkbox" id="faqCheckbox-1" name="faq" class="faqToggle" checked>
+            <input type="checkbox" id="faqCheckbox-1" name="faq" class="faqToggle">
 
             <label class="faqTitle" for="faqCheckbox-1">
               <h4>贊助時間有限制嗎？</h4>
@@ -322,7 +319,7 @@ function handleSubmit(e) {
 
 .formCostChoice{
   .btn{
-    margin: 8px;
+    margin: 0 8px;
   }
 }
 .formLabel{
@@ -333,8 +330,14 @@ function handleSubmit(e) {
   display: flex;
   justify-content: center; /* 水平置中 */
   align-items: center;     /* 垂直置中（若有高度） */
-  background-color: #fcfbf7;
+  // background-color: #fcfbf7;
 }
+
+.donateForm img{
+  display: block;
+  margin: 20px auto;
+}
+
 
 </style>
 

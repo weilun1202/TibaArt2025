@@ -9,14 +9,14 @@
 
 // 贊助標題
 .donateItem{
-    font-size: map-get($font, h1);
+    font-size: map-get($font, h3);  // 32px
     color: $fontBlack;
     padding: $spacing-8 0;
 }
 
 // 收據提示字
 .formReceipt{
-    font-size: map-get($font, pwar);
+    font-size: map-get($font, pwar);  // 12px
     color: $fontBlack;
     opacity: .5;
     margin-right: 355px;
@@ -40,13 +40,13 @@
 // ------ 常見問題 -----
 
 .faqItem{
-    width: 480px;
-    padding: 1rem;
+    width: 500px;
+    padding: 0.5rem;   
     border-bottom: 1px solid $fontWhite;
 }
 
 .faqTitle {
-    font-size: map-get($font, h4);
+    font-size: map-get($font, h5);  // 20px
     display: flex;
     align-items: center;
     padding-bottom: $spacing-2;
@@ -71,7 +71,7 @@
     }
 }
 .faqText {
-    font-size: map-get($font, p);
+    font-size: map-get($font, p);  // 16px
     display: grid;
     grid-template-rows: 0fr;
     transition: .4s ease-in-out;
