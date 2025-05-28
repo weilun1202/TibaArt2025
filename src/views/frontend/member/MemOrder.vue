@@ -12,16 +12,7 @@
         <div class="header-item order-status-col">處理狀態</div>
       </div>
 
-      <div v-if="loading" class="loading-message">
-        <div class="spinner"></div>
-        載入中...
-      </div>
-
-      <div v-else-if="orders.length === 0" class="no-orders-message">
-        目前沒有任何訂單。
-      </div>
-
-      <div v-else class="order-body">
+      <div class="order-body">
         <div v-for="order in orders" :key="order.orderId" class="order-row">
           <div class="row-item order-id-col">{{ order.orderId }}</div>
           <div class="row-item order-content-col">
@@ -100,7 +91,7 @@ const fetchOrders = async () => {
         // }
       ];
       orders.value = fetchedOrders;
-    }, 800); // 模擬 800ms 延遲
+    }, 0); 
   } catch (error) {
     console.error('獲取訂單資料失敗:', error);
     // 可以在這裡處理錯誤，例如顯示錯誤訊息給用戶

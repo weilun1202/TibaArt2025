@@ -121,7 +121,7 @@ const fetchMemberData = async () => {
       };
       // 將撈到的資料賦值給 memberData
       memberData.value = fetchedData;
-    }, 500); // 模擬 500ms 延遲
+    }, 0); 
   } catch (error) {
     console.error('獲取會員資料失敗:', error);
     // 可以在這裡處理錯誤，例如顯示錯誤訊息給用戶

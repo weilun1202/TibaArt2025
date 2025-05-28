@@ -79,7 +79,7 @@ const fetchExhibitionData = async () => {
       };
       // 將撈到的資料賦值給 exhibitionData
       exhibitionData.value = fetchedExhibition;
-    }, 500); // 模擬 500ms 延遲
+    }, 0); 
   } catch (error) {
     console.error('獲取展覽資料失敗:', error);
     // 可以在這裡處理錯誤，例如顯示錯誤訊息給用戶

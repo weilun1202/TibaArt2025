@@ -30,6 +30,11 @@ import Footer from '@/components/Footer.vue'
   margin: 0 auto;
   padding-top: 72px;
 
+  @media (max-width:1080px)
+  {
+    
+  }
+
   .memHomeContent{
 
     display: flex;
