@@ -1261,117 +1261,177 @@ header .pageTitle {
 }
 
 .div1 {
+  overflow: hidden;
   height: 160px;
-  background-color: aqua;
   grid-area: 1/1/3/3;
+}
+.div1 img {
+  max-width: 100%;
+}
+.div1 img {
+  max-width: 100%;
 }
 
 .div2 {
+  overflow: hidden;
   height: 160px;
-  background-color: aqua;
   grid-area: 1/3/3/6;
+}
+.div2 img {
+  max-width: 100%;
 }
 
 .div3 {
+  overflow: hidden;
   height: 160px;
-  background-color: aqua;
   grid-area: 1/6/3/8;
+}
+.div3 img {
+  max-width: 100%;
 }
 
 .div4 {
+  overflow: hidden;
   height: 160px;
-  background-color: aqua;
   grid-area: 1/8/3/11;
+}
+.div4 img {
+  max-width: 100%;
 }
 
 .div5 {
+  overflow: hidden;
   height: 160px;
-  background-color: aqua;
   grid-area: 3/1/5/4;
+}
+.div5 img {
+  max-width: 100%;
 }
 
 .div6 {
+  overflow: hidden;
   height: 160px;
-  background-color: aqua;
   grid-area: 3/4/5/6;
+}
+.div6 img {
+  max-width: 100%;
 }
 
 .div7 {
+  overflow: hidden;
   height: 160px;
-  background-color: aqua;
   grid-area: 3/6/5/9;
+}
+.div7 img {
+  max-width: 100%;
 }
 
 .div8 {
+  overflow: hidden;
   height: 160px;
-  background-color: aqua;
   grid-area: 3/9/5/11;
+}
+.div8 img {
+  max-width: 100%;
 }
 
 .div9 {
+  overflow: hidden;
   height: 160px;
-  background-color: aqua;
   grid-area: 5/1/7/3;
+}
+.div9 img {
+  max-width: 100%;
 }
 
 .div10 {
+  overflow: hidden;
   height: 160px;
-  background-color: aqua;
   grid-area: 5/3/7/5;
+}
+.div10 img {
+  max-width: 100%;
 }
 
 .div11 {
+  overflow: hidden;
   height: 160px;
-  background-color: aqua;
   grid-area: 5/5/7/8;
+}
+.div11 img {
+  max-width: 100%;
 }
 
 .div12 {
+  overflow: hidden;
   height: 160px;
-  background-color: aqua;
   grid-area: 5/8/7/11;
+}
+.div12 img {
+  max-width: 100%;
 }
 
 .div13 {
+  overflow: hidden;
   height: 160px;
-  background-color: aqua;
   grid-area: 7/1/9/5;
+}
+.div13 img {
+  max-width: 100%;
 }
 
 .div14 {
+  overflow: hidden;
   height: 160px;
-  background-color: aqua;
   grid-area: 7/5/9/7;
+}
+.div14 img {
+  max-width: 100%;
 }
 
 .div15 {
+  overflow: hidden;
   height: 160px;
-  background-color: aqua;
   grid-area: 7/7/9/11;
+}
+.div15 img {
+  max-width: 100%;
 }
 
 .div16 {
+  overflow: hidden;
   height: 160px;
-  background-color: aqua;
   grid-area: 9/1/11/4;
+}
+.div16 img {
+  max-width: 100%;
 }
 
 .div17 {
+  overflow: hidden;
   height: 160px;
-  background-color: aqua;
   grid-area: 9/4/11/6;
+}
+.div17 img {
+  max-width: 100%;
 }
 
 .div18 {
+  overflow: hidden;
   height: 160px;
-  background-color: aqua;
   grid-area: 9/6/11/9;
+}
+.div18 img {
+  max-width: 100%;
 }
 
 .div19 {
+  overflow: hidden;
   height: 160px;
-  background-color: aqua;
   grid-area: 9/9/11/11;
+}
+.div19 img {
+  max-width: 100%;
 }
 
 .expoArea {
@@ -1399,6 +1459,7 @@ header .pageTitle {
 .expoArea .banner-text h1 {
   font-size: 3rem;
   margin-bottom: 8px;
+  font-weight: bold;
 }
 .expoArea .banner-text p {
   line-height: 1.6;
@@ -1449,6 +1510,7 @@ header .pageTitle {
 .expoArea .expoArea-intro h2 {
   font-size: 2.5rem;
   margin-bottom: 8px;
+  font-weight: bold;
 }
 .expoArea .expoArea-intro h3 {
   font-size: 2rem;
@@ -1514,6 +1576,8 @@ header .pageTitle {
   border-radius: 4px;
 }
 .expoArea .expoArea-artwork .expoArea-card .title {
+  display: flex;
+  gap: 8px;
   margin: 16px 0 8px;
 }
 .expoArea .expoArea-artwork .expoArea-card .title h3 {
@@ -1556,6 +1620,7 @@ header .pageTitle {
 }
 .expoAreaPage .main .artwork-title {
   display: flex;
+  gap: 8px;
   justify-content: start;
   align-items: baseline;
 }
@@ -1579,6 +1644,7 @@ header .pageTitle {
   font-weight: bold;
 }
 .expoAreaPage .main .btn {
+  margin-top: 24px;
   display: inline-block;
   align-self: center;
   border: none;
