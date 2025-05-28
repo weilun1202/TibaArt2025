@@ -8,17 +8,21 @@
       <!-- 以下供大家編輯 -->
       <div class="main">
         <img src="/src/assets/img/expoArea-artwork1.png" alt="">
-        <h2>凝視遺聲</h2>
-        <h3>Gaze of Unspoken</h3>
-        <p>size 66x66(m)</p>
-        <p>雕塑</p>
+        <div class="artwork-title">
+          <h2>凝視遺聲</h2>
+          <h5>Gaze of Unspoken</h5>
+          <p>size 66x66(m)</p>
+          <p>雕塑</p>
+        </div>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi magni assumenda eaque necessitatibus beatae
           ipsum cupiditate adipisci reiciendis explicabo fugit pariatur exercitationem vel quo dolores porro maxime
           laborum, dignissimos ducimus nesciunt architecto hic expedita suscipit qui? Laboriosam sint quas voluptates
           rem, eos natus nam officiis nobis asperiores sequi porro explicabo?
         </p>
+        <router-link to="/ExpoArea"><button class="btn">返回展區</button></router-link>
       </div>
+
     </div>
   </div>
 </template>

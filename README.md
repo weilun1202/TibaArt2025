@@ -85,7 +85,7 @@ $primaryGreen :  #29786A;
 $fontBlack: #2F2F2F;
 
 ### 白色
-$fontWhite:#ffffff;
+$fontWhite: #ffffff;
 
 ### 按鈕碰觸
 $buttonYellow: #E4C600;

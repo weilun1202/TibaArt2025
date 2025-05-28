@@ -9,15 +9,10 @@
   
      
 
-      <div class="justforfun">
           <div class="tempoBtn">
-            <router-link to="/" class="entryLink">前台</router-link>
-          </div>        
-          <Flashy />
-          <div class="tempoBtn">
+            <router-link to="/" class="entryLink">前台</router-link>       
             <router-link to="/admin" class="adminLink">後台</router-link>
           </div>      
-      </div>
 
       
 
@@ -26,7 +21,7 @@
 </template>
 
 <script setup>
-import Flashy from '@/components/Flashy.vue'
+
 
 </script>
 
@@ -46,9 +41,9 @@ import Flashy from '@/components/Flashy.vue'
   .entryLink,
   .adminLink {
     display: block;
-    width: 180px;
-    height: 180px;
-    line-height: 180px;
+    width: 200px;
+    height: 200px;
+    line-height: 200px;
     text-align: center;
     padding: 0 24px;
 
@@ -67,26 +62,4 @@ import Flashy from '@/components/Flashy.vue'
 
 }
 
-.yo{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.justforfun{
-  display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    box-sizing:border-box;
-}
-
-canvas{
-  width: 50%;
-  border-radius: 80% 0 80% 0;
-
-}
 </style>

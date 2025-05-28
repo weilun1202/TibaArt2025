@@ -2,32 +2,32 @@
 
     .banner {
         max-width: 1200px;
-        margin: 60px auto;
+        margin: $spacing-8 auto;
         display: flex;
         flex-wrap: wrap;
         /* for RWD */
-        background-color: #f5f5f5;
+        background-color: $logoColor2;
     }
 
     .banner-text {
         flex: 1;
         min-width: 300px;
         box-sizing: border-box;
-        padding: 3rem 2rem;
-        background-color: #f9f9f9;
+        padding: $spacing-8 $spacing-3;
+        background-color: $fontWhite;
         display: flex;
         flex-direction: column;
         justify-content: center;
     }
 
     .banner-text h1 {
-        font-size: 1.8rem;
-        margin-bottom: 0.5rem;
+        font-size: map-get($font, h1);
+        margin-bottom: $spacing-2;
     }
 
     .banner-text p {
         line-height: 1.6;
-        margin-bottom: 1rem;
+        margin-bottom: $spacing-4;
         color: #333;
     }
 
@@ -37,8 +37,8 @@
         background-color: #2f7e6b;
         color: white;
         border: none;
-        border-radius: 4px;
-        font-size: 1rem;
+        border-radius: $spacing-1;
+        font-size: map-get($font, p);
         cursor: pointer;
     }
 
@@ -63,7 +63,7 @@
         }
 
         .banner-text {
-            padding: 2rem 1.5rem;
+            padding: $spacing-8 $spacing-6;
             text-align: center;
             align-items: center;
         }
@@ -76,25 +76,25 @@
     .expoArea-intro {
         max-width: 1200px;
         margin: 0 auto;
-        padding: 4rem 1rem;
+        padding: $spacing-8 $spacing-4;
         text-align: center;
 
         h2 {
-            font-size: 1.8rem;
-            margin-bottom: 0.5rem;
+            font-size: map-get($font, h2);
+            margin-bottom: $spacing-2;
         }
 
         h3 {
-            font-size: 1.2rem;
-            color: #555;
-            margin-bottom: 0.5rem;
+            font-size: map-get($font, h3);
+            color: $fontBlack;
+            margin-bottom: $spacing-2;
         }
 
         >p {
             max-width: 700px;
-            margin: 0 auto 2rem;
+            margin: 0 auto $spacing-8;
             line-height: 1.6;
-            color: #333;
+            color: $fontBlack;
         }
 
         .expoArea-artist {
@@ -102,22 +102,22 @@
             flex-wrap: wrap;
             justify-content: center;
             align-items: flex-start;
-            gap: 2rem;
+            gap: $spacing-8;
             text-align: left;
 
             img {
                 width: 300px;
-                border-radius: 8px;
+                border-radius: $spacing-2;
                 flex-shrink: 0;
             }
 
             p {
                 max-width: 500px;
-                font-size: 1rem;
+                font-size: $spacing-4;
                 line-height: 1.8;
                 margin: 0;
                 flex: 1;
-                color: #444;
+                color: $fontBlack;
             }
 
             // awesome 區域
@@ -156,10 +156,10 @@
     .expoArea-artwork {
         max-width: 1200px;
         margin: 0 auto;
-        padding: 2rem 1rem;
+        padding: $spacing-8 $spacing-4;
         display: flex;
         flex-wrap: wrap;
-        gap: 2rem;
+        gap: $spacing-8;
         list-style: none;
         padding-left: 0;
 
@@ -169,11 +169,11 @@
 
             img {
                 width: 100%;
-                border-radius: 4px;
+                border-radius: $spacing-1;
             }
 
             .title {
-                margin: 1rem 0 0.5rem;
+                margin: $spacing-4 0 $spacing-2;
 
                 h3 {
                     margin: 0;
@@ -181,19 +181,19 @@
 
                 p {
                     margin: 0;
-                    font-size: 0.9rem;
+                    font-size: $spacing-4;
                     color: #666;
                 }
             }
 
             >p {
                 line-height: 1.6;
-                margin: 1rem 0;
-                color: #333;
+                margin: $spacing-4 0;
+                color: $fontBlack;
             }
 
             a {
-                color: #333;
+                color: $fontBlack;
                 text-decoration: underline;
                 font-weight: bold;
                 display: inline-block;
