@@ -2,7 +2,9 @@
 <template>
   <AdminNav />
   <AdminHeader />
-  <router-view />
+  <div class="backWarp">
+    <router-view />
+  </div>
 </template>
 
 
@@ -10,3 +12,14 @@
   import AdminNav from "@/components/AdminNav.vue"
   import AdminHeader from "@/components/AdminHeader.vue";
 </script>
+
+<style scoped>
+
+.backWarp{
+  /* background-color: #ccc; */
+  margin-left: 300px;
+  margin-right: 50px;
+  padding-top: 100px;
+}
+
+</style>
