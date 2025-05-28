@@ -1,7 +1,5 @@
 <template>
-  <div class="backWrap">
     <AdminTable :columns="columns" :data="data" />
-  </div>
 </template>
 
 <script setup>
@@ -10,9 +8,12 @@ import AdminTable from '@/components/AdminTable.vue'
 // 欄位設定
 const columns = [
   { key: 'id', label: '會員編號' },
-  { key: 'name', label: '姓名' },
   { key: 'email', label: 'Email' },
-  { key: 'status', label: '狀態' }
+  { key: 'name', label: '會員名稱' },
+  { key: 'register', label: '註冊時間' },
+  { key: 'update', label: '修改時間' },
+  { key: 'status', label: '狀態' },
+  { key: 'more', label: '詳細資料' }
 ]
 
 // 假資料陣列
@@ -25,12 +26,5 @@ const data = [
 </script>
 
 <style scoped>
-
-.backWrap{
-  /* background-color: #ccc; */
-  margin-left: 300px;
-  margin-right: 50px;
-  padding-top: 100px;
-}
 
 </style>
