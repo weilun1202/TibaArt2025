@@ -1,57 +1,66 @@
 <template>
-<div class="memWrap">
-      <h2>展覽贊助記錄</h2>
+  <div class="memWrap">
+    <h2>展覽贊助記錄</h2>
+    <div class="exhibition-details">
+      <div class="detail-table">
+        <div class="detail-row">
+          <div class="detail-label">贊助展覽名稱</div>
+          <div class="detail-value">{{ sponsorData.exhibitionName }}</div>
+        </div>
 
+        <div class="detail-row">
+          <div class="detail-label">贊助金額</div>
+          <div class="detail-value amount">{{ formatCurrency(sponsorData.amount) }}</div>
+        </div>
 
-    <div class="sponsorship-history">   
-  <div class="sponsorship-list">
-    <div class="sponsorship-header">
-      <div class="header-item sponsorship-name-col">贊助展覽名稱</div>
-      <div class="header-item sponsorship-amount-col">贊助金額</div>
-      <div class="header-item sponsorship-time-col">贊助時間</div>
-    </div>
-
-    <div class="sponsorship-body">
-      <div v-for="sponsorship in sponsorships" :key="sponsorship.id" class="sponsorship-row">
-        <div class="row-item sponsorship-name-col">{{ sponsorship.exhibitionName }}</div>
-        <div class="row-item sponsorship-amount-col amount">{{ formatCurrency(sponsorship.amount) }}</div>
-        <div class="row-item sponsorship-time-col">{{ sponsorship.time }}</div>
+        <div class="detail-row">
+          <div class="detail-label">贊助時間</div>
+          <div class="detail-value">{{ sponsorData.date }}</div>
+        </div>
       </div>
+
+
+      <p class="note">
+        *贊助記錄僅供查閱，如有疑問請聯繫客服。
+      </p>
     </div>
   </div>
-</div>
-
-
- </div>
-
-
-
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue';
 
-// 模擬的贊助資料
-const sponsorships = ref([
-  {
-    id: 1,
-    exhibitionName: '未來感知展 Future Senses',
-    amount: 3000,
-    time: '2025-05-20 14:30'
-  }
-])
+// 贊助資料的響應式變數
+const sponsorData = ref({
+  exhibitionName: '',
+  amount: 0,
+  date: '',
+});
 
-// 格式化金額的方法
-function formatCurrency(amount) {
+onMounted(() => {
+  fetchSponsorData();
+});
+
+// 模擬 API 撈取資料
+const fetchSponsorData = () => {
+  setTimeout(() => {
+    sponsorData.value = {
+      exhibitionName: '《微光中的浪潮》',
+      amount: 1680,
+      date: '2025-05-15 14:35',
+    };
+  }, 0);
+};
+
+// 貨幣格式化函數
+const formatCurrency = (amount) => {
   return new Intl.NumberFormat('zh-TW', {
     style: 'currency',
     currency: 'TWD',
     minimumFractionDigits: 0
-  }).format(amount)
-}
-
+  }).format(amount);
+};
 </script>
-
 
 <style lang="scss" scoped>
 @import '/style.scss';
@@ -64,116 +73,90 @@ function formatCurrency(amount) {
     font-size: map-get($font, h2);
     font-weight: bold;
     text-align: center;
+
+    @media (max-width: 1200px) {
+      font-size: map-get($font, h3);
+    }
   }
 }
 
-.sponsorship-history {
+.exhibition-details {
   max-width: 700px;
   margin: 40px auto;
   padding: 30px;
   background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-h2 {
   text-align: center;
-  color: #333;
-  margin-bottom: 30px;
-  font-size: 28px;
+
+  @media (max-width: 1200px) {
+    padding: 20px;
+  }
 }
 
-.sponsorship-list {
+.detail-table {
   border: 1px solid #e0e0e0;
   border-radius: 6px;
   overflow: hidden;
+  margin-bottom: 20px;
 }
 
-.sponsorship-header,
-.sponsorship-row {
+.detail-row {
   display: flex;
-  align-items: stretch;
   border-bottom: 1px solid #eee;
+
+  @media (max-width: 1200px) {
+    flex-direction: column;
+  }
 }
 
-.sponsorship-header {
-  background-color: #f8f8f8;
-  font-weight: bold;
-  color: #555;
-  font-size: 15px;
-  padding: 12px 0;
-}
-
-.sponsorship-row:last-child {
+.detail-row:last-child {
   border-bottom: none;
 }
 
-.header-item,
-.row-item {
-  padding: 15px 10px;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
+.detail-label,
+.detail-value {
+  padding: 15px 20px;
+  font-size: 16px;
+  text-align: left;
+
+  @media (max-width: 1200px) {
+    text-align: center;
+  }
 }
 
-/* 欄寬設定 */
-.sponsorship-name-col {
-  flex: 2; /* 展覽名稱 */
-  justify-content: flex-start;
-  padding-left: 20px;
+.detail-label {
+  flex: 0 0 150px;
+  background-color: #f8f8f8;
+  color: #666;
+  font-weight: bold;
+  border-right: 1px solid #e0e0e0;
+
+  @media (max-width: 1200px) {
+    flex: 0;
+  }
 }
 
-.sponsorship-amount-col {
-  flex: 0 0 120px;
-}
-
-.sponsorship-time-col {
-  flex: 0 0 200px;
-}
-
-.row-item {
+.detail-value {
+  flex: 1;
   color: #333;
-  font-size: 15px;
   background-color: #fff;
-  border-right: 1px solid #eee;
+  word-break: break-word;
 }
 
-.row-item:last-child {
-  border-right: none;
-}
-
-/* 贊助金額特殊樣式 */
-.amount {
+.detail-value.amount {
   color: #007bff;
   font-weight: bold;
 }
 
-/* 載入中與無資料樣式 */
-.loading-message,
-.no-sponsorships-message {
-  text-align: center;
-  padding: 50px 20px;
-  color: #666;
-  font-size: 18px;
+.note {
+  font-size: 14px;
+  color: #777;
+  text-align: left;
+  padding: 0 20px;
+
+  @media (max-width: 1200px) {
+    text-align: center;
+  }
 }
-
-.spinner {
-  border: 4px solid rgba(0, 0, 0, 0.1);
-  border-left-color: #007bff;
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  animation: spin 1s linear infinite;
-  margin: 0 auto 15px auto;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-
-
 </style>

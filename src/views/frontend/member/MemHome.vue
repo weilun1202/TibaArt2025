@@ -161,6 +161,11 @@ const saveProfile = async () => {
         font-size: map-get($font, h2);
         font-weight: bold;
         text-align: center;
+
+        @media (max-width: 1200px){
+        font-size: map-get($font, h3);
+    }
+
     }
 
     .formA{
@@ -169,6 +174,12 @@ const saveProfile = async () => {
     
         .formGroup{
             margin: 0 auto;
+
+          @media (max-width: 560px){
+            width: 100%;
+            
+        
+          }
 
         }
     
