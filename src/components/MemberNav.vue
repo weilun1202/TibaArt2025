@@ -23,10 +23,9 @@
 
 <script setup>
 const name = '緯藝藝術家'
-// const avatar = '/src/assets/img/TibaArt-Icon.svg' // 假資料，未來可改動態
+// const avatar = '/src/assets/img/TibaArt-Icon.svg' //
 
 const logout = () => {
-  // 這邊之後可加上登出邏輯
   alert('已登出')
 }
     
@@ -50,6 +49,7 @@ const logout = () => {
         justify-content: center;
         align-items: center;
         gap: $spacing-8;
+
     }
   
       .memAvatar{
@@ -58,34 +58,90 @@ const logout = () => {
         border-radius: 50%;
         border: 2px dashed;
         margin: 0 auto;
+
+        @media (max-width:496px){ 
+          width: 100px;
+          height: 100px;
+        }
+
+
       }
 
       .memName{
         font-size: map-get($font, h4);
         font-weight: bold;
-      }
 
-      .memNav ul{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+    // border: 1px solid ;
 
-        a{
-            display: block;
-            padding: $spacing-3;
-            border-radius: 8px;
-            text-decoration: none;
-            color: $fontBlack;
-
-            &:hover{
-            cursor: pointer;
-            background-color: $logoColor3;
-            color: $fontWhite;
-          }
+        @media (max-width:496px){ 
+        font-size: map-get($font, h5);
 
         }
 
+      }
+
+      .memNav ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  @media (max-width: 1200px) { 
+    flex-direction: row;
+  }
+
+  @media (max-width: 496px) { 
+    flex-wrap: wrap;
+  }
+
+  li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    @media (max-width: 496px) {   
+      width: calc(50% - 1px); // Account for border width
+      border: 1.5px solid $fontBlack;
+      
+      // Remove borders between adjacent items
+      &:nth-child(odd) {
+        border-right: none;
+      }
+      &:not(:last-child):not(:nth-last-child(2)) {
+        border-bottom: none;
+      }
+    }
+  }
+
+  a {
+    display: block;
+    padding: $spacing-3;
+    border-radius: 8px;
+    text-decoration: none;
+    color: $fontBlack;
+    transition: all 0.2s ease; // Smooth hover transitions
+
+    @media (max-width: 496px) { 
+      box-sizing: border-box;
+      width: 100%;
+      padding: $spacing-2; // Consider smaller padding on mobile
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: $logoColor3;
+      color: $fontWhite;
+
+      @media (max-width: 496px) { 
+        border-radius: 0;
+      }
+    }
+  }
+
+
+        }
+        .logoutBtn{
+          margin-top: 40px;
         }
 
       }

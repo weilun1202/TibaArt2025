@@ -7,6 +7,8 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
 
+
+
 // Font Awesome 相關導入
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
