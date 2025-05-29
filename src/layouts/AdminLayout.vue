@@ -15,10 +15,14 @@
 
 <style scoped>
 
+
 .backWarp{
-  /* background-color: #ccc; */
-  margin-left: 300px;
-  margin-right: 50px;
+  /* 為了把全域背景色蓋掉 */
+  height: 100vh;
+  background-color: #fff;
+
+  padding-left: 300px;
+  padding-right: 50px;
   padding-top: 100px;
 }
 

@@ -86,6 +86,21 @@
 .appIconUp{
   font-size: 28px;
 }
+@media screen and (max-width: 992px) {
+  .applicationImg{
+    // overflow: hidden;
+    display: none;
+  }
+  .applicationSection{
+    margin: 0 auto;
+    padding: $spacing-2;
+  }
+}
+@media screen and (max-width: 540px) {
+  .applicationArea{
+    width: 350px;
+  }
+}
 
 </style>
 

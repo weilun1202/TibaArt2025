@@ -11,7 +11,7 @@
 .donateItem{
     font-size: map-get($font, h3);  // 32px
     color: $fontBlack;
-    padding: $spacing-8 0;
+    padding: $spacing-6 0;
 }
 
 // 收據提示字
@@ -20,14 +20,14 @@
     color: $fontBlack;
     opacity: .5;
     margin-right: 355px;
-    padding: $spacing-1 0;
+    padding: $spacing-2 0;
 }
 .pay{
     padding: 0 100px;
 }
 
 .faq{
-    padding-top: 60px;
+    // padding-top: 20px;
     text-align: center;
     margin: 0 auto;
     display: flex;
@@ -35,6 +35,7 @@
     justify-content: center; /* 水平置中 */
     align-items: center;     /* 垂直置中 */ 
     width: 500px;
+    padding-bottom: 20px;
 }
 
 // ------ 常見問題 -----

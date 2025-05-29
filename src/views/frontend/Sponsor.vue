@@ -33,14 +33,16 @@
               贊助金額
             </div>
             <div class="formCostChoice">
-              <button
-                class="btn"
-                v-for="(amount, index) in amounts"
-                :key="index"
-                @click="selectAmount(amount)"
-              >
-                {{ amount }} 元
-              </button>
+              <div class="formCostChoiceBtn">
+                <button
+                  class="btn"
+                  v-for="(amount, index) in amounts"
+                  :key="index"
+                  @click="selectAmount(amount)"
+                >
+                  {{ amount }} 元
+                </button>
+              </div>
               <label for="cost" class="formLabel">
                 新臺幣
                 <span class="formHint">*</span>
@@ -315,6 +317,17 @@ function handleSubmit(e) {
   color: #C34E4E;
   font-size: map-get($font, pwar);
   margin-top: 4px;
+  .formCostChoice{
+    .formCostChoiceBtn{
+      .btn.first-child{
+        width: 102px; 
+        font-weight: bolder;
+      }
+    }
+  }
+}
+.formError{
+  font-weight: bold;
 }
 
 .formCostChoice{
@@ -336,6 +349,75 @@ function handleSubmit(e) {
 .donateForm img{
   display: block;
   margin: 20px auto;
+}
+.faqText{
+  line-height: 1.6;
+}
+@media screen and (max-width: 700px){
+  .btn{
+    font-size: 1.25rem;
+    line-height: 48px;
+  }
+}
+@media screen and (max-width: 540px) {
+  .formA{
+    .formGroup{
+      width: 390px;
+    }
+    input[type="text"],
+    input[type="tel"],
+    select{
+      width: 100%;
+    }
+    #cost{
+      width: 390px;
+    }
+    .formCostChoice{
+      margin: 0 auto;
+    }
+    .formReceipt{
+      display: block;
+      text-align: left;
+      width: 360px;
+    }
+    .formCostChoiceBtn{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 8px;
+      .btn:first-child{
+        width: 102px;
+      }
+    }
+  }
+  .faq{
+    width: 390px;
+  }
+  .faqItem{
+    width: 390px;
+  }
+}
+@media screen and (max-width: 430px){
+  .formA{
+    width: 350px;
+    .formGroup{
+      width: 350px;
+    }
+    #cost{
+      width: 350px;
+    }
+    .formCostChoiceBtn{
+      justify-content: space-evenly
+      // flex-wrap: wrap;
+    }
+  }
+  .faq{
+    width: 350px;
+  }
+  .faqItem{
+    width: 330px;
+    text-align: left;
+  }
 }
 
 

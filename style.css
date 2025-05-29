@@ -99,7 +99,6 @@
 
 .ecpayBtn {
   border-radius: 8px;
-  border: 1px solid #2F2F2F;
   display: inline-block;
   padding: 0;
   background: none;
@@ -991,6 +990,7 @@ header .pageTitle {
   border-radius: 8px;
   padding: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
 }
 
 .cartItem {
@@ -1054,6 +1054,10 @@ header .pageTitle {
 .removeBtn:hover {
   background-color: #E4C600;
   color: #2F2F2F;
+}
+
+.cartContainer .continueShopping {
+  text-align: end;
 }
 
 .card2 {
@@ -1187,36 +1191,81 @@ header .pageTitle {
 }
 @media (max-width: 640px) {
   .cartContainer {
-    margin: 80px 20px;
+    margin: 40px 20px;
   }
-  .cartItem {
-    flex-direction: column;
-    align-items: flex-start;
+  .card {
+    padding: 16px;
   }
   .cartItem img {
-    height: 100%;
-    width: 100%;
+    height: 110px;
+    width: 110px;
     -o-object-fit: cover;
        object-fit: cover;
   }
   .cartItem .cartDetails {
-    margin-top: 20px;
+    margin-top: 5px;
+    gap: 10px;
+  }
+  .cartItem .cardName, .cartItem .productPrice, .cartItem .productDescription {
+    font-size: 1rem;
+    margin-bottom: 2px;
+  }
+  .cartItem .selectQuan {
+    width: 80px;
+    height: 24px;
+  }
+  .cartItem .selectQuan .addMinus, .cartItem .selectQuan #quantity, .cartItem .selectQuan .addMinus {
+    height: 24px;
+    position: relative;
+    top: -6px;
+    right: 0;
+  }
+  .cartItem .selectQuan #quantity {
+    background-color: transparent;
+    width: 24px;
+  }
+  .cartItem .selectQuan .addMinus, .cartItem .selectQuan .addMinus {
+    width: 8px;
+  }
+  .removeBtn {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+    cursor: pointer;
+    position: absolute;
+    top: 2px;
+    right: 1px;
+  }
+  .removeBtn p {
+    position: relative;
+    top: -3px;
   }
 }
 @media (max-width: 530px) {
-  .cartDetails {
-    line-height: 1.2;
-    margin-bottom: 8px;
-  }
-  .cartDetails .productDescription {
-    font-size: 1rem;
-  }
-  .cartDetails .quantity {
-    height: 24px;
-  }
   .form label {
     flex: 0.8;
     padding-right: 10px;
+  }
+}
+@media (max-width: 472px) {
+  .cartContainer {
+    margin: 32px 20px;
+  }
+  .card {
+    padding: 12px;
+  }
+  .cartItem img {
+    height: 90px;
+    width: 90px;
+  }
+  .removeBtn {
+    width: 24px;
+    height: 24px;
+    top: 6px;
+    right: 6px;
   }
 }
 @media (max-width: 422px) {
@@ -1250,188 +1299,220 @@ header .pageTitle {
     left: 0;
   }
 }
-.parent {
+.expo .parent {
   margin-top: 32px;
   margin-bottom: 32px;
   display: grid;
   grid-template-columns: repeat(10, 1fr);
-  grid-template-rows: repeat(12, 1fr);
+  grid-template-rows: repeat(10, 1fr);
   grid-column-gap: 12px;
   grid-row-gap: 12px;
 }
-
-.div1 {
+.expo .parent .grid {
   overflow: hidden;
-  height: 160px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-height: 160px;
+}
+.expo .parent .grid img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.expo .parent .div1 {
   grid-area: 1/1/3/3;
 }
-.div1 img {
+.expo .parent .div1 img {
   max-width: 100%;
 }
-.div1 img {
-  max-width: 100%;
-}
-
-.div2 {
-  overflow: hidden;
-  height: 160px;
+.expo .parent .div2 {
   grid-area: 1/3/3/6;
 }
-.div2 img {
+.expo .parent .div2 img {
   max-width: 100%;
 }
-
-.div3 {
-  overflow: hidden;
-  height: 160px;
+.expo .parent .div3 {
   grid-area: 1/6/3/8;
 }
-.div3 img {
+.expo .parent .div3 img {
   max-width: 100%;
 }
-
-.div4 {
-  overflow: hidden;
-  height: 160px;
+.expo .parent .div4 {
   grid-area: 1/8/3/11;
 }
-.div4 img {
+.expo .parent .div4 img {
   max-width: 100%;
 }
-
-.div5 {
-  overflow: hidden;
-  height: 160px;
+.expo .parent .div5 {
   grid-area: 3/1/5/4;
 }
-.div5 img {
+.expo .parent .div5 img {
   max-width: 100%;
 }
-
-.div6 {
-  overflow: hidden;
-  height: 160px;
+.expo .parent .div6 {
   grid-area: 3/4/5/6;
 }
-.div6 img {
+.expo .parent .div6 img {
   max-width: 100%;
 }
-
-.div7 {
-  overflow: hidden;
-  height: 160px;
+.expo .parent .div7 {
   grid-area: 3/6/5/9;
 }
-.div7 img {
+.expo .parent .div7 img {
   max-width: 100%;
 }
-
-.div8 {
-  overflow: hidden;
-  height: 160px;
+.expo .parent .div8 {
   grid-area: 3/9/5/11;
 }
-.div8 img {
+.expo .parent .div8 img {
   max-width: 100%;
 }
-
-.div9 {
-  overflow: hidden;
-  height: 160px;
+.expo .parent .div9 {
   grid-area: 5/1/7/3;
 }
-.div9 img {
+.expo .parent .div9 img {
   max-width: 100%;
 }
-
-.div10 {
-  overflow: hidden;
-  height: 160px;
+.expo .parent .div10 {
   grid-area: 5/3/7/5;
 }
-.div10 img {
+.expo .parent .div10 img {
   max-width: 100%;
 }
-
-.div11 {
-  overflow: hidden;
-  height: 160px;
+.expo .parent .div11 {
   grid-area: 5/5/7/8;
 }
-.div11 img {
+.expo .parent .div11 img {
   max-width: 100%;
 }
-
-.div12 {
-  overflow: hidden;
-  height: 160px;
+.expo .parent .div12 {
   grid-area: 5/8/7/11;
 }
-.div12 img {
+.expo .parent .div12 img {
   max-width: 100%;
 }
-
-.div13 {
-  overflow: hidden;
-  height: 160px;
+.expo .parent .div13 {
   grid-area: 7/1/9/5;
 }
-.div13 img {
+.expo .parent .div13 img {
   max-width: 100%;
 }
-
-.div14 {
-  overflow: hidden;
-  height: 160px;
+.expo .parent .div14 {
   grid-area: 7/5/9/7;
 }
-.div14 img {
+.expo .parent .div14 img {
   max-width: 100%;
 }
-
-.div15 {
-  overflow: hidden;
-  height: 160px;
+.expo .parent .div15 {
   grid-area: 7/7/9/11;
 }
-.div15 img {
+.expo .parent .div15 img {
   max-width: 100%;
 }
-
-.div16 {
-  overflow: hidden;
-  height: 160px;
+.expo .parent .div16 {
   grid-area: 9/1/11/4;
 }
-.div16 img {
+.expo .parent .div16 img {
   max-width: 100%;
 }
-
-.div17 {
-  overflow: hidden;
-  height: 160px;
+.expo .parent .div17 {
   grid-area: 9/4/11/6;
 }
-.div17 img {
+.expo .parent .div17 img {
   max-width: 100%;
 }
-
-.div18 {
-  overflow: hidden;
-  height: 160px;
+.expo .parent .div18 {
   grid-area: 9/6/11/9;
 }
-.div18 img {
+.expo .parent .div18 img {
   max-width: 100%;
 }
-
-.div19 {
-  overflow: hidden;
-  height: 160px;
+.expo .parent .div19 {
   grid-area: 9/9/11/11;
 }
-.div19 img {
+.expo .parent .div19 img {
   max-width: 100%;
+}
+@media (max-width: 360px) {
+  .expo .parent {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .expo .parent .grid {
+    width: 100%;
+    height: 160px;
+    overflow: hidden;
+  }
+  .expo .parent img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+       object-fit: cover;
+    display: block;
+  }
+  .expo .parent .grid.left,
+  .expo .parent .grid.right {
+    width: 100%;
+  }
+}
+@media (max-width: 390px) {
+  .expo .parent {
+    margin: 32px 6px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    justify-content: start;
+  }
+  .expo .grid {
+    width: calc(50% - 2px);
+    height: 10rem;
+    overflow: hidden;
+  }
+  .expo .grid img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+       object-fit: cover;
+  }
+}
+@media (max-width: 430px) {
+  .expo .parent {
+    margin: 32px 6px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    justify-content: start;
+  }
+  .expo .grid {
+    height: 10rem;
+    overflow: hidden;
+  }
+  .expo .grid img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+       object-fit: cover;
+  }
+  .expo .grid.left {
+    width: calc(60% - 2px);
+  }
+  .expo .grid.right {
+    width: calc(40% - 2px);
+  }
+}
+@media (min-width: 744px) and (max-width: 834px) {
+  .expo .parent {
+    overflow: hidden;
+  }
+  .expo .parent .grid img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+       object-fit: cover;
+  }
 }
 
 .expoArea {
@@ -1678,13 +1759,13 @@ header .pageTitle {
   margin: 24px;
 }
 .applicationSection .applicationContent .applicationTitle {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: bold;
   color: #2F2F2F;
   margin: 20px 0;
 }
 .applicationSection .applicationText {
-  font-size: 1.5rem;
+  font-size: 1rem;
   color: #2F2F2F;
   margin: 24px 0;
 }
@@ -1712,9 +1793,9 @@ header .pageTitle {
 }
 
 .donateItem {
-  font-size: 3rem;
+  font-size: 2rem;
   color: #2F2F2F;
-  padding: 32px 0;
+  padding: 24px 0;
 }
 
 .formReceipt {
@@ -1722,7 +1803,7 @@ header .pageTitle {
   color: #2F2F2F;
   opacity: 0.5;
   margin-right: 355px;
-  padding: 4px 0;
+  padding: 8px 0;
 }
 
 .pay {
@@ -1730,7 +1811,6 @@ header .pageTitle {
 }
 
 .faq {
-  padding-top: 60px;
   text-align: center;
   margin: 0 auto;
   display: flex;
@@ -1738,16 +1818,17 @@ header .pageTitle {
   justify-content: center; /* 水平置中 */
   align-items: center; /* 垂直置中 */
   width: 500px;
+  padding-bottom: 20px;
 }
 
 .faqItem {
-  width: 480px;
-  padding: 1rem;
+  width: 500px;
+  padding: 0.5rem;
   border-bottom: 1px solid #ffffff;
 }
 
 .faqTitle {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   display: flex;
   align-items: center;
   padding-bottom: 8px;
