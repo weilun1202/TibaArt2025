@@ -254,14 +254,26 @@ function closeMenu() {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    flex-grow: 1;
+
+    li{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      
+    }
 
     li a {
-      display: block;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      
       text-decoration: none;
       color: #000;
       font-size: 20px;
-      padding: 36px;
-      text-align: center;
+      height: 40px;
+      padding: 30px 0;
+
       transition: background-color 0.3s, color 0.3s;
 
       &:hover {

@@ -79,7 +79,7 @@ const fetchExhibitionData = async () => {
       };
       // 將撈到的資料賦值給 exhibitionData
       exhibitionData.value = fetchedExhibition;
-    }, 500); // 模擬 500ms 延遲
+    }, 0); 
   } catch (error) {
     console.error('獲取展覽資料失敗:', error);
     // 可以在這裡處理錯誤，例如顯示錯誤訊息給用戶
@@ -118,6 +118,12 @@ const formatCurrency = (amount) => {
         font-size: map-get($font, h2);
         font-weight: bold;
         text-align: center;
+
+    @media (max-width: 1200px){
+      font-size: map-get($font, h3);
+    }
+
+
     }
 }
 
@@ -129,6 +135,12 @@ const formatCurrency = (amount) => {
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   text-align: center;
+
+  @media (max-width:1200px){
+    padding:20px;
+  }
+
+
 }
 
 h2 {
@@ -147,6 +159,11 @@ h2 {
 .detail-row {
   display: flex;
   border-bottom: 1px solid #eee;
+
+  @media (max-width:1200px){
+    flex-direction: column;
+  }
+
 }
 
 .detail-row:last-child {
@@ -158,6 +175,9 @@ h2 {
   padding: 15px 20px;
   font-size: 16px;
   text-align: left;
+  @media (max-width:1200px){
+    text-align: center;
+  }
 }
 
 .detail-label {
@@ -166,6 +186,12 @@ h2 {
   color: #666;
   font-weight: bold;
   border-right: 1px solid #e0e0e0;
+
+  @media (max-width:1200px){
+    flex: 0;
+
+  }
+
 }
 
 .detail-value {
@@ -185,6 +211,11 @@ h2 {
   color: #777;
   text-align: left; /* 備註靠左對齊 */
   padding: 0 20px; /* 與表格對齊 */
+
+  @media (max-width:1200px){
+    text-align: center;
+  }
+
 }
 
 /* 如果未來啟用編輯按鈕的樣式 */
