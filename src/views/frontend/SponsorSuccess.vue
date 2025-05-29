@@ -14,12 +14,11 @@
             
             <img src="@/assets/img/TibaArtLogo.svg" alt="">
   
-            <h2 class="reminderTitle">您尚未登入會員</h2>
-            <p class="reminderText">感謝您的贊助！為了讓我們保留您的紀錄，請先登入會員帳號。</p>
+            <h2 class="reminderTitle">贊助成功！</h2>
+            <p class="reminderText">已經將本次贊助資訊保留在您的紀錄，感謝您的支持。</p>
             
             <div>
-              <button class="btn reminderBtn" @click="goLogin">會員登入</button>
-              <button class="btn reminderBtn" @click="goECPay">直接贊助</button>
+              <button class="btn reminderBtn" @click="goExpo">回到線上展覽</button>
             </div>
           </div>  
 
@@ -36,12 +35,8 @@
 <script setup>
   import { ref } from 'vue'
   import { useRouter } from 'vue-router'
-  function goLogin() {
-    window.location.href = '/MemLogin' // 登入頁路徑
-  }
-
-  function goECPay() {
-    window.location.href = 'https://www.ecpay.com.tw/' // 綠界網址
+  function goExpo() {
+    window.location.href = '/Expo' // 回到線上展覽
   }
   
 </script>

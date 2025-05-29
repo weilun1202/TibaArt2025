@@ -25,6 +25,7 @@ import MemReg from '@/views/frontend/MemReg.vue'
 import MemRegOK from '@/views/frontend/MemRegOK.vue'
 import MemForgetPass from '@/views/frontend/MemForgetPass.vue'
 import SponsorReminder from '@/views/frontend/SponsorReminder.vue'
+import SponsorSuccess from '@/views/frontend/SponsorSuccess.vue'
 
 //frontend/member
 import MemHome from '@/views/frontend/member/MemHome.vue'
@@ -63,6 +64,7 @@ const routes = [
       { path: 'memRegOK', name: 'MemRegOK', component: MemRegOK },
       { path: 'memForgetPass', name: 'MemForgetPass', component: MemForgetPass },
       { path: '/sponsor-reminder', name: 'SponsorReminder', component: SponsorReminder},
+      { path: '/sponsorSuccess', name: 'SponsorSuccess', component: SponsorSuccess},
       {
         path: '/product/:id',
         name: 'product',
