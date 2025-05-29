@@ -99,7 +99,6 @@
 
 .ecpayBtn {
   border-radius: 8px;
-  border: 1px solid #2F2F2F;
   display: inline-block;
   padding: 0;
   background: none;
@@ -1612,13 +1611,13 @@ header .pageTitle {
   margin: 24px;
 }
 .applicationSection .applicationContent .applicationTitle {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: bold;
   color: #2F2F2F;
   margin: 20px 0;
 }
 .applicationSection .applicationText {
-  font-size: 1.5rem;
+  font-size: 1rem;
   color: #2F2F2F;
   margin: 24px 0;
 }
@@ -1646,9 +1645,9 @@ header .pageTitle {
 }
 
 .donateItem {
-  font-size: 3rem;
+  font-size: 2rem;
   color: #2F2F2F;
-  padding: 32px 0;
+  padding: 24px 0;
 }
 
 .formReceipt {
@@ -1656,7 +1655,7 @@ header .pageTitle {
   color: #2F2F2F;
   opacity: 0.5;
   margin-right: 355px;
-  padding: 4px 0;
+  padding: 8px 0;
 }
 
 .pay {
@@ -1664,7 +1663,6 @@ header .pageTitle {
 }
 
 .faq {
-  padding-top: 60px;
   text-align: center;
   margin: 0 auto;
   display: flex;
@@ -1672,16 +1670,17 @@ header .pageTitle {
   justify-content: center; /* 水平置中 */
   align-items: center; /* 垂直置中 */
   width: 500px;
+  padding-bottom: 20px;
 }
 
 .faqItem {
-  width: 480px;
-  padding: 1rem;
+  width: 500px;
+  padding: 0.5rem;
   border-bottom: 1px solid #ffffff;
 }
 
 .faqTitle {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   display: flex;
   align-items: center;
   padding-bottom: 8px;
