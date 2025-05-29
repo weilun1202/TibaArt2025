@@ -42,7 +42,6 @@ import AdminExpo from '@/views/backend/AdminExpo.vue'
 import AdminProduct from '@/views/backend/AdminProduct.vue'
 import AdminOrder from '@/views/backend/AdminOrder.vue'
 import AdminDonate from '@/views/backend/AdminDonate.vue'
-import EmptyLayout from '@/layouts/EmptyLayout.vue'
 import LoginAdmin from '@/views/backend/LoginAdmin.vue'
 
 
@@ -65,12 +64,8 @@ const routes = [
       { path: 'memReg', name: 'MemReg', component: MemReg },
       { path: 'memRegOK', name: 'MemRegOK', component: MemRegOK },
       { path: 'memForgetPass', name: 'MemForgetPass', component: MemForgetPass },
-<<<<<<< HEAD
-      { path: '/sponsor-reminder', name: 'SponsorReminder', component: SponsorReminder},
-      { path: '/sponsorSuccess', name: 'SponsorSuccess', component: SponsorSuccess},
-=======
-      { path: '/sponsor-reminder', name: 'SponsorReminder', component: SponsorReminder },
->>>>>>> yi-xh
+      { path: 'sponsor-reminder', name: 'SponsorReminder', component: SponsorReminder },
+      { path: 'sponsorSuccess', name: 'SponsorSuccess', component: SponsorSuccess },
       {
         path: '/product/:id',
         name: 'product',
