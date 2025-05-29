@@ -525,15 +525,19 @@ header .pageTitle {
 }
 .about .banner,
 .about .intro {
-  width: 1200px;
+  width: 100%;
   margin: 0 auto;
 }
 .about .banner {
   display: flex;
-  align-items: center; /* 讓文字與圖片垂直置中 */
+  align-items: center;
+  /* 讓文字與圖片垂直置中 */
   justify-content: space-between;
-  gap: 20px; /* 文字與圖片間距 */
-  padding: 32px 0; /* 上下留白 */
+  gap: 20px;
+  /* 文字與圖片間距 */
+  padding: 32px 0;
+  /* 上下留白 */
+  overflow: hidden;
 }
 .about .banner-text {
   /* 文字區塊約 35% 寬度，可依設計調整 */
@@ -552,9 +556,8 @@ header .pageTitle {
 .about .banner img {
   /* 圖片占剩餘寬度，並保持比例 */
   flex: 0 0 65%;
-  width: 100%;
+  width: 50%;
   height: auto;
-  display: block;
 }
 .about .intro {
   padding: 32px 0;
@@ -570,12 +573,14 @@ header .pageTitle {
   line-height: 1.6;
   color: #2F2F2F;
   text-align: justify;
+  padding: 8px;
 }
 .about .history {
   text-align: center;
   color: #2F2F2F;
 }
 .about .timeline {
+  overflow: hidden;
   display: flex;
   padding: 0;
   margin: 32px;
@@ -598,6 +603,24 @@ header .pageTitle {
   width: 100%;
   border-radius: 4px;
   margin-bottom: 8px;
+}
+@media (max-width: 1000px) {
+  .about .banner-text {
+    padding-left: 16px;
+  }
+  .about .banner-text h2 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: bold;
+  }
+}
+@media (max-width: 865px) {
+  .about .banner {
+    flex-direction: column;
+  }
+  .about .banner img {
+    width: 100%;
+  }
 }
 
 .shopTab {
