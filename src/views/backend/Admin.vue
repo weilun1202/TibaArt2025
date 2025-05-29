@@ -18,5 +18,10 @@
 
 <style lang="scss" scoped>
 @import '/style.scss';
+.orderWarp{
+  width: 500px;
+  height: 200px;
+  border: 5px solid $fontWarn;
+}
 
 </style>
