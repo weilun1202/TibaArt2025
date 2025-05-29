@@ -1,144 +1,284 @@
-.parent {
-    margin-top: $spacing-8;
-    margin-bottom: $spacing-8;
+.expo {
 
-    display: grid;
-    grid-template-columns: repeat(10, 1fr);
-    grid-template-rows: repeat(12, 1fr);
-    grid-column-gap: $spacing-3;
-    grid-row-gap: $spacing-3;
 
-}
 
-.div1 {
-    
-    height: 160px;
-    background-color: aqua;
-    grid-area: 1 / 1 / 3 / 3;
-}
+    .parent {
+        margin-top: $spacing-8;
+        margin-bottom: $spacing-8;
 
-.div2 {
-    
-    height: 160px;
-    background-color: aqua;
-    grid-area: 1 / 3 / 3 / 6;
-}
+        display: grid;
+        grid-template-columns: repeat(10, 1fr);
+        grid-template-rows: repeat(10, 1fr);
+        grid-column-gap: $spacing-3;
+        grid-row-gap: $spacing-3;
 
-.div3 {
-    
-    height: 160px;
-    background-color: aqua;
-    grid-area: 1 / 6 / 3 / 8;
-}
 
-.div4 {
-    
-    height: 160px;
-    background-color: aqua;
-    grid-area: 1 / 8 / 3 / 11;
-}
 
-.div5 {
-    
-    height: 160px;
-    background-color: aqua;
-    grid-area: 3 / 1 / 5 / 4;
-}
+        .div1 {
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 160px;
+            // background-color: $fontWhite;
+            grid-area: 1 / 1 / 3 / 3;
 
-.div6 {
-    
-    height: 160px;
-    background-color: aqua;
-    grid-area: 3 / 4 / 5 / 6;
-}
+            img {
+                max-width: 100%;
+            }
 
-.div7 {
-    
-    height: 160px;
-    background-color: aqua;
-    grid-area: 3 / 6 / 5 / 9;
-}
+        }
 
-.div8 {
-    
-    height: 160px;
-    background-color: aqua;
-    grid-area: 3 / 9 / 5 / 11;
-}
+        .div2 {
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 160px;
+            // background-color: $fontWhite;
+            grid-area: 1 / 3 / 3 / 6;
 
-.div9 {
-    
-    height: 160px;
-    background-color: aqua;
-    grid-area: 5 / 1 / 7 / 3;
-}
+            img {
+                max-width: 100%;
+            }
+        }
 
-.div10 {
-    
-    height: 160px;
-    background-color: aqua;
-    grid-area: 5 / 3 / 7 / 5;
-}
+        .div3 {
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 160px;
+            // background-color: $fontWhite;
+            grid-area: 1 / 6 / 3 / 8;
 
-.div11 {
-    
-    height: 160px;
-    background-color: aqua;
-    grid-area: 5 / 5 / 7 / 8;
-}
+            img {
+                max-width: 100%;
+            }
+        }
 
-.div12 {
-    
-    height: 160px;
-    background-color: aqua;
-    grid-area: 5 / 8 / 7 / 11;
-}
+        .div4 {
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 160px;
+            // background-color: $fontWhite;
+            grid-area: 1 / 8 / 3 / 11;
 
-.div13 {
-    
-    height: 160px;
-    background-color: aqua;
-    grid-area: 7 / 1 / 9 / 5;
-}
+            img {
+                max-width: 100%;
+            }
+        }
 
-.div14 {
-    
-    height: 160px;
-    background-color: aqua;
-    grid-area: 7 / 5 / 9 / 7;
-}
+        .div5 {
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 160px;
+            // background-color: $fontWhite;
+            grid-area: 3 / 1 / 5 / 4;
 
-.div15 {
-    
-    height: 160px;
-    background-color: aqua;
-    grid-area: 7 / 7 / 9 / 11;
-}
+            img {
+                max-width: 100%;
+            }
+        }
 
-.div16 {
-    
-    height: 160px;
-    background-color: aqua;
-    grid-area: 9 / 1 / 11 / 4;
-}
+        .div6 {
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 160px;
+            // background-color: $fontWhite;
+            grid-area: 3 / 4 / 5 / 6;
 
-.div17 {
-    
-    height: 160px;
-    background-color: aqua;
-    grid-area: 9 / 4 / 11 / 6;
-}
+            img {
+                max-width: 100%;
+            }
+        }
 
-.div18 {
-    
-    height: 160px;
-    background-color: aqua;
-    grid-area: 9 / 6 / 11 / 9;
-}
+        .div7 {
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 160px;
+            // background-color: $fontWhite;
+            grid-area: 3 / 6 / 5 / 9;
 
-.div19 {
-    
-    height: 160px;
-    background-color: aqua;
-    grid-area: 9 / 9 / 11 / 11;
+            img {
+                max-width: 100%;
+            }
+        }
+
+        .div8 {
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 160px;
+            // background-color: $fontWhite;
+            grid-area: 3 / 9 / 5 / 11;
+
+            img {
+                max-width: 100%;
+            }
+        }
+
+        .div9 {
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 160px;
+            // background-color: $fontWhite;
+            grid-area: 5 / 1 / 7 / 3;
+
+            img {
+                max-width: 100%;
+            }
+        }
+
+        .div10 {
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 160px;
+            // background-color: $fontWhite;
+            grid-area: 5 / 3 / 7 / 5;
+
+            img {
+                max-width: 100%;
+            }
+        }
+
+        .div11 {
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 160px;
+            // background-color: $fontWhite;
+            grid-area: 5 / 5 / 7 / 8;
+
+            img {
+                max-width: 100%;
+            }
+        }
+
+        .div12 {
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 160px;
+            // background-color: $fontWhite;
+            grid-area: 5 / 8 / 7 / 11;
+
+            img {
+                max-width: 100%;
+            }
+        }
+
+        .div13 {
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 160px;
+            // background-color: $fontWhite;
+            grid-area: 7 / 1 / 9 / 5;
+
+            img {
+                max-width: 100%;
+            }
+        }
+
+        .div14 {
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 160px;
+            // background-color: $fontWhite;
+            grid-area: 7 / 5 / 9 / 7;
+
+            img {
+                max-width: 100%;
+            }
+        }
+
+        .div15 {
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 160px;
+            // background-color: $fontWhite;
+            grid-area: 7 / 7 / 9 / 11;
+
+            img {
+                max-width: 100%;
+            }
+        }
+
+        .div16 {
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 160px;
+            // background-color: $fontWhite;
+            grid-area: 9 / 1 / 11 / 4;
+
+            img {
+                max-width: 100%;
+            }
+        }
+
+        .div17 {
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 160px;
+            // background-color: $fontWhite;
+            grid-area: 9 / 4 / 11 / 6;
+
+            img {
+                max-width: 100%;
+            }
+        }
+
+        .div18 {
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 160px;
+            // background-color: $fontWhite;
+            grid-area: 9 / 6 / 11 / 9;
+
+            img {
+                max-width: 100%;
+            }
+        }
+
+        .div19 {
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 160px;
+            // background-color: $fontWhite;
+            grid-area: 9 / 9 / 11 / 11;
+
+            img {
+                max-width: 100%;
+            }
+        }
+    }
 }

@@ -18,6 +18,7 @@
 
         .artwork-title {
             display: flex;
+            gap: $spacing-2;
             justify-content: start;
             align-items: baseline;
         }
@@ -46,6 +47,8 @@
         }
 
         .btn {
+            margin-top: $spacing-6;
+
             display: inline-block;
             align-self: center;
             border: none;
