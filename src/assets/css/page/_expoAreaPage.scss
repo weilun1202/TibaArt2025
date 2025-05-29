@@ -2,7 +2,6 @@
 
 
     .main {
-
         max-width: 1200px;
         margin: 0 auto;
         padding: $spacing-8 $spacing-4;
@@ -64,8 +63,28 @@
 
     }
 
+    @media (max-width: 530px) {
+        .artwork-title {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 1rem;
+            align-items: center;
 
+            h2,
+            h5,
+            p {
 
+                white-space: nowrap;
 
+            }
 
+            h2 {
+                font-size: map-get($font, h4);
+            }
+
+            h5 {
+                font-size: map-get($font, p);
+            }
+        }
+    }
 }
