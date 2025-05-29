@@ -1,102 +1,133 @@
-
 .about {
 
-/* 通用容器寬度置中 */
-.banner,
-.intro {
-  width: 1200px;
-  margin: 0 auto;
-}
+  /* 通用容器寬度置中 */
+  .banner,
+  .intro {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  /* Banner 橫向排版 */
+  .banner {
+    display: flex;
+    align-items: center;
+    /* 讓文字與圖片垂直置中 */
+    justify-content: space-between;
+    gap: $spacing-5;
+    /* 文字與圖片間距 */
+    padding: $spacing-8 0;
+    /* 上下留白 */
+
+    overflow: hidden;
+  }
+
+  .banner-text {
+    /* 文字區塊約 35% 寬度，可依設計調整 */
+    flex: 0 0 35%;
+  }
+
+  .banner-text h2 {
+    margin: 0;
+    font-size: map-get($font, h2);
+    line-height: 1.2;
+  }
+
+  .banner-text p {
+    margin: $spacing-2 0 0;
+    font-size: map-get($font, p);
+    color: $fontBlack;
+  }
+
+  .banner img {
+    /* 圖片占剩餘寬度，並保持比例 */
+    flex: 0 0 65%;
+    width: 50%;
+    height: auto;
+
+  }
+
+  /* Intro 區塊 */
+  .intro {
+    padding: $spacing-8 0;
+  }
+
+  .intro h1 {
+    margin: 0 0 $spacing-4;
+    font-size: map-get($font, h1);
+    text-align: center;
+    color: $fontBlack;
+  }
+
+  .intro p {
+    margin: 0;
+    line-height: 1.6;
+    color: $fontBlack;
+    text-align: justify;
+    padding: $spacing-2;
+  }
 
 
 
-/* Banner 橫向排版 */
-.banner {
-  display: flex;
-  align-items: center;    /* 讓文字與圖片垂直置中 */
-  justify-content: space-between;
-  gap: $spacing-5;               /* 文字與圖片間距 */
-  padding: $spacing-8 0;         /* 上下留白 */
-}
 
-.banner-text {
-  /* 文字區塊約 35% 寬度，可依設計調整 */
-  flex: 0 0 35%;
-}
+  // 大事記水平滾動區塊
+  .history {
 
-.banner-text h2 {
-  margin: 0;
-  font-size: map-get($font, h2);
-  line-height: 1.2;
-}
 
-.banner-text p {
-  margin: $spacing-2 0 0;
-  font-size: map-get($font, p);
-  color: $fontBlack;
-}
+    text-align: center;
+    color: $fontBlack;
+  }
 
-.banner img {
-  /* 圖片占剩餘寬度，並保持比例 */
-  flex: 0 0 65%;
-  width: 100%;
-  height: auto;
-  display: block;
-}
+  .timeline {
+    overflow: hidden;
 
-/* Intro 區塊 */
-.intro {
-  padding: $spacing-8 0;
-}
+    display: flex;
+    padding: 0;
+    margin: $spacing-8 ;
+    list-style: none;
 
-.intro h1 {
-  margin: 0 0 $spacing-4;
-  font-size: map-get($font, h1);
-  text-align: center;
-  color:$fontBlack;
-}
+    li {
+      flex: 0 0 auto;
+      width: 260px;
+      margin-right: $spacing-8;
 
-.intro p {
-  margin: 0;
-  line-height: 1.6;
-  color: $fontBlack;
-  text-align: justify;
-}
+      h3 {
+        font-size: map-get($font, h3);
+        margin-bottom: $spacing-3;
+      }
 
-    
-    
-    
-    // 大事記水平滾動區塊
-    .history{
-        text-align: center;
-        color:$fontBlack;
+      span {
+        font-size: map-get($font, p);
+        line-height: 1.6;
+      }
+
+      img {
+        width: 100%;
+        border-radius: $spacing-1;
+        margin-bottom: $spacing-2;
+      }
     }
-        .timeline {
+  }
 
-            display: flex;
-            padding: 0;
-            margin: $spacing-8 ;
-            list-style: none;
+  @media (max-width: 1000px) {
+    .banner-text {
+      padding-left: $spacing-4;
+    }
 
-            li {
-                flex: 0 0 auto;
-                width: 260px;
-                margin-right: $spacing-8;
+    .banner-text h2 {
+      margin: 0;
+      font-size: map-get($font, h3);
+      font-weight: bold;
+    }
 
-                h3{
-                  font-size:map-get($font, h3);
-                  margin-bottom: $spacing-3;
-                }
-                span{
-                  font-size:map-get($font, p);
-                  line-height: 1.6;
-                }
-                img {
-                    width: 100%;
-                    border-radius: $spacing-1;
-                    margin-bottom: $spacing-2;
-                }
-            }
-        }
-    
+  }
+
+  @media (max-width: 865px) {
+    .banner {
+      flex-direction: column;
+    }
+
+    .banner img {
+      width: 100%;
+    }
+  }
 }
