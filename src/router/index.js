@@ -41,6 +41,8 @@ import AdminExpo from '@/views/backend/AdminExpo.vue'
 import AdminProduct from '@/views/backend/AdminProduct.vue'
 import AdminOrder from '@/views/backend/AdminOrder.vue'
 import AdminDonate from '@/views/backend/AdminDonate.vue'
+import EmptyLayout from '@/layouts/EmptyLayout.vue'
+import LoginAdmin from '@/views/backend/LoginAdmin.vue'
 
 
 const routes = [
@@ -62,7 +64,7 @@ const routes = [
       { path: 'memReg', name: 'MemReg', component: MemReg },
       { path: 'memRegOK', name: 'MemRegOK', component: MemRegOK },
       { path: 'memForgetPass', name: 'MemForgetPass', component: MemForgetPass },
-      { path: '/sponsor-reminder', name: 'SponsorReminder', component: SponsorReminder},
+      { path: '/sponsor-reminder', name: 'SponsorReminder', component: SponsorReminder },
       {
         path: '/product/:id',
         name: 'product',
@@ -94,6 +96,12 @@ const routes = [
       { path: 'order', name: 'AdminOrder', component: AdminOrder, meta: { title: '訂單管理' } },
       { path: 'donate', name: 'AdminDonate', component: AdminDonate, meta: { title: '贊助管理' } },
     ]
+  },
+  {
+    path: '/admin/login',
+    name: 'LoginAdmin',
+    component: LoginAdmin,
+    meta: { title: '後台系統登入' }
   }
 
 
