@@ -1308,214 +1308,211 @@ header .pageTitle {
   grid-column-gap: 12px;
   grid-row-gap: 12px;
 }
-.expo .parent .div1 {
+.expo .parent .grid {
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 160px;
+  max-height: 160px;
+}
+.expo .parent .grid img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.expo .parent .div1 {
   grid-area: 1/1/3/3;
 }
 .expo .parent .div1 img {
   max-width: 100%;
 }
 .expo .parent .div2 {
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 160px;
   grid-area: 1/3/3/6;
 }
 .expo .parent .div2 img {
   max-width: 100%;
 }
 .expo .parent .div3 {
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 160px;
   grid-area: 1/6/3/8;
 }
 .expo .parent .div3 img {
   max-width: 100%;
 }
 .expo .parent .div4 {
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 160px;
   grid-area: 1/8/3/11;
 }
 .expo .parent .div4 img {
   max-width: 100%;
 }
 .expo .parent .div5 {
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 160px;
   grid-area: 3/1/5/4;
 }
 .expo .parent .div5 img {
   max-width: 100%;
 }
 .expo .parent .div6 {
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 160px;
   grid-area: 3/4/5/6;
 }
 .expo .parent .div6 img {
   max-width: 100%;
 }
 .expo .parent .div7 {
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 160px;
   grid-area: 3/6/5/9;
 }
 .expo .parent .div7 img {
   max-width: 100%;
 }
 .expo .parent .div8 {
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 160px;
   grid-area: 3/9/5/11;
 }
 .expo .parent .div8 img {
   max-width: 100%;
 }
 .expo .parent .div9 {
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 160px;
   grid-area: 5/1/7/3;
 }
 .expo .parent .div9 img {
   max-width: 100%;
 }
 .expo .parent .div10 {
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 160px;
   grid-area: 5/3/7/5;
 }
 .expo .parent .div10 img {
   max-width: 100%;
 }
 .expo .parent .div11 {
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 160px;
   grid-area: 5/5/7/8;
 }
 .expo .parent .div11 img {
   max-width: 100%;
 }
 .expo .parent .div12 {
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 160px;
   grid-area: 5/8/7/11;
 }
 .expo .parent .div12 img {
   max-width: 100%;
 }
 .expo .parent .div13 {
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 160px;
   grid-area: 7/1/9/5;
 }
 .expo .parent .div13 img {
   max-width: 100%;
 }
 .expo .parent .div14 {
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 160px;
   grid-area: 7/5/9/7;
 }
 .expo .parent .div14 img {
   max-width: 100%;
 }
 .expo .parent .div15 {
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 160px;
   grid-area: 7/7/9/11;
 }
 .expo .parent .div15 img {
   max-width: 100%;
 }
 .expo .parent .div16 {
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 160px;
   grid-area: 9/1/11/4;
 }
 .expo .parent .div16 img {
   max-width: 100%;
 }
 .expo .parent .div17 {
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 160px;
   grid-area: 9/4/11/6;
 }
 .expo .parent .div17 img {
   max-width: 100%;
 }
 .expo .parent .div18 {
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 160px;
   grid-area: 9/6/11/9;
 }
 .expo .parent .div18 img {
   max-width: 100%;
 }
 .expo .parent .div19 {
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 160px;
   grid-area: 9/9/11/11;
 }
 .expo .parent .div19 img {
   max-width: 100%;
+}
+@media (max-width: 360px) {
+  .expo .parent {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .expo .parent .grid {
+    width: 100%;
+    height: 160px;
+    overflow: hidden;
+  }
+  .expo .parent img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+       object-fit: cover;
+    display: block;
+  }
+  .expo .parent .grid.left,
+  .expo .parent .grid.right {
+    width: 100%;
+  }
+}
+@media (max-width: 390px) {
+  .expo .parent {
+    margin: 32px 6px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    justify-content: start;
+  }
+  .expo .grid {
+    width: calc(50% - 2px);
+    height: 10rem;
+    overflow: hidden;
+  }
+  .expo .grid img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+       object-fit: cover;
+  }
+}
+@media (max-width: 430px) {
+  .expo .parent {
+    margin: 32px 6px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    justify-content: start;
+  }
+  .expo .grid {
+    height: 10rem;
+    overflow: hidden;
+  }
+  .expo .grid img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+       object-fit: cover;
+  }
+  .expo .grid.left {
+    width: calc(60% - 2px);
+  }
+  .expo .grid.right {
+    width: calc(40% - 2px);
+  }
+}
+@media (min-width: 744px) and (max-width: 834px) {
+  .expo .parent {
+    overflow: hidden;
+  }
+  .expo .parent .grid img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+       object-fit: cover;
+  }
 }
 
 .expoArea {
@@ -1568,23 +1565,6 @@ header .pageTitle {
      object-fit: cover;
   height: auto;
 }
-@media (max-width: 768px) {
-  .expoArea .banner {
-    flex-direction: column;
-  }
-  .expoArea .banner-text,
-  .expoArea .banner img {
-    width: 100%;
-  }
-  .expoArea .banner-text {
-    padding: 32px 24px;
-    text-align: center;
-    align-items: center;
-  }
-  .expoArea .banner-text button {
-    align-self: center;
-  }
-}
 .expoArea .expoArea-intro {
   max-width: 1200px;
   margin: 0 auto;
@@ -1609,42 +1589,33 @@ header .pageTitle {
 }
 .expoArea .expoArea-intro .expoArea-artist {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 32px;
-  text-align: left;
+  align-items: center;
+  gap: 2rem;
+  padding: 1.5rem;
+  border-radius: 1rem;
 }
 .expoArea .expoArea-intro .expoArea-artist img {
-  width: 300px;
-  border-radius: 8px;
-  flex-shrink: 0;
+  max-width: 50%;
+  max-height: 50%;
+  border-radius: 1rem;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
-.expoArea .expoArea-intro .expoArea-artist p {
-  max-width: 500px;
-  font-size: 16px;
-  line-height: 1.8;
-  margin: 0;
+.expoArea .expoArea-intro .expoArea-artist h5 {
+  text-align: left;
   flex: 1;
-  color: #2F2F2F;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 3rem;
 }
-@media (max-width: 768px) {
-  .expoArea .expoArea-intro .expoArea-artist {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  .expoArea .expoArea-intro .expoArea-artist p {
-    max-width: 100%;
-  }
-  .expoArea .expoArea-intro .expoArea-artist .social {
-    text-align: center;
-  }
+.expoArea .expoArea-intro .expoArea-artist .icons {
+  display: flex;
+  gap: 1rem;
+  font-size: 2rem;
 }
 .expoArea .expoArea-artwork {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 32px 16px;
+  margin: 32px 32px;
   display: flex;
   flex-wrap: wrap;
   gap: 32px;
@@ -1684,6 +1655,34 @@ header .pageTitle {
   display: inline-block;
 }
 @media (max-width: 768px) {
+  .expoArea .banner {
+    flex-direction: column;
+  }
+  .expoArea .banner-text,
+  .expoArea .banner img {
+    width: 100%;
+  }
+  .expoArea .banner-text {
+    padding: 32px 24px;
+    text-align: center;
+    align-items: center;
+  }
+  .expoArea .banner-text button {
+    align-self: center;
+  }
+  .expoArea .expoArea-artist {
+    flex-direction: column;
+    text-align: center;
+  }
+  .expoArea .expoArea-artist img {
+    width: 100%;
+    max-width: 300px;
+  }
+  .expoArea .expoArea-artist .icons {
+    justify-content: center;
+  }
+}
+@media (max-width: 632px) {
   .expoArea .expoArea-artwork .expoArea-card {
     width: 100%;
   }
@@ -1739,6 +1738,25 @@ header .pageTitle {
 .expoAreaPage .main .btn:hover {
   background-color: #E4C600;
   color: #2F2F2F;
+}
+@media (max-width: 530px) {
+  .expoAreaPage .artwork-title {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 1rem;
+    align-items: center;
+  }
+  .expoAreaPage .artwork-title h2,
+  .expoAreaPage .artwork-title h5,
+  .expoAreaPage .artwork-title p {
+    white-space: nowrap;
+  }
+  .expoAreaPage .artwork-title h2 {
+    font-size: 1.5rem;
+  }
+  .expoAreaPage .artwork-title h5 {
+    font-size: 1rem;
+  }
 }
 
 .applicationWrapper {
