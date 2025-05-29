@@ -1,4 +1,5 @@
 <template>
+  <div class="expo">
 <div class="wrapper">
         <header>
         <div class="pageTitle">線上展覽</div>
@@ -23,6 +24,7 @@
 <router-link to="/ExpoArea" class="div17"><img src="/src/assets/img/expo16.jpg" alt=""></router-link>
 <router-link to="/ExpoArea" class="div18"><img src="/src/assets/img/expo17.jpg" alt=""></router-link>
 <router-link to="/ExpoArea" class="div19"><img src="/src/assets/img/expo18.jpg" alt=""></router-link>
+</div>
 </div>
 </div>
 </template>
