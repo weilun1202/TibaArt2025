@@ -2,9 +2,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     padding: 40px;
     gap: 40px;
 
+    height: calc(100vh - 192px);
+    
     img {
         width: 200px;
     }
