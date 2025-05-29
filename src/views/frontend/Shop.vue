@@ -37,7 +37,7 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, nextTick } from 'vue';
+import { ref, onMounted, computed, watch, nextTick } from 'vue';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { useRouter } from 'vue-router';
 import itemList from '@/components/itemList.vue';
@@ -52,52 +52,21 @@ const actualSearchQuery = ref(''); // 實際用於過濾的查詢詞，只有在
 const isSearchInputExpanded = ref(false);
 const searchInput = ref(null); // 用於獲取 input 元素的引用
 
-// 商品數據
-const items = ref([
-  {
-    id: 1,
-    name: '緯藝馬克杯',
-    price: 500,
-    image: new URL('@/assets/img/itemMug.jpg', import.meta.url).href,
-    category: 'tiba'
-  },
-  {
-    id: 2,
-    name: '緯藝帆布袋',
-    price: 580,
-    image: new URL('@/assets/img/itemBag.jpg', import.meta.url).href,
-    category: 'tiba'
-  },
-  {
-    id: 3,
-    name: '緯藝杯墊',
-    price: 490,
-    image: new URL('@/assets/img/itemCoaster.jpg', import.meta.url).href,
-    category: 'tiba'
-  },
-  {
-    id: 4,
-    name: '緯藝書籤',
-    price: 200,
-    image: new URL('@/assets/img/itemBookmark.jpg', import.meta.url).href,
-    category: 'tiba'
-  },
-  // 藝術家原創商品範例
-  {
-    id: 5,
-    name: '藝術家油畫',
-    price: 3500,
-    image: new URL('@/assets/img/itemPainting.jpg', import.meta.url).href, 
-    category: 'artist'
-  },
-  {
-    id: 6,
-    name: '藝術家雕塑',
-    price: 18000,
-    image: new URL('@/assets/img/itemSculpture.jpg', import.meta.url).href,
-    category: 'artist'
-  }
-]);
+// 商品數據 - 從 JSON 檔案載入並處理圖片路徑
+const items = ref([]);
+
+// 在組件掛載時載入商品資料
+onMounted(() => {
+  fetch('./productData.json')
+    .then(res => res.json())
+    .then(jsonData => {
+      console.log(jsonData)
+      items.value = jsonData;
+  })
+  .catch(error => {
+    console.error('載入商品資料失敗:', error);
+  });
+});
 
 // 計算屬性
 const filteredItems = computed(() => {

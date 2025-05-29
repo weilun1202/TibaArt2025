@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "name": "緯藝馬克杯",
+    "description": "材質：磁器\n規格：325ml\n簡約設計馬克杯，溫潤手感，陪你度過每一個溫暖時刻。",
+    "price": 500,
+    "image": "/assets/img/itemMug.jpg",
+    "category": "tiba"
+  },
+  {
+    "id": 2,
+    "name": "緯藝帆布袋",
+    "description": "材質：厚磅純棉帆布\n尺寸：約38x42cm\n質感自然，堅固耐用，陪你輕鬆出門每一天。",
+    "price": 580,
+    "image": "/assets/img/itemBag.jpg",
+    "category": "tiba"
+  },
+  {
+    "id": 3,
+    "name": "緯藝杯墊",
+    "description": "材質：軟木＋吸水陶瓷\n尺寸：直徑10cm\n吸水又防滑，為你的桌面增添一抹藝術感。",
+    "price": 490,
+    "image": "/assets/img/itemCoaster.jpg",
+    "category": "tiba"
+  },
+  {
+    "id": 4,
+    "name": "緯藝書籤",
+    "description": "材質：金屬＋彩印工藝\n尺寸：約2.5x12cm\n精緻輕巧，讓閱讀時光多一份藝術陪伴。",
+    "price": 200,
+    "image": "/assets/img/itemBookmark.jpg",
+    "category": "tiba"
+  },
+  {
+    "id": 5,
+    "name": "藝術家油畫",
+    "description": "媒材：油彩畫布\n尺寸：約40x50cm\n原創藝術作品，筆觸細膩，為空間注入靈魂與色彩。",
+    "price": 3500,
+    "image": "/assets/img/itemPainting.jpg",
+    "category": "artist"
+  },
+  {
+    "id": 6,
+    "name": "藝術家雕塑",
+    "description": "媒材：樹脂＋金屬\n尺寸：約25x35x20cm\n現代感雕塑藝術，獨具造型與情感張力。",
+    "price": 18000,
+    "image": "/assets/img/itemSculpture.jpg",
+    "category": "artist"
+  }
+]
