@@ -1,10 +1,11 @@
 <template>
+<div class="canvas-wrapper">
 
+    <canvas id="canvas" width="1440" height="700"></canvas>
+        <div class="frontQ animate__animated animate__wobble">作品乏人問津？</div>
+        <div class="frontA animate__animated animate__rotateIn">快點來找緯藝！</div>
 
-<canvas id="canvas" width="1440" height="700">
-</canvas>
-
-
+</div>
 </template>
 <script setup scoped>
 import { onMounted } from 'vue';
@@ -113,12 +114,35 @@ onMounted(() => {
 @import '/style.scss';
 
 
+.canvas-wrapper{
+    position: relative;
+}
+
 #canvas {
   display: block;
   width: 100vw;
   height: 100vh;
-  z-index: 0;
-  
+  z-index: 0; 
+}
+
+.frontQ,
+.frontA {
+    position: absolute;
+    font-size: 40px;
+    font-weight: bold;
+    color: $logoBrown;
+}
+
+
+
+.frontQ{
+    top:20%;
+    left:20%;
+}
+
+.frontA{
+    top:20%;
+    right:18%;
 }
 
 
