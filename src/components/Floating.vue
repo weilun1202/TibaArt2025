@@ -6,7 +6,9 @@
 
 
 </template>
-<script>
+<script setup scoped>
+import { onMounted } from 'vue';
+
 
 function doFirst() {
     let canvas = document.querySelector('#canvas')
@@ -100,15 +102,23 @@ function doFirst() {
 
 
 }
-window.addEventListener('load', doFirst)
+// window.addEventListener('load', doFirst)
+onMounted(() => {
+  doFirst();
+});
 
 
 </script>
 <style lang="scss" >
 @import '/style.scss';
 
-canvas{
-  width: 100%;
+
+#canvas {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  
 }
 
 

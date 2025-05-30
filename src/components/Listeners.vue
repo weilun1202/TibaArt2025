@@ -11,6 +11,10 @@
     <div class="text"><span>L</span><span>I</span><span>S</span><span>T</span><span>E</span><span>N</span>
       <div class="main-btn_wrapper"><i class="main-btn fa fa-play" aria-hidden="true"></i></div>
     </div>
+	<div class="circle-options">
+    <div class="option">Option 1</div>
+    <div class="option">Option 2</div>
+  </div>
   </div>
   <div class="header">
     <div class="burger-wrapper">
@@ -256,6 +260,161 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  // ... 現有程式碼 ...
+
+  // 迷你播放器按鈕
+  const miniPlayerPlayBtn = document.querySelector('.mini-player_btn_wrapper .btn-play');
+  const miniPlayerPauseBtn = document.querySelector('.mini-player_btn_wrapper .btn-pause');
+  const miniPlayerNextBtn = document.querySelector('.mini-player_btn_wrapper .btn-next');
+  const miniPlayerPrevBtn = document.querySelector('.mini-player_btn_wrapper .btn-prev');
+  const btnOpenPlayer = document.querySelector('.btn-open-player');
+  const player = document.getElementById('player'); // 取得播放器元素
+
+  // 播放器內的按鈕
+  const playbackPlayBtn = document.querySelector('.playback_btn_wrapper .btn-play');
+  const playbackPauseBtn = document.querySelector('.playback_btn_wrapper .btn-pause');
+  const playbackNextBtn = document.querySelector('.playback_btn_wrapper .btn-next');
+  const playbackPrevBtn = document.querySelector('.playback_btn_wrapper .btn-prev');
+
+  // 返回按鈕
+  const backBtn = document.querySelector('.back_btn');
+
+  // 列表項目
+  const listItems = document.querySelectorAll('.list_item');
+
+  // 主播放按鈕
+  const mainBtn = document.querySelector('.main-btn_wrapper .main-btn');
+
+
+  // 為按鈕添加事件監聽器 (範例)
+  if (miniPlayerPlayBtn) {
+    miniPlayerPlayBtn.addEventListener('click', () => {
+      console.log('點擊了迷你播放器播放按鈕');
+      // 播放邏輯，切換按鈕顯示等
+      gsap.to(miniPlayerPlayBtn, { opacity: 0, display: 'none', duration: 0.3 });
+      gsap.to(miniPlayerPauseBtn, { opacity: 1, display: 'block', duration: 0.3 });
+    });
+  }
+
+  if (miniPlayerPauseBtn) {
+    miniPlayerPauseBtn.addEventListener('click', () => {
+      console.log('點擊了迷你播放器暫停按鈕');
+      // 暫停邏輯，切換按鈕顯示等
+      gsap.to(miniPlayerPauseBtn, { opacity: 0, display: 'none', duration: 0.3 });
+      gsap.to(miniPlayerPlayBtn, { opacity: 1, display: 'block', duration: 0.3 });
+    });
+  }
+
+  if (btnOpenPlayer && player) {
+    gsap.set(player, { x: '100%', display: 'none' }); // 播放器初始隱藏
+    btnOpenPlayer.addEventListener('click', () => {
+      console.log('打開播放器');
+      gsap.to(dim, { opacity: 1, display: 'block', duration: 0.5, ease: Power2.easeInOut });
+      gsap.to(player, { x: '0%', display: 'block', duration: 0.5, ease: Expo.easeOut });
+    });
+  }
+
+  if (backBtn && player) {
+    backBtn.addEventListener('click', () => {
+      console.log('返回');
+      gsap.to(player, { x: '100%', display: 'none', duration: 0.5, ease: Expo.easeOut });
+      gsap.to(dim, { opacity: 0, display: 'none', duration: 0.5, ease: Power2.easeInOut });
+    });
+  }
+
+  // 為導航連結添加事件 (如果需要處理路由或特定行為)
+  const navLinks = document.querySelectorAll('.nav_link');
+  navLinks.forEach(link => {
+    link.addEventListener('click', (event) => {
+      // event.preventDefault(); // 如果你不想讓連結導航
+      console.log(`點擊了導航連結: ${link.textContent}`);
+      // 處理導航邏輯，例如關閉導航選單
+      gsap.to(dim, { opacity: 0, display: 'none', duration: 0.5, ease: Power2.easeInOut });
+      gsap.to(nav, { xPercent: -100, display: 'none', duration: 0.5, ease: Expo.easeOut });
+    });
+  });
+
+  // 為主播放按鈕添加事件 (範例：點擊後顯示)
+  if (mainBtn) {
+    // 假設你希望點擊 LISEN 後的播放按鈕會做什麼
+    mainBtn.addEventListener('click', () => {
+      console.log('點擊了主播放按鈕');
+      // 例如：播放音樂或打開播放器
+      gsap.to(btnOpenPlayer, { opacity: 1, display: 'block', duration: 0.5, ease: Power2.easeOut }); // 假設打開迷你播放器
+    });
+  }
+
+  // 如果你希望點擊 'LISTEN' 文字時，不僅出現 circle-options，也讓 main-btn_wrapper 出現
+  if (text) {
+    text.addEventListener('click', () => {
+      const mainBtnWrapper = document.querySelector('.main-btn_wrapper');
+      if (mainBtnWrapper) {
+        gsap.to(mainBtnWrapper, {
+          opacity: 1,
+          scale: 1,
+          display: 'block', // 確保元素可見
+          duration: 0.8,
+          ease: Power2.easeOut
+        });
+      }
+      // 原有的 circleOptions 邏輯
+      const circleOptions = document.querySelector('.circle-options'); // 再次確認 circle-options 存在
+      if (circleOptions) {
+        gsap.set(circleOptions, { display: 'flex' });
+        gsap.to(circleOptions, {
+          scale: 1,
+          opacity: 1,
+          duration: 0.8,
+          ease: Power2.easeOut
+        });
+      }
+    });
+  }
+
+  // 處理列表項目點擊
+  if (listItems) {
+    listItems.forEach(item => {
+      item.addEventListener('click', () => {
+        console.log('點擊了列表項目');
+        // 移除所有 selected 類
+        listItems.forEach(li => li.classList.remove('selected'));
+        // 為當前點擊的項目添加 selected 類
+        item.classList.add('selected');
+        // 在這裡你可以添加播放該曲目的邏輯
+      });
+    });
+  }
+
+  // 處理策展人列表項目點擊
+  const curatorItems = document.querySelectorAll('.curator_list_content .item');
+  if (curatorItems) {
+    curatorItems.forEach(item => {
+      item.addEventListener('click', () => {
+        console.log('點擊了策展人項目');
+        // 在這裡你可以添加跳轉到該策展人頁面或顯示其資訊的邏輯
+      });
+    });
+  }
+
+  // 策展人頁面顯示/隱藏邏輯 (需要觸發點)
+  // 如果你希望點擊特定按鈕打開策展人頁面，你需要為該按鈕添加事件
+  // 例如，如果點擊某個導航連結會顯示策展人頁面：
+  // const curatorLink = document.querySelector('.nav_link[data-page="curator"]'); // 假設導航連結有 data-page 屬性
+  // const curatorPage = document.getElementById('curator');
+  // if (curatorLink && curatorPage) {
+  //   gsap.set(curatorPage, { opacity: 0, display: 'none' }); // 初始隱藏
+  //   curatorLink.addEventListener('click', () => {
+  //     gsap.to(curatorPage, { opacity: 1, display: 'block', duration: 0.8, ease: Power2.easeInOut });
+  //     // 同時隱藏其他頁面，並關閉導航
+  //     gsap.to(dim, { opacity: 0, display: 'none', duration: 0.5, ease: Power2.easeInOut });
+  //     gsap.to(nav, { xPercent: -100, display: 'none', duration: 0.5, ease: Expo.easeOut });
+  //   });
+  // }
+
+});
 
 
 

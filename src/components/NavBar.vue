@@ -118,9 +118,6 @@ onUnmounted(() => {
     z-index: 1000;
     background: transparent;
 
-    // border:1px solid;
-
-
 
     .logo {
         height: 60px;
@@ -141,11 +138,7 @@ onUnmounted(() => {
         gap: $spacing-4;
 
         li {
-            margin-right: $spacing-8;
-
-            @media (max-width: 1200px) {
-                 margin-right: 0;
-            }
+            width: 100%;
 
             a {
                 line-height: 24px;
@@ -263,9 +256,11 @@ onUnmounted(() => {
     height: 100vh;
     z-index: 999;
     display: flex;
+    background: transparent;
 
     .dropdown-overlay {
         flex: 1;
+        background: rgb(230, 219, 210, 0.5);
     }
 
     .dropdown-content {
@@ -292,6 +287,9 @@ onUnmounted(() => {
             list-style: none;
 
             li {
+
+                // border:1px solid;
+
                 display: block;
                 opacity: 0;
                 transform: translateX(30px);
@@ -304,39 +302,40 @@ onUnmounted(() => {
                 }
 
                 a {
+                  width: 100%;
+                  align-items: center;
+
                     display: flex;
                     justify-content: center;
                     align-items: center;
                     text-decoration: none;
                     color: #333;
-                    font-size: 18px;
+                    font-size: 20px;
                     font-weight: 500;
                     padding: 20px 30px;
-                    margin: 5px 20px;
                     transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
                     position: relative;
                     overflow: hidden;
 
-                    &::before {
-                        content: '';
-                        position: absolute;
-                        top: 0;
-                        left: -100%;
-                        width: 100%;
-                        height: 100%;
-                        // background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-                        transition: left 0.5s;
+                    &:hover{
+                      transform: scale(1.05);
+                      color: $logoDGreen;
+
+                    }
+                    
+                    &::after {
+                      content: '';
+                      position: absolute;
+                      bottom: 17.5px;
+                      right: 0;
+                      height: 1.5px;
+                      width: 0;
+                      background-color: #000;
+                      transition: width 0.4s ease-in-out;
                     }
 
-                    &:hover {
-                        background-color: rgba(23, 96, 102, 0.1);
-                        color: #176066;
-                        transform: translateX(-5px);
-                        box-shadow: 0 4px 15px rgba(23, 96, 102, 0.2);
-
-                        &::before {
-                            left: 100%;
-                        }
+                    &:hover::after {
+                      width: 38%;
                     }
 
                     &:active {

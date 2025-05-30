@@ -1,29 +1,24 @@
 <template>
+  <div class="canvas-wrapper">
+      <canvas id="canvas" width="1440" height="700"></canvas>   
+      
+      
+    <div class="btnSet">
+        <button @click="goFront">前台</button>
+        <button @click="goAdmin">後台</button>
+    </div>
 
-<div class="canvas-wrapper">
-    <canvas id="canvas" width="1440" height="700"></canvas>   
-    
-    
-  <div class="btnSet">
-      <button @click="goFront">前台</button>
-      <button @click="goAdmin">後台</button>
+    <div class="title">
+      <p>TibaArt 緯藝</p>
+      <br>
+      <p>提拔你的藝術力</p>
+    </div>
+
+  
+
   </div>
-
-  <div class="title">
-    <p>TibaArt 緯藝</p>
-    <br>
-    <p>提拔你的藝術力</p>
-  </div>
-
- 
-
-</div>
-
-
-
-
 </template>
-<script setup>
+<script setup scoped>
 import { onMounted } from 'vue';
 
 
@@ -139,11 +134,11 @@ function doFirst() {
             context.stroke();
         }
         context.drawImage(pic, 558, 189)
-        currentIndex = (currentIndex + 1) % positions.length; // 移動到下一個區塊
+      currentIndex = (currentIndex + 1) % positions.length; // 移動到下一個區塊
+
     }
 
-    setInterval(drawBlocks, 800); 
-
+    setInterval(drawBlocks, 100); 
 
 }
 // window.addEventListener('load', doFirst)
