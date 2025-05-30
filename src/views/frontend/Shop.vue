@@ -57,7 +57,7 @@ const items = ref([]);
 
 // 在組件掛載時載入商品資料
 onMounted(() => {
-  fetch('./productData.json')
+  fetch('/productData.json')
     .then(res => res.json())
     .then(jsonData => {
       console.log(jsonData)
