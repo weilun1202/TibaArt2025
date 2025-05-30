@@ -17,7 +17,7 @@
           laborum, dignissimos ducimus nesciunt architecto hic expedita suscipit qui? Laboriosam sint quas voluptates
           rem, eos natus nam officiis nobis asperiores sequi porro explicabo?
         </p>
-        <router-link to="/ExpoArea"><button class="btn">返回展區</button></router-link>
+        <router-link to="/front/ExpoArea"><button class="btn">返回展區</button></router-link>
       </div>
 
     </div>

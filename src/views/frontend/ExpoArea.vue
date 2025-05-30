@@ -9,7 +9,7 @@
           <p>The Luminous Silence</p>
           <p>「當情感無以為繼，色彩替我們說話。」 凱婭·露希亞的創作長年在寂靜與爆發之間來回拉扯，她以自然隱喻人心，讓畫布成為風暴中心的靜止點。
             本次展覽精選其近十年間五件代表作，以色彩為線索，從冷冽冰縫、綠林密靜，到炙熱的內燃記憶，呈現一場無語卻極具張力的感官旅程。觀者不需理解，僅需感受</p>
-            <router-link to="/Sponsor" ><button>贊助</button></router-link>
+            <router-link to="/front/Sponsor" ><button>贊助</button></router-link>
           </div >
           <img src="/src/assets/img/expoArea-banner.png" alt="">
       </div>
@@ -43,7 +43,7 @@
             <p>油畫</p>
           </div>
           <p>本畫靈感來自她親眼目睹的冰川裂縫，畫面以大面積裂痕與流動線條組成，象徵人內在的情緒斷層。她用此畫探討壓抑情感之下的潛流，並相信裂縫不是崩壞，而是讓光進入的通道。</p>
-          <router-link to="/ExpoAreaPage">leam more</router-link>
+          <router-link to="/front/ExpoAreaPage">leam more</router-link>
         </li>
 
         <li class="expoArea-card">
@@ -54,7 +54,7 @@
             <p>油畫</p>
           </div>
           <p>本畫靈感來自她親眼目睹的冰川裂縫，畫面以大面積裂痕與流動線條組成，象徵人內在的情緒斷層。她用此畫探討壓抑情感之下的潛流，並相信裂縫不是崩壞，而是讓光進入的通道。</p>
-          <router-link to="/ExpoAreaPage">leam more</router-link>
+          <router-link to="/front/ExpoAreaPage">leam more</router-link>
         </li>
         <li class="expoArea-card">
           <img src="/src/assets/img/expoArea-artwork3.png" alt="">
@@ -64,7 +64,7 @@
             <p>油畫</p>
           </div>
           <p>本畫靈感來自她親眼目睹的冰川裂縫，畫面以大面積裂痕與流動線條組成，象徵人內在的情緒斷層。她用此畫探討壓抑情感之下的潛流，並相信裂縫不是崩壞，而是讓光進入的通道。</p>
-          <router-link to="/ExpoAreaPage">leam more</router-link>
+          <router-link to="/front/ExpoAreaPage">leam more</router-link>
         </li>
                 <li class="expoArea-card">
           <img src="/src/assets/img/expoArea-artwork4.png" alt="">
@@ -74,7 +74,7 @@
             <p>油畫</p>
           </div>
           <p>本畫靈感來自她親眼目睹的冰川裂縫，畫面以大面積裂痕與流動線條組成，象徵人內在的情緒斷層。她用此畫探討壓抑情感之下的潛流，並相信裂縫不是崩壞，而是讓光進入的通道。</p>
-          <router-link to="/ExpoAreaPage">leam more</router-link>
+          <router-link to="/front/ExpoAreaPage">leam more</router-link>
         </li>
                 <li class="expoArea-card">
           <img src="/src/assets/img/expoArea-artwork5.png" alt="">
@@ -84,7 +84,7 @@
             <p>油畫</p>
           </div>
           <p>本畫靈感來自她親眼目睹的冰川裂縫，畫面以大面積裂痕與流動線條組成，象徵人內在的情緒斷層。她用此畫探討壓抑情感之下的潛流，並相信裂縫不是崩壞，而是讓光進入的通道。</p>
-          <router-link to="/ExpoAreaPage">leam more</router-link>
+          <router-link to="/front/ExpoAreaPage">leam more</router-link>
         </li>
       </ul>
 

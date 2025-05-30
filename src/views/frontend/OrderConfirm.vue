@@ -14,7 +14,7 @@
                   我們已發送確認信至您的信箱，您可隨時至「訂單追蹤」頁面查看最新狀態。</p>
 
               <div class="goBack">
-                  <button type="button" class="btn"><router-link to="/shop">回到首頁</router-link></button>
+                  <button type="button" class="btn"><router-link to="/front/shop">回到首頁</router-link></button>
                   <button type="button" class="btn"><router-link to="">查看訂單</router-link></button>
               </div>
           </div>

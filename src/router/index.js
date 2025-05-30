@@ -4,12 +4,11 @@ import { createRouter, createWebHistory } from 'vue-router'
 import FrontLayout from '@/layouts/FrontLayout.vue'
 import AdminLayout from '@/layouts/AdminLayout.vue'
 import MemberLayout from '@/layouts/MemberLayout.vue'
-// import EmptyLayout from '@/layouts/EmptyLayout.vue'
 
-
-// views
+//views
+import Home from '@/views/Home.vue'
 //frontend
-import Home from '@/views/frontend/Home.vue'
+import FrontHome from '@/views/frontend/FrontHome.vue'
 import Expo from '@/views/frontend/Expo.vue'
 import ExpoArea from '@/views/frontend/ExpoArea.vue'
 import ExpoAreaPage from '@/views/frontend/ExpoAreaPage.vue'
@@ -46,11 +45,12 @@ import LoginAdmin from '@/views/backend/LoginAdmin.vue'
 
 
 const routes = [
+  { path: '/', name: 'Home', component: Home },
   {
-    path: '/',
+    path: '/front',
     component: FrontLayout,
     children: [
-      { path: '/', name: 'Home', component: Home },
+      { path: '', name: 'FrontHome', component: FrontHome},
       { path: 'expo', name: 'Expo', component: Expo },
       { path: 'expoArea', name: 'ExpoArea', component: ExpoArea },
       { path: 'expoAreaPage', name: 'ExpoAreaPage', component: ExpoAreaPage },

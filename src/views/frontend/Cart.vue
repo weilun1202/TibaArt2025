@@ -46,7 +46,7 @@
                             <button class="removeBtn"><p>-</p></button>
                         </div>
                     </div>
-                    <p class="continueShopping"><router-link to="/shop">繼續選購商品</router-link></p>
+                    <p class="continueShopping"><router-link to="/front/shop">繼續選購商品</router-link></p>
 
                 </div>
 
@@ -120,7 +120,7 @@
                                 <hr>
                                 <p class="total"><span>總計</span><span>NT$560</span></p>
                             </div>
-                            <button class="btn"><router-link to="/orderConfirm">確認購買</router-link></button>
+                            <button class="btn"><router-link to="/front/orderConfirm">確認購買</router-link></button>
                             <img class="ecpay" src="@/assets/img/ecpay_logo.svg" alt="">
                         </div>
                     </div>

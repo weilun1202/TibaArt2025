@@ -43,7 +43,7 @@
 
                     <div class="actions">
                         <button type="button" class="btn">加入購物車</button>
-                        <p class="continueShopping"><router-link to="/shop">回商品列表</router-link></p>
+                        <p class="continueShopping"><router-link to="/front/shop">回商品列表</router-link></p>
                     </div>
                 </div>
             </div>

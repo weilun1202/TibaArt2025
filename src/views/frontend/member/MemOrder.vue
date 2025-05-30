@@ -203,7 +203,7 @@ $mobile: 810px;
 $tablet: 1024px;
 
 .mem-wrap {
-  padding: 20px;
+  padding: 40px;
   min-height: 100vh;
 
   @media (min-width: $mobile) {
