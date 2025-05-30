@@ -53,7 +53,7 @@
                 />
                 <div class="reminder">
                   <span class="formError hidden">格式錯誤</span>
-                  <router-link to="/memForgetPass" class="passForget">忘記密碼</router-link>
+                  <router-link to="/front/memForgetPass" class="passForget">忘記密碼</router-link>
                 </div>
               </div>
 
@@ -92,7 +92,7 @@
                 />
                 <div class="reminder">
                   <span class="formError hidden">格式錯誤</span>
-                  <router-link to="/memForgetPass" class="passForget">忘記密碼</router-link>
+                  <router-link to="/front/memForgetPass" class="passForget">忘記密碼</router-link>
                 </div>
               </div>
 

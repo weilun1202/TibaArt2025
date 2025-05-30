@@ -81,62 +81,62 @@ const logout = () => {
       }
 
       .memNav ul {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
 
-  @media (max-width: 1200px) { 
-    flex-direction: row;
-  }
+        @media (max-width: 1200px) { 
+          flex-direction: row;
+        }
 
-  @media (max-width: 496px) { 
-    flex-wrap: wrap;
-  }
+        @media (max-width: 496px) { 
+          flex-wrap: wrap;
+        }
 
-  li {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-    @media (max-width: 496px) {   
-      width: calc(50% - 1px); // Account for border width
-      border: 1.5px solid $fontBlack;
-      
-      // Remove borders between adjacent items
-      &:nth-child(odd) {
-        border-right: none;
-      }
-      &:not(:last-child):not(:nth-last-child(2)) {
-        border-bottom: none;
-      }
-    }
-  }
+          li {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+            @media (max-width: 496px) {   
+              width: calc(50% - 1px); // Account for border width
+              border: 1.5px solid $fontBlack;
+              
+              // Remove borders between adjacent items
+              &:nth-child(odd) {
+                border-right: none;
+              }
+              &:not(:last-child):not(:nth-last-child(2)) {
+                border-bottom: none;
+              }
+            }
+          }
 
-  a {
-    display: block;
-    padding: $spacing-3;
-    border-radius: 8px;
-    text-decoration: none;
-    color: $fontBlack;
-    transition: all 0.2s ease; // Smooth hover transitions
+          a {
+            display: block;
+            padding: $spacing-3;
+            border-radius: 8px;
+            text-decoration: none;
+            color: $fontBlack;
+            transition: all 0.2s ease; // Smooth hover transitions
 
-    @media (max-width: 496px) { 
-      box-sizing: border-box;
-      width: 100%;
-      padding: $spacing-2; // Consider smaller padding on mobile
-    }
+            @media (max-width: 496px) { 
+              box-sizing: border-box;
+              width: 100%;
+              padding: $spacing-2; // Consider smaller padding on mobile
+            }
 
-    &:hover {
-      cursor: pointer;
-      background-color: $logoColor3;
-      color: $fontWhite;
+            &:hover {
+              cursor: pointer;
+              background-color: $logoColor3;
+              color: $fontWhite;
 
-      @media (max-width: 496px) { 
-        border-radius: 0;
-      }
-    }
-  }
+              @media (max-width: 496px) { 
+                border-radius: 0;
+              }
+            }
+          }
 
 
         }

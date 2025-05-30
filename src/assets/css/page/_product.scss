@@ -45,6 +45,7 @@
 .productDescription {
     margin-bottom: map-get($font, p);
     color: #555;
+    white-space: pre-wrap;
 }
 
 .productPrice {

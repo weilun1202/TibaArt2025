@@ -1,8 +1,8 @@
 .expoArea {
 
-    
-    
-    
+
+
+
     .banner {
         max-width: 1200px;
         margin: $spacing-8 auto;
@@ -55,27 +55,7 @@
         height: auto;
     }
 
-    /* RWD: 手機排版垂直堆疊 */
-    @media (max-width: 768px) {
-        .banner {
-            flex-direction: column;
-        }
 
-        .banner-text,
-        .banner img {
-            width: 100%;
-        }
-
-        .banner-text {
-            padding: $spacing-8 $spacing-6;
-            text-align: center;
-            align-items: center;
-        }
-
-        .banner-text button {
-            align-self: center;
-        }
-    }
 
     .expoArea-intro {
         max-width: 1200px;
@@ -104,64 +84,44 @@
 
         .expoArea-artist {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: flex-start;
-            gap: $spacing-8;
-            text-align: left;
+            align-items: center;
+            gap: 2rem;
+
+            padding: 1.5rem;
+            border-radius: 1rem;
 
             img {
-                width: 300px;
-                border-radius: $spacing-2;
-                flex-shrink: 0;
+                max-width: 50%;
+                max-height: 50%;
+                border-radius: 1rem;
+                object-fit: cover;
             }
 
-            p {
-                max-width: 500px;
-                font-size: $spacing-4;
-                line-height: 1.8;
-                margin: 0;
+            h5 {
+                text-align: left;
                 flex: 1;
-                color: $fontBlack;
+                font-size: 1rem;
+                line-height: 1.6;
+                color: #333;
+                margin-bottom: 3rem;
             }
 
-            // awesome 區域
-            // .social {
-            //   margin-top: 1rem;
+            .icons {
 
-            //   a {
-            //     font-size: 1.5rem;
-            //     margin-right: 1rem;
-            //     color: #000;
-            //     text-decoration: none;
-            //   }
-            // }
-        }
 
-        // RWD
-        @media (max-width: 768px) {
-            .expoArea-artist {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
+                display: flex;
+                gap: 1rem;
 
-                p {
-                    max-width: 100%;
-                }
-
-                .social {
-                    text-align: center;
-                }
+                font-size: 2rem;
             }
         }
+
+
     }
-
 
     //artwork 區域
     .expoArea-artwork {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: $spacing-8 $spacing-4;
+        margin: $spacing-8 $spacing-8;
         display: flex;
         flex-wrap: wrap;
         gap: $spacing-8;
@@ -179,7 +139,7 @@
 
             .title {
                 display: flex;
-                gap:$spacing-2 ;
+                gap: $spacing-2 ;
                 margin: $spacing-4 0 $spacing-2;
 
                 h3 {
@@ -207,17 +167,53 @@
             }
         }
 
-        // 響應式：手機版單欄
-        @media (max-width: 768px) {
-            .expoArea-card {
+    }
+
+    /* RWD: 手機排版垂直堆疊 */
+    @media (max-width: 768px) {
+        .banner {
+            flex-direction: column;
+        }
+
+        .banner-text,
+        .banner img {
+            width: 100%;
+        }
+
+        .banner-text {
+            padding: $spacing-8 $spacing-6;
+            text-align: center;
+            align-items: center;
+        }
+
+        .banner-text button {
+            align-self: center;
+        }
+
+        .expoArea-artist {
+            flex-direction: column;
+            text-align: center;
+
+            img {
                 width: 100%;
+                max-width: 300px;
+            }
+
+            .icons {
+                justify-content: center;
+            }
+        }
+
+
+    }
+
+    @media (max-width: 632px) {
+        .expoArea-artwork {
+            .expoArea-card {
+                width: 100%; // 一行只放一張圖
             }
         }
     }
-
-
-
-
 
 
 }

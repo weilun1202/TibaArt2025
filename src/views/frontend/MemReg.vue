@@ -103,7 +103,7 @@
           </div>
 
           <button class="btn regBtn" type="button"
-          @click="$router.push('/memRegOK')"
+          @click="$router.push('/front/memRegOK')"
           >註冊</button>
 
           <div class="thirdPartyRegister">

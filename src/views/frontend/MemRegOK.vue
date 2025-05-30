@@ -13,7 +13,7 @@
 
               <div class="backToHome">
                   <button type="button" class="btn"
-                  @click="$router.push('/')"
+                  @click="$router.push('/front')"
                   >回到首頁</button>
               </div>
         </div>

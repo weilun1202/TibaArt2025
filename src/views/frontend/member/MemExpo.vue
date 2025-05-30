@@ -143,11 +143,6 @@ const formatCurrency = (amount) => {
 
 }
 
-h2 {
-  color: #333;
-  margin-bottom: 30px;
-  font-size: 28px;
-}
 
 .detail-table {
   border: 1px solid #e0e0e0;
