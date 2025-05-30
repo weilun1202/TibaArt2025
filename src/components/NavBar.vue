@@ -1,6 +1,6 @@
 <template>
   <nav class="frontNav">
-    <router-link to="/" @click="closeMenu"><img class="logo" src="@/assets/img/TibaArtLogo.svg" alt="" /></router-link>
+    <router-link to="/front" @click="closeMenu"><img class="logo" src="@/assets/img/TibaArtLogo.svg" alt="" /></router-link>
 
     <!-- <div class="navBar">
       <ul>
