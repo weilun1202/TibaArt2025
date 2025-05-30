@@ -129,7 +129,7 @@ onUnmounted(() => {
 
     }
 
-    }
+   
 
     ul {
         display: flex;
@@ -406,5 +406,6 @@ onUnmounted(() => {
     .dropdown-slide-leave-to .dropdown-content {
         transform: translateY(-100%);
     }
+  }
 }
 </style>

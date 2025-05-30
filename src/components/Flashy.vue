@@ -8,11 +8,11 @@
         <button @click="goAdmin">後台</button>
     </div>
 
-    <div class="title">
+    <!-- <div class="title">
       <p>TibaArt 緯藝</p>
       <br>
       <p>提拔你的藝術力</p>
-    </div>
+    </div> -->
 
   
 
@@ -166,14 +166,15 @@ const goAdmin = () => {
 
 .canvas-wrapper {
   position: relative;
-  z-index: 0; 
+  // z-index: 0; 
 }
 
 #canvas {
   display: block;
   position: absolute;
-  width: 100vw;
-  height: 100vh;
+  // width: 100vw;
+  // height: 100vh;
+  width: 50%;
   
   top: 0;
   left: 0;

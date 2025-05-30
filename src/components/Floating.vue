@@ -2,13 +2,20 @@
 <div class="canvas-wrapper">
 
     <canvas id="canvas" width="1440" height="700"></canvas>
-        <div class="frontQ animate__animated animate__wobble">作品乏人問津？</div>
-        <div class="frontA animate__animated animate__rotateIn">快點來找緯藝！</div>
+    <div class="frontQ animate__animated animate__wobble">作品乏人問津？</div>
+    <div class="frontA animate__animated animate__rotateIn">快點來找緯藝！</div>
+
+    <div class="btnSet">
+        <button class="toFront" @click="goFront">前台</button>
+        <button class="toAdmin" @click="goAdmin">後台</button>
+    </div>
+
 
 </div>
 </template>
 <script setup scoped>
 import { onMounted } from 'vue';
+
 
 
 function doFirst() {
@@ -108,14 +115,28 @@ onMounted(() => {
   doFirst();
 });
 
+import { useRouter } from 'vue-router'
+
+
+const router = useRouter()
+
+const goFront = () => {
+  router.push('/front')
+}
+const goAdmin = () => {
+  router.push('/admin')
+}
+
 
 </script>
-<style lang="scss" >
+<style lang="scss" scoped>
 @import '/style.scss';
 
 
 .canvas-wrapper{
     position: relative;
+    width: 100vw;
+    height: 100vh;
 }
 
 #canvas {
@@ -142,8 +163,41 @@ onMounted(() => {
 
 .frontA{
     top:20%;
-    right:18%;
+    right:20%;
 }
+
+
+  button{
+
+    display: block;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: $logoYellow;
+    color: $fontBlack;
+    font-size: 32px;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(41, 120, 106, 0.3);;
+    border: none;
+    position: absolute;
+
+    &:hover{
+      cursor: pointer;
+      background-color: $logoGreen;
+      transform: scale(1.10);
+      color: $logoYellow;  
+    }
+  
+  }
+
+  .toFront{
+    top:50%;
+    left:45%
+  }
+  .toAdmin{
+    top:72%;
+    left:45%
+  }
 
 
 
