@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="wrapper">
-      <header>
+      <header class="animate__animated animate__flipInX">
         <div class="pageTitle">註冊信箱驗證</div>
       </header>
       <!-- 以下供大家編輯 -->

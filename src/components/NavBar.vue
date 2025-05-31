@@ -166,17 +166,17 @@ onUnmounted(() => {
                   transition: width 0.5s ease-in-out;
 
                   @media (max-width: 1200px) {
-                    left: -50vw;
+                    // left: -50vw;
                   }
                 }
 
                 &:hover:after {
                     width: 100%;
 
-                  @media (max-width: 1200px) {
-                    background-color: #176066;
-                    width: 150vw;
-                }
+                //   @media (max-width: 1200px) {
+                //     background-color: #176066;
+                //     width: 150vw;
+                // }
                 }
             }
         }
@@ -266,7 +266,9 @@ onUnmounted(() => {
     .dropdown-content {
         width: 40%;
         height: 100%;
-        background: linear-gradient(135deg, #f6eee4 0%, #ffffff 100%);
+        // background: linear-gradient(135deg, #f6eee4 0%, #ffffff 100%);
+        background-image: url('/src/assets/img/burgerBG.svg');
+        background-size: cover;
         box-shadow: -5px 0 25px rgba(0, 0, 0, 0.15);
         overflow-y: auto;
         display: flex;

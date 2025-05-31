@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="wrapper">
-      <header>
+      <header class="animate__animated animate__flipInX">
         <div class="pageTitle">購物車</div>
       </header>
       <!-- Wrapper 不設 1200px 寬（例如展覽、關於我們頁面應該會滿版），想要限制內容在 1200 的再自己包一個 div 限制 1200  -->

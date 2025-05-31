@@ -2,6 +2,12 @@
 
 <div class="frontHomeW">
 
+    <div class="infoPanel animate__animated animate__flipInX">
+
+        TibaArt 緯藝基金會
+
+
+    </div>
     
 
 
@@ -163,7 +169,7 @@
 </div>
 </template>
 
-<script setup>
+<script setup scoped>
 
 
 
@@ -181,6 +187,16 @@
 svg {
     width: 100vw;
     height: 100vh;
+}
+
+
+.infoPanel{
+
+margin: 0 auto;
+width: 50%;
+border: 1.5px solid;
+padding: 32px;
+
 }
 
 </style>

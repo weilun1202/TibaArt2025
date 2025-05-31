@@ -3,7 +3,7 @@
     <!-- 關於我們 介紹 -->
 
     <section class="wrapper" ref="wrapper">
-      <header>
+      <header class="animate__animated animate__flipInX">
         <div class="pageTitle">關於我們</div>
       </header>
 

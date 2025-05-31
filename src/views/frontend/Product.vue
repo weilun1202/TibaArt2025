@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="wrapper">
-        <header>
+        <header class="animate__animated animate__flipInX">
         <div class="pageTitle">線上商城</div>
         </header>
         <div class="wrap">
