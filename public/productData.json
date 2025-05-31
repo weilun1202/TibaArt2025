@@ -46,5 +46,53 @@
     "price": 18000,
     "image": "/assets/img/itemSculpture.jpg",
     "category": "artist"
+  },
+  {
+    "id": 7,
+    "name": "緯藝明信片組",
+    "price": 250,
+    "image": "/assets/img/itemPostcard.jpg",
+    "category": "tiba",
+    "description": "材質：進口卡紙\n規格：一組6張，每張10x15cm\n搭配藝術插畫，傳遞祝福也傳遞美感。"
+  },
+  {
+    "id": 8,
+    "name": "緯藝筆記本",
+    "price": 320,
+    "image": "/assets/img/itemNotebook.jpg",
+    "category": "tiba",
+    "description": "材質：環保紙張＋藝術封面\n規格：A5 / 80頁\n書寫手感佳，是日常與靈感的好夥伴。"
+  },
+  {
+    "id": 9,
+    "name": "藝術家攝影集",
+    "price": 4200,
+    "image": "/assets/img/itemPhoto.jpg",
+    "category": "artist",
+    "description": "媒材：藝術微噴＋無酸相紙\n尺寸：30x40cm（含白邊）\n原創攝影作品，凝視瞬間的永恆詩意。"
+  },
+  {
+    "id": 10,
+    "name": "藝術家陶藝",
+    "price": 5200,
+    "image": "/assets/img/itemCeramic.jpg",
+    "category": "artist",
+    "description": "媒材：高溫陶＋釉彩\n尺寸：約15x15x20cm\n質樸與靈感並存，點綴生活的藝術小物。"
+  },
+  {
+    "id": 11,
+    "name": "藝術家紙燈罩",
+    "price": 1600,
+    "image": "/assets/img/itemPaperArt.jpg",
+    "category": "artist",
+    "description": "材質：進口紙＋手工摺製\n尺寸：約25x25x30cm\n柔和光影中的藝術設計，為空間注入溫暖氣息。"
+  },
+  {
+    "id": 12,
+    "name": "藝術家版畫",
+    "price": 2800,
+    "image": "/assets/img/itemPrint.jpg",
+    "category": "artist",
+    "description": "媒材：數位版畫＋簽名＋限量編號\n尺寸：30x30cm\n經典作品再製，收藏級限量藝術印刷。"
   }
 ]
