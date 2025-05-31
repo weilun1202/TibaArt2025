@@ -267,7 +267,7 @@ onUnmounted(() => {
         width: 40%;
         height: 100%;
         // background: linear-gradient(135deg, #f6eee4 0%, #ffffff 100%);
-        background-image: url('/src/assets/img/burgerBG.svg');
+        background-image: url('/src/assets/img/burgerBG v1.svg');
         background-size: cover;
         box-shadow: -5px 0 25px rgba(0, 0, 0, 0.15);
         overflow-y: auto;

@@ -38,7 +38,7 @@ function doFirst() {
 
     function animate() {
         context.clearRect(625, 35, 200, 199 + float * 2);
-        time += 0.03;
+        time += 0.1;
         let y = baseY + Math.sin(time) * float;
 
 
@@ -184,7 +184,8 @@ const goAdmin = () => {
     &:hover{
       cursor: pointer;
       background-color: $logoGreen;
-      transform: scale(1.10);
+      // transform: scale(1.10);
+      transform: translateX(20px);
       color: $logoYellow;  
     }
   

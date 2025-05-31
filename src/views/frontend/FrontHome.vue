@@ -41,6 +41,7 @@
         <!-- 深色圓弧 -->
         <path d="M80 120 Q120 100 160 120 Q180 130 200 140 Q180 160 160 180 Q120 200 80 180 Q60 160 60 140 Q60 130 80 120 Z" fill="#2d2d2d"/>
         
+        
         <!-- 中間垂直畫作框架 -->
         <rect x="320" y="150" width="80" height="120" fill="#f0e6d2" stroke="#d4c4a8" stroke-width="6"/>
         
@@ -132,6 +133,7 @@
               fill="transparent" 
               style="cursor: pointer; stroke: rgba(0,0,0,0); stroke-width: 3;"
               data-title="抽象流線畫作"
+              @click="router.push('/front/expo')"
         />
         
         <!-- 中間垂直畫作互動區 -->
@@ -139,6 +141,7 @@
               fill="transparent" 
               style="cursor: pointer; stroke: rgba(0,0,0,0); stroke-width: 3;"
               data-title="綠色流線作品"
+              @click="router.push('/front/sponsor')"
         />
         
         <!-- 小型幾何畫作1互動區 -->
@@ -146,6 +149,7 @@
               fill="transparent" 
               style="cursor: pointer; stroke: rgba(0,0,0,0); stroke-width: 3;"
               data-title="幾何線條作品"
+              @click="router.push('/front/application')"
         />
         
         <!-- 小型畫作2互動區 -->
@@ -153,6 +157,7 @@
               fill="transparent" 
               style="cursor: pointer; stroke: rgba(0,0,0,0); stroke-width: 3;"
               data-title="藍色垂直構圖"
+              @click="router.push('/front/about')"
         />
         
         <!-- 右側大型畫作互動區 -->
@@ -160,6 +165,7 @@
               fill="transparent" 
               style="cursor: pointer; stroke: rgba(0,0,0,0); stroke-width: 3;"
               data-title="現代抽象大作"
+              @click="router.push('/front/shop')"
         />
 
 
@@ -170,6 +176,9 @@
 </template>
 
 <script setup scoped>
+import router from '@/router';
+
+
 
 
 
@@ -197,6 +206,13 @@ width: 50%;
 border: 1.5px solid;
 padding: 32px;
 
+}
+
+#artwork-1{
+
+    &:hover{
+        background-color: $Gray;
+    }
 }
 
 </style>
