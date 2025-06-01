@@ -1626,7 +1626,9 @@ header .pageTitle:after {
 
 .expoArea {
   /* 圖片區塊 */
-  /* RWD: 手機排版垂直堆疊 */
+  /* 1) 外層容器：相對定位，方便放大鏡用絕對定位 */
+  /* 2) 原始圖片：寬度 100%，高 auto，自行調整 */
+  /* 3) 放大鏡 (magnifier) 的基本樣式 */
 }
 .expoArea .banner {
   max-width: 1200px;
@@ -1763,36 +1765,75 @@ header .pageTitle:after {
   font-weight: bold;
   display: inline-block;
 }
+.expoArea .zoom-container {
+  position: relative;
+  display: inline-block;
+  /* 如果需要固定寬高可以另外設定，例如 width: 600px; height: auto; */
+  cursor: crosshair;
+  /* 讓滑鼠移進去時變成十字準心（可依需求改） */
+}
+.expoArea .zoom-container .zoom-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  /* 避免滑鼠拖拉去選到圖片 */
+}
+.expoArea .zoom-container .magnifier {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 150px;
+  /* 放大鏡直徑，可自行調整 */
+  height: 150px;
+  /* 同上 */
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  /* 裁切超出圓形範圍的背景 */
+  pointer-events: none;
+  /* 讓滑鼠事件穿透到下層的圖片 */
+  transform: scale(0);
+  /* 初始縮成 0，不顯示 */
+  transform-origin: center center;
+  background-repeat: no-repeat;
+  /* 背景圖會在 JS 裡設成跟原圖一樣的 URL；background-size 也在 JS 裡統一設定 */
+  z-index: 10;
+  /* 平滑過渡的動態效果可用 GSAP 來控制 scale、x、y */
+  /* RWD: 手機排版垂直堆疊 */
+}
 @media (max-width: 768px) {
-  .expoArea .banner {
+  .expoArea .zoom-container .magnifier .banner {
     flex-direction: column;
   }
-  .expoArea .banner-text,
-  .expoArea .banner img {
+  .expoArea .zoom-container .magnifier .banner-text,
+  .expoArea .zoom-container .magnifier .banner img {
     width: 100%;
   }
-  .expoArea .banner-text {
+  .expoArea .zoom-container .magnifier .banner-text {
     padding: 32px 24px;
     text-align: center;
     align-items: center;
   }
-  .expoArea .banner-text button {
+  .expoArea .zoom-container .magnifier .banner-text button {
     align-self: center;
   }
-  .expoArea .expoArea-artist {
+  .expoArea .zoom-container .magnifier .expoArea-artist {
     flex-direction: column;
     text-align: center;
   }
-  .expoArea .expoArea-artist img {
+  .expoArea .zoom-container .magnifier .expoArea-artist img {
     width: 100%;
     max-width: 300px;
   }
-  .expoArea .expoArea-artist .icons {
+  .expoArea .zoom-container .magnifier .expoArea-artist .icons {
     justify-content: center;
   }
 }
 @media (max-width: 632px) {
-  .expoArea .expoArea-artwork .expoArea-card {
+  .expoArea .zoom-container .magnifier .expoArea-artwork .expoArea-card {
     width: 100%;
   }
 }
