@@ -1,14 +1,14 @@
 header {
     height: 120px;
-    background-color: $primaryGreen;
-
+    // background-color: $primaryGreen;
     // border: 1px solid black;
 
 
     .pageTitle {
         font-size: map-get($font, h1);
         font-family: $fontTC;
-        color: $fontWhite;
+        // color: $fontWhite;
+        color: $fontBlack;
         font-weight: bold;
 
         text-align: center;
@@ -16,6 +16,64 @@ header {
         position: relative;
         top: 50%;
         transform: translate(0, -50%);
+
+        // &:before{
+        //     content: '';
+        //     display: block;
+        //     width: 100px;
+        //     height: 3px;
+        //     background-color: $fontBlack;
+        //     position: absolute;
+        //     left: 30%;
+        //     top: 50%;
+        //     transform: translate(0, -50%);
+
+        //     @media (max-width: 1200px) {
+        //         left:20%;
+        //     }
+
+        //     @media (max-width: 800px) {
+        //         left:10%;
+        //     }
+
+        //     @media (max-width: 550px) {
+        //         width: 50px;
+        //     }
+
+
+        // }
+
+        // &:after{
+        //     content: '';
+        //     display: block;
+        //     width: 100px;
+        //     height: 3px;
+        //     background-color: $fontBlack;
+        //     position: absolute;
+        //     right: 30%;
+        //     top: 50%;
+        //     transform: translate(0, -50%);
+
+        //     @media (max-width: 1200px) {
+        //         right:20%;
+        //     }
+
+        //      @media (max-width: 800px) {
+        //         right:10%;
+        //     }
+
+        //     @media (max-width: 550px) {
+        //         width: 50px;
+        //     }
+
+        // }
+
+        
+            
+
+
+
+
     }
 
     @media (max-width: 820px) {

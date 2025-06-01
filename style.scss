@@ -1,4 +1,6 @@
 @import url('./src/assets/css/reset.css');
+@import url('https://fonts.googleapis.com/css2?family=Chocolate+Classical+Sans&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
 
 //basic
 @import './src/assets/css/basic/breakpoint';
@@ -50,7 +52,8 @@
 
 html {
   font-size: $bodyfont;
-  font-family: $fontTC, $fontEG;
+  font-family: 'Chocolate Classical Sans', $fontTC, $fontEG;
+  // 2025/06/01 測試新字體試試看
 
   $fontBlack: #2F2F2F;
 

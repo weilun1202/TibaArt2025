@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="wrapper">
-      <header>
+      <header class="animate__animated animate__flipInX">
         <div class="pageTitle">會員登入</div>
       </header>
       <div class="loginPage">
@@ -62,7 +62,7 @@
                 @click="$router.push('/member')"
                 >確定登入</button>
                 <button class="btn" type="button"
-                @click="$router.push('/memReg')"
+                @click="$router.push('/front/memReg')"
                 >註冊會員</button>
               </div>
             </div>

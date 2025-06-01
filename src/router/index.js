@@ -67,7 +67,7 @@ const routes = [
       { path: 'sponsor-reminder', name: 'SponsorReminder', component: SponsorReminder },
       { path: 'sponsorSuccess', name: 'SponsorSuccess', component: SponsorSuccess },
       {
-        path: '/product/:id',
+        path: 'product/:id',
         name: 'product',
         component: () => import('@/views/frontend/Product.vue'),
         props: true

@@ -1,10 +1,7 @@
 <template>
-  <!-- <div class="choose">
-    <button @click="goFront">前台</button>
-    <button @click="goAdmin">後台</button>
-  </div> -->
 
-  <Flashy />
+  <Floating/>
+  <!-- <Flashy /> -->
   <Footer />
 
 
@@ -12,13 +9,13 @@
 
 <script setup>
 import Flashy from '@/components/Flashy.vue'
+import Floating from '@/components/Floating.vue'
 import Footer from '@/components/Footer.vue'
 
 </script>
 
 <style lang="scss" scoped>
 @import '/style.scss';
-
 
 
 </style>

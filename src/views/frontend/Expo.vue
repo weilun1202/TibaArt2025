@@ -1,7 +1,7 @@
 <template>
   <div class="expo">
 <div class="wrapper">
-        <header>
+        <header class="animate__animated animate__flipInX">
         <div class="pageTitle">線上展覽</div>
       </header>
 <div class="parent">

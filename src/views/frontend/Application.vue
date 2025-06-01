@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="wrapper">
-      <header>
+      <header class="animate__animated animate__flipInX">
         <div class="pageTitle">展覽申請</div>
       </header>
       
