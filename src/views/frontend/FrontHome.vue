@@ -8,12 +8,12 @@
     
      <transition name="fade" mode="out-in">
       <div :key="activeBlock" class="info">
-        <p class="animate__animated animate__flipInX" v-if="activeBlock === 'painting1'"> {{ painting1 }}</p>
-        <p class="animate__animated animate__flipInX" v-else-if="activeBlock === 'painting2'"> {{ painting2 }}</p>
-        <p class="animate__animated animate__flipInX" v-else-if="activeBlock === 'painting3'"> {{ painting3 }}</p>
-        <p class="animate__animated animate__flipInX" v-else-if="activeBlock === 'painting4'"> {{ painting4 }}</p>
-        <p class="animate__animated animate__flipInX" v-else-if="activeBlock === 'painting5'"> {{ painting5}}</p>
-        <p class="animate__animated animate__flipInX" v-else-if="activeBlock === 'painting6'"> 前往觀看{{ painting6}}</p>
+        <p class="flip animate__animated animate__flipInX" v-if="activeBlock === 'painting1'"> {{ painting1 }}</p>
+        <p class="flip animate__animated animate__flipInX" v-else-if="activeBlock === 'painting2'"> {{ painting2 }}</p>
+        <p class="flip animate__animated animate__flipInX" v-else-if="activeBlock === 'painting3'"> {{ painting3 }}</p>
+        <p class="flip animate__animated animate__flipInX" v-else-if="activeBlock === 'painting4'"> {{ painting4 }}</p>
+        <p class="flip animate__animated animate__flipInX" v-else-if="activeBlock === 'painting5'"> {{ painting5}}</p>
+        <p class="flip animate__animated animate__flipInX" v-else-if="activeBlock === 'painting6'"> 前往觀看{{ painting6}}</p>
         <p v-else>{{ defaultText }}</p>
       </div>
     </transition>
@@ -323,7 +323,6 @@ onUnmounted(() => {
 
 <style lang="scss" scoped>
 @import '/style.scss';
-@import url('https://fonts.googleapis.com/css2?family=Chocolate+Classical+Sans&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
 .frontHomeW{
     padding-top: 36px;
@@ -344,6 +343,11 @@ border: 1.5px solid;
 padding: 32px;
 text-align: center;
 
+}
+
+.flip{
+    font-weight: bold;
+    color: $logoDGreen;
 }
 
 h1{
