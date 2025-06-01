@@ -6,10 +6,10 @@
               <img class="memAvatar" :src="uploadedUrl" alt="">
             </div>
             <div>
-              <button class="avatarUpload" @click="openModal">更換照片</button>
+              <button class="avatarUpload" @click="openModal">上傳照片</button>
               <Modal v-model:isOpen="showModal" title="上傳圖片" @file-selected="handleFileSelected">
                 <div class="modalDIY">
-                  <p class="modalText">選擇欲更換的照片</p>
+                  <p class="modalText">選擇欲上傳的照片</p>
                   <input type="file" accept="image/*" @change="handleFileChange" name="" id="" >
                   <div class="avatarPreview image-preview" v-if="previewUrl">
                      <img :src="previewUrl" alt="Preview" style="max-width: 100%; max-height: 120px;" />
