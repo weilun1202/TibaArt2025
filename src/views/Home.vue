@@ -8,7 +8,6 @@
 </template>
 
 <script setup>
-import Flashy from '@/components/Flashy.vue'
 import Floating from '@/components/Floating.vue'
 import Footer from '@/components/Footer.vue'
 

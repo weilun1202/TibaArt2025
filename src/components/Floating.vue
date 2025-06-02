@@ -170,8 +170,8 @@ const goAdmin = () => {
   button{
 
     display: block;
-    width: 150px;
-    height: 150px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
     background-color: $logoYellow;
     color: $fontBlack;
@@ -185,19 +185,19 @@ const goAdmin = () => {
       cursor: pointer;
       background-color: $logoGreen;
       // transform: scale(1.10);
-      transform: translateX(20px);
+      transform: scale(1.05);
       color: $logoYellow;  
     }
   
   }
 
   .toFront{
-    top:50%;
-    left:45%
+    top:385px;
+    left:675px;
   }
   .toAdmin{
-    top:72%;
-    left:45%
+    top:525px;
+    left:675px;
   }
 
 
