@@ -12,8 +12,8 @@ const columns = [
   { key: 'name', label: '藝術家名稱' },
   { key: 'email', label: 'Email' },
   { key: 'update', label: '修改時間' },
-  { key: 'status', label: '狀態', class:'' },
-  { key: 'more', label: '詳細資料', class:'add-button btn' },
+  { key: 'status', label: '狀態', type:'switch'},
+  { key: 'more', label: '詳細資料', type:'button'},
 ]
 
 // php抓來的假資料陣列

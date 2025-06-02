@@ -13,7 +13,7 @@ const columns = [
   { key: 'artist', label: '出展人' },
   { key: 'expoStart', label: '開始日期' },
   { key: 'expoEnd', label: '結束日期' },
-  { key: 'status', label: '狀態' },
+  { key: 'status', label: '狀態', type:'select', options:['展覽中', '已撤展'] },
 ]
 
 // 假資料陣列

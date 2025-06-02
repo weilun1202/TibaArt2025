@@ -13,7 +13,7 @@ const columns = [
   { key: 'sum', label: '總金額' },
   { key: 'address', label: '配送地址' },
   { key: 'time', label: '訂購時間' },
-  { key: 'status', label: '狀態' },
+  { key: 'status', label: '狀態', type:'select', options:['未出貨', '已出貨', '已取消'] },
 ]
 
 // 假資料陣列
