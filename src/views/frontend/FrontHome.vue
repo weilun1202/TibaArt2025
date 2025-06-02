@@ -5,6 +5,12 @@
      <!-- <div class="infoPanel animate__animated animate__flipInX">
         <p>TibaArt 緯藝基金會</p>
     </div> -->
+
+     <div class="split-text-container">
+            <h1 ref="splitTextElement" class="animated-heading">
+            TibaArt 緯藝基金會
+            </h1>
+    </div>
     
      <transition name="fade" mode="out-in">
       <div :key="activeBlock" class="info">
@@ -17,12 +23,6 @@
         <p v-else>{{ defaultText }}</p>
       </div>
     </transition>
-
-        <div class="split-text-container">
-            <h1 ref="splitTextElement" class="animated-heading">
-            TibaArt 緯藝基金會
-            </h1>
-        </div>
 
       <svg ref="svgRef" width="1000" height="600" viewBox="0 0 1000 600" xmlns="http://www.w3.org/2000/svg">
 
@@ -325,7 +325,7 @@ onUnmounted(() => {
 @import '/style.scss';
 
 .frontHomeW{
-    padding-top: 36px;
+    padding-top: 100px;
 }
 
 svg {
@@ -355,8 +355,7 @@ h1{
     font-weight: 450;
     text-align: center;
     color: $fontBlack;
-    margin-top: 32px;
-    font-family: 'Chocolate Classical Sans';
+    margin-bottom: 32px;
 }
 
 
@@ -400,7 +399,7 @@ image:hover{
 
 .info{
     margin: 12px auto 0;
-    padding: 32px;
+    padding: 16px;
     width: 25%;
     border:1.5px solid;
     text-align: center;

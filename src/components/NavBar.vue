@@ -116,7 +116,7 @@ onUnmounted(() => {
     left: 0;
     right: 0;
     z-index: 1000;
-    background: transparent;
+    background: linear-gradient(180deg, #f6eee4 0%, #ffffff 100%);
 
 
     .logo {
