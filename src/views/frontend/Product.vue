@@ -11,6 +11,7 @@
                 <div class="shopTab">
                     <div class="subTitle">
                         <h1>商品資訊</h1>
+                        <!-- {{ $router.currentRoute }} -->
                     </div>
                 </div>
 
@@ -50,7 +51,9 @@
                     <span class="recoTitle">或許您會喜歡</span>
                     <!-- 推薦商品列表 -->
                     <ul class="itemList">
-                        <li class="item" v-for="item in recommendedProducts" :key="item.id">
+                        <li class="item" 
+                            v-for="item in recommendedProducts" 
+                            :key="item.id">
                             <router-link :to="{ name: 'product', params: { id: item.id } }" class="itemImage">
                                 <img :src="item.image" :alt="item.name">
                             </router-link>
@@ -73,6 +76,7 @@
         </div>
     </div>
 </template>
+
 
 <script setup>
 import { ref, onMounted, computed } from 'vue';
@@ -131,7 +135,6 @@ const handleAddToCart = () => {
     if(success){
         alert(`已將「${currentProduct.value.name}」x ${quantity.value} 加入購物車`);
         quantity.value = 1
-
     }
 }
 
@@ -144,3 +147,11 @@ const handleRecommendedAddToCart = (item) => {
 }
 
 </script>
+
+<style lang="scss" scoped>
+@import '/style.scss';
+.shopTab {
+    padding: 20px 20px 40px;
+}
+
+</style>

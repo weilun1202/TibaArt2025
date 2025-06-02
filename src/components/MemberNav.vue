@@ -11,7 +11,7 @@
             <div>
               <button class="avatarUpload" @click="openModal">上傳照片</button>
               <Modal v-model:isOpen="showModal" title="上傳圖片" @file-selected="handleFileSelected" @click="closeModal">
-                <div class="modalDIY">
+                <div class="modalDIY" method="post" action="SingleFile.php" enctype="multipart/form-data">
                   <label for="file-upload" class="modalText">選擇圖片</label>
                   <input id="file-upload" type="file" accept="image/*" @change="handleFileChange">
                   <div class="avatarPreview image-preview" v-if="previewUrl">

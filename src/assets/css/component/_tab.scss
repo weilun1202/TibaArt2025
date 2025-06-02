@@ -8,7 +8,7 @@
 
     .tibaShopTab, .artShopTab {
         h1{
-            color: $primaryGreen;
+            color: $fontBlack;
         }
         @include shopTabButton;
     }

@@ -1,5 +1,5 @@
 .subTitle h1{
-    color: $primaryGreen;
+    color: $fontBlack;
     font-size: map-get($font, h2);
     font-weight: bold;
     // border-bottom: 4px solid $primaryGreen;
@@ -123,9 +123,9 @@
 .recoTitle{
     font-size: map-get($font, h3);
     font-weight: bold;
-    color: $primaryGreen;
+    // color: $primaryGreen;
     display: block;
-    margin: 100px auto 40px;
+    margin: 80px auto 40px;
     text-align: center;
 }
 
