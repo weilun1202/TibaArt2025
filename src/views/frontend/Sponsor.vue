@@ -16,7 +16,7 @@
             <div class="donateItem">
               欲贊助之展覽
             </div>
-            <select id="subject" name="subject" v-model="subject" @change="errors.subject = ''">
+            <select id="subject" name="sponsored" v-model="subject" @change="errors.subject = ''">
               <option value="">請選擇</option>
               <option value="expo1">《 靜界焰光 》</option>
               <option value="expo2">《 雪白世界 》</option>
@@ -50,7 +50,7 @@
               <input
                 type="text"
                 id="cost"
-                name="cost"
+                name="amount"
                 placeholder="請選擇或輸入金額"
                 v-model="selectedAmount"
               />
@@ -70,7 +70,7 @@
             <input
               type="text"
               id="name"
-              name="name"
+              name="patron"
               placeholder="請輸入姓名"
               v-model="name"
               @input="errors.name = ''"
@@ -299,7 +299,7 @@ function handleSubmit(e) {
       window.location.href = 'https://www.ecpay.com.tw/'
     } else {
       // 未登入，導向提醒頁
-      router.push('/sponsor-reminder')
+      router.push('/front/sponsorReminder')
     }
   }
 }

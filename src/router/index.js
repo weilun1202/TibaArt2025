@@ -64,7 +64,7 @@ const routes = [
       { path: 'memReg', name: 'MemReg', component: MemReg },
       { path: 'memRegOK', name: 'MemRegOK', component: MemRegOK },
       { path: 'memForgetPass', name: 'MemForgetPass', component: MemForgetPass },
-      { path: 'sponsor-reminder', name: 'SponsorReminder', component: SponsorReminder },
+      { path: 'sponsorReminder', name: 'SponsorReminder', component: SponsorReminder },
       { path: 'sponsorSuccess', name: 'SponsorSuccess', component: SponsorSuccess },
       {
         path: 'product/:id',

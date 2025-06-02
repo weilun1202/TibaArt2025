@@ -13,13 +13,13 @@
           <div class="reminderContent">
             
             <img src="@/assets/img/TibaArtLogo.svg" alt="">
-  
-            <h2 class="reminderTitle">贊助成功！</h2>
-            <p class="reminderText">已經將本次贊助資訊保留在您的紀錄，感謝您的支持。</p>
-            
-            <div>
-              <button class="btn reminderBtn" @click="goExpo">回到線上展覽</button>
-            </div>
+            <p>
+              <h2 class="reminderTitle">贊助成功！</h2>
+              <p class="reminderText">已經將本次贊助資訊保留在您的紀錄，感謝您的支持。</p>
+              <div>
+                <button class="btn reminderBtn" @click="goExpo">回到線上展覽</button>
+              </div>
+            </p>
           </div>  
 
         </div>
@@ -36,7 +36,7 @@
   import { ref } from 'vue'
   import { useRouter } from 'vue-router'
   function goExpo() {
-    window.location.href = '/Expo' // 回到線上展覽
+    window.location.href = '/front/Expo' // 回到線上展覽
   }
   
 </script>
@@ -57,23 +57,26 @@
     align-items: center;
     padding: 40px;
     gap: 40px;
-  }
-  .reminderTitle {
-    font-size: 2rem;
-  }
-  .reminderText{
-    padding: $spacing-5;
-    max-width: 640px;
-    text-align: center;
-    line-height: 1.6;
-  }
-  .reminderBtn{
-    box-sizing: border-box;
-    margin: $spacing-1;
-  }
-  img{
+
+    img{
     width: 200px;
-  } 
+    } 
+    p{
+      max-width: 640px;
+      text-align: center;
+      line-height: 1.6;
+      .reminderTitle {
+        font-size: 2rem;
+      }
+      .reminderText{
+        padding: $spacing-5;
+      }
+      .reminderBtn{
+        margin: 0 5px;
+        gap: 20px;
+      }
+    }
+  }
 }
 @media screen and (max-width:705px){
   .reminderContent{
