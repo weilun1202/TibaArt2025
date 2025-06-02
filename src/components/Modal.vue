@@ -41,7 +41,7 @@ const handleOverlayClick = () => {
 </script>
 
 <style scoped>
-.modal-overlay {
+.modal-overlay { 
   position: fixed;
   top: 0;
   left: 0;

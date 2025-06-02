@@ -221,23 +221,7 @@
     </svg>
 
 
-    <!-- 底部內容區域，用於產生滾動空間 -->
-    <div class="content-section" ref="contentSection">
-      <div class="content-block">
-        <h2>探索更多藝術</h2>
-        <p>滾動以體驗視差效果</p>
-      </div>
-      <div class="content-block">
-        <h2>藝術家的故事</h2>
-        <p>每一幅作品都有其獨特的故事</p>
-      </div>
-      <div class="content-block">
-        <h2>創作靈感</h2>
-        <p>從生活中汲取無限的創作靈感</p>
-      </div>
-    </div>
-
-
+    
 
 
 </div>
@@ -248,11 +232,11 @@ import router from '@/router';
 import { ref, onMounted, onUnmounted } from 'vue'
 import { gsap } from 'gsap'
 import { SplitText } from 'gsap/SplitText'; 
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-gsap.registerPlugin(SplitText, ScrollTrigger);
+gsap.registerPlugin(SplitText);
 
-const splitTextElement = ref(null);
-let mySplitText;
+const splitTextElement = ref(null); // 用於引用要分割的文字元素
+let mySplitText; // 儲存 SplitText 實例，以便在組件銷毀時 revert
+
 
 const svgRef = ref(null)
 const paint1 = ref(null)
@@ -261,13 +245,13 @@ const paint3 = ref(null)
 const paint4 = ref(null)
 const paint5 = ref(null)
 const paint6 = ref(null)
-const infoPanel = ref(null)
-const parallaxBg = ref(null)
-const contentSection = ref(null)
 
-const activeBlock = ref('');
-const defaultText = ref('點選下方作品，開始悠遊緯藝！');
 
+const activeBlock = ref(''); // 用於儲存當前滑鼠懸停的畫框名稱
+const defaultText = ref('點選下方作品，開始悠遊緯藝！'); // 預設顯示的文字
+
+// 定義每個畫框對應的文字內容
+// 這裡可以直接定義為 ref 物件，或者更簡潔的直接使用 JavaScript 物件
 const painting1 = '我要贊助藝術家';
 const painting2 = '我要申請辦展';
 const painting3 = '我想要更了解緯藝';
@@ -276,292 +260,69 @@ const painting5 = '我要買藝術周邊';
 const painting6 = '線上展覽';
 
 const setActiveBlock = (blockName) => {
+  // console.log('Mouse event triggered for:', blockName);
   activeBlock.value = blockName;
 };
 
+const animatedText = ref(null);
+
+
 onMounted(() => {
-  // 文字分割動畫
-  if (splitTextElement.value) {
+
+if (splitTextElement.value) {
+    // 創建 SplitText 實例
+    // type: 'chars' 將文字分割成單個字元
+    // type: 'words' 將文字分割成單詞
+    // type: 'lines' 將文字分割成行
+    // 你也可以組合使用，例如 'chars,words'
     mySplitText = new SplitText(splitTextElement.value, { type: 'chars' });
+
+    // 對每個字元進行動畫
     gsap.from(mySplitText.chars, {
       opacity: 0,
-      y: 20,
-      rotationX: -245,
-      transformOrigin: '50% 50% -20px',
-      stagger: 0.2,
-      duration: 1,
-      ease: 'back.out(1.7)',
-      delay: 0.5
+      y: 20, // 初始位置從下方 20px 處
+      rotationX: -245, // 初始旋轉
+      transformOrigin: '50% 50% -20px', // 設置旋轉中心，製造從深處飛出的效果
+      stagger: 0.2, // 每個字元之間動畫延遲 0.05 秒
+      duration: 1, // 每個字元動畫持續時間 0.8 秒
+      ease: 'back.out(1.7)', // 緩動效果
+      delay: 0.5 // 整體動畫延遲 0.5 秒開始
     });
   }
     
-  // 初始設定所有元素為「在畫面外」
+  // 初始設定所有元素為「在畫面外」，例如往左滑入
   gsap.set([paint1.value, paint2.value], { x: -200, opacity: 0 })
   gsap.set([paint3.value], { y: 200, opacity: 0 })
   gsap.set([paint4.value], { y: -200, opacity: 0 })
   gsap.set([paint5.value], { x: 200, opacity: 0 })
+//   gsap.set([paint6.value], { x: 200, opacity: 0 })
 
-  // 順序滑入動畫
-  gsap.timeline()
-    .to(paint1.value, { x: 0, opacity: 1, duration: 0.75, ease: 'power3.out' })
-    .to(paint2.value, { x: 0, opacity: 1, duration: 0.75, ease: 'circ.out' }, '+=0.05')
-    .to(paint3.value, { y: 0, opacity: 1, duration: 0.75, ease: 'bounce.out' }, '+=0.05')
-    .to(paint4.value, { y: 0, opacity: 1, duration: 0.75, ease: 'elastic.out(1, 0.3)' }, '+=0.05')
-    .to(paint5.value, { x: 0, opacity: 1, duration: 0.75, ease: 'power3.out' }, '0.05')
 
+    // 順序滑入
   gsap.timeline()
+    .to(paint1.value, { x: 0, opacity: 1, duration: 0.75, ease: 'power3.out' }, )
+      .to(paint2.value, { x: 0, opacity: 1, duration: 0.75, ease: 'circ.out' }, '+=0.05')
+      .to(paint3.value, { y: 0, opacity: 1, duration: 0.75, ease: 'bounce.out' }, '+=0.05')
+      .to(paint4.value, { y: 0, opacity: 1, duration: 0.75, ease: 'elastic.out(1, 0.3)' }, '+=0.05')
+      .to(paint5.value, { x: 0, opacity: 1, duration: 0.75, ease: 'power3.out' }, '0.05')
+    //   .to(paint6.value, { x: 0, opacity: 1, duration: 0.75, ease: 'power3.out' }, '+=0.5')
+
+    gsap.timeline()
     .fromTo(".painting6", 
         { scale: 2, x: 800, y: 200, z: 0 }, 
         { scale: 1, x: 0, y: 0, z: 500, duration: 1, ease: "circ.out" }, '+=1'
     );
-
-  // 左右視差效果設定
-  setupHorizontalParallax();
+    
 })
 
-const setupHorizontalParallax = () => {
-  // 主標題左右視差效果
-  gsap.to(splitTextElement.value, {
-    xPercent: -20, // 向左移動
-    ease: "none",
-    scrollTrigger: {
-      trigger: splitTextElement.value,
-      start: "top bottom", 
-      end: "bottom top",
-      scrub: true
-    }
-  });
-
-  // 信息面板向右移動
-  gsap.to(infoPanel.value, {
-    xPercent: 15,
-    ease: "none",
-    scrollTrigger: {
-      trigger: infoPanel.value,
-      start: "top bottom",
-      end: "bottom top", 
-      scrub: true
-    }
-  });
-
-  // 左側畫作組 - 向右移動（快速）
-  gsap.to([paint1.value, paint2.value], {
-    xPercent: 30,
-    rotation: 3,
-    ease: "none",
-    scrollTrigger: {
-      trigger: svgRef.value,
-      start: "top bottom",
-      end: "bottom top",
-      scrub: 1
-    }
-  });
-
-  // 中間畫作 - 向左移動（中速）
-  gsap.to([paint3.value, paint4.value], {
-    xPercent: -20,
-    scale: 1.05,
-    rotation: -2,
-    ease: "none",
-    scrollTrigger: {
-      trigger: svgRef.value,
-      start: "top bottom",
-      end: "bottom top",
-      scrub: 1.5
-    }
-  });
-
-  // 右側畫作 - 向左移動（慢速）
-  gsap.to(paint5.value, {
-    xPercent: -40,
-    rotation: 2,
-    ease: "none",
-    scrollTrigger: {
-      trigger: svgRef.value,
-      start: "top bottom",
-      end: "bottom top",
-      scrub: 2
-    }
-  });
-
-  // 思考者雕像 - 特殊左右搖擺效果
-  gsap.to(paint6.value, {
-    xPercent: 25,
-    rotationY: 20,
-    rotationZ: 5,
-    scale: 1.1,
-    transformOrigin: "center center",
-    ease: "none",
-    scrollTrigger: {
-      trigger: svgRef.value,
-      start: "top bottom",
-      end: "bottom top",
-      scrub: 1.5
-    }
-  });
-
-  // SVG 整體左右傾斜效果
-  gsap.to(svgRef.value, {
-    rotationZ: 2,
-    xPercent: -10,
-    ease: "none",
-    scrollTrigger: {
-      trigger: svgRef.value,
-      start: "top center",
-      end: "bottom center",
-      scrub: 2
-    }
-  });
-
-  // 背景層左右視差效果
-  if (parallaxBg.value) {
-    const bgLayers = parallaxBg.value.querySelectorAll('.bg-layer');
-    bgLayers.forEach((layer, index) => {
-      gsap.to(layer, {
-        xPercent: -15 * (index + 1), // 每層不同的左右移動速度
-        ease: "none",
-        scrollTrigger: {
-          trigger: parallaxBg.value,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: true
-        }
-      });
-    });
-  }
-
-  // 內容區塊的左右交替進入
-  if (contentSection.value) {
-    const contentBlocks = contentSection.value.querySelectorAll('.content-block');
-    contentBlocks.forEach((block, index) => {
-      const direction = index % 2 === 0 ? -100 : 100; // 交替從左右進入
-      
-      gsap.fromTo(block, 
-        {
-          opacity: 0,
-          x: direction,
-          rotationY: direction > 0 ? -15 : 15
-        },
-        {
-          opacity: 1,
-          x: 0,
-          rotationY: 0,
-          duration: 1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: block,
-            start: "top 80%",
-            end: "bottom 20%",
-            toggleActions: "play none none reverse"
-          }
-        }
-      );
-      
-      // 個別內容塊的左右視差效果
-      gsap.to(block, {
-        xPercent: index % 2 === 0 ? -10 : 10, // 交替左右移動
-        ease: "none",
-        scrollTrigger: {
-          trigger: block,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 2
-        }
-      });
-    });
-  }
-
-  // 鼠標左右移動視差效果
-  let mouseX = 0;
-
-  const handleMouseMove = (e) => {
-    mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-
-    // SVG 左右跟隨鼠標
-    gsap.to(svgRef.value, {
-      rotationY: mouseX * 5,
-      x: mouseX * 20,
-      transformPerspective: 1000,
-      duration: 1,
-      ease: "power2.out"
-    });
-
-    // 左邊畫作向右跟隨
-    gsap.to([paint1.value, paint2.value], {
-      x: mouseX * 30,
-      rotation: mouseX * 2,
-      duration: 1.5,
-      ease: "power2.out"
-    });
-
-    // 右邊畫作向左反向跟隨
-    gsap.to([paint4.value, paint5.value], {
-      x: -mouseX * 25,
-      rotation: -mouseX * 1.5,
-      duration: 1.2,
-      ease: "power2.out"
-    });
-
-    // 中間畫作微妙跟隨
-    gsap.to(paint3.value, {
-      x: mouseX * 15,
-      duration: 1.8,
-      ease: "power2.out"
-    });
-
-    // 思考者左右搖擺
-    gsap.to(paint6.value, {
-      rotationY: mouseX * 10,
-      x: mouseX * 20,
-      duration: 1,
-      ease: "power2.out"
-    });
-  };
-
-  document.addEventListener('mousemove', handleMouseMove);
-
-  // 清理函數
-  onUnmounted(() => {
-    document.removeEventListener('mousemove', handleMouseMove);
-  });
-
-  // 滾動方向檢測的左右效果
-  let lastScrollY = 0;
-  
-  const handleScroll = () => {
-    const currentScrollY = window.scrollY;
-    const scrollDirection = currentScrollY > lastScrollY ? 1 : -1;
-    
-    // 根據滾動方向調整左右移動
-    gsap.to([paint1.value, paint3.value, paint5.value], {
-      x: scrollDirection * 10,
-      duration: 0.5,
-      ease: "power2.out"
-    });
-    
-    gsap.to([paint2.value, paint4.value], {
-      x: -scrollDirection * 8,
-      duration: 0.5, 
-      ease: "power2.out"
-    });
-    
-    lastScrollY = currentScrollY;
-  };
-  
-  window.addEventListener('scroll', handleScroll);
-  
-  onUnmounted(() => {
-    window.removeEventListener('scroll', handleScroll);
-  });
-};
-
-// 在組件銷毀時清除
+// 在組件銷毀時清除 SplitText 的修改，避免污染 DOM
 onUnmounted(() => {
   if (mySplitText) {
-    mySplitText.revert();
+    mySplitText.revert(); // 將文字恢復到原始狀態
   }
-  ScrollTrigger.getAll().forEach(trigger => trigger.kill());
 });
+
+
 </script>
 
 <style lang="scss" scoped>
