@@ -102,12 +102,7 @@
           <router-link to="/front/ExpoAreaPage">leam more</router-link>
         </li>
       </ul>
-
     </div>
-
-
-
-
   </div>
 
 </template>
