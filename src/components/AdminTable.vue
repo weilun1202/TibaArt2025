@@ -24,17 +24,48 @@
     <table class="result-table">
       <thead>
         <tr>
-          <th v-for="col in columns" :key="col.key">
+          <th v-for="col in columns" :key="col.key" :class="col.class">
             {{ col.label }}
           </th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="(row, index) in paginatedData" :key="index">
-          <td v-for="col in columns" :key="col.key">
-            <div :class="col?.class">
+          <td v-for="col in columns" :key="col.key" :class="col.class">
+            <!-- 狀態欄位：開關按鈕 -->
+              <template v-if="col.type === 'switch'">
+                <button
+                  @click="toggleStatus(row)"
+                  :class="['switch-btn', row.status ? 'on' : 'off']"
+                >
+                  {{ row.status ? '啟用' : '停用' }}
+                </button>
+              </template>
+              <!-- 狀態欄位：下拉選單 -->
+              <template v-else-if="col.type === 'select'">
+                <select v-model="row[col.key]" @change="handleStatusChange(row)">
+                  <option
+                    v-for="option in col.options || []"
+                    :key="option"
+                    :value="option"
+                  >
+                    {{ option }}
+                  </option>
+                </select>
+              </template>
+              <!-- 詳細按鈕 -->
+              <template v-else-if="col.type === 'button'">
+              <button @click="emit('view-more', row)">
+                {{ col.buttonLabel || '查看' }}
+              </button>
+            </template>
+            
+            <template v-else>
               {{ row[col.key] }}
-            </div>
+            </template>
+            <!-- <div :class="col?.class">
+              {{ row[col.key] }}
+            </div> -->
           </td>
         </tr>
         <tr v-if="paginatedData.length === 0">
@@ -60,12 +91,13 @@ const props = defineProps({
   data: Array
 })
 
-const emit = defineEmits(['add'])
+const emit = defineEmits(['add', 'toggle-status', 'status-change', 'view-more'])
 
 const selectedKey = ref('')
 const keyword = ref('')
 const currentPage = ref(1)
 const itemsPerPage = 10
+
 
 // 篩選後的資料
 const filteredData = computed(() => {
@@ -102,6 +134,18 @@ function handleAdd() {
 watch([selectedKey, keyword], () => {
   currentPage.value = 1
 })
+
+
+// 狀態按鈕開關
+function toggleStatus(row) {
+  row.status = !row.status
+  emit('toggle-status', row)  // 通知外層
+}
+
+function handleStatusChange(row) {
+  emit('status-change', row)
+}
+
 </script>
 
 
@@ -152,6 +196,10 @@ watch([selectedKey, keyword], () => {
   color: #fff;
 }
 
+.result-table tbody tr:hover{
+  background-color: #eee;
+}
+
 .result-table .empty {
   text-align: center;
   color: #888;
@@ -178,4 +226,34 @@ watch([selectedKey, keyword], () => {
   color: #aaa;
   cursor: default;
 }
+
+// 狀態按鈕
+.switch-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.switch-btn.on {
+  background-color: $logoColor4;
+  color: white;
+}
+
+.switch-btn.off {
+  background-color: #ccc;
+  color: white;
+}
+
+// 表格長寬
+@for $i from 1 through 300 {
+  @if $i % 10 == 0{
+    .w-#{$i} {
+      width: #{$i}px;
+    }
+  }
+}
+
 </style>

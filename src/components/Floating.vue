@@ -124,7 +124,7 @@ const goFront = () => {
   router.push('/front')
 }
 const goAdmin = () => {
-  router.push('/admin')
+  router.push('/admin/login')
 }
 
 
