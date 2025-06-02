@@ -191,11 +191,7 @@ const goFront = () => {
     router.push('/front')
 }
 const goAdmin = () => {
-<<<<<<< HEAD
-    router.push('/admin')
-=======
   router.push('/admin/login')
->>>>>>> yi-xh
 }
 </script>
 
