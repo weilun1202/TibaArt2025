@@ -2,8 +2,8 @@
 <template>
   <Teleport to="body">
     <Transition name="modal">
-    <div v-if="isOpen" class="modal-overlay">
-      <div class="modal-content">
+    <div v-if="isOpen" class="modal-overlay" @click="handleOverlayClick">
+      <div class="modal-content" @click.stop>
           <button @click="close" class="close-button">x</button>
         <header v-if="title" class="modal-header">
           <h2>{{ title }}</h2>
@@ -21,22 +21,22 @@
 </template>
 
 <script setup>
-import { ref, defineProps, defineEmits } from 'vue';
+import { defineProps, defineEmits } from 'vue';
 
 defineProps({
-  title: String, // 彈出視窗標題
-  isOpen: Boolean, // 控制彈出視窗顯示/隱藏
+  title: String, 
+  isOpen: Boolean, 
 });
 
 const emit = defineEmits(['update:isOpen', 'file-selected', 'click']);
 
-const previewUrl = ref(null);
-
 const close = () => {
-  emit('update:isOpen', false); // 觸發關閉事件
-  previewUrl.value = null; 
+  emit('update:isOpen', false); 
 };
 
+const handleOverlayClick = () => {
+  emit('click'); 
+};
 
 </script>
 

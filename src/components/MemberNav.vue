@@ -2,30 +2,31 @@
   <div class="memSideDiv">
     <div class="memSideCon">
         <div class="memAvatarDiv">
-            <div class="avatarUploaded uploadedUrl image-uploaded" v-if="uploadedUrl">
-              <img class="memAvatar" :src="uploadedUrl" alt="">
+            <div class="memAvatarCon avatarUploaded uploadedUrl image-uploaded" v-if="uploadedUrl">
+              <img class="memAvatar" :src="uploadedUrl" alt="上傳的頭像">
+            </div>
+            <div v-else class="memAvatarCon">
+              <img class="memAvatar" src="@/assets/img/TibaArt-Icon.svg" alt="預設頭像" />
             </div>
             <div>
               <button class="avatarUpload" @click="openModal">上傳照片</button>
-              <Modal v-model:isOpen="showModal" title="上傳圖片" @file-selected="handleFileSelected">
+              <Modal v-model:isOpen="showModal" title="上傳圖片" @file-selected="handleFileSelected" @click="closeModal">
                 <div class="modalDIY">
-                  <p class="modalText">選擇欲上傳的照片</p>
-                  <input type="file" accept="image/*" @change="handleFileChange" name="" id="" >
+                  <label for="file-upload" class="modalText">選擇圖片</label>
+                  <input id="file-upload" type="file" accept="image/*" @change="handleFileChange">
                   <div class="avatarPreview image-preview" v-if="previewUrl">
-                     <img :src="previewUrl" alt="Preview" style="max-width: 100%; max-height: 120px;" />
+                     <img :src="previewUrl" alt="預覽" style="max-width: 100%; max-height: 120px;" />
                   </div>
-                 
-
                 </div>
                 <div class="modalBtnSet">
-                  <button @click="showModal = false">取消</button>
-                  <button @click="uploadImage">確認上傳</button>   
+                  <button @click="closeModal" aria-label="取消上傳">取消</button>
+                  <button @click="uploadImage" aria-label="確認上傳圖片">確認上傳</button>   
                 </div>              
               </Modal>
-              <div v-if="selectedImageUrl" class="uploaded-image">
+              <!-- <div v-if="selectedImageUrl" class="uploaded-image">
                 <h3>已上傳的圖片：</h3>
                 <img :src="selectedImageUrl" alt="Uploaded Image" style="max-width: 100%; max-height: 120px;" />
-              </div>
+              </div> -->
             </div>
         </div>
         <div class="memName">
@@ -45,60 +46,47 @@
 </template>
 
 <script setup>
-import { ref, defineProps, defineEmits } from 'vue';
+import { ref } from 'vue';
 import Modal from '@/components/Modal.vue';
 
 const name = '緯藝藝術家'
 const logout = () => {
   alert('已登出')
 }
-
-defineProps({
-  title: String,
-  isOpen: Boolean,
-});
-
-const emit = defineEmits(['update:isOpen', 'file-selected']);
-
-const previewUrl = ref(null); // 用於儲存圖片預覽的 URL
-
-const close = () => {
-  emit('update:isOpen', false);
-  previewUrl.value = null; // 關閉時清除預覽
-};
-
-const handleFileChange = (event) => {
-  const file = event.target.files[0]; // 獲取第一個上傳的檔案
-  if (file && file.size > 5 * 1024 * 1024) { // 限制 5MB
-    alert('檔案大小不能超過 5MB');
-    return;
-  }
-  previewUrl.value = URL.createObjectURL(file);
-  emit('file-selected', file);
-};
-
-
-
-
 const showModal = ref(false);
-const selectedImageUrl = ref(null);
+const previewUrl = ref(null); 
+const uploadedUrl = ref(null); 
+const selectedFile = ref(null);
 
 const openModal = () => {
   showModal.value = true;
 };
 
+const closeModal = () => {
+  showModal.value = false;
+  previewUrl.value = null; 
+};
+
+const handleFileChange = (event) => {
+  const file = event.target.files[0]; 
+  if (file && file.size > 5 * 1024 * 1024) { 
+    alert('檔案大小不能超過 5MB');
+    return;
+  }
+  previewUrl.value = URL.createObjectURL(file);
+  selectedFile.value = file;
+};
+
 const handleFileSelected = (file) => {
-  // 儲存選擇的檔案並生成預覽（可選）
-  selectedImageUrl.value = URL.createObjectURL(file);
+  selectedFile.value = file; 
   console.log('選擇的檔案：', file);
 };
 
 
-
 const uploadImage = async () => {
-  if (selectedImageUrl.value) {
+  if (selectedFile.value) {
     const formData = new FormData();
-    formData.append('image', file); // file 從 handleFileSelected 儲存
+    formData.append('image', selectedFile.value);
     try {
       const response = await fetch('/api/upload', {
         method: 'POST',
@@ -106,17 +94,22 @@ const uploadImage = async () => {
       });
       const result = await response.json();
       console.log('上傳成功：', result);
+      // 假設後端返回上傳後的圖片 URL
+      // 如果後端未返回 URL，則使用臨時 URL
+      uploadedUrl.value = result.url || URL.createObjectURL(selectedFile.value);
       showModal.value = false;
+      previewUrl.value = null;
+      selectedFile.value = null;
     } catch (error) {
       console.error('上傳失敗：', error);
+      alert('圖片上傳失敗，請重試');
     }
+  } else {
+    alert('請先選擇一張圖片');
   }
 };
 
-// const uploadImage = () => {
-//   alert('圖片已上傳');
-//   showModal.value = false;
-// };
+
     
 </script>
 
@@ -145,8 +138,8 @@ const uploadImage = async () => {
         position: relative;
         width: 120px;
         height: 120px;
-        border-radius: 50%;
-        border: 2px dashed;
+        // border-radius: 50%;
+        // border: 2px dashed;
         margin: 0 auto;
 
       @media (max-width:496px){ 
@@ -181,13 +174,27 @@ const uploadImage = async () => {
         }
       }
   }
+
+
+  .memAvatarCon{
+    position: relative;
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        border: 2px dashed;
+        margin: 0 auto;
+
+      @media (max-width:496px){ 
+          width: 100px;
+          height: 100px;
+        }
+  }
   
       .memAvatar{
         width: 100%;
         height: 100%;
         border-radius: 50%;
         object-fit: cover;
-
       }
 
 

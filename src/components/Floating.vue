@@ -140,10 +140,11 @@ const goAdmin = () => {
 }
 
 #canvas {
+  position: fixed;
   display: block;
   width: 100vw;
   height: 100vh;
-  z-index: 0; 
+  z-index: 0;
 }
 
 .frontQ,
