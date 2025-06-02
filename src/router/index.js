@@ -108,14 +108,23 @@ const routes = [
 
 ]
 
+// const router = createRouter({
+//   history: createWebHistory(),
+//   routes,
+//   scrollBehavior(to, from, savedPosition) {
+//     // always scroll to top
+//     return { top: 0 }
+//   },
+// })
 const router = createRouter({
-  history: createWebHistory(),
-  routes,
+  history: createWebHistory(import.meta.env.BASE_URL),  // 使用 Vite 設定的 base 路徑
+  routes: routes,
   scrollBehavior(to, from, savedPosition) {
-    // always scroll to top
+    // 每次切換路由都滾動到頁面頂部
     return { top: 0 }
-  },
+  }
 })
+
 
 export default router
 
