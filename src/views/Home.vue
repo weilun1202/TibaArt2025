@@ -1,7 +1,6 @@
 <template>
 
   <Floating/>
-  <!-- <Flashy /> -->
   <Footer />
 
 

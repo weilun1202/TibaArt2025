@@ -142,7 +142,7 @@ function startAnimation() {
         drawStaticElements(context);
         
         // 動畫邏輯
-        time += 0.1;
+        time += 0.05;
         const y = baseY + Math.sin(time) * float;
         
         // 繪製浮動的 logo
