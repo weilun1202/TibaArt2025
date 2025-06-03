@@ -615,10 +615,13 @@ header .pageTitle {
 }
 .about .banner {
   display: flex;
-  align-items: center; /* 讓文字與圖片垂直置中 */
-  justify-content: space-between; /* 文字與圖片間距 */
+  align-items: center;
+  /* 讓文字與圖片垂直置中 */
+  justify-content: space-between;
+  /* 文字與圖片間距 */
   gap: 20px;
-  padding: 32px 0; /* 上下留白 */
+  padding: 32px 0;
+  /* 上下留白 */
   overflow: hidden;
 }
 .about .banner .banner-text {
@@ -626,13 +629,13 @@ header .pageTitle {
   flex: 0 0 35%;
 }
 .about .banner .banner-text h2 {
-  padding-left: 12px;
+  padding-left: 32px;
   margin: 0;
   font-size: 2.5rem;
   line-height: 1.2;
 }
 .about .banner .banner-text p {
-  padding-left: 12px;
+  padding-left: 32px;
   margin: 8px 0 0;
   font-size: 1rem;
   color: #2F2F2F;
@@ -653,7 +656,7 @@ header .pageTitle {
   color: #2F2F2F;
 }
 .about .intro p {
-  margin: 0;
+  margin: 0 32px;
   line-height: 1.6;
   color: #2F2F2F;
   text-align: justify;
@@ -665,13 +668,16 @@ header .pageTitle {
 }
 .about .control {
   position: relative;
-  height: 70vh; /* 滿版高度（視窗高度） */
-  overflow: hidden; /* 隱藏超出左右範圍 */
+  height: 70vh;
+  /* 滿版高度（視窗高度） */
+  overflow: hidden;
+  /* 隱藏超出左右範圍 */
 }
 .about .control .timeline {
   display: flex;
   width: -moz-max-content;
-  width: max-content; /* 根據內容自動撐開寬度 */
+  width: max-content;
+  /* 根據內容自動撐開寬度 */
   list-style: none;
   padding: 0;
   margin: 32px;
@@ -679,10 +685,10 @@ header .pageTitle {
 .about .control .timeline li {
   flex: 0 0 auto;
   width: 260px;
-  margin-right: 32px;
+  margin-right: 60px;
 }
 .about .control .timeline li h3 {
-  font-size: 2rem;
+  font-size: 1.25rem;
   margin-bottom: 12px;
 }
 .about .control .timeline li span {
@@ -690,7 +696,7 @@ header .pageTitle {
   line-height: 1.6;
 }
 .about .control .timeline li img {
-  width: 100%;
+  max-width: 300px;
   border-radius: 4px;
   margin-bottom: 8px;
 }
@@ -1581,7 +1587,7 @@ header .pageTitle {
   /* 3) 放大鏡 (magnifier) 的基本樣式 */
 }
 .expoArea .banner {
-  max-width: 1200px;
+  max-width: 100%;
   margin: 32px auto;
   display: flex;
   flex-wrap: wrap;
@@ -1592,7 +1598,7 @@ header .pageTitle {
   flex: 1;
   min-width: 300px;
   box-sizing: border-box;
-  padding: 32px 12px;
+  padding: 32px 32px;
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
@@ -1634,7 +1640,7 @@ header .pageTitle {
 }
 .expoArea .expoArea-intro h2 {
   font-size: 2.5rem;
-  margin-bottom: 8px;
+  margin-bottom: 32px;
   font-weight: bold;
 }
 .expoArea .expoArea-intro h3 {
@@ -1693,10 +1699,12 @@ header .pageTitle {
 }
 .expoArea .expoArea-artwork .expoArea-card .title {
   display: flex;
+  align-items: baseline;
   gap: 8px;
   margin: 16px 0 8px;
 }
 .expoArea .expoArea-artwork .expoArea-card .title h3 {
+  font-size: 1.5rem;
   margin: 0;
 }
 .expoArea .expoArea-artwork .expoArea-card .title p {

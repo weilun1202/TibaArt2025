@@ -253,10 +253,16 @@ const updateItemQuan = (productId, newQuan) => {
 }
 
 //移除商品
-const handleRemoveItem = (productId) => {
-    const item = cartItems.value.find(item => item.id === productId);
-    if(item && confirm(`確定要移除「${item.name}」嗎？`)){
-        removeFromCart(productId);
+const handleRemoveItem = async (productId) => {
+    try {
+        await new Promise(resolve => requestAnimationFrame(resolve));
+        
+        const item = cartItems.value.find(item => item.id === productId);
+        if(item && confirm(`確定要移除「${item.name}」嗎？`)){
+            removeFromCart(productId);
+        }
+    } catch (error) {
+        console.error('移除商品失敗:', error);
     }
 }
 

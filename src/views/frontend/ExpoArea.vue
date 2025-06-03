@@ -9,9 +9,9 @@
           <p>The Luminous Silence</p>
           <p>「當情感無以為繼，色彩替我們說話。」 凱婭·露希亞的創作長年在寂靜與爆發之間來回拉扯，她以自然隱喻人心，讓畫布成為風暴中心的靜止點。
             本次展覽精選其近十年間五件代表作，以色彩為線索，從冷冽冰縫、綠林密靜，到炙熱的內燃記憶，呈現一場無語卻極具張力的感官旅程。觀者不需理解，僅需感受</p>
-            <router-link to="/front/Sponsor" ><button>贊助</button></router-link>
-          </div >
-          <img src="/src/assets/img/expoArea-banner.png" alt="">
+          <router-link to="/front/Sponsor"><button>贊助</button></router-link>
+        </div>
+        <img src="/public/assets/img/expoArea-banner.png" alt="">
       </div>
 
       <div class="expoArea-intro">
@@ -19,33 +19,25 @@
         <h3>艾莉亞·諾瓦</h3>
         <p>出生於冰島雷克雅維克，自幼沉浸於極光與火山地貌的視覺震撼中。20歲時赴挪威卑爾根藝術學院深造，後旅居日本京都五年，受禪意美學影響深遠。</p>
         <div class="expoArea-artist">
-          <img src="/src/assets/img/expoArea-artist.png" alt="artist">
+          <img src="/public/assets/img/expoArea-artist.png" alt="artist">
           <div>
-          <h5>她認為自然界的極端對比，冷與熱、生與死、光與闇，是情緒最誠實的投射。她的創作動機是透過畫布「捕捉內心風暴中那道平靜的光」，將感知與直覺轉化為視覺語言。
-          </h5>
+            <h5>她認為自然界的極端對比，冷與熱、生與死、光與闇，是情緒最誠實的投射。她的創作動機是透過畫布「捕捉內心風暴中那道平靜的光」，將感知與直覺轉化為視覺語言。
+            </h5>
 
             <div class="icons">
-            <font-awesome-icon icon="globe" />
-            <font-awesome-icon :icon="['fab', 'instagram']" />
-            <font-awesome-icon :icon="['fab', 'behance']" />
+              <font-awesome-icon icon="globe" />
+              <font-awesome-icon :icon="['fab', 'instagram']" />
+              <font-awesome-icon :icon="['fab', 'behance']" />
             </div>
-            </div>
+          </div>
         </div>
       </div>
 
 
       <ul class="expoArea-artwork">
-        <li
-          v-for="(art, idx) in artworks"
-          :key="idx"
-          class="expoArea-card"
-        >
+        <li v-for="(art, idx) in artworks" :key="idx" class="expoArea-card">
           <div class="zoom-container">
-            <img
-              class="zoom-image"
-              :src="art.imgSrc"
-              :alt="art.title"
-            />
+            <img class="zoom-image" :src="art.imgSrc" :alt="art.title" />
             <div class="magnifier"></div>
           </div>
           <div class="title">
@@ -72,7 +64,7 @@ import { ref } from 'vue'
 // 宣告 artworks 陣列
 const artworks = ref([
   {
-    imgSrc: '/src/assets/img/expoArea-artwork1.png',
+    imgSrc: import.meta.env.BASE_URL + '/assets/img/expoArea-artwork1.png',
     title: '裂縫之下',
     englishTitle: 'Beneath the Fracture',
     medium: '油畫',
@@ -81,7 +73,7 @@ const artworks = ref([
     link: '/front/ExpoAreaPage',
   },
   {
-    imgSrc: '/src/assets/img/expoArea-artwork2.png',
+    imgSrc: import.meta.env.BASE_URL + '/assets/img/expoArea-artwork2.png',
     title: '裂縫之下',
     englishTitle: 'Beneath the Fracture',
     medium: '油畫',
@@ -90,7 +82,7 @@ const artworks = ref([
     link: '/front/ExpoAreaPage',
   },
   {
-    imgSrc: '/src/assets/img/expoArea-artwork3.png',
+    imgSrc: import.meta.env.BASE_URL + '/assets/img/expoArea-artwork3.png',
     title: '裂縫之下',
     englishTitle: 'Beneath the Fracture',
     medium: '油畫',
@@ -99,7 +91,7 @@ const artworks = ref([
     link: '/front/ExpoAreaPage',
   },
   {
-    imgSrc: '/src/assets/img/expoArea-artwork4.png',
+    imgSrc: import.meta.env.BASE_URL + '/assets/img/expoArea-artwork4.png',
     title: '裂縫之下',
     englishTitle: 'Beneath the Fracture',
     medium: '油畫',
@@ -108,7 +100,7 @@ const artworks = ref([
     link: '/front/ExpoAreaPage',
   },
   {
-    imgSrc: '/src/assets/img/expoArea-artwork5.png',
+    imgSrc: import.meta.env.BASE_URL + '/assets/img/expoArea-artwork5.png',
     title: '裂縫之下',
     englishTitle: 'Beneath the Fracture',
     medium: '油畫',
@@ -192,6 +184,7 @@ onMounted(() => {
     });
   });
 });
+
 </script>
 
 <style lang="scss" scoped>
