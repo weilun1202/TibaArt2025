@@ -178,23 +178,22 @@
   font-size: 2rem;
   line-height: 40px;
   font-weight: bold;
-  opacity: 0.5;
   position: relative;
   display: inline-block;
   padding-bottom: 3px;
   cursor: pointer;
 }
 .shopTab .tibaShopTab h1, .shopTab .artShopTab h1 {
-  color: #29786A;
+  color: #2F2F2F;
 }
 .shopTab .tibaShopTab::after, .shopTab .artShopTab::after {
   content: "";
   position: absolute;
   left: 0;
-  bottom: -4px;
+  bottom: -6px;
   width: 0;
   height: 4px;
-  background-color: #29786A;
+  background-color: #2F2F2F;
   transition: width 0.5s ease-in-out;
 }
 @media (max-width: 520px) {
@@ -207,12 +206,13 @@
   width: 100%;
   left: 0;
 }
-.shopTab .tibaShopTab.active, .shopTab .artShopTab.active {
-  opacity: 1;
+.shopTab .tibaShopTab.active h1, .shopTab .artShopTab.active h1 {
+  color: #29786A;
 }
 .shopTab .tibaShopTab.active::after, .shopTab .artShopTab.active::after {
   width: 100%;
   left: 0;
+  background-color: #29786A;
 }
 @media (max-width: 760px) {
   .shopTab {
@@ -343,7 +343,7 @@ header .pageTitle {
   left: 0;
   right: 0;
   z-index: 1000;
-  background: transparent;
+  background: linear-gradient(180deg, #f6eee4 0%, #ffffff 100%);
 }
 .frontNav .logo {
   height: 60px;
@@ -357,6 +357,7 @@ header .pageTitle {
   justify-content: center;
   align-items: center;
   gap: 16px;
+  overflow: hidden;
 }
 .frontNav ul li {
   width: 100%;
@@ -911,7 +912,7 @@ header .pageTitle {
   }
 }
 .subTitle h1 {
-  color: #29786A;
+  color: #2F2F2F;
   font-size: 2.5rem;
   font-weight: bold;
   line-height: 48px;
@@ -1032,9 +1033,8 @@ header .pageTitle {
 .recoTitle {
   font-size: 2rem;
   font-weight: bold;
-  color: #29786A;
   display: block;
-  margin: 100px auto 40px;
+  margin: 80px auto 40px;
   text-align: center;
 }
 
@@ -1201,6 +1201,9 @@ header .pageTitle {
   font-size: 1rem;
   letter-spacing: 1px;
 }
+.form label .formHint {
+  color: #C34E4E;
+}
 .form input,
 .form .invoiceType {
   width: 100%;
@@ -1301,26 +1304,24 @@ header .pageTitle {
     margin-top: 5px;
     gap: 10px;
   }
-  .cartItem .cardName, .cartItem .productPrice, .cartItem .productDescription {
+  .cartItem .cardName,
+  .cartItem .productPrice,
+  .cartItem .productDescription {
     font-size: 1rem;
     margin-bottom: 2px;
   }
   .cartItem .selectQuan {
-    width: 86px;
+    width: 80px;
+  }
+  .cartItem .selectQuan .addMinus,
+  .cartItem .selectQuan #quantity,
+  .cartItem .selectQuan .addMinus {
     height: 24px;
   }
-  .cartItem .selectQuan .addMinus, .cartItem .selectQuan #quantity, .cartItem .selectQuan .addMinus {
-    height: 24px;
-    position: relative;
-    top: -6px;
-    right: 0;
-  }
-  .cartItem .selectQuan #quantity {
-    background-color: transparent;
-    width: 24px;
-  }
-  .cartItem .selectQuan .addMinus, .cartItem .selectQuan .addMinus {
-    width: 8px;
+  .cartItem .selectQuan .addMinus,
+  .cartItem .selectQuan .addMinus {
+    width: 4px;
+    padding: 8px;
   }
   .removeBtn {
     width: 32px;

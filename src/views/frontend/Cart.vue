@@ -25,7 +25,9 @@
                                 key="item.id">
 
                             <div class="cartItem">
-                                <img :src="item.image" :alt="item.name">
+                                <router-link :to="{name: 'product', params: {id: item.id}}" class="itemImage">
+                                    <img :src="baseUrl + item.image" :alt="item.name">
+                                </router-link>
                                 <div class="cartDetails">
                                     <h3 class="cardName">{{item.name}}</h3>
                                     <p class="productPrice">價格：NT$ {{item.price}}</p>
@@ -41,7 +43,7 @@
                                             <input type="number" 
                                                 :id="'quantity-' + item.id" 
                                                 :value="item.quantity"
-                                                @input="updateItemQuan(item.Id, $event.target.value)" 
+                                                @input="updateItemQuan(item.id, $event.target.value)" 
                                                 min="1">
 
                                             <button type="button" class="addMinus"
@@ -66,33 +68,55 @@
                         <h2 class="cardTitle">訂購人資訊</h2>
                         <div class="form">
                             <div class="formGroup">
-                                <label for="buyerName">姓名</label>
+                                <label for="buyerName">
+                                    姓名
+                                    <span class="formHint">*</span>
+                                </label>
                                 <input id="buyerName" type="text" 
                                     placeholder="請輸入姓名" 
-                                    v-model="orderInfo.name">
+                                    v-model="orderInfo.name"
+                                    @input="clearError(buyerName)">
+                                    <div class="errorMsg" 
+                                        v-if="errors.buyerName">
+                                    {{errors.buyerName}}</div>
                             </div>
                             <div class="formGroup">
-                                <label for="buyerTel">電話</label>
+                                <label for="buyerTel">
+                                    電話
+                                    <span class="formHint">*</span>
+                                </label>
                                 <input id="buyerTel" type="tel" 
                                     placeholder="請輸入電話" 
-                                    v-model="orderInfo.tel">
+                                    v-model="orderInfo.tel"
+                                    @input="restrictNum('order')"
+                                    required>
                             </div>
                             <div class="formGroup">
-                                <label for="buyerAddress">地址</label>
+                                <label for="buyerAddress">
+                                    地址
+                                    <span class="formHint">*</span>
+                                </label>
                                 <input id="buyerAddress" type="text" 
                                     placeholder="請輸入地址" 
                                     v-model="orderInfo.address">
                             </div>
                             <div class="formGroup">
-                                <label for="invoiceType">發票類型</label>
-                                <select id="invoiceType" class="invoiceType">
+                                <label for="invoiceType">
+                                    發票類型
+                                    <span class="formHint">*</span>
+                                </label>
+                                <select id="invoiceType" class="invoiceType"
+                                    v-model="orderInfo.invoiceType">
                                     <option value="">請選擇</option>
                                     <option value="">紙本發票</option>
-                                    <option value="">電子發票</option>
+                                    <option value="electronic">電子發票</option>
                                 </select>
                             </div>
-                            <div class="formGroup">
-                                <label for="carrier">載具</label>
+                            <div class="formGroup" v-if="orderInfo.invoiceType =='electronic'">
+                                <label for="carrier">
+                                    載具
+                                    <span class="formHint">*</span>
+                                </label>
                                 <input id="carrier" type="text" placeholder="請輸入載具號碼">
                             </div>
                         </div>
@@ -112,21 +136,32 @@
                                 </div>
                             </div>
                             <div class="formGroup">
-                                <label for="sameName">姓名</label>
+                                <label for="sameName">
+                                    姓名
+                                    <span class="formHint">*</span>
+                                </label>
                                 <input id="sameName" type="text" 
                                     placeholder="請輸入姓名" 
                                     v-model="recipientInfo.name"
                                     :disabled="sameAsOrder">
                             </div>
                             <div class="formGroup">
-                                <label for="sameTel">電話</label>
+                                <label for="sameTel">
+                                    電話
+                                    <span class="formHint">*</span>
+                                </label>
                                 <input id="sameTel" type="tel" 
                                     placeholder="請輸入電話" 
                                     v-model="recipientInfo.tel"
-                                    :disabled="sameAsOrder">
+                                    :disabled="sameAsOrder"
+                                    @input="restrictNum('recipient')"
+                                    required>
                             </div>
                             <div class="formGroup">
-                                <label for="sameAddress">地址</label>
+                                <label for="sameAddress">
+                                    地址
+                                    <span class="formHint">*</span>
+                                </label>
                                 <input id="sameAddress" type="text" 
                                     placeholder="請輸入地址" 
                                     v-model="recipientInfo.address"
@@ -162,6 +197,7 @@ import{ref, watch, computed } from 'vue';
 import {useCart} from '@/stores/cart.js';
 
 const { cartItems, updateQuan, removeFromCart, totalPrice } = useCart();
+const baseUrl = import.meta.env.BASE_URL;
 
 
 const orderInfo = ref({
@@ -245,4 +281,29 @@ watch(orderInfo, (update) => {
         recipientInfo.value.address = update.address;
     }
 }, { deep: true });  //確保能監聽到物件內部屬性的變化
+
+
+//驗證資料
+const errors = ref({});
+function validateForm(){
+    errors.value={};
+    
+    //有無商品
+    if(cartItems.value.length == 0){
+        errors.value.cart = '購物車不能為空'
+    }
+    
+    //電話只能輸入數字
+
+    //訂單資訊
+}
 </script>
+
+
+<style scoped>
+.errorMsg {
+    color: #e74c3c;
+    font-size: 14px;
+    margin-top: 5px;
+}
+</style>

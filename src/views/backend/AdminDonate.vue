@@ -9,10 +9,10 @@ import AdminTable from '@/components/AdminTable.vue'
 const columns = [
   { key: 'id', label: '筆數' },
   { key: 'patron', label: '贊助者' },
-  { key: 'sponsored', label: '受贊助人' },
+  { key: 'email', label: '贊助者信箱' },
+  { key: 'sponsored', label: '贊助展覽' },
   { key: 'amount', label: '金額' },
-  { key: 'size', label: '尺寸' },
-  { key: 'note', label: '備註' },
+  { key: 'time', label: '贊助時間' },
 ]
 
 // 假資料陣列

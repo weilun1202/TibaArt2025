@@ -35,71 +35,26 @@
 
 
       <ul class="expoArea-artwork">
-        <li class="expoArea-card">
-          <div class="zoom-container" >
-          <img class="zoom-image" src="/src/assets/img/expoArea-artwork1.png" alt="">
-          <div class="magnifier"></div>
+        <li
+          v-for="(art, idx) in artworks"
+          :key="idx"
+          class="expoArea-card"
+        >
+          <div class="zoom-container">
+            <img
+              class="zoom-image"
+              :src="art.imgSrc"
+              :alt="art.title"
+            />
+            <div class="magnifier"></div>
           </div>
           <div class="title">
-            <h3>裂縫之下</h3>
-            <p>Beneath the Fracture</p>
-            <p>油畫</p>
+            <h3>{{ art.title }}</h3>
+            <p>{{ art.englishTitle }}</p>
+            <p>{{ art.medium }}</p>
           </div>
-          <p>本畫靈感來自她親眼目睹的冰川裂縫，畫面以大面積裂痕與流動線條組成，象徵人內在的情緒斷層。她用此畫探討壓抑情感之下的潛流，並相信裂縫不是崩壞，而是讓光進入的通道。</p>
-          <router-link to="/front/ExpoAreaPage">leam more</router-link>
-        </li>
-
-        <li class="expoArea-card">
-          <div class="zoom-container" >
-          <img class="zoom-image" src="/src/assets/img/expoArea-artwork2.png" alt="">
-          <div class="magnifier"></div>
-          </div>
-          <div class="title">
-            <h3>裂縫之下</h3>
-            <p>Beneath the Fracture</p>
-            <p>油畫</p>
-          </div>
-          <p>本畫靈感來自她親眼目睹的冰川裂縫，畫面以大面積裂痕與流動線條組成，象徵人內在的情緒斷層。她用此畫探討壓抑情感之下的潛流，並相信裂縫不是崩壞，而是讓光進入的通道。</p>
-          <router-link to="/front/ExpoAreaPage">leam more</router-link>
-        </li>
-        <li class="expoArea-card">
-          <div class="zoom-container" >
-          <img class="zoom-image" src="/src/assets/img/expoArea-artwork3.png" alt="">
-          <div class="magnifier"></div>
-          </div>
-          <div class="title">
-            <h3>裂縫之下</h3>
-            <p>Beneath the Fracture</p>
-            <p>油畫</p>
-          </div>
-          <p>本畫靈感來自她親眼目睹的冰川裂縫，畫面以大面積裂痕與流動線條組成，象徵人內在的情緒斷層。她用此畫探討壓抑情感之下的潛流，並相信裂縫不是崩壞，而是讓光進入的通道。</p>
-          <router-link to="/front/ExpoAreaPage">leam more</router-link>
-        </li>
-                <li class="expoArea-card">
-          <div class="zoom-container" >
-          <img class="zoom-image" src="/src/assets/img/expoArea-artwork4.png" alt="">
-          <div class="magnifier"></div>
-          </div>
-          <div class="title">
-            <h3>裂縫之下</h3>
-            <p>Beneath the Fracture</p>
-            <p>油畫</p>
-          </div>
-          <p>本畫靈感來自她親眼目睹的冰川裂縫，畫面以大面積裂痕與流動線條組成，象徵人內在的情緒斷層。她用此畫探討壓抑情感之下的潛流，並相信裂縫不是崩壞，而是讓光進入的通道。</p>
-          <router-link to="/front/ExpoAreaPage">leam more</router-link>
-        </li>
-         <li class="expoArea-card">
-          <div class="zoom-container" >
-          <img class="zoom-image" src="/src/assets/img/expoArea-artwork5.png" alt="">
-          <div class="magnifier"></div>
-          </div>
-          <div class="title">
-            <h3>裂縫之下</h3>
-            <p>Beneath the Fracture</p>
-            <p>油畫</p>
-          </div>
-          <p>本畫靈感來自她親眼目睹的冰川裂縫，畫面以大面積裂痕與流動線條組成，象徵人內在的情緒斷層。她用此畫探討壓抑情感之下的潛流，並相信裂縫不是崩壞，而是讓光進入的通道。</p>
-          <router-link to="/front/ExpoAreaPage">leam more</router-link>
+          <p>{{ art.description }}</p>
+          <router-link :to="art.link">learn more</router-link>
         </li>
       </ul>
     </div>
@@ -108,6 +63,61 @@
 </template>
 
 <script setup>
+
+//v-for跑div
+
+
+import { ref } from 'vue'
+
+// 宣告 artworks 陣列
+const artworks = ref([
+  {
+    imgSrc: '/src/assets/img/expoArea-artwork1.png',
+    title: '裂縫之下',
+    englishTitle: 'Beneath the Fracture',
+    medium: '油畫',
+    description:
+      '本畫靈感來自她親眼目睹的冰川裂縫，畫面以大面積裂痕與流動線條組成，象徵人內在的情緒斷層。她用此畫探討壓抑情感之下的潛流，並相信裂縫不是崩壞，而是讓光進入的通道。',
+    link: '/front/ExpoAreaPage',
+  },
+  {
+    imgSrc: '/src/assets/img/expoArea-artwork2.png',
+    title: '裂縫之下',
+    englishTitle: 'Beneath the Fracture',
+    medium: '油畫',
+    description:
+      '本畫靈感來自她親眼目睹的冰川裂縫，畫面以大面積裂痕與流動線條組成，象徵人內在的情緒斷層。她用此畫探討壓抑情感之下的潛流，並相信裂縫不是崩壞，而是讓光進入的通道。',
+    link: '/front/ExpoAreaPage',
+  },
+  {
+    imgSrc: '/src/assets/img/expoArea-artwork3.png',
+    title: '裂縫之下',
+    englishTitle: 'Beneath the Fracture',
+    medium: '油畫',
+    description:
+      '本畫靈感來自她親眼目睹的冰川裂縫，畫面以大面積裂痕與流動線條組成，象徵人內在的情緒斷層。她用此畫探討壓抑情感之下的潛流，並相信裂縫不是崩壞，而是讓光進入的通道。',
+    link: '/front/ExpoAreaPage',
+  },
+  {
+    imgSrc: '/src/assets/img/expoArea-artwork4.png',
+    title: '裂縫之下',
+    englishTitle: 'Beneath the Fracture',
+    medium: '油畫',
+    description:
+      '本畫靈感來自她親眼目睹的冰川裂縫，畫面以大面積裂痕與流動線條組成，象徵人內在的情緒斷層。她用此畫探討壓抑情感之下的潛流，並相信裂縫不是崩壞，而是讓光進入的通道。',
+    link: '/front/ExpoAreaPage',
+  },
+  {
+    imgSrc: '/src/assets/img/expoArea-artwork5.png',
+    title: '裂縫之下',
+    englishTitle: 'Beneath the Fracture',
+    medium: '油畫',
+    description:
+      '本畫靈感來自她親眼目睹的冰川裂縫，畫面以大面積裂痕與流動線條組成，象徵人內在的情緒斷層。她用此畫探討壓抑情感之下的潛流，並相信裂縫不是崩壞，而是讓光進入的通道。',
+    link: '/front/ExpoAreaPage',
+  },
+])
+//放大鏡
 import { onMounted } from 'vue';
 import { gsap } from 'gsap';
 

@@ -11,12 +11,13 @@
                 <div class="shopTab">
                     <div class="subTitle">
                         <h1>商品資訊</h1>
+                        <!-- {{ $router.currentRoute }} -->
                     </div>
                 </div>
 
                 <div class="productContainer" v-if="currentProduct">
                     <div class="productImg">
-                        <img :src="currentProduct.image" alt="currentProduct.name">
+                        <img :src="baseUrl + currentProduct.image" alt="currentProduct.name">
                     </div>
                     <div class="productInfo">
                         <h1 class="productName">{{ currentProduct.name }}</h1>
@@ -50,9 +51,11 @@
                     <span class="recoTitle">或許您會喜歡</span>
                     <!-- 推薦商品列表 -->
                     <ul class="itemList">
-                        <li class="item" v-for="item in recommendedProducts" :key="item.id">
+                        <li class="item" 
+                            v-for="item in recommendedProducts" 
+                            :key="item.id">
                             <router-link :to="{ name: 'product', params: { id: item.id } }" class="itemImage">
-                                <img :src="item.image" :alt="item.name">
+                                <img :src="baseUrl + item.image" :alt="item.name">
                             </router-link>
 
                             <div class="itemInfo">
@@ -74,6 +77,7 @@
     </div>
 </template>
 
+
 <script setup>
 import { ref, onMounted, computed } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
@@ -81,6 +85,8 @@ import {useCart} from '@/stores/cart.js';
 
 const router = useRouter();
 const route = useRoute();
+const baseUrl = import.meta.env.BASE_URL;
+
 
 const {addToCart} = useCart();
 
@@ -90,7 +96,7 @@ const currentProduct = ref(null)
 const quantity = ref(1)
 
 onMounted(async () => {
-    const resp = await fetch('/productData.json')
+    const resp = await fetch(import.meta.env.BASE_URL + 'productData.json')
     if (!resp.ok) {
         throw new Error('無法載入商品資料')
     } else {
@@ -131,7 +137,6 @@ const handleAddToCart = () => {
     if(success){
         alert(`已將「${currentProduct.value.name}」x ${quantity.value} 加入購物車`);
         quantity.value = 1
-
     }
 }
 
@@ -144,3 +149,11 @@ const handleRecommendedAddToCart = (item) => {
 }
 
 </script>
+
+<style lang="scss" scoped>
+@import '/style.scss';
+.shopTab {
+    padding: 20px 20px 40px;
+}
+
+</style>

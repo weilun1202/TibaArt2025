@@ -4,7 +4,7 @@
     "name": "緯藝馬克杯",
     "description": "材質：磁器\n規格：325ml\n簡約設計馬克杯，溫潤手感，陪你度過每一個溫暖時刻。",
     "price": 500,
-    "image": "/assets/img/itemMug.jpg",
+    "image": "assets/img/itemMug.jpg",
     "category": "tiba"
   },
   {
@@ -12,7 +12,7 @@
     "name": "緯藝帆布袋",
     "description": "材質：厚磅純棉帆布\n尺寸：約38x42cm\n質感自然，堅固耐用，陪你輕鬆出門每一天。",
     "price": 580,
-    "image": "/assets/img/itemBag.jpg",
+    "image": "assets/img/itemBag.jpg",
     "category": "tiba"
   },
   {
@@ -20,7 +20,7 @@
     "name": "緯藝杯墊",
     "description": "材質：軟木＋吸水陶瓷\n尺寸：直徑10cm\n吸水又防滑，為你的桌面增添一抹藝術感。",
     "price": 490,
-    "image": "/assets/img/itemCoaster.jpg",
+    "image": "assets/img/itemCoaster.jpg",
     "category": "tiba"
   },
   {
@@ -28,7 +28,7 @@
     "name": "緯藝書籤",
     "description": "材質：金屬＋彩印工藝\n尺寸：約2.5x12cm\n精緻輕巧，讓閱讀時光多一份藝術陪伴。",
     "price": 200,
-    "image": "/assets/img/itemBookmark.jpg",
+    "image": "assets/img/itemBookmark.jpg",
     "category": "tiba"
   },
   {
@@ -36,7 +36,7 @@
     "name": "藝術家油畫",
     "description": "媒材：油彩畫布\n尺寸：約40x50cm\n原創藝術作品，筆觸細膩，為空間注入靈魂與色彩。",
     "price": 3500,
-    "image": "/assets/img/itemPainting.jpg",
+    "image": "assets/img/itemPainting.jpg",
     "category": "artist"
   },
   {
@@ -44,14 +44,14 @@
     "name": "藝術家雕塑",
     "description": "媒材：樹脂＋金屬\n尺寸：約25x35x20cm\n現代感雕塑藝術，獨具造型與情感張力。",
     "price": 18000,
-    "image": "/assets/img/itemSculpture.jpg",
+    "image": "assets/img/itemSculpture.jpg",
     "category": "artist"
   },
   {
     "id": 7,
     "name": "緯藝明信片組",
     "price": 250,
-    "image": "/assets/img/itemPostcard.jpg",
+    "image": "assets/img/itemPostcard.jpg",
     "category": "tiba",
     "description": "材質：進口卡紙\n規格：一組6張，每張10x15cm\n搭配藝術插畫，傳遞祝福也傳遞美感。"
   },
@@ -59,7 +59,7 @@
     "id": 8,
     "name": "緯藝筆記本",
     "price": 320,
-    "image": "/assets/img/itemNotebook.jpg",
+    "image": "assets/img/itemNotebook.jpg",
     "category": "tiba",
     "description": "材質：環保紙張＋藝術封面\n規格：A5 / 80頁\n書寫手感佳，是日常與靈感的好夥伴。"
   },
@@ -67,7 +67,7 @@
     "id": 9,
     "name": "藝術家攝影集",
     "price": 4200,
-    "image": "/assets/img/itemPhoto.jpg",
+    "image": "assets/img/itemPhoto.jpg",
     "category": "artist",
     "description": "媒材：藝術微噴＋無酸相紙\n尺寸：30x40cm（含白邊）\n原創攝影作品，凝視瞬間的永恆詩意。"
   },
@@ -75,7 +75,7 @@
     "id": 10,
     "name": "藝術家陶藝",
     "price": 5200,
-    "image": "/assets/img/itemCeramic.jpg",
+    "image": "assets/img/itemCeramic.jpg",
     "category": "artist",
     "description": "媒材：高溫陶＋釉彩\n尺寸：約15x15x20cm\n質樸與靈感並存，點綴生活的藝術小物。"
   },
@@ -83,7 +83,7 @@
     "id": 11,
     "name": "藝術家紙燈罩",
     "price": 1600,
-    "image": "/assets/img/itemPaperArt.jpg",
+    "image": "assets/img/itemPaperArt.jpg",
     "category": "artist",
     "description": "材質：進口紙＋手工摺製\n尺寸：約25x25x30cm\n柔和光影中的藝術設計，為空間注入溫暖氣息。"
   },
@@ -91,7 +91,7 @@
     "id": 12,
     "name": "藝術家版畫",
     "price": 2800,
-    "image": "/assets/img/itemPrint.jpg",
+    "image": "assets/img/itemPrint.jpg",
     "category": "artist",
     "description": "媒材：數位版畫＋簽名＋限量編號\n尺寸：30x30cm\n經典作品再製，收藏級限量藝術印刷。"
   }

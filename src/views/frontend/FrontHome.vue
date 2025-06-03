@@ -2,10 +2,6 @@
 
 <div class="frontHomeW">
 
-     <!-- <div class="infoPanel animate__animated animate__flipInX">
-        <p>TibaArt 緯藝基金會</p>
-    </div> -->
-
      <div class="split-text-container">
             <h1 ref="splitTextElement" class="animated-heading">
             TibaArt 緯藝基金會
@@ -32,33 +28,6 @@
         <!-- 展館牆面 -->
         <!-- <path d="M0 0 L1000 0 L1000 450 L0 450 Z" fill="#ffffff"/> -->
         
-        <g 
-        class="paint paint1 painting1" 
-        ref="paint1"
-        >
-
-        <!-- 左側大型畫作框架 -->
-        <rect x="50" y="80" width="220" height="180" fill="#f0e6d2" stroke="#d4c4a8" stroke-width="8"/>
-        
-        <!-- 左側大型畫作內容 -->
-        <!-- 深紫色背景 -->
-        <path d="M58 88 L262 88 L262 252 L58 252 Z" fill="#4a4266"/>
-        
-        <!-- 橙紅色圓形 -->
-        <circle cx="120" cy="140" r="25" fill="#e55a4e"/>
-        
-        <!-- 藍色流線 -->
-        <path d="M140 88 Q180 120 220 150 Q240 170 262 200 L262 88 Z" fill="#6ba3d6"/>
-        
-        <!-- 橙紅色區塊 -->
-        <path d="M220 88 L262 88 L262 160 Q240 140 220 120 Z" fill="#e55a4e"/>
-        
-        <!-- 白色流線 -->
-        <path d="M58 200 Q100 180 140 200 Q180 220 220 200 Q240 190 262 200 L262 252 L58 252 Z" fill="#f5f5f5"/>
-        
-        <!-- 深色圓弧 -->
-        <path d="M80 120 Q120 100 160 120 Q180 130 200 140 Q180 160 160 180 Q120 200 80 180 Q60 160 60 140 Q60 130 80 120 Z" fill="#2d2d2d"/>
-        </g>
         
         <g 
         class="paint paint2 painting2" 
@@ -79,8 +48,36 @@
         
         <!-- 藍色小圓 -->
         <circle cx="340" cy="170" r="8" fill="#6ba3d6"/>
-        </g>
+      </g>
 
+      <g 
+      class="paint paint1 painting1" 
+      ref="paint1"
+      >
+
+      <!-- 左側大型畫作框架 -->
+      <rect x="50" y="80" width="220" height="180" fill="#f0e6d2" stroke="#d4c4a8" stroke-width="8"/>
+      
+      <!-- 左側大型畫作內容 -->
+      <!-- 深紫色背景 -->
+      <path d="M58 88 L262 88 L262 252 L58 252 Z" fill="#4a4266"/>
+      
+      <!-- 橙紅色圓形 -->
+      <circle cx="120" cy="140" r="25" fill="#e55a4e"/>
+      
+      <!-- 藍色流線 -->
+      <path d="M140 88 Q180 120 220 150 Q240 170 262 200 L262 88 Z" fill="#6ba3d6"/>
+      
+      <!-- 橙紅色區塊 -->
+      <path d="M220 88 L262 88 L262 160 Q240 140 220 120 Z" fill="#e55a4e"/>
+      
+      <!-- 白色流線 -->
+      <path d="M58 200 Q100 180 140 200 Q180 220 220 200 Q240 190 262 200 L262 252 L58 252 Z" fill="#f5f5f5"/>
+      
+      <!-- 深色圓弧 -->
+      <path d="M80 120 Q120 100 160 120 Q180 130 200 140 Q180 160 160 180 Q120 200 80 180 Q60 160 60 140 Q60 130 80 120 Z" fill="#2d2d2d"/>
+      </g>
+      
         <g class="paint paint3" ref="paint3">
         <!-- 小型幾何畫作框架1 -->
         <rect x="450" y="120" width="70" height="70" fill="#f0e6d2" stroke="#d4c4a8" stroke-width="4"/>
@@ -207,38 +204,17 @@
               @mouseleave="setActiveBlock('')"
         />
 
-          <image class="thinker painting6" 
-          ref="paint6"
-          style="cursor: pointer"
-          href="/src/assets/img/thinker.svg" 
-          x="400" y="200" 
-          width="240" height="240"
-          @click="router.push('/front/expo')"
-          @mouseenter="setActiveBlock('painting6')"
-          @mouseleave="setActiveBlock('')"
-        />
-
+        <image class="thinker painting6 parallax-layer-6" 
+              ref="paint6"
+              style="cursor: pointer"
+              href="/src/assets/img/thinker.svg" 
+              width="240" height="240"
+              @click="router.push('/front/expo')"
+              @mouseenter="setActiveBlock('painting6')"
+              @mouseleave="setActiveBlock('')"/>
+              
+              <!-- x="400" y="200"  -->
     </svg>
-
-
-    <!-- 底部內容區域，用於產生滾動空間 -->
-    <div class="content-section" ref="contentSection">
-      <div class="content-block">
-        <h2>探索更多藝術</h2>
-        <p>滾動以體驗視差效果</p>
-      </div>
-      <div class="content-block">
-        <h2>藝術家的故事</h2>
-        <p>每一幅作品都有其獨特的故事</p>
-      </div>
-      <div class="content-block">
-        <h2>創作靈感</h2>
-        <p>從生活中汲取無限的創作靈感</p>
-      </div>
-    </div>
-
-
-
 
 </div>
 </template>
@@ -300,20 +276,74 @@ onMounted(() => {
   gsap.set([paint3.value], { y: 200, opacity: 0 })
   gsap.set([paint4.value], { y: -200, opacity: 0 })
   gsap.set([paint5.value], { x: 200, opacity: 0 })
+  gsap.set(paint6.value, { x: window.innerWidth / 2, y: window.innerHeight / 4, opacity: 0, scale: 2 }); // 從視窗右下方開始
+
 
   // 順序滑入動畫
   gsap.timeline()
     .to(paint1.value, { x: 0, opacity: 1, duration: 0.75, ease: 'power3.out' })
-    .to(paint2.value, { x: 0, opacity: 1, duration: 0.75, ease: 'circ.out' }, '+=0.05')
-    .to(paint3.value, { y: 0, opacity: 1, duration: 0.75, ease: 'bounce.out' }, '+=0.05')
-    .to(paint4.value, { y: 0, opacity: 1, duration: 0.75, ease: 'elastic.out(1, 0.3)' }, '+=0.05')
-    .to(paint5.value, { x: 0, opacity: 1, duration: 0.75, ease: 'power3.out' }, '0.05')
+    .to(paint2.value, { x: 0, opacity: 1, duration: 0.75, ease: 'circ.out' }, '0.5')
+    .to(paint3.value, { y: 0, opacity: 1, duration: 0.75, ease: 'bounce.out' }, '0.7')
+    .to(paint4.value, { y: 0, opacity: 1, duration: 0.75, ease: 'elastic.out(1, 0.3)' }, '1.2')
+    .to(paint5.value, { x: 0, opacity: 1, duration: 0.75, ease: 'power3.out' }, '0.4')
 
-  gsap.timeline()
-    .fromTo(".painting6", 
-        { scale: 2, x: 800, y: 200, z: 0 }, 
-        { scale: 1, x: 0, y: 0, z: 500, duration: 1, ease: "circ.out" }, '+=1'
-    );
+    .to(paint6.value, { 
+      x: 400,
+      y: 240,
+      opacity: 1, 
+      scale: 1,
+      duration: 1.5,
+      ease: 'back.out(1.7)' 
+    }, '1.4');
+    
+
+  // Hover 效果 for painting1 to painting5
+  const paintings = [paint1.value, paint2.value, paint3.value, paint4.value, paint5.value];
+  paintings.forEach((painting, index) => {
+    const artwork = document.getElementById(`artwork-${index + 1}`);
+    if (artwork && painting) {
+      artwork.addEventListener('mouseenter', () => {
+        gsap.to(painting, {
+          scale: 1.2,
+          duration: 0.3,
+          ease: 'power2.out',
+          transformOrigin: 'center center'
+        });
+      });
+      artwork.addEventListener('mouseleave', () => {
+        gsap.to(painting, {
+          scale: 1,
+          duration: 0.3,
+          ease: 'power2.out',
+          transformOrigin: 'center center'
+        });
+      });
+    }
+  });
+
+  // Hover 效果 for painting6
+  if (paint6.value) {
+    paint6.value.addEventListener('mouseenter', () => {
+      gsap.to(paint6.value, {
+        scale: 1.2,
+        rotation: 5, 
+        filter: 'drop-shadow(0 0 10px rgba(255, 255, 0, 0.8)) drop-shadow(0 0 20px rgba(255, 255, 0, 0.6))',
+        duration: 0.3,
+        ease: 'power2.out',
+        transformOrigin: 'center center'
+      });
+    });
+    paint6.value.addEventListener('mouseleave', () => {
+      gsap.to(paint6.value, {
+        scale: 1,
+        rotation: 0,
+        filter: 'none',
+        duration: 0.3,
+        ease: 'power2.out',
+        transformOrigin: 'center center'
+      });
+    });
+  }
 
   // 左右視差效果設定
   setupHorizontalParallax();
@@ -322,7 +352,6 @@ onMounted(() => {
 const setupHorizontalParallax = () => {
   // 主標題左右視差效果
   gsap.to(splitTextElement.value, {
-    xPercent: -20, // 向左移動
     ease: "none",
     scrollTrigger: {
       trigger: splitTextElement.value,
@@ -381,22 +410,6 @@ const setupHorizontalParallax = () => {
       start: "top bottom",
       end: "bottom top",
       scrub: 2
-    }
-  });
-
-  // 思考者雕像 - 特殊左右搖擺效果
-  gsap.to(paint6.value, {
-    xPercent: 25,
-    rotationY: 20,
-    rotationZ: 5,
-    scale: 1.1,
-    transformOrigin: "center center",
-    ease: "none",
-    scrollTrigger: {
-      trigger: svgRef.value,
-      start: "top bottom",
-      end: "bottom top",
-      scrub: 1.5
     }
   });
 
@@ -508,14 +521,6 @@ const setupHorizontalParallax = () => {
       duration: 1.8,
       ease: "power2.out"
     });
-
-    // 思考者左右搖擺
-    gsap.to(paint6.value, {
-      rotationY: mouseX * 10,
-      x: mouseX * 20,
-      duration: 1,
-      ease: "power2.out"
-    });
   };
 
   document.addEventListener('mousemove', handleMouseMove);
@@ -581,7 +586,6 @@ svg {
     aspect-ratio: 5/5; 
   }
 
-
 .infoPanel{
 
 margin: 0 auto;
@@ -589,7 +593,6 @@ width: 50%;
 border: 1.5px solid;
 padding: 32px;
 text-align: center;
-
 }
 
 .flip{
@@ -602,7 +605,7 @@ h1{
     font-weight: 450;
     text-align: center;
     color: $fontBlack;
-    margin-bottom: 32px;
+    margin-bottom: 32px;  
 
   @media (max-width: 1000px){
     font-size: 48px;
@@ -615,9 +618,7 @@ h1{
     @media (max-width: 420px){
     font-size: 36px;
   }
-
 }
-
 
 svg {
   display: block;
@@ -626,67 +627,37 @@ svg {
   perspective: 1000px
 }
 
-// .paint {
-//   opacity: 0;
-//   transform: translateY(50px);
-//   transition: all 0.8s ease;
-// }
-
-// .paint.enter {
-//   opacity: 1;
-//   transform: translateY(0);
-// }
-
-#artwork-1:hover, 
-#artwork-2:hover, 
-#artwork-3:hover, 
-#artwork-4:hover, 
-#artwork-5:hover{
-    fill: rgb(255, 255, 255, 0.5);
-}
-
-image{
-    // transform-style: preserve-3d;
-    transform-origin: center center;
-}
-
-image:hover{
-    transform: scale(1.5) rotate(15deg);
-}
-
-
 .info{
-    margin: 12px auto 0;
+    position: absolute; 
+    top: 27%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    
     padding: 16px;
     width: 25%;
-    border:1.5px solid;
+    border: 1.5px solid;
     text-align: center;
+    background-color: rgba(255, 255, 255, 0.9); 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    pointer-events: none; 
+    z-index: 10;
+
+    font-size: map-get($font, p); 
 
 
   @media (max-width: 1080px){
     width: 35%;
   }
 
-  @media (max-width: 900px){
-    width: 45%;
-  }
-
   @media (max-width: 750px){
-    width: 55%;
+    width: 50%;
   }
 
-   @media (max-width: 580px){
-    width: 65%;
+    @media (max-width: 520px){
+      width: 55%;
+      font-size: map-get($font, pwar); 
   }
-
-    @media (max-width: 420px){
-      width: 80%;
-  }
-
-
-
 
 }
-
 
 </style>
