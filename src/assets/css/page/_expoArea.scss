@@ -4,7 +4,7 @@
 
 
     .banner {
-        max-width: 1200px;
+        max-width: 100%;
         margin: $spacing-8 auto;
         display: flex;
         flex-wrap: wrap;
@@ -16,7 +16,7 @@
         flex: 1;
         min-width: 300px;
         box-sizing: border-box;
-        padding: $spacing-8 $spacing-3;
+        padding: $spacing-8 $spacing-8 ;
         background-color: $fontWhite;
         display: flex;
         flex-direction: column;
@@ -65,7 +65,7 @@
 
         h2 {
             font-size: map-get($font, h2);
-            margin-bottom: $spacing-2;
+            margin-bottom: $spacing-8;
             font-weight: bold;
         }
 
@@ -139,10 +139,14 @@
 
             .title {
                 display: flex;
+
+                align-items: baseline;
                 gap: $spacing-2 ;
                 margin: $spacing-4 0 $spacing-2;
 
                 h3 {
+
+                    font-size: map-get($font, h4);
                     margin: 0;
                 }
 

@@ -27,133 +27,133 @@ const expoItems = ref([
     to: '/front/ExpoArea',
     className: 'div1',
     side: 'left',
-    img: '/src/assets/img/expo1.jpg'
+    img: '/tjd101/g2/assets/img/expo1.jpg'
   },
   {
     id: 2,
     to: '/front/ExpoArea',
     className: 'div2',
     side: 'right',
-    img: '/src/assets/img/expo2.jpg'
+    img: '/tjd101/g2/assets/img/expo2.jpg'
   },
   {
     id: 3,
     to: '/front/ExpoArea',
     className: 'div3',
     side: 'right',
-    img: '/src/assets/img/expo3.jpg'
+    img: '/tjd101/g2/assets/img/expo3.jpg'
   },
   {
     id: 4,
     to: '/front/ExpoArea',
     className: 'div4',
     side: 'left',
-    img: '/src/assets/img/expo4.jpg'
+    img: '/tjd101/g2/assets/img/expo4.jpg'
   },
   {
     id: 5,
     to: '/front/ExpoArea',
     className: 'div5',
     side: 'left',
-    img: '/src/assets/img/expo5.jpg'
+    img: '/tjd101/g2/assets/img/expo5.jpg'
   },
   {
     id: 6,
     to: '/front/ExpoArea',
     className: 'div6',
     side: 'right',
-    img: '/src/assets/img/expo6.jpg'
+    img: '/tjd101/g2/assets/img/expo6.jpg'
   },
   {
     id: 7,
     to: '/front/ExpoArea',
     className: 'div7',
     side: 'right',
-    img: '/src/assets/img/expo7.jpg'
+    img: '/tjd101/g2/assets/img/expo7.jpg'
   },
   {
     id: 8,
     to: '/front/ExpoArea',
     className: 'div8',
     side: 'left',
-    img: '/src/assets/img/expo8.jpg'
+    img: '/tjd101/g2/assets/img/expo8.jpg'
   },
   {
     id: 9,
     to: '/front/ExpoArea',
     className: 'div9',
     side: 'left',
-    img: '/src/assets/img/expo9.jpg'
+    img: '/tjd101/g2/assets/img/expo9.jpg'
   },
   {
     id: 10,
     to: '/front/ExpoArea',
     className: 'div10',
     side: 'right',
-    img: '/src/assets/img/expo10.jpg'
+    img: '/tjd101/g2/assets/img/expo10.jpg'
   },
   {
     id: 11,
     to: '/front/ExpoArea',
     className: 'div11',
     side: 'right',
-    img: '/src/assets/img/expo11.jpg'
+    img: '/tjd101/g2/assets/img/expo11.jpg'
   },
   {
     id: 12,
     to: '/front/ExpoArea',
     className: 'div12',
     side: 'left',
-    img: '/src/assets/img/expo12.jpg'
+    img: '/tjd101/g2/assets/img/expo12.jpg'
   },
   {
     id: 13,
     to: '/front/ExpoArea',
     className: 'div13',
     side: 'left',
-    img: '/src/assets/img/expo13.jpg'
+    img: '/tjd101/g2/assets/img/expo13.jpg'
   },
   {
     id: 14,
     to: '/front/ExpoArea',
     className: 'div14',
     side: 'right',
-    img: '/src/assets/img/expo14.jpg'
+    img: '/tjd101/g2/assets/img/expo14.jpg'
   },
   {
     id: 15,
     to: '/front/ExpoArea',
     className: 'div15',
     side: 'right',
-    img: '/src/assets/img/expo15.jpg'
+    img: '/tjd101/g2/assets/img/expo15.jpg'
   },
   {
     id: 16,
     to: '/front/ExpoArea',
     className: 'div16',
     side: 'left',
-    img: '/src/assets/img/expo16.jpg'
+    img: '/tjd101/g2/assets/img/expo16.jpg'
   },
   {
     id: 17,
     to: '/front/ExpoArea',
     className: 'div17',
     side: 'left',
-    img: '/src/assets/img/expo17.jpg'
+    img: '/tjd101/g2/assets/img/expo17.jpg'
   },
   {
     id: 18,
     to: '/front/ExpoArea',
     className: 'div18',
     side: 'right',
-    img: '/src/assets/img/expo18.jpg'
+    img: '/tjd101/g2/assets/img/expo18.jpg'
   },
   {
     id: 19,
     to: '/front/ExpoArea',
     className: 'div19',
     side: 'right',
-    img: '/src/assets/img/expo19.jpg'
+    img: '/tjd101/g2/assets/img/expo19.jpg'
   }
 ])
 </script>

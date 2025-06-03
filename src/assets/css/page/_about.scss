@@ -20,14 +20,14 @@
       flex: 0 0 35%;
 
       h2 {
-        padding-left: $spacing-3;
+        padding-left: $spacing-8;
         margin: 0;
         font-size: map-get($font, h2);
         line-height: 1.2;
       }
 
       p {
-        padding-left: $spacing-3;
+        padding-left: $spacing-8;
         margin: $spacing-2 0 0;
         font-size: map-get($font, p);
         color: $fontBlack;
@@ -54,7 +54,9 @@
     }
 
     p {
-      margin: 0;
+
+
+      margin: 0 $spacing-8;
       line-height: 1.6;
       color: $fontBlack;
       text-align: justify;
@@ -84,7 +86,7 @@
       li {
         flex: 0 0 auto;
         width: 260px;
-        margin-right: $spacing-8;
+        margin-right: 60px;
 
         h3 {
           font-size: map-get($font, h3);
@@ -97,7 +99,7 @@
         }
 
         img {
-          width: 100%;
+          max-width: 300px;
           border-radius: $spacing-1;
           margin-bottom: $spacing-2;
         }
