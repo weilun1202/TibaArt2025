@@ -55,17 +55,16 @@
               </template>
               <!-- 詳細按鈕 -->
               <template v-else-if="col.type === 'button'">
-              <button @click="emit('view-more', row)">
-                {{ col.buttonLabel || '查看' }}
-              </button>
-            </template>
+                <button 
+                @click="emit('view-more', row)"
+                class="more-btn">
+                  {{ col.buttonLabel || '查看' }}
+                </button>
+              </template>
             
             <template v-else>
               {{ row[col.key] }}
             </template>
-            <!-- <div :class="col?.class">
-              {{ row[col.key] }}
-            </div> -->
           </td>
         </tr>
         <tr v-if="paginatedData.length === 0">
@@ -101,7 +100,8 @@ const itemsPerPage = 10
 
 // 篩選後的資料
 const filteredData = computed(() => {
-  if (!selectedKey.value || !keyword.value) return props.data
+  if (!selectedKey.value || !keyword.value) 
+  return props.data
   return props.data.filter(row => {
     const value = row[selectedKey.value]?.toString() || ''
     return value.includes(keyword.value)
@@ -182,6 +182,7 @@ function handleStatusChange(row) {
 .result-table {
   width: 100%;
   border-collapse: collapse;
+  table-layout: fixed;
 }
 
 .result-table th,
@@ -247,13 +248,33 @@ function handleStatusChange(row) {
   color: white;
 }
 
+// 查看按鈕
+.more-btn{
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  background-color: $logoColor3;
+  color: white;
+  &:hover{
+    background-color: lighten($logoColor3, 10%);
+  }
+}
+
 // 表格長寬
-@for $i from 1 through 300 {
+@for $i from 1 through 200 {
   @if $i % 10 == 0{
     .w-#{$i} {
       width: #{$i}px;
     }
   }
+}
+.ellipsis {
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 </style>
