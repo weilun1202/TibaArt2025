@@ -17,7 +17,7 @@
 
                 <div class="productContainer" v-if="currentProduct">
                     <div class="productImg">
-                        <img :src="currentProduct.image" alt="currentProduct.name">
+                        <img :src="baseUrl + currentProduct.image" alt="currentProduct.name">
                     </div>
                     <div class="productInfo">
                         <h1 class="productName">{{ currentProduct.name }}</h1>
@@ -55,7 +55,7 @@
                             v-for="item in recommendedProducts" 
                             :key="item.id">
                             <router-link :to="{ name: 'product', params: { id: item.id } }" class="itemImage">
-                                <img :src="item.image" :alt="item.name">
+                                <img :src="baseUrl + item.image" :alt="item.name">
                             </router-link>
 
                             <div class="itemInfo">
@@ -85,6 +85,8 @@ import {useCart} from '@/stores/cart.js';
 
 const router = useRouter();
 const route = useRoute();
+const baseUrl = import.meta.env.BASE_URL;
+
 
 const {addToCart} = useCart();
 
@@ -94,7 +96,7 @@ const currentProduct = ref(null)
 const quantity = ref(1)
 
 onMounted(async () => {
-    const resp = await fetch('/productData.json')
+    const resp = await fetch(import.meta.env.BASE_URL + 'productData.json')
     if (!resp.ok) {
         throw new Error('無法載入商品資料')
     } else {

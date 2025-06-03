@@ -26,7 +26,7 @@
 
                             <div class="cartItem">
                                 <router-link :to="{name: 'product', params: {id: item.id}}" class="itemImage">
-                                    <img :src="item.image" :alt="item.name">
+                                    <img :src="baseUrl + item.image" :alt="item.name">
                                 </router-link>
                                 <div class="cartDetails">
                                     <h3 class="cardName">{{item.name}}</h3>
@@ -197,6 +197,8 @@ import{ref, watch, computed } from 'vue';
 import {useCart} from '@/stores/cart.js';
 
 const { cartItems, updateQuan, removeFromCart, totalPrice } = useCart();
+const baseUrl = import.meta.env.BASE_URL;
+
 
 const orderInfo = ref({
     name: '',
