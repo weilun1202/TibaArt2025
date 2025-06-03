@@ -4,7 +4,7 @@
     <span>{{ route.meta.title }}</span>
     <div class="adminHeaderBtn">
       <button class="btn" v-if="!isAdminHome" @click="goHome">回首頁</button>
-      <button class="btn">登出</button>
+      <button class="btn" @click="adminLogout">登出</button>
     </div>
   </div>
 
@@ -22,6 +22,10 @@ const isAdminHome = computed(() => route.name === 'Admin')
 function goHome() {
 router.push('/admin')
 }
+
+function adminLogout(){
+  router.push('/admin/login')
+}
 </script>
 
 <style lang="scss" scoped>
@@ -34,7 +38,7 @@ router.push('/admin')
   width: calc(100% - 250px);
   height: 60px;
   border-bottom: 2px solid $primaryGreen;
-  float: right;
+  margin-left: auto;
   span{
     padding: $spacing-5;
     font-size: 20px;
@@ -42,6 +46,12 @@ router.push('/admin')
   }
   .btn{
     margin-right: $spacing-5;
+  }
+}
+.adminHeaderBtn{
+  .btn{
+    font-size: 16px;
+    line-height: 42px;
   }
 }
 </style>

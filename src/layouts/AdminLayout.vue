@@ -18,12 +18,12 @@
 
 .backWarp{
   /* 為了把全域背景色蓋掉 */
-  height: 100vh;
+  height: calc(100vh - 60px);
   background-color: #fff;
 
   padding-left: 300px;
   padding-right: 50px;
-  padding-top: 100px;
+  padding-top: 40px;
 }
 
 </style>
