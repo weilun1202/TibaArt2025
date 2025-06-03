@@ -148,11 +148,23 @@ const toggleSearchInput = () => {
   }
 };
 
-const handleAddToCart = (item) => {
-  // 處理從子組件傳來的加入購物車事件
-  const success = addToCart(item);
-  if(success) {
-    alert(`已將「${item.name}」加入購物車`);
+// const handleAddToCart = (item) => {
+//   // 處理從子組件傳來的加入購物車事件
+//   const success = addToCart(item);
+//   if(success) {
+//     alert(`已將「${item.name}」加入購物車`);
+//   }
+// };
+
+const handleAddToCart = async (item) => {
+  try {
+    await new Promise(resolve => requestAnimationFrame(resolve));
+    const success = addToCart(item);
+    if (success) {
+      alert(`已將「${item.name}」加入購物車`);
+    }
+  } catch (error) {
+    console.error('加入購物車失敗:', error);
   }
 };
 </script>
