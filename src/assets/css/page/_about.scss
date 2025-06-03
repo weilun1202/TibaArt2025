@@ -1,4 +1,5 @@
 .about {
+
   /* 通用容器寬度置中 */
   .banner,
   .intro {
@@ -9,10 +10,13 @@
   /* Banner 橫向排版 */
   .banner {
     display: flex;
-    align-items: center;            /* 讓文字與圖片垂直置中 */
-    justify-content: space-between; /* 文字與圖片間距 */
+    align-items: center;
+    /* 讓文字與圖片垂直置中 */
+    justify-content: space-between;
+    /* 文字與圖片間距 */
     gap: $spacing-5;
-    padding: $spacing-8 0;          /* 上下留白 */
+    padding: $spacing-8 0;
+    /* 上下留白 */
     overflow: hidden;
 
     .banner-text {
@@ -73,12 +77,15 @@
   /* GSAP 水平滾動容器 */
   .control {
     position: relative;
-    height: 70vh;    /* 滿版高度（視窗高度） */
-    overflow: hidden; /* 隱藏超出左右範圍 */
+    height: 70vh;
+    /* 滿版高度（視窗高度） */
+    overflow: hidden;
+    /* 隱藏超出左右範圍 */
 
     .timeline {
       display: flex;
-      width: max-content; /* 根據內容自動撐開寬度 */
+      width: max-content;
+      /* 根據內容自動撐開寬度 */
       list-style: none;
       padding: 0;
       margin: $spacing-8;
@@ -89,7 +96,7 @@
         margin-right: 60px;
 
         h3 {
-          font-size: map-get($font, h3);
+          font-size: map-get($font, h5);
           margin-bottom: $spacing-3;
         }
 

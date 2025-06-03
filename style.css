@@ -615,10 +615,13 @@ header .pageTitle {
 }
 .about .banner {
   display: flex;
-  align-items: center; /* 讓文字與圖片垂直置中 */
-  justify-content: space-between; /* 文字與圖片間距 */
+  align-items: center;
+  /* 讓文字與圖片垂直置中 */
+  justify-content: space-between;
+  /* 文字與圖片間距 */
   gap: 20px;
-  padding: 32px 0; /* 上下留白 */
+  padding: 32px 0;
+  /* 上下留白 */
   overflow: hidden;
 }
 .about .banner .banner-text {
@@ -665,13 +668,16 @@ header .pageTitle {
 }
 .about .control {
   position: relative;
-  height: 70vh; /* 滿版高度（視窗高度） */
-  overflow: hidden; /* 隱藏超出左右範圍 */
+  height: 70vh;
+  /* 滿版高度（視窗高度） */
+  overflow: hidden;
+  /* 隱藏超出左右範圍 */
 }
 .about .control .timeline {
   display: flex;
   width: -moz-max-content;
-  width: max-content; /* 根據內容自動撐開寬度 */
+  width: max-content;
+  /* 根據內容自動撐開寬度 */
   list-style: none;
   padding: 0;
   margin: 32px;
@@ -682,7 +688,7 @@ header .pageTitle {
   margin-right: 60px;
 }
 .about .control .timeline li h3 {
-  font-size: 2rem;
+  font-size: 1.25rem;
   margin-bottom: 12px;
 }
 .about .control .timeline li span {
