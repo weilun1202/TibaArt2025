@@ -14,8 +14,8 @@
         <p class="flip animate__animated animate__flipInX" v-else-if="activeBlock === 'painting2'"> {{ painting2 }}</p>
         <p class="flip animate__animated animate__flipInX" v-else-if="activeBlock === 'painting3'"> {{ painting3 }}</p>
         <p class="flip animate__animated animate__flipInX" v-else-if="activeBlock === 'painting4'"> {{ painting4 }}</p>
-        <p class="flip animate__animated animate__flipInX" v-else-if="activeBlock === 'painting5'"> {{ painting5}}</p>
-        <p class="flip animate__animated animate__flipInX" v-else-if="activeBlock === 'painting6'"> 前往觀看{{ painting6}}</p>
+        <p class="flip animate__animated animate__flipInX" v-else-if="activeBlock === 'painting5'"> {{ painting5 }}</p>
+        <p class="flip animate__animated animate__flipInX" v-else-if="activeBlock === 'painting6'"> {{ painting6 }}</p>
         <p v-else>{{ defaultText }}</p>
       </div>
     </transition>
@@ -249,7 +249,7 @@ const painting2 = '我要申請辦展';
 const painting3 = '我想要更了解緯藝';
 const painting4 = '我要前往會員中心';
 const painting5 = '我要買藝術周邊';
-const painting6 = '線上展覽';
+const painting6 = '前往觀看線上展覽';
 
 const setActiveBlock = (blockName) => {
   activeBlock.value = blockName;

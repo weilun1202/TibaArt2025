@@ -311,6 +311,11 @@ function handleSubmit(e) {
 /* 可以把額外的 CSS 加在這裡或保留在全域 */
 @import '/style.scss';
 
+
+.faq{
+  margin-bottom: 120px;
+}
+
 .formGroup .formError{
   display: block;
   min-height: 1.2em;

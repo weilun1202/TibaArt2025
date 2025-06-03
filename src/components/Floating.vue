@@ -116,7 +116,7 @@ function startAnimation() {
     
     // 載入圖片
     const pic = new Image();
-    pic.src = '/src/assets/img/logo.png';
+    pic.src = './src/assets/img/logo.png';
     
     let time = 0;
     const float = 15;

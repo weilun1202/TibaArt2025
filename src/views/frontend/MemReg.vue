@@ -15,96 +15,105 @@
         <img src="/src/assets/img/RegisterImg.jpg" alt="">
 
         <div class="regContainer">
-          <div class="formA">
+         <div class="formA">
+            <!-- 姓名 -->
             <div class="formGroup">
-              <label for="regName" class="formLabel">姓名</label>
+              <label for="name" class="formLabel">姓名</label>
               <input
                 type="text"
-                id="regName"
-                name="regName"
+                id="name"
+                v-model="form.name"
                 placeholder="輸入姓名"
               />
-              <span class="formError hidden">格式錯誤</span>
+              <span class="formError" :class="{ hidden: !errors.name }">{{ errors.name }}</span>
             </div>
 
+                <!-- 信箱 -->
             <div class="formGroup">
-              <label for="regEmail" class="formLabel">電子郵件（您的帳號）</label>
+              <label for="email" class="formLabel">電子郵件（您的帳號）</label>
               <input
                 type="email"
-                id="regEmail"
-                name="regEmail"
-                placeholder="輸入電子郵件"
+                id="email"
+                v-model="form.email"
+                placeholder="example@email.com"
               />
-              <span class="formError hidden">格式錯誤</span>
+              <span class="formError" :class="{ hidden: !errors.email }">{{ errors.email }}</span>
             </div>
 
+                <!-- 密碼 -->
             <div class="formGroup">
-              <label for="regPassword" class="formLabel">設定密碼</label>
+              <label for="password" class="formLabel">設定密碼</label>
               <input
                 type="password"
-                id="regPassword"
-                name="regPassword"
+                id="password"
+                v-model="form.password"
                 placeholder="輸入密碼"
               />
-              <span class="formError hidden">格式錯誤</span>
+              <span class="formError" :class="{ hidden: !errors.password }">{{ errors.password }}</span>
             </div>
 
+            <!-- 確認密碼 -->
             <div class="formGroup">
-              <label for="confirmPassword" class="formLabel">確認密碼</label>
+              <label for="cPassword" class="formLabel">確認密碼</label>
               <input
                 type="password"
-                id="confirmPassword"
-                name="confirmPassword"
+                id="cPassword"
+                v-model="form.cPassword"
                 placeholder="確認密碼"
               />
-              <span class="formError hidden">格式錯誤</span>
+              <span class="formError" :class="{ hidden: !errors.cPassword }">{{ errors.cPassword }}</span>
             </div>
 
+            <!-- 手機 -->
             <div class="formGroup">
-              <label for="regPhone" class="formLabel">手機號碼</label>
+              <label for="phone" class="formLabel">手機號碼</label>
               <input
                 type="tel"
-                id="regPhone"
-                name="regPhone"
-                placeholder="輸入手機號碼"
+                id="phone"
+                v-model="form.phone"
+                placeholder="輸入手機"
               />
-              <span class="formError hidden">格式錯誤</span>
+              <span class="formError" :class="{ hidden: !errors.phone }">{{ errors.phone }}</span>
             </div>
 
+            <!-- 生日 -->
             <div class="formGroup">
-              <label for="regBirthday" class="formLabel">您的生日</label>
+              <label for="birthday" class="formLabel">您的生日</label>
               <input
                 type="date"
-                id="regBirthday"
-                name="regBirthday"
+                id="birthday"
+                :max="today"
+                v-model="form.birthday"
                 placeholder="選擇生日"
               />
-              <span class="formError hidden">格式錯誤</span>
+              <span class="formError" :class="{ hidden: !errors.birthday }">{{ errors.birthday }}</span>
             </div>
 
-            <div class="formGroup">
-              <label for="regGender" class="formLabel">性別</label>
-              <select id="regGender" name="regGender" class="formSelect">
-                <option value="male">男</option>
-                <option value="female">女</option>
-              </select>
-              <span class="formError hidden">請選擇性別</span>
-            </div>
-
+            <!-- 性別 -->          
+                <div class="formGroup">
+                  <label for="gender" class="formLabel">性別</label>
+                  <select id="gender" class="formSelect" v-model="form.gender">
+                    <option value="">請選擇</option>
+                    <option value="M">男</option>
+                    <option value="F">女</option>
+                  </select>
+                  <span class="formError" :class="{ hidden: !errors.gender }">{{ errors.gender }}</span>
+                </div>
+                
+                <!-- 條款勾選 -->
+              <div class="formGroup">
+                <input type="checkbox" id="termsAgreement" v-model="form.termsAgreement" />
+                <label for="termsAgreement" class="terms">
+                  我已詳細閱讀並接受<a href="#" target="_blank">緯藝會員條款</a>
+                </label>
+                <br>
+                <span class="formError" :class="{ hidden: !errors.termsAgreement }">{{ errors.termsAgreement }}</span>
+              </div>
+      
+              <!-- 註冊按鈕 -->
+              <button class="btn regBtn" type="button" @click="handleSubmit">註冊</button>
           </div>
 
-          <div class="formGroup">
-            <input type="checkbox" id="termsAgreement" name="termsAgreement" class="formCheckbox">
-            <label for="termsAgreement" class="formLabel">
-              我已詳細閱讀並接受<a href="#" target="_blank">緯藝會員服務條款</a>
-            </label>
-            <br>
-            <span class="formError hidden">請勾選以繼續</span>
-          </div>
-
-          <button class="btn regBtn" type="button"
-          @click="$router.push('/front/memRegOK')"
-          >註冊</button>
 
           <div class="thirdPartyRegister">
             <div class="separator">或使用以下方式註冊</div>
@@ -128,10 +137,149 @@
 
 <script setup>
 
+import { reactive } from 'vue'
+import { useRouter } from 'vue-router'
+
+const today = new Date().toISOString().split('T')[0]; // 轉成 YYYY-MM-DD 格式
+
+const router = useRouter()
+
+const form = reactive({
+  name: '',
+  email: '',
+  password: '',
+  cPassword: '',
+  phone: '',
+  birthday: '',
+  gender:'',
+  termsAgreement: false,
+})
+
+const errors = reactive({
+  name: '',
+  email: '',
+  password: '',
+  cPassword: '',
+  phone: '',
+  birthday: '',
+  gender:'',
+  termsAgreement: '',
+})
+
+
+function validateForm() {
+  let valid = true
+
+  // Reset errors
+  Object.keys(errors).forEach(key => errors[key] = '')
+
+  // 姓名
+  if (!form.name.trim()) {
+    errors.name = '姓名為必填'
+    valid = false
+  } else if (form.name.length < 2) {
+    errors.name = '姓名至少兩個字'
+    valid = false
+  }
+
+  // 信箱
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  if (!form.email.trim()) {
+    errors.email = '信箱為必填'
+    valid = false
+  } else if (!emailRegex.test(form.email)) {
+    errors.email = '請輸入正確的信箱格式'
+    valid = false
+  }
+
+  // 密碼
+  if (!form.password) {
+    errors.password = '請輸入密碼'
+    valid = false
+  } else if (form.password.length < 6) {
+    errors.password = '密碼需至少 6 碼'
+    valid = false
+  }
+
+  // 確認密碼
+  if (form.cPassword !== form.password) {
+    errors.cPassword = '兩次密碼不一致'
+    valid = false
+  }
+
+  // 手機
+  if (form.phone.length !== 10) {
+    errors.phone = '請輸入正確手機格式'
+    valid = false
+  }
+  
+  // 生日
+  if (form.birthday == '') {
+    errors.birthday = '請選擇生日'
+    valid = false
+  } 
+
+    // 性別
+  if (form.gender == '') {
+    errors.gender = '請選擇性別'
+    valid = false
+  } 
+
+  // 條款
+  if (!form.termsAgreement) {
+    errors.termsAgreement = '請勾選同意條款'
+    valid = false
+  }
+
+  return valid
+}
+
+async function handleSubmit() {
+  if (validateForm()) {
+
+    // 只取出要送進資料庫的欄位
+    const payload = {
+      name: form.name,
+      email: form.email,
+      password: form.password,
+      phone: form.phone,
+      birthday: form.birthday,
+      gender: form.gender,
+    }
+
+    try {
+      const response = await fetch('http://localhost/TibaTest/memRegister.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload), // <-- 注意是乾淨資料
+      })
+
+      const result = await response.json()
+
+      if (result.success) {
+        router.push('/front/memRegOK')  // 成功導向
+      } else {
+        alert('註冊失敗：' + result.message)
+      }
+    } catch (error) {
+      console.error('傳送資料錯誤', error)
+      alert('伺服器錯誤，請稍後再試')
+    }
+  }
+}
+
+
 </script>
 
 <style lang="scss" scoped>
 @import '/style.scss';
+
+.wrapper{
+  padding-bottom: 60px;
+
+}
 
 .toRegisterOK  a{
 
@@ -198,6 +346,8 @@ line-height: 200px;
 
 
 .formA{
+  text-align: center;
+
   @media (max-width: 520px) {
       width: 100vw;
     }
@@ -239,6 +389,29 @@ line-height: 200px;
     font-size: map-get($font, p);
     line-height: 48px;
    }
+
+
+#termsAgreement{
+  width: 15px;
+ height: 15px;
+
+}
+
+.terms a{
+  color: $logoBlue;
+  font-weight: bold;
+  text-decoration: none;
+
+  &:hover{
+    text-decoration: underline;
+    color: $logoGreen;
+  }
+
+
+}
+
+
+
 
 </style>
 
