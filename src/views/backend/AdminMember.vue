@@ -13,7 +13,6 @@
         <p>生日：{{ selectedMember.birthday }}</p>
         <p>性別：{{ selectedMember.gender }}</p>
         <p>註冊時間：{{ selectedMember.register }}</p>
-        <button @click="showModal = false">關閉</button>
       </div>
   </div>
 </template>
@@ -25,12 +24,12 @@ import AdminTable from '@/components/AdminTable.vue'
 // 欄位設定
 const columns = [
   { key: 'id', label: '會員編號', class: 'w-100' },
-  { key: 'name', label: '會員名稱' },
-  { key: 'email', label: 'Email' },
-  { key: 'register', label: '註冊時間' },
-  { key: 'update', label: '修改時間' },
-  { key: 'status', label: '狀態', type:'switch' },
-  { key: 'more', label: '詳細資料', type: 'button', buttonLabel: '查看' }
+  { key: 'name', label: '會員名稱' , class: 'w-150'},
+  { key: 'email', label: 'Email'},
+  { key: 'register', label: '註冊時間', class: 'w-200' },
+  { key: 'update', label: '修改時間' , class: 'w-200'},
+  { key: 'status', label: '狀態', type:'switch', class: 'w-90' },
+  { key: 'more', label: '詳細', type: 'button', buttonLabel: '查看', class: 'w-90' }
 ]
 
 const showModal = ref(false)
@@ -66,7 +65,8 @@ onMounted(async () => {
 
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import '/style.scss';
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -80,8 +80,16 @@ onMounted(async () => {
 }
 .modal-content {
   background: white;
-  padding: 24px;
-  border-radius: 8px;
-  min-width: 300px;
+  width: 500px;
+  h3{
+    font-size: 24px;
+    background-color: $primaryGreen;
+    padding: $spacing-4;
+    color: #FFF;
+  }
+  p{
+    font-size: 20px;
+    padding: $spacing-3;
+  }
 }
 </style>
