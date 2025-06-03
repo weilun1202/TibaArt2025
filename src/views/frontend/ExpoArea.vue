@@ -64,7 +64,7 @@ import { ref } from 'vue'
 // 宣告 artworks 陣列
 const artworks = ref([
   {
-    imgSrc: '/assets/img/expoArea-artwork1.png',
+    imgSrc: import.meta.env.BASE_URL + '/assets/img/expoArea-artwork1.png',
     title: '裂縫之下',
     englishTitle: 'Beneath the Fracture',
     medium: '油畫',
@@ -73,7 +73,7 @@ const artworks = ref([
     link: '/front/ExpoAreaPage',
   },
   {
-    imgSrc: '/assets/img/expoArea-artwork2.png',
+    imgSrc: import.meta.env.BASE_URL + '/assets/img/expoArea-artwork2.png',
     title: '裂縫之下',
     englishTitle: 'Beneath the Fracture',
     medium: '油畫',
@@ -82,7 +82,7 @@ const artworks = ref([
     link: '/front/ExpoAreaPage',
   },
   {
-    imgSrc: '/assets/img/expoArea-artwork3.png',
+    imgSrc: import.meta.env.BASE_URL + '/assets/img/expoArea-artwork3.png',
     title: '裂縫之下',
     englishTitle: 'Beneath the Fracture',
     medium: '油畫',
@@ -91,7 +91,7 @@ const artworks = ref([
     link: '/front/ExpoAreaPage',
   },
   {
-    imgSrc: '/assets/img/expoArea-artwork4.png',
+    imgSrc: import.meta.env.BASE_URL + '/assets/img/expoArea-artwork4.png',
     title: '裂縫之下',
     englishTitle: 'Beneath the Fracture',
     medium: '油畫',
@@ -100,7 +100,7 @@ const artworks = ref([
     link: '/front/ExpoAreaPage',
   },
   {
-    imgSrc: '/assets/img/expoArea-artwork5.png',
+    imgSrc: import.meta.env.BASE_URL + '/assets/img/expoArea-artwork5.png',
     title: '裂縫之下',
     englishTitle: 'Beneath the Fracture',
     medium: '油畫',
