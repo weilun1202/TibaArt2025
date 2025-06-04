@@ -671,7 +671,7 @@ header .pageTitle {
 .about .control {
   touch-action: pan-y;
   position: relative;
-  max-height: 50vh;
+  max-height: 70vh;
   /* 滿版高度（視窗高度） */
   overflow: hidden;
   /* 隱藏超出左右範圍 */
