@@ -1,4 +1,6 @@
 .about {
+  max-width: 1200px;
+  margin: 0 auto;
 
   /* 通用容器寬度置中 */
   .banner,
@@ -9,6 +11,7 @@
 
   /* Banner 橫向排版 */
   .banner {
+
     display: flex;
     align-items: center;
     /* 讓文字與圖片垂直置中 */
@@ -76,11 +79,37 @@
 
   /* GSAP 水平滾動容器 */
   .control {
+    touch-action: pan-y;
+
     position: relative;
-    height: 70vh;
+    max-height: 70vh;
     /* 滿版高度（視窗高度） */
     overflow: hidden;
     /* 隱藏超出左右範圍 */
+
+    //給control一個半透明白色漸層遮罩
+    /* 這裡用 &::before 代表 .control::before */
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      /* 遮罩不攔截滑鼠事件 */
+
+      /* 從左到 50% 都是半透明白，50% 後漸漸透明 */
+      background: linear-gradient(to right,
+          rgba(246, 238, 228, 0) 0%,
+          rgba(246, 238, 228, 0) 25%,
+          rgba(246, 238, 228, 0.3) 50%,
+          rgba(246, 238, 228, 0.5) 75%,
+          rgba(246, 238, 228, 1) 100%);
+
+      z-index: 1;
+      /* 確保遮罩蓋在下面的 .timeline 之上 */
+    }
 
     .timeline {
       display: flex;
@@ -94,6 +123,10 @@
         flex: 0 0 auto;
         width: 260px;
         margin-right: 60px;
+
+        li:last-child {
+          margin-right: 0;
+        }
 
         h3 {
           font-size: map-get($font, h5);

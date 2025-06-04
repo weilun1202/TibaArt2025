@@ -1,7 +1,7 @@
 .expoArea {
 
-
-
+    max-width: 1200px;
+    margin: 0 auto;
 
     .banner {
         max-width: 100%;
@@ -58,7 +58,6 @@
 
 
     .expoArea-intro {
-        max-width: 1200px;
         margin: 0 auto;
         padding: $spacing-8 $spacing-4;
         text-align: center;
@@ -83,6 +82,7 @@
         }
 
         .expoArea-artist {
+
             display: flex;
             align-items: center;
             gap: 2rem;
@@ -97,23 +97,34 @@
                 object-fit: cover;
             }
 
-            h5 {
-                text-align: left;
-                flex: 1;
-                font-size: 1rem;
-                line-height: 1.6;
-                color: #333;
-                margin-bottom: 3rem;
-            }
-
-            .icons {
-
-
+            .artist-text {
                 display: flex;
-                gap: 1rem;
 
-                font-size: 2rem;
+                flex-direction: column;
+                justify-content: space-between;
+
+                h5 {
+
+
+                    text-align: left;
+                    font-size: 1rem;
+                    line-height: 1.6;
+                    color: #333;
+                    margin-bottom: $spacing-8;
+
+
+                }
+
+                .icons {
+
+
+                    display: flex;
+                    gap: 1rem;
+
+                    font-size: 2rem;
+                }
             }
+
         }
 
 
@@ -164,10 +175,17 @@
             }
 
             a {
+
                 color: $fontBlack;
-                text-decoration: underline;
+                text-decoration: none;
                 font-weight: bold;
                 display: inline-block;
+
+            }
+
+            a:hover {
+                text-decoration: underline;
+                color: gray;
             }
         }
 

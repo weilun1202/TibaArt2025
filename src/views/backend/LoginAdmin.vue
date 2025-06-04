@@ -1,22 +1,33 @@
 <template>
   <img src="../../assets/img/TibaArtLogo.svg" class="logo">
-  <div class="adminLogin">
-  <span>後台登入</span>
-
+  
+  <form @submit.prevent="adminLogin" class="adminLogin">
+    <span>後台登入</span>
     <label for="adminAccount">
       帳號
-      <br>
-      <input v-model="acc"
-      name="adminAccount" id ="adminAccount" type="text" placeholder="請輸入帳號">
+      <br />
+      <input
+        v-model="acc"
+        name="adminAccount"
+        id="adminAccount"
+        type="text"
+        placeholder="請輸入帳號"
+      />
     </label>
     <label for="adminPassword">
       密碼
-      <br>
-      <input v-model="pwd"
-      name= "adminPassword" id="adminPassword" type="password" placseholder="請輸入密碼">
+      <br />
+      <input
+        v-model="pwd"
+        name="adminPassword"
+        id="adminPassword"
+        type="password"
+        placeholder="請輸入密碼"
+      />
     </label>
-    <button class="btn" @click="adminLogin">登入</button>
-  </div>
+
+    <button class="btn" type="submit">登入</button>
+  </form>
 </template>
 
 <script setup>

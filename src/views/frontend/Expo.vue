@@ -18,6 +18,7 @@
   </div>
 </template>
 <script setup>
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ref } from 'vue'
 
 // 1. 定義一個陣列，把原本寫死的每一筆 router-link，拆成「圖片路徑」、「class 名稱」、「left/right」等欄位
