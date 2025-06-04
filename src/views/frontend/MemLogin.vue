@@ -39,7 +39,7 @@
                   placeholder="輸入 E-mail"
                   v-model="general.email"
                 />
-              <span class="formError">格式錯誤</span>
+              <span class="formError hidden">格式錯誤</span>
               </div>
 
               <div class="formGroup">
@@ -52,15 +52,18 @@
                   v-model="general.password"
                 />
                 <div class="reminder">
-                <span class="formError">格式錯誤</span>
+                <span class="formError hidden">格式錯誤</span>
                   <router-link to="/front/memForgetPass" class="passForget">忘記密碼</router-link>
                 </div>
               </div>
 
               <div class="btnGroup">
                 <button class="btn" type="button"
-                @click="handleSubmit"
+                @click="router.push('/member')"
                 >確定登入</button>
+                 <!-- <button class="btn" type="button"
+                @click="handleSubmit"
+                >確定登入</button> -->
                 <button class="btn" type="button"
                 @click="$router.push('/front/memReg')"
                 >註冊會員</button>
@@ -79,7 +82,7 @@
                   placeholder="輸入 E-mail"
                   v-model="artist.email"
                 />
-              <span class="formError">格式錯誤</span>
+              <span class="formError hidden">格式錯誤</span>
               </div>
 
               <div class="formGroup">
@@ -95,12 +98,16 @@
                   <router-link to="/front/memForgetPass" class="passForget">忘記密碼</router-link>
                 </div>
               </div>
-
               <div class="btnGroup">
+                <button class="btn" type="button"
+                @click="router.push('/member')"
+                >確定登入</button>
+              </div>
+              <!-- <div class="btnGroup">
                 <button class="btn" type="button"
                 @click="handleSubmit"
                 >確定登入</button>
-              </div>
+              </div> -->
             </div>
           </div>
           

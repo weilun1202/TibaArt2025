@@ -116,7 +116,7 @@ function startAnimation() {
     
     // 載入圖片
     const pic = new Image();
-    pic.src = './src/assets/img/Logo.svg';
+    pic.src = import.meta.env.BASE_URL + '/assets/img/Logo.svg';
     
     let time = 0;
     const float = 15;
