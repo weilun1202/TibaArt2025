@@ -602,6 +602,8 @@ header .pageTitle {
 }
 
 .about {
+  max-width: 1200px;
+  margin: 0 auto;
   /* 通用容器寬度置中 */
   /* Banner 橫向排版 */
   /* Intro 區塊 */
@@ -668,10 +670,25 @@ header .pageTitle {
 }
 .about .control {
   position: relative;
-  height: 70vh;
+  max-height: 50vh;
   /* 滿版高度（視窗高度） */
   overflow: hidden;
   /* 隱藏超出左右範圍 */
+  /* 這裡用 &::before 代表 .control::before */
+}
+.about .control::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  /* 遮罩不攔截滑鼠事件 */
+  /* 從左到 50% 都是半透明白，50% 後漸漸透明 */
+  background: linear-gradient(to right, rgba(246, 238, 228, 0) 0%, rgba(246, 238, 228, 0) 25%, rgba(246, 238, 228, 0.3) 50%, rgba(246, 238, 228, 0.5) 75%, rgb(246, 238, 228) 100%);
+  z-index: 1;
+  /* 確保遮罩蓋在下面的 .timeline 之上 */
 }
 .about .control .timeline {
   display: flex;
@@ -1581,6 +1598,8 @@ header .pageTitle {
 }
 
 .expoArea {
+  max-width: 1200px;
+  margin: 0 auto;
   /* 圖片區塊 */
   /* 1) 外層容器：相對定位，方便放大鏡用絕對定位 */
   /* 2) 原始圖片：寬度 100%，高 auto，自行調整 */
@@ -1633,7 +1652,6 @@ header .pageTitle {
   height: auto;
 }
 .expoArea .expoArea-intro {
-  max-width: 1200px;
   margin: 0 auto;
   padding: 32px 16px;
   text-align: center;
@@ -1668,15 +1686,19 @@ header .pageTitle {
   -o-object-fit: cover;
      object-fit: cover;
 }
-.expoArea .expoArea-intro .expoArea-artist h5 {
+.expoArea .expoArea-intro .expoArea-artist .artist-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.expoArea .expoArea-intro .expoArea-artist .artist-text h5 {
   text-align: left;
-  flex: 1;
   font-size: 1rem;
   line-height: 1.6;
   color: #333;
-  margin-bottom: 3rem;
+  margin-bottom: 32px;
 }
-.expoArea .expoArea-intro .expoArea-artist .icons {
+.expoArea .expoArea-intro .expoArea-artist .artist-text .icons {
   display: flex;
   gap: 1rem;
   font-size: 2rem;
@@ -1719,9 +1741,13 @@ header .pageTitle {
 }
 .expoArea .expoArea-artwork .expoArea-card a {
   color: #2F2F2F;
-  text-decoration: underline;
+  text-decoration: none;
   font-weight: bold;
   display: inline-block;
+}
+.expoArea .expoArea-artwork .expoArea-card a:hover {
+  text-decoration: underline;
+  color: gray;
 }
 .expoArea .zoom-container {
   position: relative;

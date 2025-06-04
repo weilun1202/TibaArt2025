@@ -16,12 +16,14 @@
 
       <div class="expoArea-intro">
         <h2>藝術家介紹</h2>
-        <h3>艾莉亞·諾瓦</h3>
-        <p>出生於冰島雷克雅維克，自幼沉浸於極光與火山地貌的視覺震撼中。20歲時赴挪威卑爾根藝術學院深造，後旅居日本京都五年，受禪意美學影響深遠。</p>
+        
+        
         <div class="expoArea-artist">
           <img src="/public/assets/img/expoArea-artist.png" alt="artist">
-          <div>
-            <h5>她認為自然界的極端對比，冷與熱、生與死、光與闇，是情緒最誠實的投射。她的創作動機是透過畫布「捕捉內心風暴中那道平靜的光」，將感知與直覺轉化為視覺語言。
+          <div class="artist-text">
+         
+            <h5>出生於冰島雷克雅維克，自幼沉浸於極光與火山地貌的視覺震撼中。20歲時赴挪威卑爾根藝術學院深造，後旅居日本京都五年，受禪意美學影響深遠。<br>
+              她認為自然界的極端對比，冷與熱、生與死、光與闇，是情緒最誠實的投射。她的創作動機是透過畫布「捕捉內心風暴中那道平靜的光」，將感知與直覺轉化為視覺語言。
             </h5>
 
             <div class="icons">
@@ -37,7 +39,9 @@
       <ul class="expoArea-artwork">
         <li v-for="(art, idx) in artworks" :key="idx" class="expoArea-card">
           <div class="zoom-container">
-            <img class="zoom-image" :src="art.imgSrc" :alt="art.title" />
+            <router-link :to="art.link">
+              <img class="zoom-image" :src="art.imgSrc" :alt="art.title" />
+            </router-link>
             <div class="magnifier"></div>
           </div>
           <div class="title">
