@@ -22,7 +22,6 @@
   background-color: #fff;
 
   padding-left: 300px;
-  padding-right: 50px;
   padding-top: 40px;
 }
 

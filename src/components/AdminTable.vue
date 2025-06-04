@@ -180,7 +180,6 @@ function handleStatusChange(row) {
 
 /* 表格 */
 .result-table {
-  width: 100%;
   border-collapse: collapse;
   table-layout: fixed;
 }
@@ -263,18 +262,16 @@ function handleStatusChange(row) {
 }
 
 // 表格長寬
-@for $i from 1 through 200 {
-  @if $i % 10 == 0{
+@for $i from 1 through 300 {
+  @if $i % 50 == 0{
     .w-#{$i} {
-      width: #{$i}px;
+      min-width: #{$i}px;
+      box-sizing: border-box;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
-}
-.ellipsis {
-  box-sizing: border-box;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 </style>
