@@ -7,10 +7,10 @@ import AdminTable from '@/components/AdminTable.vue'
 
 // 欄位設定
 const columns = [
-  { key: 'id', label: '作品編號' },
-  { key: 'img', label: '作品圖片' },
-  { key: 'email', label: '作品名稱' },
-  { key: 'name', label: '作者' },
+  { key: 'id', label: '作品編號', class:'w-100'},
+  { key: 'img', label: '作品圖片', class:'w-150' },
+  { key: 'name', label: '作品名稱' },
+  { key: 'artist', label: '作者' },
   { key: 'size', label: '尺寸' },
   { key: 'note', label: '備註' },
 ]
