@@ -26,6 +26,7 @@ const columns = [
   { key: 'id', label: '會員編號', class: 'w-100' },
   { key: 'name', label: '會員名稱' , class: 'w-150'},
   { key: 'email', label: 'Email'},
+  { key: 'phone', label: '連絡電話', class: 'w-100'},
   { key: 'register', label: '註冊時間', class: 'w-200' },
   { key: 'update', label: '修改時間' , class: 'w-200'},
   { key: 'status', label: '狀態', type:'switch', class: 'w-90' },

@@ -629,7 +629,7 @@ svg {
 
 .info{
     position: absolute; 
-    top: 27%; 
+    top: 35%; 
     left: 50%; 
     transform: translate(-50%, -50%); 
     
