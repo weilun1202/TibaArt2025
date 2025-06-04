@@ -31,15 +31,15 @@
           <div id="generalLogin" class="tabContent" v-if="currentTab === 'general'" :class="{ bgGeneral: currentTab === 'general' }">
             <div class="formA" @submit.prevent="submitGeneral">
               <div class="formGroup">
-                <label for="account" class="formLabel">帳號（您的電子信箱）</label>
+                <label for="email" class="formLabel">帳號（您的電子信箱）</label>
                 <input
                   type="email"
-                  id="account"
-                  name="account"
+                  id="email"
+                  name="email"
                   placeholder="輸入 E-mail"
                   v-model="general.email"
                 />
-                <span class="formError hidden">格式錯誤</span>
+              <span class="formError">格式錯誤</span>
               </div>
 
               <div class="formGroup">
@@ -52,14 +52,14 @@
                   v-model="general.password"
                 />
                 <div class="reminder">
-                  <span class="formError hidden">格式錯誤</span>
+                <span class="formError">格式錯誤</span>
                   <router-link to="/front/memForgetPass" class="passForget">忘記密碼</router-link>
                 </div>
               </div>
 
               <div class="btnGroup">
-                <button class="btn" type="submit"
-                @click="$router.push('/member')"
+                <button class="btn" type="button"
+                @click="handleSubmit"
                 >確定登入</button>
                 <button class="btn" type="button"
                 @click="$router.push('/front/memReg')"
@@ -72,21 +72,21 @@
           <div id="artistLogin" class="tabContent" v-if="currentTab === 'artist'" :class="{ bgArtist: currentTab === 'artist' }">
             <div class="formA" @submit.prevent="submitArtist">
               <div class="formGroup">
-                <label for="artistEmail" class="formLabel">帳號（您的電子信箱）</label>
+                <label for="email" class="formLabel">帳號（您的電子信箱）</label>
                 <input
                   type="email"
-                  id="artistEmail"
+                  id="email"
                   placeholder="輸入 E-mail"
                   v-model="artist.email"
                 />
-                <span class="formError hidden">格式錯誤</span>
+              <span class="formError">格式錯誤</span>
               </div>
 
               <div class="formGroup">
-                <label for="artistPassword" class="formLabel">密碼</label>
+                <label for="password" class="formLabel">密碼</label>
                 <input
                   type="password"
-                  id="artistPassword"
+                  id="password"
                   placeholder="輸入密碼"
                   v-model="artist.password"
                 />
@@ -97,8 +97,8 @@
               </div>
 
               <div class="btnGroup">
-                <button class="btn" type="submit"
-                @click="$router.push('/member')"
+                <button class="btn" type="button"
+                @click="handleSubmit"
                 >確定登入</button>
               </div>
             </div>
@@ -122,15 +122,16 @@
 <script setup>
 
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 const currentTab = ref('general')
 
-const general = ref({
+const general = ref ({
   email: '',
   password: ''
 })
 
-const artist = ref({
+const artist = ref ({
   email: '',
   password: ''
 })
@@ -147,6 +148,96 @@ const submitArtist = () => {
 
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 defineProps()
+
+const router = useRouter()
+
+function validateForm() {
+  let valid = true
+
+  // Reset errors
+  Object.keys(errors).forEach(key => errors[key] = '')
+
+
+  // 一般登入信箱
+  
+  if (!form.email.trim()) {
+    errors.email = '信箱為必填'
+    valid = false
+  } else if (!emailRegex.test(form.email)) {
+    errors.email = '請輸入正確的信箱格式'
+    valid = false
+  }
+
+ // 藝術家登入信箱
+
+   if (!form.email.trim()) {
+    errors.email = '信箱為必填'
+    valid = false
+  } else if (!emailRegex.test(form.email)) {
+    errors.email = '請輸入正確的信箱格式'
+    valid = false
+   }
+
+  // 一般登入密碼
+  if (!form.password) {
+    errors.password = '請輸入密碼'
+    valid = false
+  } else if (form.password.length < 6) {
+    errors.password = '密碼需至少 6 碼'
+    valid = false
+  }
+
+  // 藝術家登入密碼
+  if (!form.password) {
+    errors.password = '請輸入密碼'
+    valid = false
+  } else if (form.password.length < 6) {
+    errors.password = '密碼需至少 6 碼'
+    valid = false
+  }
+
+
+  return valid
+
+}
+
+async function handleSubmit() {
+  if (validateForm()) {
+
+    // 只取出要送進資料庫的欄位
+    const payload = {
+      name: form.name,
+      email: form.email,
+      password: form.password,
+      phone: form.phone,
+      birthday: form.birthday,
+      gender: form.gender,
+    }
+
+    try {
+      const response = await fetch('http://localhost/TibaTest/memLogin.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload), // <-- 注意是乾淨資料
+      })
+
+      const result = await response.json()
+
+      if (result.success) {
+        router.push('/front/memRegOK')  // 成功導向
+      } else {
+        alert('註冊失敗：' + result.message)
+      }
+    } catch (error) {
+      console.error('傳送資料錯誤', error)
+      alert('伺服器錯誤，請稍後再試')
+    }
+  }
+}
+
+
 
 </script>
 
