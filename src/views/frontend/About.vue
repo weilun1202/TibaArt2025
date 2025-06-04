@@ -79,7 +79,6 @@
 </template>
 
 <script setup>
-
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 import gsap from 'gsap'
 
@@ -92,35 +91,80 @@ onMounted(() => {
 
   // 計算可水平捲動的最大距離
   const totalWidth = timelineEl.scrollWidth
-  const viewportWidth = window.innerWidth
+  const viewportWidth = controlEl.clientWidth
   const maxScrollDistance = totalWidth - viewportWidth
 
-  let currentX = 0
+  let currentX = 0        // 當前已經移到的 x 值
+  let initialX = 0        // 在 touchstart 時的 currentX 快照
+  let startTouchX = 0     // touchstart 時手指的起始 clientX
+  let newX = 0            // touchmove 時算出的 newX
 
+  // --- 1. Wheel (滑鼠滾輪) 事件 ---
   function onWheel(e) {
     e.preventDefault()
     const delta = e.deltaY * 0.8
-    let newX = currentX - delta
+    let targetX = currentX - delta
+
+    // clamp 範圍
+    if (targetX > 0) targetX = 0
+    if (targetX < -maxScrollDistance) targetX = -maxScrollDistance
+
+    gsap.to(timelineEl, {
+      x: targetX,
+      ease: 'power2.out',
+      duration: 0.3
+    })
+    currentX = targetX
+  }
+
+  controlEl.addEventListener('wheel', onWheel, { passive: false })
+
+  // --- 2. Touch (手指拖曳) 事件 ---
+  function onTouchStart(e) {
+    // 只處理單指
+    if (e.touches.length !== 1) return
+    e.preventDefault()
+    startTouchX = e.touches[0].clientX
+    initialX = currentX
+  }
+
+  function onTouchMove(e) {
+    // 只處理單指
+    if (e.touches.length !== 1) return
+    e.preventDefault()
+    const touchX = e.touches[0].clientX
+    const deltaX = touchX - startTouchX
+    newX = initialX + deltaX
 
     // clamp 範圍
     if (newX > 0) newX = 0
     if (newX < -maxScrollDistance) newX = -maxScrollDistance
 
-    // GSAP 給位移
+    // 用 GSAP 做動畫
     gsap.to(timelineEl, {
       x: newX,
       ease: 'power2.out',
-      duration: 0.3
+      duration: 0.2
     })
+  }
 
+  function onTouchEnd(e) {
+    // touch 結束或中斷時，把 newX 存到 currentX
     currentX = newX
   }
 
-  // 只在滑鼠在 .control 上時，綁定 wheel 事件
-  controlEl.addEventListener('wheel', onWheel, { passive: false })
+  controlEl.addEventListener('touchstart', onTouchStart, { passive: false })
+  controlEl.addEventListener('touchmove', onTouchMove, { passive: false })
+  controlEl.addEventListener('touchend', onTouchEnd)
+  controlEl.addEventListener('touchcancel', onTouchEnd)
 
+  // --- 3. 卸載時移除監聽器 ---
   onBeforeUnmount(() => {
     controlEl.removeEventListener('wheel', onWheel)
+    controlEl.removeEventListener('touchstart', onTouchStart)
+    controlEl.removeEventListener('touchmove', onTouchMove)
+    controlEl.removeEventListener('touchend', onTouchEnd)
+    controlEl.removeEventListener('touchcancel', onTouchEnd)
   })
 })
 </script>

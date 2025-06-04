@@ -669,6 +669,7 @@ header .pageTitle {
   color: #2F2F2F;
 }
 .about .control {
+  touch-action: pan-y;
   position: relative;
   max-height: 50vh;
   /* 滿版高度（視窗高度） */
@@ -703,6 +704,9 @@ header .pageTitle {
   flex: 0 0 auto;
   width: 260px;
   margin-right: 60px;
+}
+.about .control .timeline li li:last-child {
+  margin-right: 0;
 }
 .about .control .timeline li h3 {
   font-size: 1.25rem;
@@ -1395,7 +1399,7 @@ header .pageTitle {
   display: flex;
   justify-content: center;
   align-items: center;
-  max-height: 160px;
+  max-height: 300px;
 }
 .expo .parent .grid img {
   width: 100%;
@@ -1525,7 +1529,7 @@ header .pageTitle {
   }
   .expo .parent .grid {
     width: 100%;
-    height: 160px;
+    height: 300px;
     overflow: hidden;
   }
   .expo .parent img {

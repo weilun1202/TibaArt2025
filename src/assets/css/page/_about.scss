@@ -79,6 +79,8 @@
 
   /* GSAP 水平滾動容器 */
   .control {
+    touch-action: pan-y;
+
     position: relative;
     max-height: 50vh;
     /* 滿版高度（視窗高度） */
@@ -121,6 +123,10 @@
         flex: 0 0 auto;
         width: 260px;
         margin-right: 60px;
+
+        li:last-child {
+          margin-right: 0;
+        }
 
         h3 {
           font-size: map-get($font, h5);
