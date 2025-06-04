@@ -80,6 +80,12 @@
 <style lang="scss" scoped>
 /* 可以把額外的 CSS 加在這裡或保留在全域 */
 @import '/style.scss';
+
+.wrapper{
+    margin-bottom: 120px;
+}
+
+
 .appIconDown{
   font-size: map-get($font, h3);
 }

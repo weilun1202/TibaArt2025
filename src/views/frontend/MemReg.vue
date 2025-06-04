@@ -82,7 +82,7 @@
               <input
                 type="date"
                 id="birthday"
-                :max="today"
+                :max="maxBirthdayStr"
                 v-model="form.birthday"
                 placeholder="選擇生日"
               />
@@ -140,7 +140,10 @@
 import { reactive } from 'vue'
 import { useRouter } from 'vue-router'
 
-const today = new Date().toISOString().split('T')[0]; // 轉成 YYYY-MM-DD 格式
+// const today = new Date().toISOString().split('T')[0]; // 轉成 YYYY-MM-DD 格式
+const today = new Date()
+const maxBirthday = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+const maxBirthdayStr = maxBirthday.toISOString().split('T')[0]; // yyyy-mm-dd 字串
 
 const router = useRouter()
 
