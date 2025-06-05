@@ -7,8 +7,8 @@ import AdminTable from '@/components/AdminTable.vue'
 
 // 欄位設定
 const columns = [
-  { key: 'id', label: '商品編號' },
-  { key: 'type', label: '分類' },
+  { key: 'id', label: '商品編號',class:'w-100' },
+  { key: 'type', label: '分類',class:'w-100' },
   { key: 'name', label: '商品名稱' },
   { key: 'img', label: '商品圖' },
   { key: 'des', label: '商品描述' },

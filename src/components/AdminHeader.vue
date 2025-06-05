@@ -38,7 +38,8 @@ function adminLogout(){
   width: calc(100% - 250px);
   height: 60px;
   border-bottom: 2px solid $primaryGreen;
-  margin-left: auto;
+  position: fixed;
+  right: 0;
   span{
     padding: $spacing-5;
     font-size: 20px;

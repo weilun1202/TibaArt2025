@@ -1,5 +1,5 @@
 <template>
-    <AdminTable :columns="columns" :data="data" />
+    <AdminTable :columns="columns" :data="data" :showAddButton="false"/>
 </template>
 
 <script setup>
@@ -7,7 +7,7 @@ import AdminTable from '@/components/AdminTable.vue'
 
 // 欄位設定
 const columns = [
-  { key: 'id', label: '筆數' },
+  { key: 'id', label: '筆數', class:'w-100' },
   { key: 'patron', label: '贊助者' },
   { key: 'email', label: '贊助者信箱' },
   { key: 'sponsored', label: '贊助展覽' },

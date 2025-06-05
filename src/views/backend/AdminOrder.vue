@@ -1,5 +1,5 @@
 <template>
-    <AdminTable :columns="columns" :data="data" />
+    <AdminTable :columns="columns" :data="data" :showAddButton="false"/>
 </template>
 
 <script setup>
