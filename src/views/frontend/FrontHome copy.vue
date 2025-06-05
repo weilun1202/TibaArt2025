@@ -8,21 +8,17 @@
             </h1>
     </div>
     
-     <!-- <transition name="fade" mode="out-in">
+     <transition name="fade" mode="out-in">
       <div :key="activeBlock" class="info">
-        <p>點選下方作品，開始悠遊緯藝！</p>
+        <p class="flip animate__animated animate__flipInX" v-if="activeBlock === 'painting1'"> {{ painting1 }}</p>
+        <p class="flip animate__animated animate__flipInX" v-else-if="activeBlock === 'painting2'"> {{ painting2 }}</p>
+        <p class="flip animate__animated animate__flipInX" v-else-if="activeBlock === 'painting3'"> {{ painting3 }}</p>
+        <p class="flip animate__animated animate__flipInX" v-else-if="activeBlock === 'painting4'"> {{ painting4 }}</p>
+        <p class="flip animate__animated animate__flipInX" v-else-if="activeBlock === 'painting5'"> {{ painting5 }}</p>
+        <p class="flip animate__animated animate__flipInX" v-else-if="activeBlock === 'painting6'"> {{ painting6 }}</p>
+        <p v-else>{{ defaultText }}</p>
       </div>
-    </transition> -->
-
-
-    <!-- tooltip（在 svg 外） -->
-      <div 
-        class="tooltip animate__animated animate__pulse" 
-        v-if="tooltipVisible"
-        :style="{ top: tooltipY + 'px', left: tooltipX + 'px' }"
-      >
-        {{ tooltipText }}
-      </div>
+    </transition>
 
       <svg ref="svgRef" width="1000" height="600" viewBox="0 0 1000 600" xmlns="http://www.w3.org/2000/svg">
 
@@ -164,10 +160,9 @@
               style="cursor: pointer; stroke: rgba(0,0,0,0); stroke-width: 3;"
               data-title="抽象流線畫作"
               @click="router.push('/front/sponsor')"
-              @mouseenter="event => showTooltip(event, '我要贊助藝術家')"
-              @mousemove="moveTooltip"
-              @mouseleave="hideTooltip"
-              />
+              @mouseenter="setActiveBlock('painting1')"
+              @mouseleave="setActiveBlock('')"
+        />
         
         <!-- 中間垂直畫作互動區 -->
         <rect id="artwork-2" x="320" y="150" width="80" height="120" 
@@ -175,10 +170,9 @@
               style="cursor: pointer; stroke: rgba(0,0,0,0); stroke-width: 3;"
               data-title="綠色流線作品"
               @click="router.push('/front/application')"
-              @mouseenter="event => showTooltip(event, '我要申請辦展')"
-              @mousemove="moveTooltip"
-              @mouseleave="hideTooltip"
-              />
+              @mouseenter="setActiveBlock('painting2')"
+              @mouseleave="setActiveBlock('')"
+        />
         
         <!-- 小型幾何畫作1互動區 -->
         <rect id="artwork-3" x="450" y="120" width="70" height="70" 
@@ -186,10 +180,9 @@
               style="cursor: pointer; stroke: rgba(0,0,0,0); stroke-width: 3;"
               data-title="幾何線條作品"
               @click="router.push('/front/about')"
-              @mouseenter="event => showTooltip(event, '我想要更了解緯藝')"
-              @mousemove="moveTooltip"
-              @mouseleave="hideTooltip"
-              />
+              @mouseenter="setActiveBlock('painting3')"
+              @mouseleave="setActiveBlock('')"
+        />
         
         <!-- 小型畫作2互動區 -->
         <rect id="artwork-4" x="540" y="120" width="60" height="90" 
@@ -197,10 +190,9 @@
               style="cursor: pointer; stroke: rgba(0,0,0,0); stroke-width: 3;"
               data-title="藍色垂直構圖"
               @click="router.push('/front/memLogin')"
-              @mouseenter="event => showTooltip(event, '我要前往會員中心')"
-              @mousemove="moveTooltip"
-              @mouseleave="hideTooltip"
-              />
+              @mouseenter="setActiveBlock('painting4')"
+              @mouseleave="setActiveBlock('')"
+        />
         
         <!-- 右側大型畫作互動區 -->
         <rect id="artwork-5" x="680" y="100" width="280" height="200" 
@@ -208,31 +200,20 @@
               style="cursor: pointer; stroke: rgba(0,0,0,0); stroke-width: 3;"
               data-title="現代抽象大作"
               @click="router.push('/front/shop')"
-              @mouseenter="event => showTooltip(event, '我要買藝術周邊')"
-              @mousemove="moveTooltip"
-              @mouseleave="hideTooltip"
-              />
+              @mouseenter="setActiveBlock('painting5')"
+              @mouseleave="setActiveBlock('')"
+        />
 
-        <image id="artwork-6" class="thinker painting6 parallax-layer-6" 
+        <image class="thinker painting6 parallax-layer-6" 
               ref="paint6"
               style="cursor: pointer"
               href="/src/assets/img/thinker.svg" 
               width="240" height="240"
               @click="router.push('/front/expo')"
-              @mouseenter="event => showTooltip(event, '前往觀看線上展覽')"
-              @mousemove="moveTooltip"
-              @mouseleave="hideTooltip"
-              />
-
-        <image id="artwork-7" class="banana painting7 parallax-layer-7" 
-              ref="paint7"
-              style="cursor: pointer"
-              href="/src/assets/img/banana.svg" 
-              width="100" height="100"
-              @mouseenter="event => showTooltip(event, '是誰把我吃掉了？')"
-              @mousemove="moveTooltip"
-              @mouseleave="hideTooltip"
-              />              
+              @mouseenter="setActiveBlock('painting6')"
+              @mouseleave="setActiveBlock('')"/>
+              
+              <!-- x="400" y="200"  -->
     </svg>
 
 </div>
@@ -256,32 +237,23 @@ const paint3 = ref(null)
 const paint4 = ref(null)
 const paint5 = ref(null)
 const paint6 = ref(null)
-const paint7 = ref(null)
+const infoPanel = ref(null)
 const parallaxBg = ref(null)
 const contentSection = ref(null)
 
-const tooltipVisible = ref(false)
-const tooltipText = ref('')
-const tooltipX = ref(0)
-const tooltipY = ref(0)
+const activeBlock = ref('');
+const defaultText = ref('點選下方作品，開始悠遊緯藝！');
 
-function showTooltip(event, text, artworkCenterX, artworkCenterY) {
-  tooltipText.value = text
-  tooltipVisible.value = true
+const painting1 = '我要贊助藝術家';
+const painting2 = '我要申請辦展';
+const painting3 = '我想要更了解緯藝';
+const painting4 = '我要前往會員中心';
+const painting5 = '我要買藝術周邊';
+const painting6 = '前往觀看線上展覽';
 
-}
-
-function moveTooltip(event) {
-  if (!tooltipVisible.value) return
-
-  tooltipX.value = event.clientX + 20
-  tooltipY.value = event.clientY - 20
-
-}
-
-function hideTooltip() {
-  tooltipVisible.value = false
-}
+const setActiveBlock = (blockName) => {
+  activeBlock.value = blockName;
+};
 
 onMounted(() => {
   // 文字分割動畫
@@ -305,7 +277,6 @@ onMounted(() => {
   gsap.set([paint4.value], { y: -200, opacity: 0 })
   gsap.set([paint5.value], { x: 200, opacity: 0 })
   gsap.set(paint6.value, { x: window.innerWidth / 2, y: window.innerHeight / 4, opacity: 0, scale: 2 }); // 從視窗右下方開始
-  gsap.set([paint7.value], { x: -200, opacity: 0 })
 
 
   // 順序滑入動畫
@@ -316,20 +287,18 @@ onMounted(() => {
     .to(paint4.value, { y: 0, opacity: 1, duration: 0.75, ease: 'elastic.out(1, 0.3)' }, '1.2')
     .to(paint5.value, { x: 0, opacity: 1, duration: 0.75, ease: 'power3.out' }, '0.4')
 
-    .to(paint6.value, {
-      x: 410,
-      y: 200,
-      opacity: 1,
+    .to(paint6.value, { 
+      x: 400,
+      y: 240,
+      opacity: 1, 
       scale: 1,
       duration: 1.5,
-      ease: 'back.out(1.7)'
-    }, '1.4')
-
-    .to(paint7.value, { x: 350, y: 300, opacity: 1, duration: 0.75, ease: 'power3.out' }, '0.4');
+      ease: 'back.out(1.7)' 
+    }, '1.4');
     
 
   // Hover 效果 for painting1 to painting5
-  const paintings = [paint1.value, paint2.value, paint3.value, paint4.value, paint5.value, null, paint7.value];
+  const paintings = [paint1.value, paint2.value, paint3.value, paint4.value, paint5.value];
   paintings.forEach((painting, index) => {
     const artwork = document.getElementById(`artwork-${index + 1}`);
     if (artwork && painting) {
@@ -358,7 +327,7 @@ onMounted(() => {
       gsap.to(paint6.value, {
         scale: 1.2,
         rotation: 5, 
-        filter: 'drop-shadow(0 0 10px rgba(235, 166, 37, 0.8)) drop-shadow(0 0 20px rgba(255, 255, 0, 0.6))',
+        filter: 'drop-shadow(0 0 10px rgba(255, 255, 0, 0.8)) drop-shadow(0 0 20px rgba(255, 255, 0, 0.6))',
         duration: 0.3,
         ease: 'power2.out',
         transformOrigin: 'center center'
@@ -392,6 +361,17 @@ const setupHorizontalParallax = () => {
     }
   });
 
+  // 信息面板向右移動
+  gsap.to(infoPanel.value, {
+    xPercent: 15,
+    ease: "none",
+    scrollTrigger: {
+      trigger: infoPanel.value,
+      start: "top bottom",
+      end: "bottom top", 
+      scrub: true
+    }
+  });
 
   // 左側畫作組 - 向右移動（快速）
   gsap.to([paint1.value, paint2.value], {
@@ -436,8 +416,7 @@ const setupHorizontalParallax = () => {
   // SVG 整體左右傾斜效果
   gsap.to(svgRef.value, {
     rotationZ: 2,
-    xPercent: 0,
-    yPercent: -10,
+    xPercent: -10,
     ease: "none",
     scrollTrigger: {
       trigger: svgRef.value,
@@ -607,6 +586,15 @@ svg {
     aspect-ratio: 5/5; 
   }
 
+.infoPanel{
+
+margin: 0 auto;
+width: 50%;
+border: 1.5px solid;
+padding: 32px;
+text-align: center;
+}
+
 .flip{
     font-weight: bold;
     color: $logoDGreen;
@@ -671,22 +659,5 @@ svg {
   }
 
 }
-
-.tooltip {
-  position: absolute;
-  pointer-events: none;
-  white-space: nowrap;
-  z-index: 1000;
-    
-  padding: 16px;
-  border: 1.5px solid;
-  text-align: center;
-  background-color: rgba(255, 255, 255, 0.9); 
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  pointer-events: none; 
-
-  font-size: map-get($font, p); 
-}
-
 
 </style>
