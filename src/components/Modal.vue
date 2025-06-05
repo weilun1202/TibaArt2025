@@ -47,7 +47,7 @@ const handleOverlayClick = () => {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgb(230, 219, 210, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -55,9 +55,10 @@ const handleOverlayClick = () => {
 }
 
 .modal-content {
-  background: white;
+  background:linear-gradient(205deg, #f6eee4, #ffffff);
   padding: 12px;
-  border-radius: 8px;
+  border-radius: 32px;
+  border: 3px solid #2F2F2F;
   max-width: 500px;
   width: 100%;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
