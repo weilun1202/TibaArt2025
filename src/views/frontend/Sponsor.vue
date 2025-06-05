@@ -16,7 +16,7 @@
             <div class="donateItem">
               欲贊助之展覽
             </div>
-            <select id="subject" name="sponsored" v-model="subject" @change="errors.subject = ''">
+            <select id="sponsored" name="artist_id" v-model="subject" @change="errors.subject = ''">
               <option value="">請選擇</option>
               <option value="expo1">《 靜界焰光 》</option>
               <option value="expo2">《 雪白世界 》</option>
@@ -70,7 +70,7 @@
             <input
               type="text"
               id="name"
-              name="patron"
+              name="member_id"
               placeholder="請輸入姓名"
               v-model="name"
               @input="errors.name = ''"
@@ -84,7 +84,7 @@
             <label for="email" class="formLabel">
               帳號 (信箱)<span class="formHint">*</span>
             </label>
-            <div class="formReceipt">收據將以電子郵件方式寄出</div>
+            <div class="formReceipt">收據將以電子郵件方式寄出</div><!-- name="email" "share" ?-->
             <input
               type="text"
               id="email"
@@ -99,7 +99,7 @@
 
           <div class="formGroup">
 
-            <label for="pay" class="formLabel">
+            <label class="formLabel">
               付款方式
             </label>
             <button type="button" class="btn formDonate" @click="handleSubmit">
@@ -424,7 +424,31 @@ function handleSubmit(e) {
     text-align: left;
   }
 }
-
+@media screen and (max-width: 400px){
+  .formA{
+    width: 320px;
+    .formGroup{
+      width: 320px;
+    }
+    .formReceipt{
+      width: 200px;
+    }
+    input[type="text"],
+    input[type="tel"],
+    select{
+      width: 100%;
+    }
+    #cost{
+      width: 320px;
+    }
+  }
+  .donateForm{
+    width: 280px;
+  }
+  .faq{
+    width: 280px;
+  }
+}
 
 </style>
 

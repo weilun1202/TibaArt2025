@@ -107,6 +107,11 @@
     width: 350px;
   }
 }
+@media screen and (max-width: 390px) {
+  .applicationArea{
+    width: 280px;
+  }
+}
 
 </style>
 
