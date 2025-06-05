@@ -229,11 +229,20 @@
               style="cursor: pointer"
               href="/src/assets/img/banana.svg" 
               width="100" height="100"
+              @click="openQuiz"
               @mouseenter="event => showTooltip(event, '是誰把我吃掉了？')"
               @mousemove="moveTooltip"
               @mouseleave="hideTooltip"
               />              
     </svg>
+
+    <Quiz v-model:isOpen="showQuiz" title="緯藝小測驗" @click="closeQuiz">
+                <div class="QuizDIY">
+                </div>
+                <div class="QuizBtnSet">
+                  <button @click="closeQuiz" aria-label="取消">不玩了</button>
+                </div>              
+    </Quiz>
 
 </div>
 </template>
@@ -241,6 +250,7 @@
 <script setup>
 import router from '@/router';
 import { ref, onMounted, onUnmounted } from 'vue'
+import Quiz from '@/components/Quiz.vue';
 import { gsap } from 'gsap'
 import { SplitText } from 'gsap/SplitText'; 
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -264,6 +274,14 @@ const tooltipVisible = ref(false)
 const tooltipText = ref('')
 const tooltipX = ref(0)
 const tooltipY = ref(0)
+
+const showQuiz = ref(false);
+const openQuiz = () => {
+  showQuiz.value = true;
+};
+const closeQuiz = () => {
+  showQuiz.value = false;
+};
 
 function showTooltip(event, text, artworkCenterX, artworkCenterY) {
   tooltipText.value = text
