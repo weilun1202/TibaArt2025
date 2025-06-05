@@ -217,7 +217,7 @@ const resultDescriptions = [
 
 .quiz-content {
   background:linear-gradient(to top, #f6eee4, #ffffff);
-  padding: 12px;
+  padding: 20px;
   border-radius: 32px;
   border: 3px solid #2F2F2F;
   max-width: 50vw;

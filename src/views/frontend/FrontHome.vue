@@ -2,18 +2,14 @@
 
 <div class="frontHomeW">
 
-     <div class="split-text-container">
+    <div class="split-text-container">
             <h1 ref="splitTextElement" class="animated-heading">
             TibaArt 緯藝基金會
             </h1>
     </div>
-    
-     <!-- <transition name="fade" mode="out-in">
-      <div :key="activeBlock" class="info">
-        <p>點選下方作品，開始悠遊緯藝！</p>
-      </div>
-    </transition> -->
-
+    <div>
+        <p class="animate__animated animate__tada">點選下方作品，開始悠遊緯藝！</p>
+    </div>
 
     <!-- tooltip（在 svg 外） -->
       <div 
@@ -623,19 +619,15 @@ svg {
     display: block;
     margin: 0 auto;
     aspect-ratio: 5/5; 
+    perspective: 1000px
   }
-
-.flip{
-    font-weight: bold;
-    color: $logoDGreen;
-}
 
 h1{
     font-size: 60px;
     font-weight: 450;
     text-align: center;
     color: $fontBlack;
-    margin-bottom: 32px;  
+    margin-bottom: 20px;  
 
   @media (max-width: 1000px){
     font-size: 48px;
@@ -645,50 +637,29 @@ h1{
     font-size: 40px;
   }
 
-    @media (max-width: 420px){
+  @media (max-width: 420px){
     font-size: 36px;
   }
 }
 
-svg {
-  display: block;
-  margin: 0 auto;
+p{
+   text-align: center;
+   font-size: 28px;
 
-  perspective: 1000px
-}
-
-.info{
-    position: absolute; 
-    top: 35%; 
-    left: 50%; 
-    transform: translate(-50%, -50%); 
-    
-    padding: 16px;
-    width: 25%;
-    border: 1.5px solid;
-    text-align: center;
-    background-color: rgba(255, 255, 255, 0.9); 
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    pointer-events: none; 
-    z-index: 10;
-
-    font-size: map-get($font, p); 
-
-
-  @media (max-width: 1080px){
-    width: 35%;
+  @media (max-width: 1000px){
+    font-size: 24px;
   }
 
-  @media (max-width: 750px){
-    width: 50%;
+  @media (max-width: 820px){
+    font-size: 20px;
   }
 
-    @media (max-width: 520px){
-      width: 55%;
-      font-size: map-get($font, pwar); 
+  @media (max-width: 420px){
+    font-size: 16px;
   }
 
 }
+
 
 .tooltip {
   position: absolute;
