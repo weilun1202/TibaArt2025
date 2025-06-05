@@ -10,6 +10,41 @@
         flex-wrap: wrap;
         /* for RWD */
         background-color: $logoColor2;
+
+        @media (max-width: 710px) {
+            .banner {
+                flex-direction: column;
+            }
+
+            .banner-text,
+            .banner img {
+                width: 100%;
+            }
+
+            .banner-text {
+                padding: $spacing-8 $spacing-6;
+                text-align: center;
+                align-items: center;
+            }
+
+            .banner-text button {
+                align-self: center;
+            }
+
+            .expoArea-artist {
+                flex-direction: column;
+                text-align: center;
+
+                img {
+                    width: 100%;
+                    max-width: 300px;
+                }
+
+                .icons {
+                    justify-content: center;
+                }
+            }
+        }
     }
 
     .banner-text {
@@ -127,6 +162,18 @@
 
         }
 
+        @media (max-width: 640px) {
+            .expoArea-artist {
+                display: flex;
+                flex-direction: column;
+
+
+                .icons {
+                    justify-content: flex-end;
+
+                }
+            }
+        }
 
     }
 
@@ -155,17 +202,28 @@
                 gap: $spacing-2 ;
                 margin: $spacing-4 0 $spacing-2;
 
+
                 h3 {
 
                     font-size: map-get($font, h4);
                     margin: 0;
+
+                    @media (max-width: 710px) {
+                        font-size: map-get($font, h5);
+                    }
                 }
 
                 p {
                     margin: 0;
                     font-size: $spacing-4;
                     color: #666;
+
+                    @media (max-width: 710px) {
+                        font-size: map-get($font, p);
+                    }
                 }
+
+
             }
 
             >p {
@@ -178,7 +236,7 @@
 
                 color: $fontBlack;
                 text-decoration: none;
-                font-weight: bold;
+                font-weight: bolder;
                 display: inline-block;
 
             }
@@ -187,98 +245,64 @@
                 text-decoration: underline;
                 color: gray;
             }
+
+
         }
 
-    }
-
-    //GSAP
-    /* 1) 外層容器：相對定位，方便放大鏡用絕對定位 */
-    .zoom-container {
-        position: relative;
-        display: inline-block;
-        /* 如果需要固定寬高可以另外設定，例如 width: 600px; height: auto; */
-        cursor: crosshair;
-        /* 讓滑鼠移進去時變成十字準心（可依需求改） */
-    }
-
-    /* 2) 原始圖片：寬度 100%，高 auto，自行調整 */
-    .zoom-container .zoom-image {
-        display: block;
-        width: 100%;
-        height: auto;
-        user-select: none;
-        /* 避免滑鼠拖拉去選到圖片 */
-    }
-
-    /* 3) 放大鏡 (magnifier) 的基本樣式 */
-    .zoom-container .magnifier {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 150px;
-        /* 放大鏡直徑，可自行調整 */
-        height: 150px;
-        /* 同上 */
-        border-radius: 50%;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-        overflow: hidden;
-        /* 裁切超出圓形範圍的背景 */
-        pointer-events: none;
-        /* 讓滑鼠事件穿透到下層的圖片 */
-        transform: scale(0);
-        /* 初始縮成 0，不顯示 */
-        transform-origin: center center;
-        background-repeat: no-repeat;
-        /* 背景圖會在 JS 裡設成跟原圖一樣的 URL；background-size 也在 JS 裡統一設定 */
-        z-index: 10;
-        /* 平滑過渡的動態效果可用 GSAP 來控制 scale、x、y */
-
-
-        /* RWD: 手機排版垂直堆疊 */
-        @media (max-width: 768px) {
-            .banner {
-                flex-direction: column;
-            }
-
-            .banner-text,
-            .banner img {
+        @media (max-width: 710px) {
+            .expoArea-card {
                 width: 100%;
             }
-
-            .banner-text {
-                padding: $spacing-8 $spacing-6;
-                text-align: center;
-                align-items: center;
-            }
-
-            .banner-text button {
-                align-self: center;
-            }
-
-            .expoArea-artist {
-                flex-direction: column;
-                text-align: center;
-
-                img {
-                    width: 100%;
-                    max-width: 300px;
-                }
-
-                .icons {
-                    justify-content: center;
-                }
-            }
-
-
         }
 
-        @media (max-width: 632px) {
-            .expoArea-artwork {
-                .expoArea-card {
-                    width: 100%; // 一行只放一張圖
-                }
-            }
+        //GSAP
+        /* 1) 外層容器：相對定位，方便放大鏡用絕對定位 */
+        .zoom-container {
+            position: relative;
+            display: inline-block;
+            /* 如果需要固定寬高可以另外設定，例如 width: 600px; height: auto; */
+            cursor: crosshair;
+            /* 讓滑鼠移進去時變成十字準心（可依需求改） */
+        }
+
+        /* 2) 原始圖片：寬度 100%，高 auto，自行調整 */
+        .zoom-container .zoom-image {
+            display: block;
+            width: 100%;
+            height: auto;
+            user-select: none;
+            /* 避免滑鼠拖拉去選到圖片 */
+        }
+
+        /* 3) 放大鏡 (magnifier) 的基本樣式 */
+        .zoom-container .magnifier {
+            position: absolute;
+            top: 0;
+            left: 0;
+            /* 直接用 rem 設定直徑，比如 10rem，相當於預設 root 16px 時 160px */
+            width: 10rem;
+            height: 10rem;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            pointer-events: none;
+            transform: scale(0);
+            /* 初始隱藏 */
+            transform-origin: center center;
+            background-repeat: no-repeat;
+            z-index: 10;
         }
 
     }
 }
+
+// 斷點
+// 360 手機
+// 390
+// 430
+
+// 744 平板
+// 768
+// 810
+// 820
+// 834
