@@ -34,9 +34,9 @@ const close = () => {
   emit('update:isOpen', false); 
 };
 
-const handleOverlayClick = () => {
-  emit('click'); 
-};
+// const handleOverlayClick = () => {
+//   emit('click'); 
+// };
 
 </script>
 

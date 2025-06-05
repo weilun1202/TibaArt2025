@@ -26,11 +26,14 @@
               </div>
             </div>
 
-            <div v-else>
+            <div v-else class="result-container">
               <h3>測驗結果</h3>
               <p>你的分數是：{{ score }} / 100</p>
               <p>{{ getResultDescription }}</p>
-              <button @click="resetQuiz" class="reset-quiz-button">重新開始</button>
+              <div class="resultBtns">
+                <button @click="resetQuiz" class="footerbtn reset-quiz-button">重新開始</button>
+                <button @click="quitQuiz" class="footerbtn quit-quiz-button">結束測驗</button>
+              </div>
             </div>
           </div>
           <!-- <slot /> -->
@@ -59,9 +62,9 @@ const close = () => {
   emit('update:isOpen', false); 
 };
 
-const handleOverlayClick = () => {
-  emit('click'); 
-};
+// const handleOverlayClick = () => {
+//   emit('click'); 
+// };
 
 const currentQuestionIndex = ref(0);
 const userAnswers = ref([]);
@@ -75,55 +78,64 @@ const currentQuestion = computed(() => quizQuestions[currentQuestionIndex.value]
 const quizQuestions = [
   {
     id: 1,
-    question: '緯藝創立於西元幾年？',
+    image: './src/assets/img/aboutBanner.jpg',
+    question: '緯藝基金會創立於西元幾年？',
     options: ['1920', '1925', '1930', '1935'],
     answer: '1925'
   },
   {
     id: 2,
+    image: './src/assets/img/about-2000.png',
     question: '1953年，緯藝與哪國水彩大會合辦「青年藝術家交流展」？',
     options: ['美國', '法國', '日本', '德國'],
     answer: '日本'
   },
   {
     id: 3,
+    image: './src/assets/img/monet.jpg',
     question: '印象派的代表畫家是誰？',
-    options: ['莫內', '達利', '安迪·沃荷', '高更'],
+    options: ['莫內', '達利', '安迪・沃荷', '高更'],
     answer: '莫內'
   },
   {
     id: 4,
+    image: './src/assets/img/Mona_Lisa.webp',
     question: '蒙娜麗莎的微笑是哪位藝術家的作品？',
     options: ['達文西', '梵谷', '畢卡索', '米開朗基羅'],
     answer: '達文西'
   },
   {
     id: 5,
+    image: './src/assets/img/dora_maar.jpg',
     question: '下列哪一項是畢卡索所創的藝術風格？',
     options: ['超現實主義', '立體主義', '印象派', '表現主義'],
     answer: '立體主義'
   },
   {
     id: 6,
+    image: './src/assets/img/dali.webp',
     question: '下列哪位藝術家以「融化的時鐘」而聞名？',
     options: ['馬蒂斯', '達利', '波提切利', '高第'],
     answer: '達利'
   },
   {
     id: 7,
+    image: './src/assets/img/van.png',
     question: '「星夜」這幅作品是出自哪位畫家之手？',
-    options: ['莫內', '梵谷', '雷諾瓦', '馬格利特'],
+    options: ['莫內', '梵谷', '雷諾瓦', '秀拉'],
     answer: '梵谷'
   },
   {
     id: 8,
+    image: './src/assets/img/sixtin.avif',
     question: '米開朗基羅參與設計並繪製了哪座教堂的天頂畫？',
-    options: ['巴黎聖母院', '聖彼得大教堂', '聖馬可大教堂', '西斯汀禮拜堂'],
-    answer: '西斯汀禮拜堂'
+    options: ['巴黎聖母院', '梵蒂岡聖彼得大教堂', '威尼斯聖馬可大教堂', '梵蒂岡西斯汀禮拜堂'],
+    answer: '梵蒂岡西斯汀禮拜堂'
   },
   {
     id: 9,
-    question: '安迪·沃荷是哪個藝術運動的代表人物？',
+    image: './src/assets/img/Andy.jpg',
+    question: '安迪・沃荷是哪個藝術運動的代表人物？',
     options: ['現代主義', '達達主義', '普普藝術', '文藝復興'],
     answer: '普普藝術'
   },
@@ -131,7 +143,7 @@ const quizQuestions = [
     id: 10,
     image: './src/assets/img/ba_eaten.jpg',
     question: '2019年，義大利藝術家毛里齊奧．卡泰蘭（Maurizio Cattelan）以一根香蕉和一條銀色膠帶創作了名為《喜劇演員》（Comedian）的作品，以下哪位不是後來把它吃掉的人？',
-    options: ['藝術系學生盧賢秀（Noh Huyn-soo）', '加密貨幣企業家孫宇晨（Justin Sun）', '行為藝術家大衛．達圖納（David Datuna）', '緯藝基金會執行長'],
+    options: ['藝術系學生盧賢秀（Noh Huyn-soo）', '加密貨幣企業家孫宇晨（Justin Sun）', '緯藝基金會執行長', '行為藝術家大衛・達圖納（David Datuna）'],
     answer: '緯藝基金會執行長'
   }
 ];
@@ -170,8 +182,11 @@ const resetQuiz = () => {
   userAnswers.value = [];
   score.value = 0;
   quizCompleted.value = false;
-  emit('update:isOpen', false); // 關閉彈出視窗
 };
+
+const quitQuiz = () => {
+  emit('update:isOpen', false); 
+}
 
 
 const resultDescriptions = [
@@ -210,6 +225,21 @@ const resultDescriptions = [
 
   height: auto;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+  @media (max-width:700px){
+    max-width: 70vw;
+  }
+
+  @media (max-width:500px){
+    max-width: 80vw;
+  }
+
+  @media (max-width:400px){
+    max-width: 90vw;
+  }
+
+
+
 }
 
 .quiz-header {
@@ -255,6 +285,8 @@ const resultDescriptions = [
   gap: 4px;
 
   button{
+    height: 24px;
+    line-height: 24px;
     background-color: #2f2f2f;
     border: none;
     border-radius: 8px;
@@ -264,6 +296,31 @@ const resultDescriptions = [
     text-align: center;
   }
 }
+
+.result-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.resultBtns{
+  display: flex;
+  gap: 8px;
+}
+
+.footerbtn{
+  height: 24px;
+    line-height: 24px;
+    background-color: #2f2f2f;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    cursor: pointer;
+    padding: 0 16px;
+    text-align: center;
+}
+
 
 // .quiz-footer {
 //   border-top: 1px solid #eee;
@@ -292,11 +349,30 @@ const resultDescriptions = [
 .quiz-image{
   display: block;
   margin: 0 auto;
-  width: 50%;
+  width: 30%;
   aspect-ratio: 1/1;
   border: 1.5px solid #2F2F2F; 
   border-radius: 50%;
   object-fit: cover;
+
+  @media (max-width:1000px){
+    width: 35%;
+  }
+
+  @media (max-width:700px){
+    width: 40%;
+  }
+
+  @media (max-width:500px){
+    width: 45%;
+  }
+
+  @media (max-width:400px){
+    width: 50%;
+  }
+
+
+
 }
 
 
