@@ -20,18 +20,18 @@
     .navBar {
         display: none;
         margin-left: auto;
+        
 
     }
 
 
 
     ul {
+        overflow: hidden;
         display: flex;
         justify-content: center;
         align-items: center;
         gap: $spacing-4;
-
-        overflow: hidden;
 
         li {
             width: 100%;

@@ -353,11 +353,11 @@ header .pageTitle {
   margin-left: auto;
 }
 .frontNav ul {
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 16px;
-  overflow: hidden;
 }
 .frontNav ul li {
   width: 100%;
@@ -2233,6 +2233,7 @@ html {
 }
 
 body {
+
   list-style: none;
   /* 保證 body 撐滿畫面高度 */
   min-height: 100vh;
