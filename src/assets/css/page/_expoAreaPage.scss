@@ -1,18 +1,98 @@
 .expoAreaPage {
-
+    max-width: 1200px;
+    margin: 0 auto;
+    /* 確保頁面不會被放大鏡影響滾動 */
+    overflow-x: hidden;
 
     .main {
-        max-width: 1200px;
-        margin: 0 auto;
+        position: relative;
+        /* 為了讓放大鏡可以絕對定位 */
         padding: $spacing-8 $spacing-4;
         text-align: center;
         color: $fontBlack;
 
+        .remind {
+            display: none;
+            text-align: center;
+            color: #666;
+
+            margin-bottom: $spacing-8;
+
+            @media (max-width: 710px) {
+                display: block;
+
+            }
+        }
+
+        /* 1. 原始圖片 */
         img {
             width: 100%;
             height: auto;
             border-radius: $spacing-1;
             margin-bottom: $spacing-8;
+            /* 避免預設拖曳行為影響 touch 事件 */
+            touch-action: none;
+            /* 防止圖片被選取 */
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            /* 游標提示可以放大 */
+            cursor: zoom-in;
+            /* 防止長按選單出現 */
+            -webkit-touch-callout: none;
+            -webkit-user-drag: none;
+            -khtml-user-drag: none;
+            -moz-user-drag: none;
+            -o-user-drag: none;
+
+            @media (max-width: 710px) {
+                margin-bottom: 0;
+
+            }
+        }
+
+        /* 2. 放大鏡容器 */
+        .magnifier {
+            /* 改用 fixed 定位，相對於視窗 */
+            position: fixed;
+            /* 初始放在 (0,0)，後面 JS 會更新 left/top */
+            left: 0;
+            top: 0;
+            width: 120px;
+            /* 放大鏡直徑 */
+            height: 120px;
+            border-radius: 50%;
+            overflow: hidden;
+            pointer-events: none;
+            /* 初始隱藏、縮小 */
+            opacity: 0;
+            transform: scale(0.2);
+            /* 讓 DOM 層級疊在最上方，避免被其他元素遮蓋 */
+            z-index: 9999;
+            border: 3px solid rgba(255, 255, 255, 0.9);
+            box-shadow:
+                0 4px 12px rgba(0, 0, 0, 0.3),
+                0 2px 4px rgba(0, 0, 0, 0.2),
+                /* 內陰影增加質感 */
+                inset 0 1px 2px rgba(255, 255, 255, 0.3);
+            /* 背景色防止透明 */
+            background-color: #fff;
+
+            img {
+                position: absolute;
+                top: 0;
+                left: 0;
+                /* 移除預設的 transform，讓 JS 完全控制 */
+                transform: none;
+                transform-origin: top left;
+                /* 確保圖片不會被選取 */
+                user-select: none;
+                -webkit-user-select: none;
+                pointer-events: none;
+                /* 保持圖片品質 */
+                image-rendering: -webkit-optimize-contrast;
+                image-rendering: crisp-edges;
+            }
         }
 
         .artwork-title {
@@ -20,6 +100,18 @@
             gap: $spacing-2;
             justify-content: start;
             align-items: baseline;
+
+            @media (max-width: 420px) {
+                margin: 0;
+
+                p {
+                    margin: 0;
+                }
+
+                :last-child {
+                    margin-bottom: $spacing-8;
+                }
+            }
         }
 
         h2 {
@@ -47,7 +139,6 @@
 
         .btn {
             margin-top: $spacing-6;
-
             display: inline-block;
             align-self: center;
             border: none;
@@ -60,31 +151,47 @@
             background-color: $buttonYellow;
             color: $fontBlack;
         }
-
     }
 
     @media (max-width: 530px) {
         .artwork-title {
             display: flex;
-            flex-wrap: nowrap;
-            gap: 1rem;
+            flex-wrap: wrap;
+            gap: 0;
             align-items: center;
 
-            h2,
-            h5,
+            .remind {
+                display: block;
+            }
+
             p {
-
-                white-space: nowrap;
-
+                margin-bottom: $spacing-8;
             }
 
             h2 {
                 font-size: map-get($font, h4);
+                margin: 0;
             }
 
             h5 {
                 font-size: map-get($font, p);
+                margin: 0;
             }
         }
     }
+}
+
+/* 額外的全域樣式，確保放大鏡效果不受干擾 */
+body {
+    /* 在觸控設備上防止雙擊縮放 */
+    touch-action: manipulation;
+}
+
+/* 確保放大鏡在所有情況下都能正常顯示 */
+.magnifier {
+    /* 強制硬體加速 */
+    will-change: transform, opacity;
+    /* 確保在所有瀏覽器中都能正確顯示 */
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }

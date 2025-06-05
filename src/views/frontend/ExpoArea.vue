@@ -114,80 +114,103 @@ const artworks = ref([
   },
 ])
 //放大鏡
-import { onMounted } from 'vue';
-import { gsap } from 'gsap';
+import { onMounted } from 'vue'
+import { gsap } from 'gsap'
 
 onMounted(() => {
-  // 如果有多個 .zoom-container，這裡使用 querySelectorAll 逐一初始化
   document.querySelectorAll('.zoom-container').forEach((container) => {
-    const img = container.querySelector('img.zoom-image');
-    const magnifier = container.querySelector('div.magnifier');
-    if (!img || !magnifier) return;
+    const img = container.querySelector('img.zoom-image')
+    const magnifier = container.querySelector('div.magnifier')
+    if (!img || !magnifier) return
 
-    // 放大倍率（可按需調整）
-    const zoomLevel = 2;
+    // 放大倍率（可自行調整）
+    const zoomLevel = 1.5
 
-    // 計算並設定放大鏡的背景圖與尺寸
+    // 放大鏡直徑與半徑：動態讀取 .magnifier 的 offsetWidth
+    function getMagnifierRadius() {
+      const diameter = magnifier.offsetWidth
+      return diameter / 2
+    }
+    let magnifierRadius = getMagnifierRadius()
+
+    // 設定放大鏡背景：使用圖片的 naturalWidth / naturalHeight 保證比例正確
     function setupMagnifierBackground() {
-      magnifier.style.backgroundImage = `url(${img.src})`;
-      magnifier.style.backgroundSize = `${img.width * zoomLevel}px ${img.height * zoomLevel}px`;
+      magnifierRadius = getMagnifierRadius() // 每次重新計算 radius（若 CSS 有做響應式改變也能即時更新）
+      const bgWidth = img.naturalWidth * zoomLevel
+      const bgHeight = img.naturalHeight * zoomLevel
+      magnifier.style.backgroundImage = `url(${img.src})`
+      magnifier.style.backgroundSize = `${bgWidth}px ${bgHeight}px`
     }
 
-    // 等圖片載入完成後再呼叫，確保 img.width/height 正確
+    // 若圖片已經載入完，馬上建立背景；否則等 load 事件
     if (img.complete) {
-      setupMagnifierBackground();
+      setupMagnifierBackground()
     } else {
-      img.addEventListener('load', setupMagnifierBackground);
+      img.addEventListener('load', setupMagnifierBackground)
     }
 
-    // 放大鏡半徑（此數值要跟 CSS 裡 .magnifier 寬高／2 一致）
-    const magnifierRadius = 150 / 2; // 若 CSS 裡 .magnifier 改成 200px 寬，就寫 200/2
-
-    // 滑鼠進入 container 時，將 .magnifier scale 0 → 1
+    // 當滑鼠移到容器時，放大鏡出現
     container.addEventListener('mouseenter', () => {
+      // 確保放大鏡半徑是最新的
+      magnifierRadius = getMagnifierRadius()
       gsap.to(magnifier, {
         duration: 0.3,
         scale: 1,
         ease: 'power3.out',
-      });
-    });
+      })
+    })
 
-    // 滑鼠離開 container 時，將 .magnifier scale 1 → 0
+    // 離開時縮回去
     container.addEventListener('mouseleave', () => {
       gsap.to(magnifier, {
         duration: 0.3,
         scale: 0,
         ease: 'power3.out',
-      });
-    });
+      })
+    })
 
-    // 滑鼠移動時，更新放大鏡位置與背景偏移
+    // 滑鼠移動時更新放大鏡位置與背景
     container.addEventListener('mousemove', (e) => {
-      const rect = container.getBoundingClientRect();
-      const offsetX = e.clientX - rect.left;
-      const offsetY = e.clientY - rect.top;
+      const rect = container.getBoundingClientRect()
+      // 計算滑鼠在 container 內的 x, y
+      let offsetX = e.clientX - rect.left
+      let offsetY = e.clientY - rect.top
 
-      // 左上角座標，使放大鏡圓心對準滑鼠
-      const xpos = offsetX - magnifierRadius;
-      const ypos = offsetY - magnifierRadius;
+      // Clamp 滑鼠位置，讓放大鏡的中心不會超出圖片範圍
+      // 放大鏡 center 最多只能在 [magnifierRadius/zoomLevel, img.width - magnifierRadius/zoomLevel]
+      const minCenterX = magnifierRadius / zoomLevel
+      const maxCenterX = img.clientWidth - (magnifierRadius / zoomLevel)
+      const minCenterY = magnifierRadius / zoomLevel
+      const maxCenterY = img.clientHeight - (magnifierRadius / zoomLevel)
 
-      // 背景須偏移的量：滑鼠在原圖的座標 * zoomLevel - 放大鏡半徑
-      const bgX = offsetX * zoomLevel - magnifierRadius;
-      const bgY = offsetY * zoomLevel - magnifierRadius;
+      // 將 offsetX/Y 限制在可用範圍
+      const centerX = Math.min(Math.max(offsetX, minCenterX), maxCenterX)
+      const centerY = Math.min(Math.max(offsetY, minCenterY), maxCenterY)
 
-      // 使用 GSAP 平滑更新位置，並在 onUpdate 裡設定背景位置
-      gsap.to(magnifier, {
-        duration: 0.1,
+      // 放大鏡左上角位置：讓圓心對準 (centerX, centerY)
+      const xpos = centerX - magnifierRadius
+      const ypos = centerY - magnifierRadius
+
+      // 背景偏移量：游標在圖片真實像素座標 * zoomLevel - magnifierRadius
+      // 這邊一樣要用「img 的顯示寬度」轉換成真實像素，再乘 zoomLevel
+      // 若圖片有寬度縮放，比方 container 變小，offsetX, offsetY 對應的是顯示尺寸，
+      // 背景偏移必須算：offset / clientWidth * naturalWidth
+      const ratioX = centerX / img.clientWidth
+      const ratioY = centerY / img.clientHeight
+      const bgX = ratioX * img.naturalWidth * zoomLevel - magnifierRadius
+      const bgY = ratioY * img.naturalHeight * zoomLevel - magnifierRadius
+
+      // 直接用 gsap.set 讓 position 跟背景一起對齊
+      gsap.set(magnifier, {
         x: xpos,
         y: ypos,
-        ease: 'power3.out',
         onUpdate: () => {
-          magnifier.style.backgroundPosition = `-${bgX}px -${bgY}px`;
-        },
-      });
-    });
-  });
-});
+          magnifier.style.backgroundPosition = `-${bgX}px -${bgY}px`
+        }
+      })
+    })
+  })
+})
 
 </script>
 
