@@ -46,7 +46,8 @@
      <!-- 購物車 -->
     <router-link to="/front/cart" class="cartIcon" @click="closeMenu">
         <font-awesome-icon :icon="['fas', 'cart-shopping']" />
-        <span class="cartCount">0</span>
+        <span class="cartCount"
+          v-if="totalItems > 0">{{ totalItems }}</span>
     </router-link>  
 
   </nav>
@@ -56,6 +57,7 @@
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { useRouter } from 'vue-router'
 import { ref, onMounted, onUnmounted } from 'vue';
+import { useCart } from '@/stores/cart.js';
 
 defineProps()
 
@@ -66,6 +68,8 @@ const goToLogin = () => {
 const goToRegister = () => {
   router.push('/MemReg') 
 }
+
+const { totalItems } = useCart()
 
 const menuOpen = ref(false)
 
