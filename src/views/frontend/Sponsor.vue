@@ -16,7 +16,8 @@
             <div class="donateItem">
               欲贊助之展覽
             </div>
-            <select id="sponsored" name="artist_id" v-model="subject" @change="errors.subject = ''">
+            <select id="artist_id" name="artist_id" v-model="subject" @change="errors.subject = ''">
+            <option v-for="expo in expoList" :value="expo.id" :key="expo.id">{{ expo.title }}</option>
               <option value="">請選擇</option>
               <option value="expo1">《 靜界焰光 》</option>
               <option value="expo2">《 雪白世界 》</option>
@@ -49,7 +50,7 @@
               </label>
               <input
                 type="text"
-                id="cost"
+                id="amount"
                 name="amount"
                 placeholder="請選擇或輸入金額"
                 v-model="selectedAmount"
@@ -70,7 +71,7 @@
             <input
               type="text"
               id="name"
-              name="member_id"
+              name="name"
               placeholder="請輸入姓名"
               v-model="name"
               @input="errors.name = ''"
@@ -109,7 +110,7 @@
           </div>
           <div class="ecpayBtn">
           </div>
-          <img src="../../assets/img/ecpay_logo.svg" alt="ecpay_logo.svg">
+          <img src="@/assets/img/ecpay_logo.svg" alt="ecpay_logo.svg">
 
           <br>
 
@@ -234,17 +235,24 @@
 
   const router = useRouter()
 
-  // 模擬登入狀態，實際可從 Vuex、Pinia、cookie 等取得
-  const isLoggedIn = ref(false)
+  // 登入狀態，從 Vuex、Pinia、cookie 取得
+  // const isLoggedIn = ref(false)
+  // const expoList = ref([
+  //   { id: 'expo1', title: '《 靜界焰光 》' },
+  //   { id: 'expo2', title: '《 雪白世界 》' },
+  //   { id: 'expo3', title: '《 白陽落櫻 》' },
+  //   { id: 'expo4', title: '《 撕裂極光 》' }
+  // ])
 
   // 表單資料
   const subject = ref('')                  // 展覽選項
   const amounts = [500, 1000, 1500, 2000]  // 所有金額選項
   const selectedAmount = ref('')           // 被選擇的金額
-  const name = ref('')
-  const email = ref('')
+  const name = ref('')                     // 贊助人名字
+  const email = ref('')                    // 電子郵件
   // 錯誤訊息狀態
   const errors = ref({
+    subject: '',
     amount: '',
     name: '',
     email: ''
@@ -259,7 +267,13 @@
 
   // 驗證資料是否有誤
   function validateForm() {
-    errors.value = {}
+    errors.value = {
+      subject: '',
+      amount: '',
+      name: '',
+      email: ''
+    }
+    
 
     if (!subject.value) {
       errors.value.subject = '請選擇一個展覽'
@@ -276,34 +290,49 @@
 
     if (!selectedAmount.value) {
       errors.value.amount = '請選擇或輸入金額'
+      isValid = false
+    } else if (!/^\d+$/.test(selectedAmount.value)) {
+      errors.value.amount = '金額必須為數字'
+      isValid = false
     }
 
-    return Object.keys(errors.value).length === 0
+    // return Object.keys(errors.value).length === 0
+    return Object.values(errors.value).every(error => error === '')
   }
 
-  // 引導登入
+function handleSubmit(e) {         // 把資料送去綠界
+    e.preventDefault()
+    if (validateForm()) {
+        const formData = new FormData()
+        // formData.append('subject', subject.value)
+        // formData.append('amount', selectedAmount.value)
+        // formData.append('name', name.value)
+        // formData.append('email', email.value)
 
-// function handleSubmit(e) {
-//   e.preventDefault()
-//   if (validateForm()) {
-//     // 成功送出邏輯
-//     console.log('送出成功', { name: name.value, email: email.value, amount: selectedAmount.value })
-//     alert('送出成功');
-//   }
-// }
-function handleSubmit(e) {
-  e.preventDefault()
-  if (validateForm()) {
-    if (isLoggedIn.value) {
-      // 已登入，前往綠界
-      window.location.href = 'https://www.ecpay.com.tw/'
-    } else {
-      // 未登入，導向提醒頁
-      router.push('/front/sponsorReminder')
+        formData.append('artist_id', subject.value) // subject 是展覽選項，可以理解為 artist_id
+        formData.append('amount', selectedAmount.value)
+        formData.append('member_id', name.value)
+        formData.append('email', email.value)
+
+        fetch('http://localhost/test2/checkoutdonate.php', {
+        // fetch('https://tibamef2e.com/tjd101/g2/checkoutdonate.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.text())
+        .then(html => {
+            // 從 PHP 回傳的綠界表單插入並提交
+            const formWrapper = document.createElement('div')
+            formWrapper.innerHTML = html
+            document.body.appendChild(formWrapper)
+            formWrapper.querySelector('form').submit()
+        })
+        .catch(err => {
+            console.error('傳送失敗', err)
+            alert('贊助失敗，請稍後再試')
+        })
     }
-  }
 }
-
 
 </script>
 
