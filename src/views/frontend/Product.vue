@@ -96,7 +96,8 @@ const currentProduct = ref(null)
 const quantity = ref(1)
 
 onMounted(async () => {
-    const resp = await fetch(import.meta.env.BASE_URL + 'productData.json')
+    // const resp = await fetch(import.meta.env.BASE_URL + 'productData.json')
+    const resp = await fetch('http://localhost/TIBAART/product.php')
     if (!resp.ok) {
         throw new Error('無法載入商品資料')
     } else {

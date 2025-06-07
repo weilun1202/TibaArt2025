@@ -50,6 +50,7 @@
                 :key="item.id">
             <router-link :to="{name: 'product', params: {id: item.id}}" class="itemImage">
               <img :src="baseUrl + item.image" :alt="item.name">
+              <!-- <img :src="item.image" :alt="item.name"> -->
             </router-link>
             
             <div class="itemInfo">
@@ -91,7 +92,7 @@ const items = ref([]);
 
 // 載入商品資料
 onMounted(() => {
-  fetch(import.meta.env.BASE_URL + 'productData.json')
+  fetch('http://localhost/TIBAART/product.php')
     .then(resp => resp.json())
     .then(jsonData => {
       // console.log(jsonData)
@@ -101,16 +102,6 @@ onMounted(() => {
     console.error('載入商品資料失敗:', error);
   });
 });
-
-// 計算該顯示在哪個頁籤
-// const filterItems = computed(() => {
-//   return items.value
-//     .filter(item => item.category == activeTab.value)
-//     .filter(item => {
-//       if (!searchQuery.value) return true;
-//       return item.name.toLowerCase().includes(searchQuery.value.toLowerCase());
-//     });
-// });
 
 const filterItems = computed(() => {
   // 如果有搜尋關鍵字，搜尋所有商品的 name
@@ -128,7 +119,7 @@ const setActiveTab = (tab) => {
 };
 
 const searchItems = () => {
-  console.log('搜尋:', SearchQuery.value);
+  console.log('搜尋:', searchQuery.value);
   isSearchInputExpanded.value = false;  // 搜尋後收起輸入框
 };
 
@@ -147,14 +138,6 @@ const toggleSearchInput = () => {
     searchQuery.value = '';
   }
 };
-
-// const handleAddToCart = (item) => {
-//   // 處理從子組件傳來的加入購物車事件
-//   const success = addToCart(item);
-//   if(success) {
-//     alert(`已將「${item.name}」加入購物車`);
-//   }
-// };
 
 const handleAddToCart = async (item) => {
   try {
