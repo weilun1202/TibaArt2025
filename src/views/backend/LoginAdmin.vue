@@ -1,5 +1,5 @@
 <template>
-  <img src="../../assets/img/TibaArtLogo.svg" class="logo">
+  <router-link to="/front"><img class="logo" src="@/assets/img/TibaArtLogo.svg" alt="" /></router-link>
   
   <form @submit.prevent="adminLogin" class="adminLogin">
     <span>後台登入</span>
@@ -53,7 +53,7 @@
 @import '/style.scss';
 .logo{
   height: 60px;
-  margin: 10px;
+  margin: 5.5px 18px;
 }
 
 .adminLogin{

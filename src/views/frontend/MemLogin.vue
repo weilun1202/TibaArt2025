@@ -230,7 +230,17 @@ async function handleSubmitGeneral() {
       const result = await response.json()
 
       if (result.success) {
-        localStorage.setItem('member', JSON.stringify(result.member))
+        localStorage.setItem('member', JSON.stringify(result.member_info))
+
+      //   localStorage.setItem('member', JSON.stringify({
+      //   id: result.member_info.id,
+      //   name: result.member_info.name,
+      //   type: result.member_info.type,
+      //   email: result.member_info.email,
+      //   account: result.member_info.account || null
+      // }))
+
+        alert('登入成功！');
         router.push('/member')
       } else {
         alert('登入失敗：' + result.message)
@@ -266,6 +276,17 @@ async function handleSubmitArtist() {
 
       if (result.success) {
         // 成功後導向會員主頁
+        localStorage.setItem('member', JSON.stringify(result.member_info))
+
+      //   localStorage.setItem('member', JSON.stringify({
+      //   id: result.member_info.id,
+      //   name: result.member_info.name,
+      //   type: result.member_info.type,
+      //   email: result.member_info.email,
+      //   account: result.member_info.account || null
+      // }))
+
+        alert('登入成功！');
         router.push('/member')
         // 同樣，這裡也需要考慮儲存會員資訊。
       } else {
