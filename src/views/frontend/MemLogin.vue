@@ -231,6 +231,8 @@ async function handleSubmitGeneral() {
 
       if (result.success) {
         localStorage.setItem('member', JSON.stringify(result.member_info))
+        localStorage.setItem('memberType', payload.type); // 加這行記錄會員類型
+
 
       //   localStorage.setItem('member', JSON.stringify({
       //   id: result.member_info.id,
@@ -277,6 +279,8 @@ async function handleSubmitArtist() {
       if (result.success) {
         // 成功後導向會員主頁
         localStorage.setItem('member', JSON.stringify(result.member_info))
+        localStorage.setItem('memberType', payload.type); // 加這行記錄會員類型
+
 
       //   localStorage.setItem('member', JSON.stringify({
       //   id: result.member_info.id,

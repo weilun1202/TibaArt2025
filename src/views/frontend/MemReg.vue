@@ -96,7 +96,7 @@
                     <option value="">請選擇</option>
                     <option value="M">男</option>
                     <option value="F">女</option>
-                    <option value="Other">不公開</option>
+                    <option value="Other">其他</option>
                   </select>
                   <span class="formError" :class="{ hidden: !errors.gender }">{{ errors.gender }}</span>
                 </div>
@@ -212,8 +212,8 @@ function validateForm() {
   }
 
   // 手機
-  if (form.phone.length !== 10) {
-    errors.phone = '請輸入正確手機格式'
+  if (memberData.phone.length !== 10 || !memberData.phone.startsWith('09')) {
+    errors.phone = '請輸入09開頭的正確手機格式（10碼）'
     valid = false
   }
   
