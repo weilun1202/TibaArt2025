@@ -7,13 +7,13 @@ import AdminTable from '@/components/AdminTable.vue'
 
 // 欄位設定
 const columns = [
-  { key: 'id', label: '展場編號' },
-  { key: 'name', label: '展覽名稱' },
-  { key: 'img', label: '展覽封面' },
-  { key: 'artist', label: '出展人' },
-  { key: 'expoStart', label: '開始日期' },
-  { key: 'expoEnd', label: '結束日期' },
-  { key: 'status', label: '狀態', type:'select', options:['展覽中', '已撤展'] },
+  { key: 'id', label: '展場編號', class:'w-100'},
+  { key: 'name', label: '展覽名稱'},
+  { key: 'img', label: '展覽封面'},
+  { key: 'artist', label: '出展人'},
+  { key: 'expoStart', label: '開始日期'},
+  { key: 'expoEnd', label: '結束日期'},
+  { key: 'status', label: '狀態', type:'select', options:['展覽中', '已撤展'], class:'w-100'},
 ]
 
 // 假資料陣列

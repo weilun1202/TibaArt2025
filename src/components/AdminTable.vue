@@ -17,7 +17,13 @@
         :disabled="!selectedKey"
       />
       <!-- 新增按鈕 -->
-      <button class="add-button btn" @click="handleAdd">＋ 新增資料</button>
+      <button 
+      v-if="props.showAddButton"
+      class="add-button btn" 
+      @click="handleAdd"
+      >
+        ＋ 新增資料
+      </button>
     </div>
 
     <!-- 表格 -->
@@ -63,7 +69,9 @@
               </template>
             
             <template v-else>
+              <span :title="row[col.key]">
               {{ row[col.key] }}
+              </span>
             </template>
           </td>
         </tr>
@@ -87,7 +95,11 @@ import { ref, computed, watch } from 'vue'
 
 const props = defineProps({
   columns: Array,
-  data: Array
+  data: Array,
+  showAddButton: {
+    type: Boolean,
+    default: true
+  }
 })
 
 const emit = defineEmits(['add', 'toggle-status', 'status-change', 'view-more'])
@@ -180,8 +192,14 @@ function handleStatusChange(row) {
 
 /* 表格 */
 .result-table {
+  width: 100%;
   border-collapse: collapse;
   table-layout: fixed;
+}
+@media (max-width: 1200px){
+  .result-table{
+    width: 880px;
+  }
 }
 
 .result-table th,
@@ -189,6 +207,11 @@ function handleStatusChange(row) {
   border: 1px solid #ddd;
   padding: 16px;
   text-align: left;
+
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .result-table th {
@@ -262,14 +285,10 @@ function handleStatusChange(row) {
 }
 
 // 表格長寬
-@for $i from 1 through 300 {
-  @if $i % 50 == 0{
+@for $i from 1 through 120 {
+  @if $i % 20 == 0{
     .w-#{$i} {
-      min-width: #{$i}px;
-      box-sizing: border-box;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      width: #{$i}px;
     }
   }
 }

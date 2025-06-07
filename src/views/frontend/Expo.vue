@@ -204,11 +204,11 @@ onMounted(async () => {
         y: 0,
         duration: 0.8,
         ease: 'power1.out',
-        delay: index * 0.1, // 每個往後延遲 0.2 秒，做「依序」效果
+        delay: index * 0.2, // 每個往後延遲 0.2 秒，做「依序」效果
         scrollTrigger: {
           trigger: el,
           start: 'top 100%',       // 當 el 的 top 到達 viewport 底下時觸發
-          toggleActions: 'play reverse play reverse',
+          toggleActions: 'play none none none',
           // play：捲動進來時播放
           // reverse：捲動回去時反向（即淡出）
           // 之後可視需求改成 'play none none none'（只要進來淡入、不需淡出）
