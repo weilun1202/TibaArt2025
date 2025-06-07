@@ -11,10 +11,11 @@
           <p>編號：{{ selectedArtist.id }}</p>
           <p>名稱：{{ selectedArtist.name }}</p>
           <p>Email：{{ selectedArtist.email }}</p>
+          <p>連絡電話：{{ selectedArtist.phone }}</p>
           <p>生日：{{ selectedArtist.birthday }}</p>
           <p>性別：{{ selectedArtist.gender }}</p>
           <p>銀行帳戶{{ selectedArtist.bank_account }}</p>
-          <p>修改時間：{{ selectedArtist.update }}</p>
+          <p>修改時間：{{ selectedArtist.updated }}</p>
         </div>
     </div>
     </transition>
@@ -23,15 +24,21 @@
       <div v-if="showAdd" class="modal-overlay" @click.self="showAdd = false">
         <div class="modal-content">
           <h3>新增藝術家會員資料</h3>
-          <label>名稱：<input v-model="newData.name" /></label>
-          <label>Email：<input v-model="newData.email" /></label>
+          <label><input type="file" /></label>
+          <label><span>*</span>藝術家名稱：<input v-model="newData.name" /></label>
+          <label><span>*</span>Email：<input v-model="newData.email" /></label>
+          <label><span>*</span>連絡電話：<input v-model="newData.phone" /></label>
           <label>生日：<input v-model="newData.birthday" type="date" /></label>
           <label>性別：
             <select v-model="newData.gender">
-              <option value="男">男</option>
-              <option value="女">女</option>
+              <option value="M">男</option>
+              <option value="F">女</option>
+              <option value="Other">不公開</option>
             </select>
           </label>
+          <label><span>*</span>銀行帳戶：<input v-model="newData.bank_account" /></label>
+          <label><span>*給予帳號</span>：<input v-model="newData.account" /></label>
+          <label><span>*給予密碼</span>：<input v-model="newData.password" /></label>
           <div class="btn-content">
             <button class="btn" @click="addData">送出</button>
             <button class="btn" @click="showAdd = false">取消</button>
@@ -51,62 +58,91 @@ const columns = [
   { key: 'id', label: '藝術家編號', class:'w-120'},
   { key: 'name', label: '藝術家名稱'},
   { key: 'email', label: 'Email'},
-  { key: 'update', label: '修改時間'},
-  { key: 'status', label: '狀態', type:'switch', class:'w-80'},
+  { key: 'phone', label: '連絡電話'},
+  { key: 'updated', label: '修改時間'},
+  { key: 'per', label: '狀態', type:'switch', class:'w-80'},
   { key: 'more', label: '詳細', type: 'button', buttonLabel: '查看', class:'w-80'}
 ]
 
-// 新增
+// 狀態變數
 const showAdd = ref(false)
+const showMore = ref(false)
+const data = ref([])
+const selectedArtist = ref({})
+
+// 新增表單資料
 const newData = ref({
   name: '',
   email: '',
   birthday: '',
-  gender: '男'
+  gender: 'Other',
+  bank_account: ''
 })
 
+// 開啟新增 modal
 function openAddModal() {
   showAdd.value = true
 }
 
-function addData() {
-  if (!newData.value.name || !newData.value.email) {
-    alert('請完整填寫資料')
+// 新增資料：送出至後端（假設為 POST API）
+async function addData() {
+  if (!newData.value.name || !newData.value.email || !newData.value.bank_account) {
+    alert('必要資料需全部填寫')
     return
   }
 
-  const newId = Date.now().toString() // 暫時生成 ID，可改成後端給
-  data.value.push({
-    id: newId,
-    ...newData.value,
-    phone: '',
-    register: new Date().toISOString().slice(0, 10),
-    update: new Date().toISOString().slice(0, 10),
-    status: true
-  })
+  try {
+    const resp = await fetch(import.meta.env.VITE_AddArtist, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newData.value)
+    })
 
-  showAddModal.value = false
-  newData.value = { name: '', email: '', birthday: '', gender: '男' }
+    if (!resp.ok) throw new Error('新增失敗')
+
+    const inserted = await resp.json()
+
+    // 將回傳資料加入表格
+    data.value.push({
+      ...inserted,
+      per: true
+    })
+
+    // 關閉 modal & 清空表單
+    showAdd.value = false
+    newData.value = {
+      name: '',
+      email: '',
+      birthday: '',
+      gender: 'Other',
+      bank_account: ''
+    }
+
+  } catch (err) {
+    alert(`新增失敗：${err.message}`)
+  }
 }
 
-// 查看
-const showMore = ref(false)
-const selectedArtist = ref({})
-
+// 查看詳細
 function openModal(row) {
   selectedArtist.value = row
   showMore.value = true
 }
 
-// php抓來的假資料陣列
-const data = ref([]);
-
+// 初始讀取資料
 onMounted(async () => {
-  const resp = await fetch(import.meta.env.VITE_AdminMember);
-  const artists = await resp.json();
-  data.value = artists;
+  const resp = await fetch(import.meta.env.VITE_AdminArtist)
+  let artists = await resp.json()
 
-});
+  artists = artists.map(artist => ({
+    ...artist,
+    per: Boolean(artist.per)
+  }))
+
+  data.value = artists
+})
 
 </script>
 
@@ -131,7 +167,7 @@ onMounted(async () => {
 }
 .modal-content {
   background: white;
-  width: 500px;
+  width: 50%;
   h3{
     font-size: 24px;
     background-color: $primaryGreen;
@@ -144,7 +180,19 @@ onMounted(async () => {
   }
   label{
     display: flex;
+    align-items: center;
     padding: $spacing-3;
+    span{
+      color: $fontWarn;
+    }
+    input{
+      height: 32px;
+      font-size: 16px;
+    }
+    select{
+      height: 32px;
+      font-size: 16px;
+    }
   }
   .btn-content{
     display: flex;

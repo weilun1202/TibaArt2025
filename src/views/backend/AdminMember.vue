@@ -32,7 +32,7 @@ const columns = [
   { key: 'email', label: 'Email'},
   { key: 'phone', label: '連絡電話'},
   { key: 'register', label: '註冊時間'},
-  { key: 'update', label: '修改時間' },
+  { key: 'updated', label: '修改時間' },
   { key: 'status', label: '狀態', type:'switch', class:'w-80'},
   { key: 'more', label: '詳細', type: 'button', buttonLabel: '查看', class:'w-80' }
 ]
@@ -51,7 +51,7 @@ function handleToggleStatus(member) {
   console.log('會員狀態已變更', member)
   
   // TODO：這裡可呼叫 API 更新資料庫
-  // await fetch(`/api/update-member-status`, {
+  // await fetch(`/api/updated-member-status`, {
     //   method: 'POST',
     //   body: JSON.stringify({ id: member.id, status: member.status }),
     //   headers: { 'Content-Type': 'application/json' }
