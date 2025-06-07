@@ -85,7 +85,7 @@
             <label for="email" class="formLabel">
               帳號 (信箱)<span class="formHint">*</span>
             </label>
-            <div class="formReceipt">收據將以電子郵件方式寄出</div><!-- name="email" "share" ?-->
+            <div class="formReceipt">收據將以電子郵件方式寄出</div>
             <input
               type="text"
               id="email"
@@ -235,7 +235,7 @@
 
   const router = useRouter()
 
-  // 登入狀態，從 Vuex、Pinia、cookie 取得
+  // 登入狀態，從 Vuex、Pinia、cookie 取得 =============== 等等修
   // const isLoggedIn = ref(false)
   // const expoList = ref([
   //   { id: 'expo1', title: '《 靜界焰光 》' },
@@ -258,15 +258,15 @@
     email: ''
   })
 
-  // 點擊按鈕時設定金額
+  // 點按鈕時設定金額
   function selectAmount(amount) {
     selectedAmount.value = amount
     errors.value.amount = '' // 清除錯誤
   }
 
-
   // 驗證資料是否有誤
   function validateForm() {
+    let isValid = true;
     errors.value = {
       subject: '',
       amount: '',
@@ -274,7 +274,6 @@
       email: ''
     }
     
-
     if (!subject.value) {
       errors.value.subject = '請選擇一個展覽'
     }
@@ -294,6 +293,9 @@
     } else if (!/^\d+$/.test(selectedAmount.value)) {
       errors.value.amount = '金額必須為數字'
       isValid = false
+    } else if(parseInt(selectedAmount.value)<=0){
+      errors.value.amount = '金額必須大於 0'
+      isValid = false
     }
 
     // return Object.keys(errors.value).length === 0
@@ -309,13 +311,13 @@ function handleSubmit(e) {         // 把資料送去綠界
         // formData.append('name', name.value)
         // formData.append('email', email.value)
 
-        formData.append('artist_id', subject.value) // subject 是展覽選項，可以理解為 artist_id
+        formData.append('artist_id', subject.value) // artist_id 是傳給 php 時，顯示的。subject 是用 v-model="subject"
         formData.append('amount', selectedAmount.value)
         formData.append('member_id', name.value)
         formData.append('email', email.value)
 
-        fetch('http://localhost/test2/checkoutdonate.php', {
-        // fetch('https://tibamef2e.com/tjd101/g2/checkoutdonate.php', {
+        fetch('http://localhost/test2/checkoutdonate.php', {       // 本機測試
+        // fetch('https://tibamef2e.com/tjd101/g2/checkoutdonate.php', {  // 正式版
             method: 'POST',
             body: formData
         })
