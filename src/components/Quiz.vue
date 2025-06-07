@@ -58,10 +58,6 @@ defineProps({
 
 const emit = defineEmits(['update:isOpen', 'file-selected', 'click']);
 
-const close = () => {
-  emit('update:isOpen', false); 
-};
-
 // const handleOverlayClick = () => {
 //   emit('click'); 
 // };
@@ -185,9 +181,14 @@ const resetQuiz = () => {
 };
 
 const quitQuiz = () => {
+  resetQuiz();
   emit('update:isOpen', false); 
 }
 
+const close = () => {
+  resetQuiz();
+  emit('update:isOpen', false); 
+};
 
 const resultDescriptions = [
   { scoreRange: [0, 20], description: '你對藝術的了解還有很大的進步空間，多看看藝術展覽吧！' },

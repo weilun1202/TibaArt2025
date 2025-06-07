@@ -96,6 +96,7 @@
                     <option value="">請選擇</option>
                     <option value="M">男</option>
                     <option value="F">女</option>
+                    <option value="Other">不公開</option>
                   </select>
                   <span class="formError" :class="{ hidden: !errors.gender }">{{ errors.gender }}</span>
                 </div>
