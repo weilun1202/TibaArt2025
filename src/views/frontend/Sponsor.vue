@@ -17,12 +17,8 @@
               欲贊助之展覽
             </div>
             <select id="artist_id" name="artist_id" v-model="subject" @change="errors.subject = ''">
-            <option v-for="expo in expoList" :value="expo.id" :key="expo.id">{{ expo.title }}</option>
-              <option value="">請選擇</option>
-              <option value="expo1">《 靜界焰光 》</option>
-              <option value="expo2">《 雪白世界 》</option>
-              <option value="expo3">《 白陽落櫻 》</option>
-              <option value="expo4">《 撕裂極光 》</option>
+              <!-- 選項從下方 const expoList 新增 -->
+              <option v-for="expo in expoList" :value="expo.id" :key="expo.id">{{ expo.title }}</option>
             </select>
             <span class="formError" v-show="true">{{ errors.subject ? errors.subject : '\u00A0' }}</span>
 
@@ -235,14 +231,14 @@
 
   const router = useRouter()
 
-  // 登入狀態，從 Vuex、Pinia、cookie 取得 =============== 等等修
-  // const isLoggedIn = ref(false)
-  // const expoList = ref([
-  //   { id: 'expo1', title: '《 靜界焰光 》' },
-  //   { id: 'expo2', title: '《 雪白世界 》' },
-  //   { id: 'expo3', title: '《 白陽落櫻 》' },
-  //   { id: 'expo4', title: '《 撕裂極光 》' }
-  // ])
+  const expoList = ref([
+    { id: '', title: '請選擇' },
+    { id: 'expo1', title: '《 靜界焰光 》' },
+    { id: 'expo2', title: '《 雪白世界 》' },
+    { id: 'expo3', title: '《 白陽落櫻 》' },
+    { id: 'expo4', title: '《 撕裂極光 》' },
+    // 如果你有從 API 來的展覽清單，也可以用 expoList.value.push(...) 加進去
+  ])
 
   // 表單資料
   const subject = ref('')                  // 展覽選項
