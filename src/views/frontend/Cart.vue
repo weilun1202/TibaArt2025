@@ -75,10 +75,12 @@
                                 <input id="buyerName" type="text" 
                                     placeholder="請輸入姓名" 
                                     v-model="orderInfo.name"
-                                    @input="clearError(buyerName)">
-                                    <div class="errorMsg" 
-                                        v-if="errors.buyerName">
-                                    {{errors.buyerName}}</div>
+                                    @blur="validateField('name')"
+                                    @keyup.enter="validateField('name')">
+                                    <div class="formError" 
+                                    v-if="errors.name && touchedFields.name">
+                                    {{errors.name}}
+                                </div>
                             </div>
                             <div class="formGroup">
                                 <label for="buyerTel">
@@ -86,38 +88,66 @@
                                     <span class="formHint">*</span>
                                 </label>
                                 <input id="buyerTel" type="tel" 
-                                    placeholder="請輸入電話" 
+                                    placeholder="請輸入電話(10碼)" 
                                     v-model="orderInfo.tel"
-                                    @input="restrictNum('order')"
-                                    required>
+                                    maxlength="10"
+                                    inputmode="numeric"
+                                    @blur="validateField('tel')"
+                                    @keyup.enter="validateField('tel')"
+                                    @input="restrictToNumbers">
+                                <div class="formError" 
+                                    v-if="errors.tel && touchedFields.tel">
+                                    {{ errors.tel }}
+                                </div>
                             </div>
-                            <div class="formGroup">
+                            <!-- <div class="formGroup">
                                 <label for="buyerAddress">
                                     地址
                                     <span class="formHint">*</span>
                                 </label>
                                 <input id="buyerAddress" type="text" 
                                     placeholder="請輸入地址" 
-                                    v-model="orderInfo.address">
-                            </div>
+                                    v-model="orderInfo.address"@blur="validateField('address')"
+                                    @keyup.enter="validateField('address')">
+                                <div class="formError" 
+                                    v-if="errors.address && touchedFields.address">
+                                    {{ errors.address }}
+                                </div>
+                            </div> -->
                             <div class="formGroup">
                                 <label for="invoiceType">
                                     發票類型
                                     <span class="formHint">*</span>
                                 </label>
                                 <select id="invoiceType" class="invoiceType"
-                                    v-model="orderInfo.invoiceType">
+                                    v-model="orderInfo.invoiceType"
+                                    @blur="validateField('invoiceType')"
+                                    @change="handleInvoiceTypeChange">
                                     <option value="">請選擇</option>
-                                    <option value="">紙本發票</option>
+                                    <option value="paper">紙本發票</option>
                                     <option value="electronic">電子發票</option>
                                 </select>
+                                <div class="formError" 
+                                    v-if="errors.invoiceType && touchedFields.invoiceType">
+                                    {{ errors.invoiceType }}
+                                </div>
                             </div>
                             <div class="formGroup" v-if="orderInfo.invoiceType =='electronic'">
                                 <label for="carrier">
                                     載具
                                     <span class="formHint">*</span>
                                 </label>
-                                <input id="carrier" type="text" placeholder="請輸入載具號碼">
+                                <input id="carrier" type="text" 
+                                    placeholder="/ABCD123 (8碼)"
+                                    v-model="orderInfo.carrier"
+                                    maxlength="8"
+                                    @blur="validateField('carrier')"
+                                    @keyup.enter="validateField('carrier')"
+                                    @input="formatCarrier">
+                                <div class="formError" 
+                                    v-if="errors.carrier && touchedFields.carrier">
+                                    {{ errors.carrier }}
+                                </div>
                             </div>
                         </div>
 
@@ -143,7 +173,13 @@
                                 <input id="sameName" type="text" 
                                     placeholder="請輸入姓名" 
                                     v-model="recipientInfo.name"
-                                    :disabled="sameAsOrder">
+                                    :disabled="sameAsOrder"
+                                    @blur="validateRecipientField('name')"
+                                    @keyup.enter="validateRecipientField('name')">
+                                <div class="formError" 
+                                    v-if="errors.recipientName && touchedFields.recipientName">
+                                    {{ errors.recipientName }}
+                                </div>
                             </div>
                             <div class="formGroup">
                                 <label for="sameTel">
@@ -151,11 +187,19 @@
                                     <span class="formHint">*</span>
                                 </label>
                                 <input id="sameTel" type="tel" 
-                                    placeholder="請輸入電話" 
+                                    placeholder="請輸入電話(10碼)" 
                                     v-model="recipientInfo.tel"
                                     :disabled="sameAsOrder"
-                                    @input="restrictNum('recipient')"
+                                    @blur="validateRecipientField('tel')"
+                                    @keyup.enter="validateRecipientField('tel')"
+                                    @input="restrictToNumbers"
+                                    maxlength="10"
+                                    inputmode="numeric"
                                     required>
+                                <div class="formError" 
+                                    v-if="errors.recipientTel && touchedFields.recipientTel">
+                                    {{ errors.recipientTel }}
+                                </div>
                             </div>
                             <div class="formGroup">
                                 <label for="sameAddress">
@@ -165,7 +209,12 @@
                                 <input id="sameAddress" type="text" 
                                     placeholder="請輸入地址" 
                                     v-model="recipientInfo.address"
-                                    :disabled="sameAsOrder">
+                                    @blur="validateRecipientField('address')"
+                                    @keyup.enter="validateRecipientField('address')">
+                                <div class="formError" 
+                                    v-if="errors.recipientAddress && touchedFields.recipientAddress">
+                                    {{ errors.recipientAddress }}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -181,7 +230,8 @@
                                 <hr>
                                 <p class="total"><span>總計</span><span>NT${{ finalPrice }}</span></p>
                             </div>
-                            <button class="btn"><router-link to="/front/orderConfirm">確認購買</router-link></button>
+                            <!-- <button class="btn"><router-link to="orderConfirm>確認購買</router-link></button> -->
+                            <button class="btn" @click="submitOrder">確認購買</button>
                             <img class="ecpay" src="@/assets/img/ecpay_logo.svg" alt="">
                         </div>
                     </div>
@@ -193,17 +243,19 @@
 </template>
 
 <script setup>
-import{ref, watch, computed } from 'vue';
+import{ref, watch, computed, reactive } from 'vue';
 import {useCart} from '@/stores/cart.js';
+import { useRouter } from 'vue-router';
 
-const { cartItems, updateQuan, removeFromCart, totalPrice } = useCart();
+
+const { cartItems, updateQuan, removeFromCart, totalPrice, clearCart } = useCart();
+const router = useRouter();
 const baseUrl = import.meta.env.BASE_URL;
 
 
 const orderInfo = ref({
     name: '',
     tel: '',
-    address: '',
     invoiceType: '',
     carrier: '',
 })
@@ -211,12 +263,16 @@ const orderInfo = ref({
 const recipientInfo = ref({
     name: '',
     tel: '',
-    address: '',    
+    address: '',
 })
 
 const sameAsOrder = ref(false);
 const shippingFee = ref(60);
 const discount = ref(0);
+const errors = ref({})
+const touchedFields = ref({}); // 追蹤哪些欄位已經被使用者操作過
+
+
 
 // 計算總價
 const finalPrice = computed (() => {
@@ -226,7 +282,6 @@ const finalPrice = computed (() => {
 //檢查資料有沒有填好
 const checkout = computed(() => {
     return orderInfo.value.name &&
-           orderInfo.value.address &&
            cartItems.value.length > 0;
 })
 
@@ -256,7 +311,7 @@ const updateItemQuan = (productId, newQuan) => {
 const handleRemoveItem = async (productId) => {
     try {
         await new Promise(resolve => requestAnimationFrame(resolve));
-        
+
         const item = cartItems.value.find(item => item.id === productId);
         if(item && confirm(`確定要移除「${item.name}」嗎？`)){
             removeFromCart(productId);
@@ -266,50 +321,302 @@ const handleRemoveItem = async (productId) => {
     }
 }
 
+
+// 限制只能輸入數字
+const restrictToNumbers = (event) => {
+    const value = event.target.value;
+    event.target.value = value.replace(/[^0-9]/g, '');
+
+    // 同步更新到對應的資料
+    if (event.target.id === 'buyerTel') {
+        orderInfo.value.tel = event.target.value;
+    } else if (event.target.id === 'sameTel') {
+        recipientInfo.value.tel = event.target.value;
+    }
+}
+
+// 格式化載具輸入
+const formatCarrier = (event) => {
+    let value = event.target.value.toUpperCase();
+
+    // 如果第一個字符不是 / 且有輸入內容，自動添加 /
+    if (value.length > 0 && value.charAt(0) !== '/') {
+        value = '/' + value;
+    }
+
+    // 第一碼必須是 /，其餘只允許數字和英文字母
+    if (value.length > 1) {
+        const firstChar = value.charAt(0);
+        const restChars = value.slice(1).replace(/[^0-9A-Z]/g, '');
+        value = firstChar + restChars;
+    }
+
+    // 限制總長度為8碼
+    if (value.length > 8) {
+        value = value.slice(0, 8);
+    }
+
+    event.target.value = value;
+    orderInfo.value.carrier = value;
+}
+
+// 處理發票類型變更
+const handleInvoiceTypeChange = () => {
+    validateField('invoiceType');
+
+    // 如果切換到紙本發票，清除載具相關錯誤和資料
+    if (orderInfo.value.invoiceType === 'paper') {
+        orderInfo.value.carrier = '';
+        delete errors.value.carrier;
+        delete touchedFields.value.carrier;
+    }
+}
+// 驗證單一欄位（訂購人資訊）
+const validateField = (fieldName) => {
+    touchedFields.value[fieldName] = true;
+
+    switch(fieldName) {
+        case 'name':
+            if (!orderInfo.value.name.trim()) {
+                errors.value.name = '請輸入姓名';
+            } else {
+                delete errors.value.name;
+            }
+            break;
+        case 'tel':
+            if (!/^[0-9]{10}$/.test(orderInfo.value.tel)) {
+                errors.value.tel = '請輸入正確的電話號碼';
+            } else {
+                delete errors.value.tel;
+            }
+            break;
+        case 'invoiceType':
+            if (!orderInfo.value.invoiceType) {
+                errors.value.invoiceType = '請選擇發票類型';
+            } else {
+                delete errors.value.invoiceType;
+            }
+            break;
+        case 'carrier':
+            // 只有選擇電子發票時才需要驗證載具
+            if (orderInfo.value.invoiceType === 'electronic') {
+                const carrierPattern = /^\/[0-9A-Z]{7}$/;
+                if (!orderInfo.value.carrier.trim()) {
+                    errors.value.carrier = '請輸入載具號碼';
+                } else if (!carrierPattern.test(orderInfo.value.carrier)) {
+                    errors.value.carrier = '載具格式錯誤：須為8碼，第一碼為/，其餘為數字或英文';
+                } else {
+                    delete errors.value.carrier;
+                }
+            } else {
+                // 選擇紙本發票時，清除載具錯誤
+                delete errors.value.carrier;
+            }
+            break;
+    }
+}
+
+// 驗證收件人欄位
+const validateRecipientField = (fieldName) => {
+    // if (sameAsOrder.value) return;
+
+    const errorKey = `recipient${fieldName.charAt(0).toUpperCase() + fieldName.slice(1)}`;
+    touchedFields.value[errorKey] = true;
+
+    switch(fieldName) {
+        case 'name':
+            if (!recipientInfo.value.name.trim()) {
+                errors.value.recipientName = '請輸入收件人姓名';
+            } else {
+                delete errors.value.recipientName;
+            }
+            break;
+        case 'tel':
+            if (!/^[0-9]{10}$/.test(recipientInfo.value.tel)) {
+                errors.value.recipientTel = '請輸入正確的電話號碼';
+            } else {
+                delete errors.value.recipientTel;
+            }
+            break;
+        case 'address':
+            // 無論是否勾選「同訂購人」，都進行地址驗證
+            if (!recipientInfo.value.address.trim()) {
+                errors.value.recipientAddress = '請輸入收件人地址';
+            } else {
+                delete errors.value.recipientAddress;
+            }
+            break;
+    }
+}
+
 // 勾或取消checkbox 時
 watch(sameAsOrder, (same) => {
     if(same) {
         recipientInfo.value.name = orderInfo.value.name;
         recipientInfo.value.tel = orderInfo.value.tel;
-        recipientInfo.value.address = orderInfo.value.address;
-    }else {
+        
+        validateRecipientField('name');
+        validateRecipientField('tel');
+
+    } else {
+        // 取消勾選時，清空收件人資訊並清除相關錯誤訊息
         recipientInfo.value.name = '';
         recipientInfo.value.tel = '';
-        recipientInfo.value.address = '';
+        delete errors.value.recipientName;
+        delete errors.value.recipientTel;
+        delete touchedFields.value.recipientName;
+        delete touchedFields.value.recipientTel;
     }
-})
+});
 
-// 即時更新收件人資訊
+// 即時更新收件人資訊 (當訂購人資訊改變時，如果勾選同訂購人，則同步更新)
 watch(orderInfo, (update) => {
     if(sameAsOrder.value) {
         recipientInfo.value.name = update.name;
         recipientInfo.value.tel = update.tel;
-        recipientInfo.value.address = update.address;
+        // 注意：這裡假設 orderInfo 中有 address 屬性。
+        // 如果沒有，您需要考慮如何處理。
+        // 為確保驗證，應將 recipientInfo.value.address = update.address; 替換為
+        // recipientInfo.value.address = update.address || '';
+        // 這樣即使訂購人資訊沒有地址，也能正確賦值並觸發收件人地址的驗證
+        recipientInfo.value.address = update.address || '';
+        // 同步更新時也觸發收件人欄位的驗證
+        validateRecipientField('name');
+        validateRecipientField('tel');
+        validateRecipientField('address');
     }
 }, { deep: true });  //確保能監聽到物件內部屬性的變化
 
+//完整表單驗證（提交時使用）
+const validateForm = () => {
+    // 標記所有欄位為已觸碰
+    touchedFields.value = {
+        name: true,
+        tel: true,
+        invoiceType: true,
+        carrier: orderInfo.value.invoiceType === 'electronic', // 只有電子發票才需要驗證載具
+        recipientName: true,
+        recipientTel: true,
+        recipientAddress: true
+    };
 
-//驗證資料
-const errors = ref({});
-function validateForm(){
-    errors.value={};
-    
-    //有無商品
-    if(cartItems.value.length == 0){
-        errors.value.cart = '購物車不能為空'
+    errors.value = {};
+
+    if (cartItems.value.length === 0) {
+        errors.value.cart = '購物車不能為空';
     }
-    
-    //電話只能輸入數字
 
-    //訂單資訊
-}
+    // 驗證訂購人資訊
+    validateField('name');
+    validateField('tel');
+    validateField('invoiceType');
+
+    if (orderInfo.value.invoiceType === 'electronic') {
+        validateField('carrier');
+    }
+
+    // 無論是否勾選「同訂購人」，都驗證收件人資訊
+    validateRecipientField('name');
+    validateRecipientField('tel');
+    validateRecipientField('address');
+
+    return Object.keys(errors.value).length === 0;
+};
+
+const submitOrder = async () => {
+    if (validateForm()) {
+        console.log('送出訂單:', {
+            orderInfo: orderInfo.value,
+            recipientInfo: recipientInfo.value,
+            cartItems: cartItems.value
+        });
+
+        // 準備要送出的資料
+        const orderData = {
+            orderInfo: orderInfo.value,
+            recipientInfo: recipientInfo.value,
+            cartItems: cartItems.value,
+            totalPrice: finalPrice.value, // 包含總價
+            shippingFee: shippingFee.value, // 包含運費
+            discount: discount.value // 包含折扣
+        };
+
+        try {
+            const response = await fetch('http://localhost/TIBAART/submitOrder.php', { 
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(orderData), // 將 JavaScript 物件轉換為 JSON 字串
+            });
+
+            const result = await response.json(); // 解析 JSON 回應
+
+            if (response.ok && result.success) {
+                alert('訂單送出成功！');
+                router.push('/front/orderConfirm'); // 驗證成功，跳轉到訂單確認頁面
+            } else {
+                alert('訂單送出失敗：' + (result.message || '未知錯誤'));
+                console.error('訂單送出失敗:', result.message);
+            }
+        } catch (error) {
+            console.error('AJAX 請求錯誤:', error);
+            alert('網路或伺服器錯誤，請稍後再試。');
+        }
+
+        // clearCart();
+
+
+        // 驗證成功，跳轉到訂單確認頁面
+        router.push('/front/orderConfirm');
+    } else {
+        // 驗證失敗，顯示警告彈窗
+        const errorMessages = [];
+        if (cartItems.value.length === 0) {
+            errorMessages.push('• 購物車不能為空');
+        }
+        if (errors.value.name) {
+            errorMessages.push('• ' + errors.value.name);
+        }
+        if (errors.value.tel) {
+            errorMessages.push('• ' + errors.value.tel);
+        }
+        if (errors.value.invoiceType) {
+            errorMessages.push('• ' + errors.value.invoiceType);
+        }
+        if (errors.value.carrier) {
+            errorMessages.push('• ' + errors.value.carrier);
+        }
+        if (errors.value.recipientName) {
+            errorMessages.push('• ' + errors.value.recipientName);
+        }
+        if (errors.value.recipientTel) {
+            errorMessages.push('• ' + errors.value.recipientTel);
+        }
+        if (errors.value.recipientAddress) {
+            errorMessages.push('• ' + errors.value.recipientAddress);
+        }
+
+        const alertMessage = '請修正以下錯誤後再提交：\n\n' + errorMessages.join('\n');
+        alert(alertMessage);
+
+        console.log('表單驗證失敗:', errors.value);
+    }
+};
+
+
 </script>
 
 
-<style scoped>
-.errorMsg {
-    color: #e74c3c;
-    font-size: 14px;
-    margin-top: 5px;
+<style lang="scss" scoped>
+@import '/style.scss';
+
+
+.formError{
+  font-size: 12px;
+  color: $fontWarn;
+  margin-top: $spacing-1;
+  min-height: $spacing-4;
 }
+
 </style>

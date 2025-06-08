@@ -30,12 +30,12 @@
             </div>
         </div>
         <div class="memName">
-            <p>{{ name }}</p>
+            <p>嗨！{{ memberData.name }}</p>
         </div>
         <div class="memNav">
         <ul>
             <li><router-link to="/member">會員基本資料</router-link></li>
-            <li><router-link to="/member/memExpo">個人展覽資訊</router-link></li>
+            <li v-if="memberData.type === 'artist'"><router-link to="/member/memExpo">個人展覽資訊</router-link></li>
             <li><router-link to="/member/memOrder">商城訂單追蹤</router-link></li>
             <li><router-link to="/member/memSponsor">展覽贊助記錄</router-link></li>
         </ul>
@@ -46,10 +46,35 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, reactive, onMounted } from 'vue';
 import Modal from '@/components/Modal.vue';
 
-const name = '緯藝藝術家'
+const memberData = reactive({
+  name: '',
+  type: ''
+});
+
+onMounted(async () => {
+  const member = JSON.parse(localStorage.getItem('member'))
+  const type = localStorage.getItem('memberType') || 'general' // 預設值
+  const decodedId = atob(member.id)
+
+  const response = await fetch('http://localhost/TibaTest/getMemberInfo.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id: decodedId, type }) // 傳 id 和 type
+  })
+
+  const result = await response.json()
+  if (result.success) {
+    const info = result.member_info
+    memberData.name = info.name
+    memberData.type = type
+  };
+})
+
+
+
 const logout = () => {
   alert('已登出')
 }

@@ -5,73 +5,74 @@
  <div class="member-profile-edit">
     <div class="formA">
       <div class="formGroup">
-        <label for="memberName" class="formLabel">姓名</label>
+        <label for="name" class="formLabel">姓名</label>
         <input
           type="text"
-          id="memberName"
-          name="memberName"
+          id="name"
+          name="name"
           placeholder="輸入姓名"
           v-model="memberData.name"
         />
-        <span class="formError hidden">格式錯誤</span>
+      <span v-if="errors.name" class="formError">{{ errors.name }}</span>
       </div>
 
       <div class="formGroup">
-        <label for="memberGender" class="formLabel">性別</label>
-        <select id="memberGender" name="memberGender" class="formSelect" v-model="memberData.gender">
+        <label for="gender" class="formLabel">性別</label>
+        <select id="gender" name="gender" class="formSelect" v-model="memberData.gender">
           <option value="">請選擇</option>
-          <option value="male">男</option>
-          <option value="female">女</option>
+          <option value="M">男</option>
+          <option value="F">女</option>
+          <option value="Other">其他</option>
         </select>
-        <span class="formError hidden">請選擇性別</span>
+      <span v-if="errors.gender" class="formError">{{ errors.gender }}</span>
       </div>
 
       <div class="formGroup">
-        <label for="memberBirthday" class="formLabel">您的生日</label>
+        <label for="birthday" class="formLabel">生日</label>
         <input
           type="date"
-          id="memberBirthday"
-          name="memberBirthday"
+          id="birthday"
+          name="birthday"
+          :max="maxBirthdayStr"
           v-model="memberData.birthday"
         />
-        <span class="formError hidden">格式錯誤</span>
+      <span v-if="errors.birthday" class="formError">{{ errors.birthday }}</span>
       </div>
 
       <div class="formGroup">
-        <label for="memberEmail" class="formLabel">電子郵件</label>
+        <label for="email" class="formLabel">電子郵件</label>
         <input
           type="email"
-          id="memberEmail"
-          name="memberEmail"
+          id="email"
+          name="email"
           placeholder="輸入電子郵件"
           v-model="memberData.email"
-          disabled 
+          readonly 
         />
-        <span class="formError hidden">格式錯誤</span>
       </div>
 
       <div class="formGroup">
-        <label for="memberPhone" class="formLabel">手機號碼</label>
+        <label for="phone" class="formLabel">手機號碼</label>
         <input
           type="tel"
-          id="memberPhone"
-          name="memberPhone"
+          id="phone"
+          name="phone"
           placeholder="輸入手機號碼"
           v-model="memberData.phone"
         />
-        <span class="formError hidden">格式錯誤</span>
+      <span v-if="errors.phone" class="formError">{{ errors.phone }}</span>
       </div>
 
-      <div class="formGroup">
-        <label for="memberAddress" class="formLabel">地址</label>
+      <div class="formGroup" v-if="memberData.bank_account">
+        <label for="bank_account" class="formLabel">銀行帳戶</label>
         <input
           type="text"
-          id="memberAddress"
-          name="memberAddress"
-          placeholder="輸入地址"
-          v-model="memberData.address"
+          id="bank_account"
+          name="bank_account"
+          placeholder="輸入銀行帳戶"
+          v-model="memberData.bank_account"
         />
-        <span class="formError hidden">格式錯誤</span>
+      <span v-if="errors.bank_account" class="formError">{{ errors.bank_account }}</span>
       </div>
 
       <button class="btn saveBtn" type="button" @click="saveProfile">儲存</button>
@@ -86,65 +87,133 @@
 
 <script setup>
 
-import { ref, onMounted } from 'vue';
+import { reactive, onMounted } from 'vue';
 
-// 使用 ref 建立響應式資料物件，用於綁定表單欄位
-const memberData = ref({
+const today = new Date()
+const maxBirthday = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+const maxBirthdayStr = maxBirthday.toISOString().split('T')[0]; 
+
+const memberData = reactive({
   name: '',
   gender: '',
   birthday: '',
   email: '',
   phone: '',
-  address: ''
+  bank_account: ''
 });
 
-// onMounted 是一個生命週期鉤子，組件掛載後會執行
-onMounted(() => {
-  // 在這裡模擬從後端 API 撈取會員資料
-  // 實際應用中，你會在這裡發送 HTTP 請求
-  fetchMemberData();
+onMounted(async () => {
+  const member = JSON.parse(localStorage.getItem('member'))
+  const type = localStorage.getItem('memberType') || 'general' // 預設值
+
+  const decodedId = atob(member.id)
+
+  const response = await fetch('http://localhost/TibaTest/getMemberInfo.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id: decodedId, type: type }) // 傳 id 和 type
+  })
+
+  const result = await response.json()
+  if (result.success) {
+    const info = result.member_info
+    memberData.name = info.name
+    memberData.email = atob(info.email)
+    memberData.phone = atob(info.phone)
+    memberData.birthday = atob(info.birthday)
+    memberData.gender = atob(info.gender)
+
+    if (info.bank_account) {
+    memberData.bank_account = atob(info.bank_account)
+    }
+
+  };
+})
+
+const errors = reactive({
+  name: '',
+  gender: '',
+  birthday: '',
+  phone: '',
+  bank_account: ''
 });
 
-// 模擬從後端獲取會員資料的函數
-const fetchMemberData = async () => {
-  try {
-    // 實際應用中，會是類似 axios.get('/api/member/profile') 的請求
-    // 這裡使用 setTimeout 模擬非同步請求延遲
-    setTimeout(() => {
-      const fetchedData = {
-        name: '王小明',
-        gender: 'male',
-        birthday: '1990-05-20',
-        email: 'wangxiaoming@example.com',
-        phone: '0912345678',
-        address: '台北市信義區忠孝東路一段1號'
-      };
-      // 將撈到的資料賦值給 memberData
-      memberData.value = fetchedData;
-    }, 0); 
-  } catch (error) {
-    console.error('獲取會員資料失敗:', error);
-    // 可以在這裡處理錯誤，例如顯示錯誤訊息給用戶
+
+function validateForm() {
+  let valid = true
+
+  // Reset errors
+  Object.keys(errors).forEach(key => errors[key] = '')
+
+  // 姓名
+  if (!memberData.name.trim()) {
+    errors.name = '姓名為必填'
+    valid = false
+  } else if (memberData.name.length < 2) {
+    errors.name = '姓名至少兩個字'
+    valid = false
   }
-};
 
-// 儲存會員資料的函數
-const saveProfile = async () => {
-  try {
-    // 在這裡將 memberData.value 發送到後端 API 進行更新
-    // 實際應用中，會是類似 axios.post('/api/member/updateProfile', memberData.value)
-    console.log('正在儲存會員資料:', memberData.value);
+  // // 密碼
+  // if (!memberData.password) {
+  //   errors.password = '請輸入密碼'
+  //   valid = false
+  // } else if (memberData.password.length < 6) {
+  //   errors.password = '密碼需至少 6 碼'
+  //   valid = false
+  // }
+
+  // // 確認密碼
+  // if (memberData.cPassword !== memberData.password) {
+  //   errors.cPassword = '兩次密碼不一致'
+  //   valid = false
+  // }
+
+  // 手機
+  if (memberData.phone.length !== 10 || !memberData.phone.startsWith('09')) {
+    errors.phone = '請輸入09開頭的正確手機格式（10碼）'
+    valid = false
+  }
+  
+  // 生日
+  if (memberData.birthday == '') {
+    errors.birthday = '請選擇生日'
+    valid = false
+  } 
+
+    // 性別
+  if (memberData.gender == '') {
+    errors.gender = '請選擇性別'
+    valid = false
+  } 
+
+  return valid
+}
+
+async function saveProfile() {
+  if (validateForm()) {
+      alert('會員資料儲存成功')
+  }
+
+}
+
+
+// const saveProfile = async () => {
+//   try {
+//     // 在這裡將 memberData.value 發送到後端 API 進行更新
+//     // 實際應用中，會是類似 axios.post('/api/member/updateProfile', memberData.value)
+//     console.log('正在儲存會員資料:', memberData.value);
     
-    // 模擬非同步請求
-    setTimeout(() => {
-      alert('會員資料儲存成功！');
-      // 儲存成功後可以做其他操作，例如導回會員中心首頁
-    }, 300);
-  } catch (error) {
-    console.error('儲存會員資料失敗:', error);
-    alert('會員資料儲存失敗，請稍後再試。');
-  }
-};
+//     // 模擬非同步請求
+//     setTimeout(() => {
+//       alert('會員資料儲存成功！');
+//       // 儲存成功後可以做其他操作，例如導回會員中心首頁
+//     }, 300);
+//   } catch (error) {
+//     console.error('儲存會員資料失敗:', error);
+//     alert('會員資料儲存失敗，請稍後再試。');
+//   }
+// };
 
 </script>
 
@@ -171,6 +240,10 @@ const saveProfile = async () => {
     .formA{
         // border: 1px solid;
         padding: 60px 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 20px;
     
         .formGroup{
             margin: 0 auto;
@@ -183,6 +256,14 @@ const saveProfile = async () => {
 
         }
     
+        .saveBtn{
+            margin: 24px auto;
+            width: auto;
+            aspect-ratio: 2/1;
+            font-size: 16px;
+        }
+
+
     }
 
 
