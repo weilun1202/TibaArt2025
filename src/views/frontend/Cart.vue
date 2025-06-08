@@ -231,7 +231,7 @@
                                 <p class="total"><span>總計</span><span>NT${{ finalPrice }}</span></p>
                             </div>
                             <!-- <button class="btn"><router-link to="orderConfirm>確認購買</router-link></button> -->
-                            <button class="btn" @click="submitOrder">確認購買</button>
+                            <button type="button" class="btn" @click="submitOrder">確認購買</button>
                             <img class="ecpay" src="@/assets/img/ecpay_logo.svg" alt="">
                         </div>
                     </div>
@@ -564,8 +564,7 @@ const submitOrder = async () => {
             alert('網路或伺服器錯誤，請稍後再試。');
         }
 
-        // clearCart();
-
+        clearCart();
 
         // 驗證成功，跳轉到訂單確認頁面
         router.push('/front/orderConfirm');
@@ -603,14 +602,10 @@ const submitOrder = async () => {
         console.log('表單驗證失敗:', errors.value);
     }
 };
-
-
 </script>
-
 
 <style lang="scss" scoped>
 @import '/style.scss';
-
 
 .formError{
   font-size: 12px;
