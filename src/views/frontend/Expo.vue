@@ -5,238 +5,172 @@
         <div class="pageTitle">線上展覽</div>
       </header>
 
-      <!-- 在這裡加上 ref -->
-      <div class="parent" ref="parentRef">
-        <router-link v-for="item in expoItems" :key="item.id" :to="item.to"
-          :class="`grid ${item.className} ${item.side}`">
-          <img class="has-tooltip" :data-title="item.title" :src="item.img" alt="" />
+      <!-- 載入狀態 -->
+      <div v-if="loading" class="loading">
+        <p>載入中...</p>
+      </div>
+
+      <!-- 錯誤狀態 -->
+      <div v-else-if="error" class="error">
+        <p>載入失敗：{{ error }}</p>
+        <button @click="fetchExpoData">重新載入</button>
+      </div>
+
+      <!-- 主要內容 -->
+      <div v-else class="parent" ref="parentRef">
+        <router-link 
+          v-for="item in expoItems" 
+          :key="item.id" 
+          :to="item.to"
+          :class="`grid ${item.className} ${item.side}`"
+        >
+          <img 
+            class="has-tooltip" 
+            :data-title="item.titleZh" 
+            :src="baseUrl + item.img" 
+            :alt="item.titleZh" 
+          />
         </router-link>
         <div class="tooltip" ref="tooltipRef"></div>
-        <!-- 只保留一個 tooltip -->
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, nextTick } from 'vue'
-// 1. 從 gsap 取出核心，並引入 ScrollTrigger
+import { ref, onMounted, nextTick, onUnmounted } from 'vue'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-// 註冊插件
+// 註冊 ScrollTrigger 插件
 gsap.registerPlugin(ScrollTrigger)
 
-// 2. 定義 expoItems（你原本的資料）
-const expoItems = ref([
-  {
-    id: 1,
-    to: '/front/ExpoArea',
-    className: 'div1',
-    side: 'left',
-    img: import.meta.env.BASE_URL + '/assets/img/expo1.jpg',
-    title: '圖片的提示文字1'
-  },
-  {
-    id: 2,
-    to: '/front/ExpoArea',
-    className: 'div2',
-    side: 'right',
-    img: import.meta.env.BASE_URL + '/assets/img/expo2.jpg',
-    title: '圖片的提示文字2'
-  },
-  {
-    id: 3,
-    to: '/front/ExpoArea',
-    className: 'div3',
-    side: 'right',
-    img: import.meta.env.BASE_URL + '/assets/img/expo3.jpg',
-    title: '圖片的提示文字3'
-  },
-  {
-    id: 4,
-    to: '/front/ExpoArea',
-    className: 'div4',
-    side: 'left',
-    img: import.meta.env.BASE_URL + '/assets/img/expo4.jpg',
-    title: '圖片的提示文字4'
-  },
-  {
-    id: 5,
-    to: '/front/ExpoArea',
-    className: 'div5',
-    side: 'left',
-    img: import.meta.env.BASE_URL + '/assets/img/expo5.jpg',
-    title: '圖片的提示文字5'
-  },
-  {
-    id: 6,
-    to: '/front/ExpoArea',
-    className: 'div6',
-    side: 'right',
-    img: import.meta.env.BASE_URL + '/assets/img/expo6.jpg',
-    title: '圖片的提示文字6'
-  },
-  {
-    id: 7,
-    to: '/front/ExpoArea',
-    className: 'div7',
-    side: 'right',
-    img: import.meta.env.BASE_URL + '/assets/img/expo7.jpg',
-    title: '圖片的提示文字7'
-  },
-  {
-    id: 8,
-    to: '/front/ExpoArea',
-    className: 'div8',
-    side: 'left',
-    img: import.meta.env.BASE_URL + '/assets/img/expo8.jpg',
-    title: '圖片的提示文字8'
-  },
-  {
-    id: 9,
-    to: '/front/ExpoArea',
-    className: 'div9',
-    side: 'left',
-    img: import.meta.env.BASE_URL + '/assets/img/expo9.jpg',
-    title: '圖片的提示文字9'
-  },
-  {
-    id: 10,
-    to: '/front/ExpoArea',
-    className: 'div10',
-    side: 'right',
-    img: import.meta.env.BASE_URL + '/assets/img/expo10.jpg',
-    title: '圖片的提示文字10'
-  },
-  {
-    id: 11,
-    to: '/front/ExpoArea',
-    className: 'div11',
-    side: 'right',
-    img: import.meta.env.BASE_URL + '/assets/img/expo11.jpg',
-    title: '圖片的提示文字11'
-  },
-  {
-    id: 12,
-    to: '/front/ExpoArea',
-    className: 'div12',
-    side: 'left',
-    img: import.meta.env.BASE_URL + '/assets/img/expo12.jpg',
-    title: '圖片的提示文字12'
-  },
-  {
-    id: 13,
-    to: '/front/ExpoArea',
-    className: 'div13',
-    side: 'left',
-    img: import.meta.env.BASE_URL + '/assets/img/expo13.jpg',
-    title: '圖片的提示文字13'
-  },
-  {
-    id: 14,
-    to: '/front/ExpoArea',
-    className: 'div14',
-    side: 'right',
-    img: import.meta.env.BASE_URL + '/assets/img/expo14.jpg',
-    title: '圖片的提示文字14'
-  },
-  {
-    id: 15,
-    to: '/front/ExpoArea',
-    className: 'div15',
-    side: 'right',
-    img: import.meta.env.BASE_URL + '/assets/img/expo15.jpg',
-    title: '圖片的提示文字15'
-  },
-  {
-    id: 16,
-    to: '/front/ExpoArea',
-    className: 'div16',
-    side: 'left',
-    img: import.meta.env.BASE_URL + '/assets/img/expo16.jpg',
-    title: '圖片的提示文字16'
-  },
-  {
-    id: 17,
-    to: '/front/ExpoArea',
-    className: 'div17',
-    side: 'left',
-    img: import.meta.env.BASE_URL + '/assets/img/expo17.jpg',
-    title: '圖片的提示文字17'
-  },
-  {
-    id: 18,
-    to: '/front/ExpoArea',
-    className: 'div18',
-    side: 'right',
-    img: import.meta.env.BASE_URL + '/assets/img/expo18.jpg',
-    title: '圖片的提示文字18'
-  },
-  {
-    id: 19,
-    to: '/front/ExpoArea',
-    className: 'div19',
-    side: 'right',
-    img: import.meta.env.BASE_URL + '/assets/img/expo19.jpg',
-    title: '圖片的提示文字19'
-  }
-])
+// 響應式資料
+const baseUrl = import.meta.env.BASE_URL
+const expoItems = ref([])
+const loading = ref(true)
+const error = ref(null)
 
-// 3. 建立一個 ref 拿到 parent 容器
 const parentRef = ref(null)
 const tooltipRef = ref(null)
 
-onMounted(async () => {
-  // 等到 DOM 更新完成
-  await nextTick()
+// 用來存儲 ScrollTrigger 實例，方便清理
+const scrollTriggers = ref([])
 
-  // 找到 parentRef 裡所有 .grid 元素
+// 撈取資料
+const fetchExpoData = async () => {
+  try {
+    loading.value = true
+    error.value = null
+
+    const response = await fetch('http://localhost/TIBAART/expo.php')
+    if (!response.ok) throw new Error(`HTTP 錯誤：${response.status}`)
+
+    const jsonData = await response.json()
+    if (!jsonData.success) throw new Error(jsonData.error || '資料載入失敗')
+
+    expoItems.value = jsonData.data
+
+    // 等 DOM 更新完成後初始化動畫
+    await nextTick()
+    
+    // 稍微延遲確保 DOM 完全渲染
+    setTimeout(() => {
+      initAnimations()
+    }, 100)
+
+  } catch (err) {
+    error.value = err.message || '網路錯誤'
+    console.error('資料載入錯誤:', err)
+  } finally {
+    loading.value = false
+  }
+}
+
+// 初始化動畫和 tooltip
+const initAnimations = () => {
+  console.log('開始初始化動畫...') // 除錯用
+  
+  if (!parentRef.value) {
+    console.warn('parentRef 不存在')
+    return
+  }
+
+  // 清理之前的 ScrollTriggers
+  scrollTriggers.value.forEach(trigger => trigger.kill())
+  scrollTriggers.value = []
+
   const grids = parentRef.value.querySelectorAll('.grid')
+  console.log('找到的 grid 元素數量:', grids.length) // 除錯用
 
-  // 針對每一個 grid 元素，建立 scrollTrigger 動畫
+  if (grids.length === 0) {
+    console.warn('沒有找到 .grid 元素')
+    return
+  }
+
+  // ScrollTrigger 動畫
   grids.forEach((el, index) => {
-    gsap.fromTo(
+    const trigger = gsap.fromTo(
       el,
-      { opacity: 0, y: 50 }, // 從「透明 + 往下偏移 50px」開始
+      { opacity: 0, y: 50 },
       {
         opacity: 1,
         y: 0,
         duration: 0.8,
         ease: 'power1.out',
-        delay: index * 0.2, // 每個往後延遲 0.2 秒，做「依序」效果
+        delay: index * 0.2,
         scrollTrigger: {
           trigger: el,
-          start: 'top 100%',       // 當 el 的 top 到達 viewport 底下時觸發
-          toggleActions: 'play none none none',
-          // play：捲動進來時播放
-          // reverse：捲動回去時反向（即淡出）
-          // 之後可視需求改成 'play none none none'（只要進來淡入、不需淡出）
+          start: 'top 90%', // 調整觸發點
+          end: 'bottom 10%',
+          toggleActions: 'play none none reverse',
+          // markers: true, // 開發時可以開啟來看觸發點
+          onToggle: (self) => {
+            console.log('ScrollTrigger 觸發:', self.isActive) // 除錯用
+          }
         }
       }
     )
+    
+    // 保存 ScrollTrigger 實例
+    if (trigger.scrollTrigger) {
+      scrollTriggers.value.push(trigger.scrollTrigger)
+    }
   })
 
-  // ── Tooltip 動態顯示設定區塊 ──
+  // 初始化 Tooltip
+  initTooltip()
+}
+
+// 獨立的 tooltip 初始化函數
+const initTooltip = () => {
   const tooltipEl = tooltipRef.value
+  
+  if (!tooltipEl) {
+    console.warn('tooltip 元素不存在')
+    return
+  }
+
   const imgs = parentRef.value.querySelectorAll('.has-tooltip')
+  console.log('找到的 tooltip 圖片數量:', imgs.length) // 除錯用
 
   imgs.forEach(img => {
     img.addEventListener('mouseenter', (e) => {
       const text = img.getAttribute('data-title') || ''
       if (!text) return
 
+      console.log('顯示 tooltip:', text) // 除錯用
+
       tooltipEl.textContent = text
-
-      // 直接把 left/top 設為游標座標（clientX, clientY）：
+      tooltipEl.style.display = 'block'
+      
       gsap.set(tooltipEl, {
-        left: e.clientX + 'px',
-        top: e.clientY + 'px',
+        left: e.clientX + 10 + 'px',
+        top: e.clientY - 10 + 'px',
         scale: 0.8,
-        opacity: 0  // 確保一開始是完全透明，讓下一行動畫帶出淡入效果
+        opacity: 0
       })
-
-      // 接著做「淡入+放大」動畫
+      
       gsap.to(tooltipEl, {
         duration: 0.2,
         opacity: 1,
@@ -246,23 +180,99 @@ onMounted(async () => {
     })
 
     img.addEventListener('mousemove', (e) => {
-      // 滑鼠移動時，只更新 left/top，保持 opacity、scale
       gsap.set(tooltipEl, {
-        left: e.clientX + 'px',
-        top: e.clientY + 'px'
+        left: e.clientX + 10 + 'px',
+        top: e.clientY - 10 + 'px'
       })
     })
 
     img.addEventListener('mouseleave', () => {
-      // 滑鼠離開時，淡出並縮小
       gsap.to(tooltipEl, {
         duration: 0.15,
         opacity: 0,
         scale: 0.8,
-        ease: 'power2.in'
+        ease: 'power2.in',
+        onComplete: () => {
+          tooltipEl.style.display = 'none'
+        }
       })
     })
   })
-  // ── Tooltip 區塊結束 ──
+}
+
+// 頁面載入時執行
+onMounted(async () => {
+  console.log('組件已掛載') // 除錯用
+  await fetchExpoData()
+})
+
+// 清理 ScrollTriggers
+onUnmounted(() => {
+  scrollTriggers.value.forEach(trigger => trigger.kill())
+  ScrollTrigger.getAll().forEach(trigger => trigger.kill())
 })
 </script>
+
+<style scoped>
+.loading {
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.2rem;
+}
+
+.error {
+  text-align: center;
+  padding: 2rem;
+  color: #e74c3c;
+}
+
+.error button {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.error button:hover {
+  background-color: #2980b9;
+}
+
+/* 確保 parent 容器有足夠高度讓 ScrollTrigger 工作 */
+.parent {
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Tooltip 樣式 */
+.tooltip {
+  position: fixed;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  pointer-events: none;
+  z-index: 1000;
+  display: none;
+  white-space: nowrap;
+}
+
+/* 確保圖片可以觸發 hover */
+.has-tooltip {
+  cursor: pointer;
+}
+
+/* 確保 grid 元素有基本樣式 */
+.grid {
+  display: block;
+  margin-bottom: 20px;
+  transition: transform 0.3s ease;
+}
+
+.grid:hover {
+  transform: scale(1.05);
+}
+</style>

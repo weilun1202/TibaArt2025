@@ -1403,7 +1403,7 @@ header .pageTitle {
   justify-content: center;
   align-items: center;
   max-height: 300px;
-  opacity: 0;
+  opacity: 1;
   /* 初始隱藏，GSAP 會從 0 漸變到 1 */
   transform: translateY(50px);
   /* 跟 JS 一致，設定初始位移 */
@@ -1544,7 +1544,7 @@ header .pageTitle {
   /* 或你要的字級 */
   padding: 6px 10px;
   border-radius: 4px;
-  opacity: 0;
+  opacity: 1;
   /* 一開始隱藏 */
   transform: scale(0.8);
   /* 只縮放，不做任何平移 */
@@ -2233,7 +2233,6 @@ html {
 }
 
 body {
-
   list-style: none;
   /* 保證 body 撐滿畫面高度 */
   min-height: 100vh;
