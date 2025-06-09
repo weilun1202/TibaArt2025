@@ -19,6 +19,11 @@
             <select id="artist_id" name="artist_id" v-model="subject" @change="errors.subject = ''">
               <!-- 選項從下方 const expoList 新增 -->
               <option v-for="expo in expoList" :value="expo.id" :key="expo.id">{{ expo.title }}</option>
+              <!-- <option value="">請選擇</option>
+              <option value="expo1">《 靜界焰光 》</option>
+              <option value="expo2">《 雪白世界 》</option>
+              <option value="expo3">《 白陽落櫻 》</option>
+              <option value="expo4">《 撕裂極光 》</option> -->
             </select>
             <span class="formError" v-show="true">{{ errors.subject ? errors.subject : '\u00A0' }}</span>
 
@@ -309,7 +314,7 @@ function handleSubmit(e) {         // 把資料送去綠界
 
         formData.append('artist_id', subject.value) // artist_id 是傳給 php 時，顯示的。subject 是用 v-model="subject"
         formData.append('amount', selectedAmount.value)
-        formData.append('member_id', name.value)
+        formData.append('d_name', name.value)
         formData.append('email', email.value)
 
         fetch('http://localhost/test2/checkoutdonate.php', {       // 本機測試
