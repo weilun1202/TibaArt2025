@@ -252,7 +252,7 @@ async function handleSubmit() {
     }
 
     try {
-      const response = await fetch('http://localhost/TibaTest/memRegister.php', {
+      const response = await fetch('http://localhost/TIBAART/memRegister.php', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -135,7 +135,7 @@ onMounted(async () => {
   const type = localStorage.getItem('memberType') || 'general' 
   const decodedId = atob(member.id)
 
-  const response = await fetch('http://localhost/TibaTest/getMemberInfo.php', {
+  const response = await fetch('http://localhost/TIBAART/getMemberInfo.php', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ id: decodedId, type: type }) // 傳 id 和 type
@@ -235,7 +235,7 @@ async function saveProfile() {
     delete dataToSend.cPassword
   }
 
-  const response = await fetch('http://localhost/TibaTest/updateMemberInfo.php', {
+  const response = await fetch('http://localhost/TIBAART/updateMemberInfo.php', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

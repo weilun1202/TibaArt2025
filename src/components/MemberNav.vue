@@ -3,7 +3,7 @@
     <div class="memSideCon">
         <div class="memAvatarDiv">
             <div class="memAvatarCon avatarUploaded uploadedUrl image-uploaded" v-if="memberData.img">
-              <img class="memAvatar" :src="memberData.img" v-if="memberData.img" alt="上傳的頭像">
+              <img class="memAvatar" :src="'http://localhost/' + memberData.img" v-if="memberData.img" alt="上傳的頭像">
             </div>
             <div v-else class="memAvatarCon">
               <img class="memAvatar" src="@/assets/img/TibaArt-Icon.svg" alt="預設頭像" />
@@ -60,7 +60,7 @@ async function loadMemberData() {
   const type = localStorage.getItem('memberType') || 'general'
   const decodedId = atob(member.id)
 
-  const response = await fetch('http://localhost/TibaTest/getMemberInfo.php', {
+  const response = await fetch('http://localhost/TIBAART/getMemberInfo.php', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ id: decodedId, type })
@@ -126,7 +126,7 @@ const uploadImage = async () => {
   formData.append('type', type);
 
   try {
-    const response = await fetch('http://localhost/TibaTest/avatarUpload.php', {
+    const response = await fetch('http://localhost/TIBAART/avatarUpload.php', {
       method: 'POST',
       body: formData,
     });

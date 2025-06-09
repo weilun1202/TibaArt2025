@@ -219,7 +219,7 @@ async function handleSubmitGeneral() {
     }
 
     try {
-      const response = await fetch('http://localhost/TibaTest/memLogin.php', {
+      const response = await fetch('http://localhost/TIBAART/memLogin.php', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -266,7 +266,7 @@ async function handleSubmitArtist() {
     }
 
     try {
-      const response = await fetch('http://localhost/TibaTest/memLogin.php', {
+      const response = await fetch('http://localhost/TIBAART/memLogin.php', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
