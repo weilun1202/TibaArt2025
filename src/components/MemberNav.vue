@@ -2,15 +2,15 @@
   <div class="memSideDiv">
     <div class="memSideCon">
         <div class="memAvatarDiv">
-            <div class="memAvatarCon avatarUploaded uploadedUrl image-uploaded" v-if="uploadedUrl">
-              <img class="memAvatar" :src="uploadedUrl" alt="上傳的頭像">
+            <div class="memAvatarCon avatarUploaded uploadedUrl image-uploaded" v-if="memberData.img">
+              <img class="memAvatar" :src="memberData.img" v-if="memberData.img" alt="上傳的頭像">
             </div>
             <div v-else class="memAvatarCon">
               <img class="memAvatar" src="@/assets/img/TibaArt-Icon.svg" alt="預設頭像" />
             </div>
             <div>
               <button class="avatarUpload" @click="openModal">上傳照片</button>
-              <Modal v-model:isOpen="showModal" title="上傳圖片" @file-selected="handleFileSelected" @click="closeModal">
+              <Modal v-model:isOpen="showModal" title="上傳圖片" @click="closeModal">
                 <div class="modalDIY" method="post" action="SingleFile.php" enctype="multipart/form-data">
                   <label for="file-upload" class="modalText">選擇圖片</label>
                   <input id="file-upload" type="file" accept="image/*" @change="handleFileChange">
@@ -51,29 +51,37 @@ import Modal from '@/components/Modal.vue';
 
 const memberData = reactive({
   name: '',
-  type: ''
+  type: '',
+  img: ''
 });
 
-onMounted(async () => {
+async function loadMemberData() {
   const member = JSON.parse(localStorage.getItem('member'))
-  const type = localStorage.getItem('memberType') || 'general' // 預設值
+  const type = localStorage.getItem('memberType') || 'general'
   const decodedId = atob(member.id)
 
   const response = await fetch('http://localhost/TibaTest/getMemberInfo.php', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ id: decodedId, type }) // 傳 id 和 type
+    body: JSON.stringify({ id: decodedId, type })
   })
 
   const result = await response.json()
   if (result.success) {
     const info = result.member_info
+    console.log(info);
+    
     memberData.name = info.name
     memberData.type = type
-  };
+    memberData.img = info.img 
+    console.log(memberData.img);
+    
+  }
+}
+
+onMounted(() => {
+  loadMemberData()
 })
-
-
 
 const logout = () => {
   alert('已登出')
@@ -93,8 +101,8 @@ const closeModal = () => {
 };
 
 const handleFileChange = (event) => {
-  const file = event.target.files[0]; 
-  if (file && file.size > 5 * 1024 * 1024) { 
+  const file = event.target.files[0];
+  if (file && file.size > 5 * 1024 * 1024) {
     alert('檔案大小不能超過 5MB');
     return;
   }
@@ -102,35 +110,53 @@ const handleFileChange = (event) => {
   selectedFile.value = file;
 };
 
-const handleFileSelected = (file) => {
-  selectedFile.value = file; 
-  console.log('選擇的檔案：', file);
-};
-
-
 const uploadImage = async () => {
-  if (selectedFile.value) {
-    const formData = new FormData();
-    formData.append('image', selectedFile.value);
-    try {
-      const response = await fetch('/api/upload', {
-        method: 'POST',
-        body: formData,
-      });
-      const result = await response.json();
-      console.log('上傳成功：', result);
-      // 假設後端返回上傳後的圖片 URL
-      // 如果後端未返回 URL，則使用臨時 URL
-      uploadedUrl.value = result.url || URL.createObjectURL(selectedFile.value);
-      showModal.value = false;
-      previewUrl.value = null;
-      selectedFile.value = null;
-    } catch (error) {
-      console.error('上傳失敗：', error);
-      alert('圖片上傳失敗，請重試');
-    }
-  } else {
+  if (!selectedFile.value) {
     alert('請先選擇一張圖片');
+    return;
+  }
+
+  const member = JSON.parse(localStorage.getItem('member'));
+  const decodedId = atob(member.id);
+  const type = localStorage.getItem('memberType') || 'general';
+
+  const formData = new FormData();
+  formData.append('img', selectedFile.value);
+  formData.append('id', decodedId);
+  formData.append('type', type);
+
+  try {
+    const response = await fetch('http://localhost/TibaTest/avatarUpload.php', {
+      method: 'POST',
+      body: formData,
+    });
+
+    const result = await response.json();
+    console.log(result);
+    
+    console.log('上傳成功：', result);
+    
+
+    memberData.img  = result.url || URL.createObjectURL(selectedFile.value);
+    
+    // 釋放預覽 URL
+    URL.revokeObjectURL(previewUrl.value);
+
+
+
+    // 關閉 modal 與清空狀態
+    showModal.value = false;
+    previewUrl.value = null;
+    selectedFile.value = null;
+
+    // loadMemberData()
+
+    // 可以選擇刷新或重新撈取資料
+    // location.reload()
+
+  } catch (error) {
+    console.error('上傳失敗：', error);
+    alert('圖片上傳失敗，請重試');
   }
 };
 

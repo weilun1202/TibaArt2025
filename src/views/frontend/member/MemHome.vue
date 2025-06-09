@@ -63,6 +63,31 @@
       <span v-if="errors.phone" class="formError">{{ errors.phone }}</span>
       </div>
 
+      <div class="formGroup">
+        <label for="password" class="formLabel">修改密碼</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="至少 6 碼"
+          v-model="memberData.password"
+        />
+        <span class="formError" v-if="errors.password">{{ errors.password }}</span>
+      </div>
+
+      <!-- 確認密碼 -->
+      <div class="formGroup">
+        <label for="cPassword" class="formLabel">確認新密碼</label>
+        <input
+          type="password"
+          id="cPassword"
+          name="cPassword"
+          placeholder="再次輸入密碼"
+          v-model="memberData.cPassword"
+        />
+        <span class="formError" v-if="errors.cPassword">{{ errors.cPassword }}</span>
+      </div>
+
       <div class="formGroup" v-if="memberData.bank_account">
         <label for="bank_account" class="formLabel">銀行帳戶</label>
         <input
@@ -75,7 +100,7 @@
       <span v-if="errors.bank_account" class="formError">{{ errors.bank_account }}</span>
       </div>
 
-      <button class="btn saveBtn" type="button" @click="saveProfile">儲存</button>
+      <button class="btn saveBtn" type="button" @click="saveProfile">儲存修改</button>
     </div>
   </div>
 
@@ -99,13 +124,15 @@ const memberData = reactive({
   birthday: '',
   email: '',
   phone: '',
-  bank_account: ''
-});
+  password: '',     
+  cPassword: '',    
+  bank_account: '', 
+  type: ''          
+})
 
 onMounted(async () => {
   const member = JSON.parse(localStorage.getItem('member'))
-  const type = localStorage.getItem('memberType') || 'general' // 預設值
-
+  const type = localStorage.getItem('memberType') || 'general' 
   const decodedId = atob(member.id)
 
   const response = await fetch('http://localhost/TibaTest/getMemberInfo.php', {
@@ -135,6 +162,8 @@ const errors = reactive({
   gender: '',
   birthday: '',
   phone: '',
+  password: '',
+  cPassword: '',
   bank_account: ''
 });
 
@@ -154,24 +183,21 @@ function validateForm() {
     valid = false
   }
 
-  // // 密碼
-  // if (!memberData.password) {
-  //   errors.password = '請輸入密碼'
-  //   valid = false
-  // } else if (memberData.password.length < 6) {
-  //   errors.password = '密碼需至少 6 碼'
-  //   valid = false
-  // }
-
-  // // 確認密碼
-  // if (memberData.cPassword !== memberData.password) {
-  //   errors.cPassword = '兩次密碼不一致'
-  //   valid = false
-  // }
+  // 密碼
+   if (memberData.password || memberData.cPassword) {
+    if (memberData.password.length < 6) {
+      errors.password = '密碼至少需 6 碼'
+      valid = false
+    }
+    if (memberData.password !== memberData.cPassword) {
+      errors.cPassword = '兩次密碼不一致'
+      valid = false
+    }
+  }
 
   // 手機
   if (memberData.phone.length !== 10 || !memberData.phone.startsWith('09')) {
-    errors.phone = '請輸入09開頭的正確手機格式（10碼）'
+    errors.phone = '請輸入09開頭的10碼手機格式'
     valid = false
   }
   
@@ -191,29 +217,57 @@ function validateForm() {
 }
 
 async function saveProfile() {
-  if (validateForm()) {
-      alert('會員資料儲存成功')
+  if (!validateForm()) return 
+
+  const member = JSON.parse(localStorage.getItem('member'))
+  const type = localStorage.getItem('memberType') || 'general' 
+  const decodedId = atob(member.id)
+
+  const dataToSend = {
+   ...memberData,
+   id: decodedId,
+   type: type  
+ }
+
+  // 如果密碼是空的，就不要送去後端（避免覆蓋成空密碼）
+  if (!memberData.password) {
+    delete dataToSend.password
+    delete dataToSend.cPassword
   }
 
+  const response = await fetch('http://localhost/TibaTest/updateMemberInfo.php', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(dataToSend)
+  })
+
+  const result = await response.json()
+
+  if (result.success) {
+    alert('資料已成功更新！')
+    // 清空密碼欄
+    memberData.password = ''
+    memberData.cPassword = ''
+
+    const info = result.member_info
+    memberData.name = info.name
+    memberData.email = atob(info.email)
+    memberData.phone = atob(info.phone)
+    memberData.birthday = atob(info.birthday)
+    memberData.gender = atob(info.gender)
+
+    if (info.bank_account) {
+    memberData.bank_account = atob(info.bank_account)
+    }
+
+
+  } else {
+    alert('更新失敗：' + result.message)
+  }
 }
 
-
-// const saveProfile = async () => {
-//   try {
-//     // 在這裡將 memberData.value 發送到後端 API 進行更新
-//     // 實際應用中，會是類似 axios.post('/api/member/updateProfile', memberData.value)
-//     console.log('正在儲存會員資料:', memberData.value);
-    
-//     // 模擬非同步請求
-//     setTimeout(() => {
-//       alert('會員資料儲存成功！');
-//       // 儲存成功後可以做其他操作，例如導回會員中心首頁
-//     }, 300);
-//   } catch (error) {
-//     console.error('儲存會員資料失敗:', error);
-//     alert('會員資料儲存失敗，請稍後再試。');
-//   }
-// };
 
 </script>
 

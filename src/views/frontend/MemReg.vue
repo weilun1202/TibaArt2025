@@ -212,8 +212,8 @@ function validateForm() {
   }
 
   // 手機
-  if (memberData.phone.length !== 10 || !memberData.phone.startsWith('09')) {
-    errors.phone = '請輸入09開頭的正確手機格式（10碼）'
+  if (form.phone.length !== 10 || !form.phone.startsWith('09')) {
+    errors.phone = '請輸入09開頭的10碼手機格式'
     valid = false
   }
   
