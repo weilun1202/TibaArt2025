@@ -24,23 +24,23 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+// import { ref, onMounted } from 'vue'
+// import { useRoute, useRouter } from 'vue-router'
 
-const route = useRoute()
-const router = useRouter()
-const orderNumber = ref('載入中')
+// const route = useRoute()
+// const router = useRouter()
+// const orderNumber = ref('載入中')
 
-onMounted(() => {
-  const orderFromQuery = route.query.orderNumber
+// onMounted(() => {
+//   const orderFromQuery = route.query.orderNumber
 
-  if( orderFromQuery ){
-    orderNumber.value = orderFromQuery
-  }else {
-    orderNumber.value = '無法取得訂單編號'
-    router/pushScopeId('/front/')
-  }
+//   if( orderFromQuery ){
+//     orderNumber.value = orderFromQuery
+//   }else {
+//     orderNumber.value = '無法取得訂單編號'
+//     router/pushScopeId('/front/')
+//   }
 
-})
+// })
 
 </script>
