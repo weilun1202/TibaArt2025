@@ -9,6 +9,9 @@
         grid-column-gap: $spacing-3;
         grid-row-gap: $spacing-3;
 
+        min-height: 100vh;
+        position: relative;
+
 
 
         .grid {
@@ -202,7 +205,7 @@
         color: #fff;
         font-size: map-get($font, h5);
         /* 或你要的字級 */
-        padding: 6px 10px;
+        padding: $spacing-3 $spacing-8;
         border-radius: 4px;
         opacity: 1;
         /* 一開始隱藏 */
@@ -213,6 +216,8 @@
         z-index: 9999;
         transition: none;
         /* 動畫交給 GSAP 完全控制 */
+        display: none;
+
     }
 
 
