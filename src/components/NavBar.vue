@@ -27,8 +27,8 @@
             <li><router-link to="/front/application" @click="closeMenu">展覽申請</router-link></li>
             <li><router-link to="/front/shop" @click="closeMenu">線上商城</router-link></li>
             <li><router-link to="/front/about" @click="closeMenu">關於我們</router-link></li>
-            <li><router-link to="/front/MemLogin" @click="closeMenu">會員登入</router-link></li>
-            <li><router-link to="/front/MemReg" @click="closeMenu">註冊會員</router-link></li>
+            <!-- <li><router-link to="/front/MemLogin" @click="closeMenu">會員登入</router-link></li>
+            <li><router-link to="/front/MemReg" @click="closeMenu">註冊會員</router-link></li> -->
           </ul>
         </div>
       </div>
@@ -43,11 +43,25 @@
       </div>
     </div>
 
+    <!-- 會員中心 未登入-->
+    <div class="memberIconN" v-if="!userStore.isLoggedIn">
+      <router-link to="/front/memLogin" @click="closeMenu">
+          <font-awesome-icon :icon="['far', 'user']" />
+      </router-link>
+    </div>
+
+    <!-- 會員中心 已登入-->
+    <div class="memberIconY" v-if="userStore.isLoggedIn && userStore.memberData.img">
+      <router-link to="/member" @click="closeMenu">
+        <img :src="'http://localhost/' + userStore.memberData.img" alt="會員頭像">
+      </router-link>
+    </div>
+
      <!-- 購物車 -->
     <router-link to="/front/cart" class="cartIcon" @click="closeMenu">
         <font-awesome-icon :icon="['fas', 'cart-shopping']" />
         <span class="cartCount"
-          v-if="totalItems > 0">{{ totalItems }}</span>
+          v-if="userStore.isLoggedIn && totalItems > 0">{{ totalItems }}</span>
     </router-link>  
 
   </nav>
@@ -56,7 +70,8 @@
 <script setup>
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { useRouter } from 'vue-router'
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, reactive, onMounted, onUnmounted } from 'vue';
+import { useUserStore } from '@/stores/user'
 import { useCart } from '@/stores/cart.js';
 
 defineProps()
@@ -68,8 +83,6 @@ const goToLogin = () => {
 const goToRegister = () => {
   router.push('/MemReg') 
 }
-
-const { totalItems } = useCart()
 
 const menuOpen = ref(false)
 
@@ -95,6 +108,55 @@ const handleEscKey = (event) => {
   }
 }
 
+const userStore = useUserStore()
+const { totalItems } = useCart()
+
+
+// 組件掛載時初始化會員資料
+onMounted(() => {
+  userStore.loadFromLocalStorage()
+  // 如果已登入，則獲取詳細資料
+  if (userStore.isLoggedIn) {
+    userStore.fetchMemberInfo()
+  }
+})
+
+// const memberData = reactive({
+//   name: '',
+//   type: '',
+//   img: ''
+// });
+
+// async function loadMemberData() {
+//   const member = JSON.parse(localStorage.getItem('member'))
+//   const type = localStorage.getItem('memberType') || 'general'
+//   const decodedId = atob(member.id)
+
+//   const response = await fetch('http://localhost/TIBAART/getMemberInfo.php', {
+//     method: 'POST',
+//     headers: { 'Content-Type': 'application/json' },
+//     body: JSON.stringify({ id: decodedId, type })
+//   })
+
+//   const result = await response.json()
+//   if (result.success) {
+//     const info = result.member_info
+//     // console.log(info);
+    
+//     memberData.name = info.name
+//     memberData.type = type
+//     memberData.img = info.img 
+//     // console.log(memberData.img);
+    
+//   }
+// }
+
+// onMounted(() => {
+//   loadMemberData()
+// })
+
+
+
 onMounted(() => {
   document.addEventListener('keydown', handleEscKey)
 })
@@ -103,6 +165,8 @@ onUnmounted(() => {
   document.removeEventListener('keydown', handleEscKey)
   document.body.style.overflow = '' // Clean up on unmount
 })
+
+
 </script>
 
 <style lang="scss" scoped>
@@ -201,7 +265,7 @@ onUnmounted(() => {
         font-size: map-get($font, h5);
 
         &:hover {
-            color: $buttonYellow;
+            color: $logoYellow;
         }
 
         .cartCount {
@@ -221,6 +285,48 @@ onUnmounted(() => {
     }
 
 
+.memberIconN a{
+    position: relative;
+    color: $fontBlack;
+    font-size: map-get($font, h5);
+    margin-right: 8px;
+    
+
+    &:hover {
+        color: $logoYellow;
+    }
+}
+
+.memberIconY{
+    position: relative;
+    margin-right: 8px;
+
+    width: 30px;
+    height: 30px;
+
+    border-radius: 50%;
+    border: 2px solid $logoBrown;
+
+     &:hover {
+      border: 2px solid $logoYellow;
+     }
+
+    img{
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+
+         &:hover {
+        opacity: 0.8;
+    }
+    }
+
+}
+
+
+
+
 .menuToggle {
     display: block;
     width: auto;
@@ -231,7 +337,7 @@ onUnmounted(() => {
 }
 
 .bar {
-    width: 26px;
+    width: 22px;
     height: 2.5px;
     background-color: #000;
     margin: 6px 12px;

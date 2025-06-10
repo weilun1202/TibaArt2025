@@ -609,6 +609,7 @@ onUnmounted(() => {
 
 .frontHomeW{
     padding-top: 100px;
+    overflow: hidden;
 }
 
 svg {

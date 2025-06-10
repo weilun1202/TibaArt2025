@@ -42,9 +42,9 @@
               <template v-if="col.type === 'switch'">
                 <button
                   @click="toggleStatus(row)"
-                  :class="['switch-btn', row.status ? 'on' : 'off']"
+                  :class="['switch-btn', row.per ? 'on' : 'off']"
                 >
-                  {{ row.status ? '啟用' : '停用' }}
+                  {{ row.per ? '啟用' : '停用' }}
                 </button>
               </template>
               <!-- 狀態欄位：下拉選單 -->
@@ -65,6 +65,14 @@
                 @click="emit('view-more', row)"
                 class="more-btn">
                   {{ col.buttonLabel || '查看' }}
+                </button>
+              </template>
+              <!-- 編輯按鈕 -->
+              <template v-else-if="col.type === 'edit'">
+                <button 
+                  @click="emit('edit', row)"
+                  class="edit-btn">
+                  {{ col.buttonLabel || '編輯' }}
                 </button>
               </template>
             
@@ -102,7 +110,7 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['add', 'toggle-status', 'status-change', 'view-more'])
+const emit = defineEmits(['add', 'toggle-status', 'status-change', 'view-more', 'edit'])
 
 const selectedKey = ref('')
 const keyword = ref('')
@@ -150,7 +158,7 @@ watch([selectedKey, keyword], () => {
 
 // 狀態按鈕開關
 function toggleStatus(row) {
-  row.status = !row.status
+  row.per = !row.per
   emit('toggle-status', row)  // 通知外層
 }
 
@@ -280,6 +288,19 @@ function handleStatusChange(row) {
   background-color: $logoColor3;
   color: white;
   &:hover{
+    background-color: lighten($logoColor3, 10%);
+  }
+}
+
+// 編輯按鈕
+.edit-btn {
+  background-color: $logoColor3;
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  &:hover {
     background-color: lighten($logoColor3, 10%);
   }
 }
