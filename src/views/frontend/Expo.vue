@@ -21,7 +21,7 @@
         <router-link 
           v-for="item in expoItems" 
           :key="item.id" 
-          :to="`/front/ExpoArea/${item.id}`"
+          :to="{ name: 'ExpoArea', params: { id: item.id } }"
           :class="`grid ${item.className} ${item.side}`"
         >
           <img 
