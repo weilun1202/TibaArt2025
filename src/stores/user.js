@@ -3,43 +3,63 @@ import { ref, computed } from 'vue'
 
 export const useUserStore = defineStore('user', {
   // 狀態定義
-  state: () => ({
-    // 會員資料
-    memberData: {
-      name: '',
-      gender: '',
-      birthday: '',
-      email: '',
-      phone: '',
-      password: '',
-      cPassword: '',
-      bank_account: '',
-      type: '',
-      img: '' // 新增會員頭像欄位
-    },
-    // 會員基本資訊 (從 localStorage 來的)
-    memberInfo: {
-      id: '',
-      email: ''
-    },
-    // 會員類型 ('general' 或 'artist')
-    memberType: 'general',
-    // 載入狀態
-    loading: false,
-    // 錯誤訊息
-    error: null,
-    // 表單驗證錯誤
-    errors: {
-      name: '',
-      gender: '',
-      birthday: '',
-      phone: '',
-      password: '',
-      cPassword: '',
-      bank_account: ''
+  state: () => {
+    // 在 state 初始化時就從 localStorage 讀取
+    let memberInfo = { id: '', email: '' }
+    let memberType = 'general'
+    
+    try {
+      const member = JSON.parse(localStorage.getItem('member'))
+      const storedMemberType = localStorage.getItem('memberType')
+      
+      if (member) {
+        memberInfo = {
+          id: member.id || '',
+          email: member.email || ''
+        }
+      }
+      
+      if (storedMemberType) {
+        memberType = storedMemberType
+      }
+    } catch (error) {
+      console.error('從 localStorage 載入會員資訊失敗:', error)
     }
-  }),
 
+    return {
+      // 會員資料
+      memberData: {
+        name: '',
+        gender: '',
+        birthday: '',
+        email: '',
+        phone: '',
+        password: '',
+        cPassword: '',
+        bank_account: '',
+        type: '',
+        img: ''
+      },
+      // 會員基本資訊 (從 localStorage 來的) - 現在會自動載入
+      memberInfo: memberInfo,
+      // 會員類型 - 現在會自動載入
+      memberType: memberType,
+      // 載入狀態
+      loading: false,
+      // 錯誤訊息
+      error: null,
+      // 表單驗證錯誤
+      errors: {
+        name: '',
+        gender: '',
+        birthday: '',
+        phone: '',
+        password: '',
+        cPassword: '',
+        bank_account: ''
+      }
+    }
+  },
   // 計算屬性 (getters)
   getters: {
     // 取得解碼後的會員 ID

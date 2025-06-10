@@ -243,7 +243,7 @@ async function handleSubmitGeneral() {
       // }))
 
         alert('登入成功！');
-        router.push('/member')
+        router.replace('/member')
       } else {
         alert('登入失敗：' + result.message)
       }

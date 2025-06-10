@@ -48,7 +48,6 @@
 <script setup>
 import { ref, reactive, onMounted } from 'vue';
 import Modal from '@/components/Modal.vue';
-// import router from '@/router';
 import { useUserStore } from '@/stores/user'
 import { useRouter } from 'vue-router'
 

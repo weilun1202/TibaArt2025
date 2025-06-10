@@ -3,10 +3,9 @@
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
-import 'animate.css'
-
 import App from './App.vue'
 import router from './router'
+import 'animate.css'
 
 
 // Font Awesome 相關導入
@@ -39,13 +38,10 @@ library.add(faMinus)
 library.add(farUser)
 
 
-
-
 const app = createApp(App)
+const pinia = createPinia()
+
 app.component('font-awesome-icon', FontAwesomeIcon)  // 註冊元件
-
-
-app.use(createPinia())
+app.use(pinia)
 app.use(router)
-
 app.mount('#app')

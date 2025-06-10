@@ -51,9 +51,10 @@
     </div>
 
     <!-- 會員中心 已登入-->
-    <div class="memberIconY" v-if="userStore.isLoggedIn && userStore.memberData.img">
+    <div class="memberIconY" v-if="userStore.isLoggedIn">
       <router-link to="/member" @click="closeMenu">
-        <img :src="'http://localhost/' + userStore.memberData.img" alt="會員頭像">
+        <img v-if="userStore.memberData.img" :src="'http://localhost/' + userStore.memberData.img" alt="會員頭像">
+        <img v-else src="@/assets/img/TibaArt-Icon.svg" alt="會員預設頭像">
       </router-link>
     </div>
 
@@ -70,7 +71,7 @@
 <script setup>
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { useRouter } from 'vue-router'
-import { ref, reactive, onMounted, onUnmounted } from 'vue';
+import { ref, reactive, onMounted, onUnmounted, watch } from 'vue';
 import { useUserStore } from '@/stores/user'
 import { useCart } from '@/stores/cart.js';
 
@@ -115,11 +116,21 @@ const { totalItems } = useCart()
 // 組件掛載時初始化會員資料
 onMounted(() => {
   userStore.loadFromLocalStorage()
-  // 如果已登入，則獲取詳細資料
   if (userStore.isLoggedIn) {
     userStore.fetchMemberInfo()
   }
+
+  // 初始化購物車
 })
+
+// 監聽登入狀態變化，重新初始化購物車
+watch(
+  () => userStore.isLoggedIn,
+  () => {
+    console.log('Navbar 監聽到登入狀態變化')
+  }
+)
+
 
 // const memberData = reactive({
 //   name: '',
