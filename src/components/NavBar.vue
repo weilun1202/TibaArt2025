@@ -61,7 +61,7 @@
     <router-link to="/front/cart" class="cartIcon" @click="closeMenu">
         <font-awesome-icon :icon="['fas', 'cart-shopping']" />
         <span class="cartCount"
-          v-if="totalItems > 0">{{ totalItems }}</span>
+          v-if="userStore.isLoggedIn && totalItems > 0">{{ totalItems }}</span>
     </router-link>  
 
   </nav>
@@ -83,8 +83,6 @@ const goToLogin = () => {
 const goToRegister = () => {
   router.push('/MemReg') 
 }
-
-const { totalItems } = useCart()
 
 const menuOpen = ref(false)
 
@@ -111,6 +109,8 @@ const handleEscKey = (event) => {
 }
 
 const userStore = useUserStore()
+const { totalItems } = useCart()
+
 
 // 組件掛載時初始化會員資料
 onMounted(() => {
