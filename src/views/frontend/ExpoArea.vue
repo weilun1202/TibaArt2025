@@ -113,7 +113,7 @@ const fetchExpoData = async () => {
       }
     }
 
-    取得該展覽的作品
+    //取得該展覽的作品
     const artworksResponse = await fetch(`http://localhost/TIBAART/artworks.php?expo_id=${expoId}`)
     if (artworksResponse.ok) {
       const artworksResult = await artworksResponse.json()
