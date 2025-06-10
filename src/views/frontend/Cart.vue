@@ -554,25 +554,39 @@ const submitOrder = async () => {
 
             if (response.ok && result.success) {
                 alert('訂單送出成功！');
-                
-                clearCart();
-                
-                router.push({
-                    path: '/front/orderConfirm', // 使用路徑而非名稱
-                    query: { orderNumber: result.orderId } // 透過 query 參數傳遞訂單編號
-                });
-            } else {
-                alert('訂單送出失敗：' + (result.message || '未知錯誤'));
-                console.error('訂單送出失敗:', result.message);
             }
+                
+            
+            // 訂單建立成功，獲取 orderId
+            const orderNumber = result.orderId;
+            
+            const ecpayResponse = await fetch('http://localhost/TIBAART/ecpayOrder.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ order_number: orderNumber })
+            });
+            
+            if (ecpayResponse.ok) {
+                // 將返回的 HTML 表單寫入文檔，觸發自動提交到綠界
+                document.open();
+                document.write(await ecpayResponse.text());
+                document.close();
+            } else {
+                alert('無法連接到綠界付款，請稍後再試');
+            }
+            
+            clearCart();
+            
+            // router.push({
+            //     path: '/front/orderConfirm', // 使用路徑而非名稱
+            //     query: { orderNumber: result.orderId } // 透過 query 參數傳遞訂單編號
+            // });
+
         } catch (error) {
-            console.error('AJAX 請求錯誤:', error);
+            console.error('Error', error);
             alert('網路或伺服器錯誤，請稍後再試。');
         }
 
-
-        // 驗證成功，跳轉到訂單確認頁面
-        // router.push('/front/orderConfirm');
     } else {
         // 驗證失敗，顯示警告彈窗
         const errorMessages = [];
