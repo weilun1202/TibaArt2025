@@ -2,7 +2,7 @@
     <AdminTable :columns="columns" :data="data " 
     :showAddButton="false"
     @view-more="openModal" 
-    @toggle-status="handleToggleStatus"
+    @toggle-status="updateStatus"
     />
 
     <transition name="fade">
@@ -46,28 +46,48 @@ function openModal(row) {
   showMore.value = true
 }
 
-// 權限
-function handleToggleStatus(member) {
-  console.log('會員狀態已變更', member)
-  
-  // TODO：這裡可呼叫 API 更新資料庫
-  // await fetch(`/api/updated-member-status`, {
-    //   method: 'POST',
-    //   body: JSON.stringify({ id: member.id, status: member.status }),
-    //   headers: { 'Content-Type': 'application/json' }
-    // })
+// 切換狀態
+async function updateStatus(row) {
+  try {
+    const resp = await fetch(import.meta.env.VITE_UpdateMemberStatus, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        id: row.id,
+        per: row.per ? 1 : 0  // 轉換成數字傳給資料庫
+      })
+    })
+    
+    if (!resp.ok) throw new Error('狀態更新失敗')
+      console.log('狀態更新成功')
+  } catch (err) {
+    alert(`狀態更新失敗：${err.message}`)
   }
+}
 
-// php抓來的假資料陣列
+// 讀取資料
 const data = ref([])
-  
-// 串接資料
+
 onMounted(async () => {
   const resp = await fetch(import.meta.env.VITE_AdminMember);
-  const members = await resp.json();
-  data.value = members;
+  let members = await resp.json();
 
+  members = members.map(member => ({
+    ...member,
+    per: Boolean(member.per),
+    gender: convertGender(member.gender)
+  }))
+  data.value = members;
 });
+
+// 轉換性別顯示
+function convertGender(code) {
+  switch (code) {
+    case 'M': return '男'
+    case 'F': return '女'
+    case 'Other': return '不公開'
+  }
+}
 
 
 </script>

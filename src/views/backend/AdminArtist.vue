@@ -2,6 +2,7 @@
     <AdminTable :columns="columns" :data="data" 
     @view-more="openModal"
     @add="openAddModal"
+    @toggle-status="updateStatus"
     />
 
     <transition name="fade">
@@ -14,7 +15,7 @@
           <p>連絡電話：{{ selectedArtist.phone }}</p>
           <p>生日：{{ selectedArtist.birthday }}</p>
           <p>性別：{{ selectedArtist.gender }}</p>
-          <p>銀行帳戶{{ selectedArtist.bank_account }}</p>
+          <p>銀行帳戶：{{ selectedArtist.bank_account }}</p>
           <p>修改時間：{{ selectedArtist.updated }}</p>
         </div>
     </div>
@@ -84,7 +85,44 @@ function openAddModal() {
   showAdd.value = true
 }
 
-// 新增資料：送出至後端（假設為 POST API）
+// 新增時同步畫面呈現
+async function fetchArtists() {
+  const resp = await fetch(import.meta.env.VITE_AdminArtist)
+  let artists = await resp.json()
+
+  // 把 TINYINT(1) 的權限轉為 Boolean 顯示用
+  artists = artists.map(artist => ({
+    ...artist,
+    per: Boolean(artist.per),
+    gender: convertGender(artist.gender)
+  }))
+
+  data.value = artists
+}
+
+// 轉換性別顯示
+function convertGender(code) {
+  switch (code) {
+    case 'M': return '男'
+    case 'F': return '女'
+    case 'Other': return '不公開'
+  }
+}
+
+function resetForm() {
+  newData.value = {
+    name: '',
+    email: '',
+    phone: '',
+    birthday: '',
+    gender: 'Other',
+    bank_account: '',
+    account: '',
+    password: ''
+  }
+}
+
+// 新增資料：送出至後端
 async function addData() {
   if (!newData.value.name || !newData.value.email || !newData.value.bank_account) {
     alert('必要資料需全部填寫')
@@ -102,26 +140,35 @@ async function addData() {
 
     if (!resp.ok) throw new Error('新增失敗')
 
-    const inserted = await resp.json()
-
-    // 將回傳資料加入表格
-    data.value.push({
-      ...inserted,
-      per: true
-    })
+    // 新增成功後重新從資料庫取得資料
+    await fetchArtists()
 
     // 關閉 modal & 清空表單
     showAdd.value = false
-    newData.value = {
-      name: '',
-      email: '',
-      birthday: '',
-      gender: 'Other',
-      bank_account: ''
-    }
+    resetForm()
 
   } catch (err) {
     alert(`新增失敗：${err.message}`)
+  }
+}
+
+
+// 切換狀態
+async function updateStatus(row) {
+  try {
+    const resp = await fetch(import.meta.env.VITE_UpdateArtistStatus, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        id: row.id,
+        per: row.per ? 1 : 0  // 轉換成數字傳給資料庫
+      })
+    })
+    
+    if (!resp.ok) throw new Error('狀態更新失敗')
+      console.log('狀態更新成功')
+  } catch (err) {
+    alert(`狀態更新失敗：${err.message}`)
   }
 }
 
@@ -131,7 +178,7 @@ function openModal(row) {
   showMore.value = true
 }
 
-// 初始讀取資料
+// 讀取資料
 onMounted(async () => {
   const resp = await fetch(import.meta.env.VITE_AdminArtist)
   let artists = await resp.json()
@@ -142,7 +189,9 @@ onMounted(async () => {
   }))
 
   data.value = artists
-})
+},
+fetchArtists()
+)
 
 </script>
 
@@ -185,14 +234,11 @@ onMounted(async () => {
     span{
       color: $fontWarn;
     }
-    input{
+    input, select{
       height: 32px;
       font-size: 16px;
     }
-    select{
-      height: 32px;
-      font-size: 16px;
-    }
+
   }
   .btn-content{
     display: flex;
