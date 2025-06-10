@@ -58,7 +58,11 @@ const routes = [
       { path: 'application', name: 'Application', component: Application },
       { path: 'shop', name: 'Shop', component: Shop },
       { path: 'cart', name: 'Cart', component: Cart },
-      { path: 'orderConfirm', component: OrderConfirm },
+      { 
+        path: 'orderConfirm',
+        name: 'OrderConfirm',  
+        component: () => import('@/views/frontend/OrderConfirm.vue') 
+      },
       { path: 'about', name: 'About', component: About },
       { path: 'memLogin', name: 'MemLogin', component: MemLogin },
       { path: 'memReg', name: 'MemReg', component: MemReg },
