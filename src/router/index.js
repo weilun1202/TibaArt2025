@@ -50,9 +50,9 @@ const routes = [
     path: '/front',
     component: FrontLayout,
     children: [
-      { path: '', name: 'FrontHome', component: FrontHome},
+      { path: '', name: 'FrontHome', component: FrontHome },
       { path: 'expo', name: 'Expo', component: Expo },
-      { path: 'expoArea', name: 'ExpoArea', component: ExpoArea },
+      { path: 'expoArea/:id', name: 'ExpoArea', component: ExpoArea },
       { path: 'expoAreaPage', name: 'ExpoAreaPage', component: ExpoAreaPage },
       { path: 'sponsor', name: 'Sponsor', component: Sponsor },
       { path: 'application', name: 'Application', component: Application },
