@@ -2,7 +2,7 @@
   <div class="memSideDiv">
     <div class="memSideCon">
         <div class="memAvatarDiv">
-            <div class="memAvatarCon avatarUploaded uploadedUrl image-uploaded" v-if="memberData.img">
+            <div class="memAvatarCon avatarUploaded image-uploaded" v-if="memberData.img">
               <img class="memAvatar" :src="'http://localhost/' + memberData.img" v-if="memberData.img" alt="上傳的頭像">
             </div>
             <div v-else class="memAvatarCon">
@@ -48,6 +48,9 @@
 <script setup>
 import { ref, reactive, onMounted } from 'vue';
 import Modal from '@/components/Modal.vue';
+// import router from '@/router';
+import { useUserStore } from '@/stores/user'
+import { useRouter } from 'vue-router'
 
 const memberData = reactive({
   name: '',
@@ -69,12 +72,12 @@ async function loadMemberData() {
   const result = await response.json()
   if (result.success) {
     const info = result.member_info
-    console.log(info);
+    // console.log(info);
     
     memberData.name = info.name
     memberData.type = type
     memberData.img = info.img 
-    console.log(memberData.img);
+    // console.log(memberData.img);
     
   }
 }
@@ -83,12 +86,25 @@ onMounted(() => {
   loadMemberData()
 })
 
+// const logout = () => {
+//   alert('已登出')
+//   localStorage.removeItem('member')
+//   localStorage.removeItem('memberType')
+//   router.push('/front/MemLogin')
+// }
+
+const userStore = useUserStore()
+const router = useRouter()
+
 const logout = () => {
   alert('已登出')
+  userStore.logout()
+  router.push('/front/MemLogin')
 }
+
+
 const showModal = ref(false);
 const previewUrl = ref(null); 
-const uploadedUrl = ref(null); 
 const selectedFile = ref(null);
 
 const openModal = () => {
@@ -189,8 +205,6 @@ const uploadImage = async () => {
         position: relative;
         width: 120px;
         height: 120px;
-        // border-radius: 50%;
-        // border: 2px dashed;
         margin: 0 auto;
 
       @media (max-width:496px){ 
@@ -232,7 +246,7 @@ const uploadImage = async () => {
         width: 120px;
         height: 120px;
         border-radius: 50%;
-        border: 2px dashed;
+        border: 2px solid $logoBrown;
         margin: 0 auto;
 
       @media (max-width:496px){ 

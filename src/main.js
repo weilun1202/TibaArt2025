@@ -12,7 +12,7 @@ import router from './router'
 // Font Awesome 相關導入
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
+import { faCartShopping, faUser } from '@fortawesome/free-solid-svg-icons'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { faGoogle } from '@fortawesome/free-brands-svg-icons'
 import { faFacebook } from '@fortawesome/free-brands-svg-icons'
@@ -21,6 +21,8 @@ import { faInstagram, faBehance } from '@fortawesome/free-brands-svg-icons'
 import { faFileArrowDown, faCloudArrowUp } from '@fortawesome/free-solid-svg-icons'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { faMinus } from '@fortawesome/free-solid-svg-icons'
+import { faUser as farUser } from '@fortawesome/free-regular-svg-icons'
+
 
 
 // 把需要的 icon 加進 library
@@ -34,6 +36,8 @@ library.add(faCloudArrowUp);
 library.add(faFileArrowDown);
 library.add(faPlus);
 library.add(faMinus)
+library.add(farUser)
+
 
 
 

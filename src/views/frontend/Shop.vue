@@ -76,7 +76,8 @@
 import { ref, onMounted, computed, nextTick } from 'vue';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { useRouter } from 'vue-router';
-import {useCart} from '@/stores/cart.js';
+import { useCart } from '@/stores/cart.js';
+import { useUserStore } from '@/stores/user'
 
 const router = useRouter();
 const baseUrl = import.meta.env.BASE_URL;
@@ -139,15 +140,29 @@ const toggleSearchInput = () => {
   }
 };
 
+const userStore = useUserStore()
+const props = defineProps({
+  product: Object
+})
+
 const handleAddToCart = async (item) => {
-  try {
-    await new Promise(resolve => requestAnimationFrame(resolve));
-    const success = addToCart(item);
-    if (success) {
-      alert(`已將「${item.name}」加入購物車`);
-    }
-  } catch (error) {
-    console.error('加入購物車失敗:', error);
+  if (!userStore.requireLogin()) {
+    alert('請先登入會員')
+    router.push('/front/memLogin')
+    return
+  } else {
+    
+      try {
+        await new Promise(resolve => requestAnimationFrame(resolve));
+        const success = addToCart(item);
+        if (success) {
+          alert(`已將「${item.name}」加入購物車`);
+        }
+      } catch (error) {
+        console.error('加入購物車失敗:', error);
+      }
+
   }
+
 };
 </script>
