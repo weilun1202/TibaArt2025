@@ -48,16 +48,16 @@
           <li v-for="(art, idx) in artworks" :key="idx" class="expoArea-card">
             <div class="zoom-container">
               <router-link :to="`/front/ExpoAreaPage/${art.id}`">
-                <img class="zoom-image" :src="baseUrl + art.image" :alt="art.title" />
+                <img class="zoom-image" :src="baseUrl + art.img" :alt="art.title" />
               </router-link>
               <div class="magnifier"></div>
             </div>
             <div class="title">
-              <h3>{{ art.title }}</h3>
-              <p>{{ art.title_en }}</p>
-              <p>{{ art.medium }}</p>
+              <h3>{{ art.name }}</h3>
+              <p>{{ art.name_en }}</p>
+              <p>{{ art.stuff }}</p>
             </div>
-            <p>{{ art.description }}</p>
+            <p>{{ art.note }}</p>
             <router-link :to="`/front/ExpoAreaPage/${art.id}`">learn more</router-link>
           </li>
         </ul>
