@@ -21,7 +21,7 @@
         <router-link 
           v-for="item in expoItems" 
           :key="item.id" 
-          :to="item.to"
+          :to="`/front/ExpoArea/${item.id}`"
           :class="`grid ${item.className} ${item.side}`"
         >
           <img 
@@ -213,7 +213,9 @@ onUnmounted(() => {
 })
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import '/style.scss';
+
 .loading {
   text-align: center;
   padding: 2rem;
@@ -241,13 +243,13 @@ onUnmounted(() => {
 }
 
 /* 確保 parent 容器有足夠高度讓 ScrollTrigger 工作 */
-.parent {
+/* .parent {
   min-height: 100vh;
   position: relative;
-}
+} */
 
 /* Tooltip 樣式 */
-.tooltip {
+/* .tooltip {
   position: fixed;
   background: rgba(0, 0, 0, 0.8);
   color: white;
@@ -258,15 +260,15 @@ onUnmounted(() => {
   z-index: 1000;
   display: none;
   white-space: nowrap;
-}
+} */
 
 /* 確保圖片可以觸發 hover */
-.has-tooltip {
+/* .has-tooltip {
   cursor: pointer;
-}
+} */
 
 /* 確保 grid 元素有基本樣式 */
-.grid {
+/* .grid {
   display: block;
   margin-bottom: 20px;
   transition: transform 0.3s ease;
@@ -274,5 +276,5 @@ onUnmounted(() => {
 
 .grid:hover {
   transform: scale(1.05);
-}
+} */
 </style>
