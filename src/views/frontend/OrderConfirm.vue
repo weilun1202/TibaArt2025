@@ -10,7 +10,7 @@
         <div class="order">
               <img src="@/assets/img/TibaArtLogo.svg" alt="">
               <span>訂單已成立!</span>
-              <p>訂單編號：#123456789<br>
+              <p>訂單編號：#{{ orderNumber }}<br>
                   我們已發送確認信至您的信箱，您可隨時至「訂單追蹤」頁面查看最新狀態。</p>
 
               <div class="goBack">
@@ -24,5 +24,23 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+
+const route = useRoute()
+const router = useRouter()
+const orderNumber = ref('載入中')
+
+onMounted(() => {
+  const orderFromQuery = route.query.orderNumber
+
+  if( orderFromQuery ){
+    orderNumber.value = orderFromQuery
+  }else {
+    orderNumber.value = '無法取得訂單編號'
+    router/pushScopeId('/front/')
+  }
+
+})
 
 </script>

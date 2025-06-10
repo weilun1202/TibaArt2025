@@ -554,7 +554,13 @@ const submitOrder = async () => {
 
             if (response.ok && result.success) {
                 alert('訂單送出成功！');
-                router.push('/front/orderConfirm'); // 驗證成功，跳轉到訂單確認頁面
+                
+                clearCart();
+                
+                router.push({
+                    path: '/front/orderConfirm', // 使用路徑而非名稱
+                    query: { orderNumber: result.orderId } // 透過 query 參數傳遞訂單編號
+                });
             } else {
                 alert('訂單送出失敗：' + (result.message || '未知錯誤'));
                 console.error('訂單送出失敗:', result.message);
@@ -564,10 +570,9 @@ const submitOrder = async () => {
             alert('網路或伺服器錯誤，請稍後再試。');
         }
 
-        clearCart();
 
         // 驗證成功，跳轉到訂單確認頁面
-        router.push('/front/orderConfirm');
+        // router.push('/front/orderConfirm');
     } else {
         // 驗證失敗，顯示警告彈窗
         const errorMessages = [];
