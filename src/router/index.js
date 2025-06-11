@@ -55,7 +55,7 @@ const routes = [
       { path: '', name: 'FrontHome', component: FrontHome },
       { path: 'expo', name: 'Expo', component: Expo },
       { path: 'expoArea/:id', name: 'ExpoArea', component: ExpoArea },
-      { path: 'expoAreaPage', name: 'ExpoAreaPage', component: ExpoAreaPage },
+      { path: 'expoAreaPage/:id', name: 'ExpoAreaPage', component: ExpoAreaPage },
       { path: 'sponsor', name: 'Sponsor', component: Sponsor },
       { path: 'application', name: 'Application', component: Application },
       { path: 'shop', name: 'Shop', component: Shop },

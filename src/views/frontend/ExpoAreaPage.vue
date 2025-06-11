@@ -1,7 +1,20 @@
 <template>
   <div class="expoAreaPage">
     <div class="wrapper">
-      <div class="main">
+
+      <!-- 載入狀態 -->
+      <div v-if="loading" class="loading">
+        <p>載入中...</p>
+      </div>
+
+      <!-- 錯誤狀態 -->
+      <div v-else-if="error" class="error">
+        <p>載入失敗：{{ error }}</p>
+        <button @click="fetchExpoData">重新載入</button>
+      </div>
+
+      <!-- 成功載入後顯示作品 -->
+      <div v-else class="main">
         <!-- 1. 原本的圖片 -->
         <img ref="targetImg" :src="imgUrl" alt="">
 
@@ -9,49 +22,106 @@
         <div ref="magnifier" class="magnifier">
           <img :src="imgUrl" alt="" ref="magnifierImg" />
         </div>
-        <p class="remind">長按圖片看細節!</p>
-
+        <p class="remind">手機板長按圖片看細節!</p>
         <!-- 以下維持你原本的文字區塊 -->
-        <div class="artwork-title">
-          <h2>{{ currentArtwork.title.zh }}</h2>
-          <h5>{{ currentArtwork.title.en }}</h5>
-          <p>{{ currentArtwork.size }}</p>
-          <p>{{ currentArtwork.type }}</p>
-        </div>
-        <p>{{ currentArtwork.description }}</p>
+<div class="artwork-title">
+  <h2>{{ artworks.name }}</h2>
+  <h5>{{ artworks.name_en }}</h5>
+  <p>{{ artworks.size }}</p>
+  <p>{{ artworks.stuff }}</p>
+</div>
+<p>{{ artworks.note }}</p>
 
-        <router-link to="/front/ExpoArea">
-          <button class="btn">返回展區</button>
-        </router-link>
+<router-link :to="`/front/ExpoArea/${expoId}`">
+  <button class="btn">返回展區</button>
+</router-link>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, nextTick, watch, computed } from 'vue'
+import { useRoute } from 'vue-router'
 import { gsap } from 'gsap'
 
-// 作品資料
-const currentArtwork = ref({
-  title: {
-    zh: '凝視遺聲',
-    en: 'Gaze of Unspoken'
-  },
-  size: 'size 66x66(m)',
-  type: '雕塑',
-  description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae rem perferendis cum exercitationem quidem sequi, sit error accusantium asperiores distinctio.Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae rem perferendis cum exercitationem quidem sequi, sit error accusantium asperiores distinctio.'
+// 加入路由
+const route = useRoute()
+const baseUrl = import.meta.env.BASE_URL
+
+// 修改變數宣告
+const loading = ref(false)
+const error = ref(null)
+const artworks = ref({}) // 改為物件而不是陣列
+
+// 使用計算屬性來動態取得圖片路徑
+const imgUrl = computed(() => {
+  return artworks.value?.img ? baseUrl + artworks.value.img : ''
 })
 
-// 圖片路徑（跟你原本一樣自動拼 BASE_URL）
-const imgUrl = import.meta.env.BASE_URL + 'assets/img/expoArea-artwork1.png'
+// 計算展覽 ID（用於返回按鈕）
+const expoId = computed(() => {
+  return artworks.value?.expo_id || null
+})
 
 // 用來取得兩個 DOM 節點：原始圖片、放大鏡容器、放大鏡內部的 img
 const targetImg = ref(null)
 const magnifier = ref(null)
 const magnifierImg = ref(null)
 
-onMounted(() => {
+// 修正後的作品資料獲取函數
+const fetchExpoData = async () => {
+  try {
+    loading.value = true
+    error.value = null
+
+    // 這裡的 id 是作品的 ID，不是展覽的 ID
+    const artworkId = route.params.id
+    console.log('作品 ID:', artworkId) // 除錯用
+    
+    if (!artworkId) {
+      throw new Error('作品 ID 不存在')
+    }
+    
+    console.log('正在載入作品 ID:', artworkId) // 除錯用
+    
+    // 直接用作品 ID 查詢單一作品
+    const artworkResponse = await fetch(`http://localhost/TIBAART/expoArtwork.php?id=${artworkId}`)
+    
+    console.log('API 回應狀態:', artworkResponse.status) // 除錯用
+    
+    if (artworkResponse.ok) {
+      const artworkResult = await artworkResponse.json()
+      console.log('API 回應內容:', artworkResult) // 除錯用
+      
+      if (artworkResult.success) {
+        artworks.value = artworkResult.data
+        console.log('作品資料設定完成:', artworks.value) // 除錯用
+      } else {
+        throw new Error(artworkResult.error || 'API 回傳錯誤')
+      }
+    } else {
+      throw new Error(`HTTP 錯誤: ${artworkResponse.status}`)
+    }
+
+  } catch (err) {
+    error.value = err.message || '網路錯誤'
+    console.error('資料載入錯誤:', err)
+  } finally {
+    loading.value = false
+  }
+}
+
+// 設定放大鏡功能
+const setupMagnifier = () => {
+  // 確保 DOM 元素存在
+  if (!targetImg.value || !magnifier.value || !magnifierImg.value) {
+    console.warn('放大鏡 DOM 元素未準備好')
+    return
+  }
+
+  console.log('開始設定放大鏡功能') // 除錯用
+
   // 常數設定
   const LONGPRESS_DELAY = 600 // 長按時間門檻 (毫秒)
   const MOVE_TOLERANCE = 10   // 長按前允許的手指微移範圍 (px)
@@ -186,9 +256,24 @@ onMounted(() => {
 
   targetImg.value.addEventListener('touchend', cancelTouch)
   targetImg.value.addEventListener('touchcancel', cancelTouch)
+}
+
+// 監聽 artworks 變化，當資料載入完成後設定放大鏡
+watch(artworks, async (newValue) => {
+  if (newValue && Object.keys(newValue).length > 0) {
+    console.log('資料已載入，準備設定放大鏡') // 除錯用
+    await nextTick() // 等待 DOM 更新
+    setupMagnifier()
+  }
+})
+
+onMounted(async () => {
+  console.log('頁面已載入，開始初始化') // 除錯用
+  loading.value = true
+  await fetchExpoData()
+  await nextTick()
+  if (Object.keys(artworks.value).length) {
+    setupMagnifier()
+  }
 })
 </script>
-
-<style lang="scss" scoped>
-@import '/style.scss';
-</style>
