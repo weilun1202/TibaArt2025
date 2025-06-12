@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD']==='OPTIONS') {
   exit;
 }
 
-$host = 'localhost';
+$host = '127.0.0.1';
 $db   = 'TIBAART';
 $user = 'root';
 $pass = 'password';  // 請改為你的實際密碼
