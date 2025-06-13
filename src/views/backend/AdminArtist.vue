@@ -16,6 +16,7 @@
           <p>生日：{{ selectedArtist.birthday }}</p>
           <p>性別：{{ selectedArtist.gender }}</p>
           <p>銀行帳戶：{{ selectedArtist.bank_account }}</p>
+          <p>藝術家簡介：{{ selectedArtist.intro }}</p>
           <p>修改時間：{{ selectedArtist.updated }}</p>
         </div>
     </div>
@@ -38,6 +39,7 @@
             </select>
           </label>
           <label><span>*</span>銀行帳戶：<input v-model="newData.bank_account" /></label>
+          <label><span>*</span>藝術家簡介：<textarea v-model="newData.intro"></textarea></label>
           <label><span>*給予帳號</span>：<input v-model="newData.account" /></label>
           <label><span>*給予密碼</span>：<input v-model="newData.password" /></label>
           <div class="btn-content">
@@ -75,10 +77,16 @@ const selectedArtist = ref({})
 const newData = ref({
   name: '',
   email: '',
+  phone: '',
   birthday: '',
   gender: 'Other',
-  bank_account: ''
+  bank_account: '',
+  intro: '',
+  account: '',
+  password: ''
 })
+
+console.log(newData)
 
 // 開啟新增 modal
 function openAddModal() {
@@ -109,7 +117,7 @@ function convertGender(code) {
   }
 }
 
-function resetForm() {
+function claenForm() {
   newData.value = {
     name: '',
     email: '',
@@ -117,6 +125,7 @@ function resetForm() {
     birthday: '',
     gender: 'Other',
     bank_account: '',
+    intro: '',
     account: '',
     password: ''
   }
@@ -124,7 +133,14 @@ function resetForm() {
 
 // 新增資料：送出至後端
 async function addData() {
-  if (!newData.value.name || !newData.value.email || !newData.value.bank_account) {
+  if (!newData.value.name ||
+      !newData.value.email ||
+      !newData.value.phone ||
+      !newData.value.bank_account ||
+      !newData.value.intro ||
+      !newData.value.account ||
+      !newData.value.password
+    ) {
     alert('必要資料需全部填寫')
     return
   }
@@ -138,14 +154,17 @@ async function addData() {
       body: JSON.stringify(newData.value)
     })
 
-    if (!resp.ok) throw new Error('新增失敗')
+    if (!resp.ok) {
+      const errText = await resp.text()
+      throw new Error(`新增失敗：${errText}`)
+    }
 
     // 新增成功後重新從資料庫取得資料
     await fetchArtists()
 
     // 關閉 modal & 清空表單
     showAdd.value = false
-    resetForm()
+    claenForm()
 
   } catch (err) {
     alert(`新增失敗：${err.message}`)
@@ -179,19 +198,7 @@ function openModal(row) {
 }
 
 // 讀取資料
-onMounted(async () => {
-  const resp = await fetch(import.meta.env.VITE_AdminArtist)
-  let artists = await resp.json()
-
-  artists = artists.map(artist => ({
-    ...artist,
-    per: Boolean(artist.per)
-  }))
-
-  data.value = artists
-},
-fetchArtists()
-)
+onMounted(async () => fetchArtists())
 
 </script>
 
