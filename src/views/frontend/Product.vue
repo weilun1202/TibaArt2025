@@ -82,6 +82,7 @@
 import { ref, onMounted, computed } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import {useCart} from '@/stores/cart.js';
+import { useUserStore } from '@/stores/user'
 
 const router = useRouter();
 const route = useRoute();
@@ -130,33 +131,50 @@ const recommendedProducts = computed(() => {
         .slice(0, 6)
 })
 
+const userStore = useUserStore()
+const props = defineProps({
+  product: Object
+})
 
 //加入購物車
 const handleAddToCart = async () => {
-    if(!currentProduct.value) return
 
-    try {
-        await new Promise(resolve => requestAnimationFrame(resolve));
-        const success = addToCart(currentProduct.value, quantity.value)
-        if(success){
-            alert(`已將「${currentProduct.value.name}」x ${quantity.value} 加入購物車`);
-            quantity.value = 1
-        }
-    } catch (error) {
-        console.error('加入購物車失敗:', error);
+     if (!userStore.requireLogin()) {
+    alert('請先登入會員')
+    router.push('/front/memLogin')
+    return
+  } else {
+      if(!currentProduct.value) return
+      
+      try {
+          await new Promise(resolve => requestAnimationFrame(resolve));
+          const success = addToCart(currentProduct.value, quantity.value)
+          if(success){
+              alert(`已將「${currentProduct.value.name}」x ${quantity.value} 加入購物車`);
+              quantity.value = 1
+          }
+      } catch (error) {
+          console.error('加入購物車失敗:', error);
+      }
     }
-}
+};
 
 //推薦商品加入購物車 (一次只能加一)
 const handleRecommendedAddToCart = async (item) => {
-    try {
-        await new Promise(resolve => requestAnimationFrame(resolve));
-        const success = addToCart(item, 1)
-        if(success){
-            alert(`已將「${item.name}」加入購物車`);
+    if (!userStore.requireLogin()) {
+    alert('請先登入會員')
+    router.push('/front/memLogin')
+    return
+  } else {
+        try {
+            await new Promise(resolve => requestAnimationFrame(resolve));
+            const success = addToCart(item, 1)
+            if(success){
+                alert(`已將「${item.name}」加入購物車`);
+            }
+        } catch (error) {
+            console.error('加入購物車失敗:', error);
         }
-    } catch (error) {
-        console.error('加入購物車失敗:', error);
     }
 }
 

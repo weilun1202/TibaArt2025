@@ -24,23 +24,33 @@
 </template>
 
 <script setup>
-// import { ref, onMounted } from 'vue'
-// import { useRoute, useRouter } from 'vue-router'
+import { ref, onMounted } from 'vue'
+import { useRoute, useRouter } from 'vue-router' //
 
-// const route = useRoute()
-// const router = useRouter()
-// const orderNumber = ref('載入中')
+const route = useRoute() //
+const router = useRouter() //
+const orderNumber = ref('載入中') //
 
-// onMounted(() => {
-//   const orderFromQuery = route.query.orderNumber
+onMounted(() => { //
+  // 嘗試從 sessionStorage 獲取訂單編號
+  const orderFromStorage = sessionStorage.getItem('lastOrderNumber'); //
 
-//   if( orderFromQuery ){
-//     orderNumber.value = orderFromQuery
-//   }else {
-//     orderNumber.value = '無法取得訂單編號'
-//     router/pushScopeId('/front/')
-//   }
+  if (orderFromStorage) { //
+    orderNumber.value = orderFromStorage; //
+    // 清除 sessionStorage 中的訂單編號，因為已經取用並顯示
+    sessionStorage.removeItem('lastOrderNumber'); //
+  } else {
+    // 如果 sessionStorage 中沒有，可以檢查 URL 參數（備用，例如直接訪問此頁面或綠界導向時）
+    const orderFromQuery = route.query.orderNumber; //
+    if (orderFromQuery) { //
+      orderNumber.value = orderFromQuery; //
+    } else {
+      orderNumber.value = '無法取得訂單編號'; //
+      // 如果確實沒有訂單編號，可以考慮導回首頁或購物車，避免頁面顯示不完整資訊
+      // router.push('/front/');
+    }
+  }
+})
 
-// })
 
 </script>

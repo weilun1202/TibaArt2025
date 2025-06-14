@@ -243,7 +243,7 @@
 </template>
 
 <script setup>
-import{ref, watch, computed, reactive } from 'vue';
+import{ref, watch, computed } from 'vue';
 import {useCart} from '@/stores/cart.js';
 import { useRouter } from 'vue-router';
 
@@ -271,8 +271,6 @@ const shippingFee = ref(60);
 const discount = ref(0);
 const errors = ref({})
 const touchedFields = ref({}); // 追蹤哪些欄位已經被使用者操作過
-
-
 
 // 計算總價
 const finalPrice = computed (() => {
@@ -559,7 +557,8 @@ const submitOrder = async () => {
             
             // 訂單建立成功，獲取 orderId
             const orderNumber = result.orderId;
-            
+            sessionStorage.setItem('lastOrderNumber', orderNumber);
+
             const ecpayResponse = await fetch('http://localhost/TIBAART/ecpayOrder.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -576,11 +575,6 @@ const submitOrder = async () => {
             }
             
             clearCart();
-            
-            // router.push({
-            //     path: '/front/orderConfirm', // 使用路徑而非名稱
-            //     query: { orderNumber: result.orderId } // 透過 query 參數傳遞訂單編號
-            // });
 
         } catch (error) {
             console.error('Error', error);
