@@ -12,15 +12,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 }
 
 // 1. 資料庫設定
-$db_host = "127.0.0.1";
-$db_user = "root";
-$db_pass = "password";
-$db_select = "TIBAART";
-
 // $db_host = "127.0.0.1";
-// $db_user = "tibamefe_since2021";
-// $db_pass = "vwRBSb.j&K#E";
-// $db_select = "tibamefe_tjd101g2";
+// $db_user = "root";
+// $db_pass = "password";
+// $db_select = "TIBAART";
+
+$db_host = "127.0.0.1";
+$db_user = "tibamefe_since2021";
+$db_pass = "vwRBSb.j&K#E";
+$db_select = "tibamefe_tjd101g2";
 
 date_default_timezone_set('Asia/Taipei');
 
@@ -173,8 +173,8 @@ $order = [
     'TotalAmount' => (int)$amount, // 使用者實際輸入的金額
     'TradeDesc' => '緯藝TibaArt贊助', // . $expo_name, // 交易描述（必填）
     'ItemName' =>   $expo_name .' 贊助藝術家 ',  //          // 商品名稱（可加上 # 結尾）改為從前端取得的商品名稱字串
-    // 'ReturnURL' => 'https://tibamef2e.com/tjd101/g2/api/returnDonate.php',
-    'ReturnURL' => 'http://localhost/test2/returndonate.php',
+    'ReturnURL' => 'https://tibamef2e.com/tjd101/g2/api/returnDonate.php',
+    // 'ReturnURL' => 'http://localhost/test2/returndonate.php',
     'ClientBackURL' => 'https://tibamef2e.com/tjd101/g2/front', // 使用者完成付款後會回到這頁
     'ChoosePayment' => 'Credit',
     'EncryptType' => 1,
