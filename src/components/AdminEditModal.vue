@@ -78,11 +78,11 @@ watch(() => props.data, () => {
   })
 })
 
-
+// 待修正
 function handleFileUpload(e) {
   imageFile.value = e.target.files[0]
   if (imageFile.value) {
-    previewUrl.value = URL.createObjectURL(imageFile.value)
+    previewUrl.value = imageFile.value
   }
 }
 

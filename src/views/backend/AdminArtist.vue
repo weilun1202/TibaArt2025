@@ -86,8 +86,6 @@ const newData = ref({
   password: ''
 })
 
-console.log(newData)
-
 // 開啟新增 modal
 function openAddModal() {
   showAdd.value = true
