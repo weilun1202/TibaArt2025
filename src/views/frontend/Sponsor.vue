@@ -16,7 +16,8 @@
             <div class="donateItem">
               欲贊助之展覽
             </div>
-            <select id="artist_id" name="artist_id" v-model="subject" @change="errors.subject = ''">
+            
+            <select id="expoN" name="expoN" v-model="subject" @change="errors.subject = ''">
               <!-- 選項從下方 const expoList 新增 -->
               <option v-for="expo in expoList" :value="expo.id" :key="expo.id">{{ expo.title }}</option>
               <!-- <option value="">請選擇</option>
@@ -234,25 +235,58 @@
   import { ref, onMounted } from 'vue'
   import { useRouter } from 'vue-router'
   import { useUserStore } from '@/stores/user.js'; // 匯入 Pinia 使用者狀態庫
+  import axios from 'axios'  // 匯入 展覽作品 
 
   const router = useRouter()
   const userStore = useUserStore()
 
-  const expoList = ref([
-    { id: '', title: '請選擇' },
-    { id: 'expo1', title: '《 靜界焰光 》' },
-    { id: 'expo2', title: '《 雪白世界 》' },
-    { id: 'expo3', title: '《 白陽落櫻 》' },
-    { id: 'expo4', title: '《 撕裂極光 》' },
-    // 如果你有從 API 來的展覽清單，也可以用 expoList.value.push(...) 加進去
-  ])
+    // 到資料庫抓展覽名稱
+  onMounted(async () => {
+    try {
+      const res = await axios.get('http://localhost/TIBAART//expo.php') // 本機測試
+      // const res = await axios.get('https://tibamef2e.com/tjd101/g2/api/expo.php') // 正式版
+      if (res.data.success) {
+        const exhibitions = res.data.data.map(item => ({
+          id: item.id,
+          title: item.titleZh // 對應 PHP 加的 titleZh(展覽中文名稱)
+        }))
+        expoList.value.push(...exhibitions)
+      } else {
+        console.error('API 回傳錯誤', res.data.error)
+      }
+    } catch (err) {
+      console.error('無法取得展覽資料', err)
+    }
+  })
 
+  // 會員登入後，自動填入表單中的姓名與信箱
+  onMounted(() => {
+    // 填入 memberData.name：
+    if (userStore.memberData.name) {
+      name.value = userStore.memberData.name
+    }
+
+    // 填入從 localStorage 載入的 email
+    if (userStore.memberInfo.email) {
+      email.value = atob(userStore.memberInfo.email)  // 避免亂碼出現
+    }
+  })
+  
   // 表單資料
+  const expoList = ref([
+    { id: '', title: '請選擇' }, // 預設
+    // 測試用，固定資料
+    // { id: 'expo1', title: '《 靜界焰光 》' },
+    // { id: 'expo2', title: '《 雪白世界 》' },
+    // { id: 'expo3', title: '《 白陽落櫻 》' },
+    // { id: 'expo4', title: '《 撕裂極光 》' },
+  ])
   const subject = ref('')                  // 展覽選項
   const amounts = [500, 1000, 1500, 2000]  // 所有金額選項
   const selectedAmount = ref('')           // 被選擇的金額
   const name = ref('')                     // 贊助人名字
   const email = ref('')                    // 電子郵件
+
   // 錯誤訊息狀態
   const errors = ref({
     subject: '',
@@ -305,35 +339,18 @@
     return Object.values(errors.value).every(error => error === '')
   }
 
-  // 組件掛載時初始化欄位
-  onMounted(() => {
-    // 填入 memberData.name：
-    if (userStore.memberData.name) {
-      name.value = userStore.memberData.name
-    }
-
-    // 填入從 localStorage 載入的 email
-    if (userStore.memberInfo.email) {
-      email.value = userStore.memberInfo.email
-    }
-  })
-
 function handleSubmit(e) {         // 把資料送去綠界
     e.preventDefault()
     if (validateForm()) {
         const formData = new FormData()
-        // formData.append('subject', subject.value)
-        // formData.append('amount', selectedAmount.value)
-        // formData.append('name', name.value)
-        // formData.append('email', email.value)
 
-        formData.append('artist_id', subject.value) // artist_id 是傳給 php 時，顯示的。subject 是用 v-model="subject"
+        formData.append('expoN', subject.value) // expoN 是傳給 PHP 時，顯示的。subject 是用 v-model="subject"
         formData.append('amount', selectedAmount.value)
         formData.append('d_name', name.value)
         formData.append('email', email.value)
 
-        // fetch('http://localhost/TIBAART/checkoutdonate.php', {       // 本機測試
-        fetch('https://tibamef2e.com/tjd101/g2/api/checkoutDonate.php', {  // 正式版
+        fetch('http://localhost/TIBAART/checkoutdonate.php', {       // 本機測試
+        // fetch('https://tibamef2e.com/tjd101/g2/api/checkoutDonate.php', {  // 正式版
             method: 'POST',
             body: formData
         })
