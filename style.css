@@ -1396,6 +1396,8 @@ header .pageTitle {
   grid-template-rows: repeat(10, 1fr);
   grid-column-gap: 12px;
   grid-row-gap: 12px;
+  min-height: 100vh;
+  position: relative;
 }
 .expo .parent .grid {
   overflow: hidden;
@@ -1542,7 +1544,7 @@ header .pageTitle {
   color: #fff;
   font-size: 1.25rem;
   /* 或你要的字級 */
-  padding: 6px 10px;
+  padding: 12px 32px;
   border-radius: 4px;
   opacity: 1;
   /* 一開始隱藏 */
@@ -1553,6 +1555,7 @@ header .pageTitle {
   z-index: 9999;
   transition: none;
   /* 動畫交給 GSAP 完全控制 */
+  display: none;
 }
 @media (max-width: 360px) {
   .expo .parent {

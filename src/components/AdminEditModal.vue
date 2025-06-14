@@ -7,7 +7,7 @@
         <div v-for="field in fields" :key="field.key" class="field">
           <label>{{ field.label }}：</label>
 
-          <!-- 多行文字欄位（textarea） -->
+          <!-- 多行文字欄位 -->
           <textarea
             v-if="field.type === 'textarea'"
             v-model="editableData[field.key]"
@@ -39,7 +39,7 @@
 
 <script setup>
 
-import { ref, watch, onMounted, nextTick } from 'vue'
+import { ref, watch, nextTick } from 'vue'
 
 const props = defineProps({
   show: Boolean,
@@ -65,6 +65,9 @@ function autoResize(event) {
 watch(() => props.data, () => {
   editableData.value = { ...props.data }
 
+  const imgField = props.fields.find(f => f.type === 'file')
+  previewUrl.value = imgField ? props.data[imgField.key] : ''
+
   nextTick(() => {
     textareas.value.forEach(t => {
       if (t) {
@@ -75,11 +78,6 @@ watch(() => props.data, () => {
   })
 })
 
-watch(() => props.data, () => {
-  editableData.value = { ...props.data }
-  const imgField = props.fields.find(f => f.type === 'file')
-  previewUrl.value = imgField ? props.data[imgField.key] : ''
-})
 
 function handleFileUpload(e) {
   imageFile.value = e.target.files[0]
