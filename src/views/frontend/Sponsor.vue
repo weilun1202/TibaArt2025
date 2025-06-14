@@ -231,10 +231,12 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
+  import { ref, onMounted } from 'vue'
   import { useRouter } from 'vue-router'
+  import { useUserStore } from '@/stores/user.js'; // 匯入 Pinia 使用者狀態庫
 
   const router = useRouter()
+  const userStore = useUserStore()
 
   const expoList = ref([
     { id: '', title: '請選擇' },
@@ -303,6 +305,19 @@
     return Object.values(errors.value).every(error => error === '')
   }
 
+  // 組件掛載時初始化欄位
+  onMounted(() => {
+    // 填入 memberData.name：
+    if (userStore.memberData.name) {
+      name.value = userStore.memberData.name
+    }
+
+    // 填入從 localStorage 載入的 email
+    if (userStore.memberInfo.email) {
+      email.value = userStore.memberInfo.email
+    }
+  })
+
 function handleSubmit(e) {         // 把資料送去綠界
     e.preventDefault()
     if (validateForm()) {
@@ -317,8 +332,8 @@ function handleSubmit(e) {         // 把資料送去綠界
         formData.append('d_name', name.value)
         formData.append('email', email.value)
 
-        fetch('http://localhost/TIBAART/checkoutdonate.php', {       // 本機測試
-        // fetch('https://tibamef2e.com/tjd101/g2/checkoutdonate.php', {  // 正式版
+        // fetch('http://localhost/TIBAART/checkoutdonate.php', {       // 本機測試
+        fetch('https://tibamef2e.com/tjd101/g2/api/checkoutDonate.php', {  // 正式版
             method: 'POST',
             body: formData
         })
