@@ -332,8 +332,8 @@ function handleSubmit(e) {         // 把資料送去綠界
         formData.append('d_name', name.value)
         formData.append('email', email.value)
 
-        // fetch('http://localhost/TIBAART/checkoutdonate.php', {       // 本機測試
-        fetch('https://tibamef2e.com/tjd101/g2/api/checkoutDonate.php', {  // 正式版
+        fetch('http://localhost/TIBAART/checkoutdonate.php', {       // 本機測試
+        // fetch('https://tibamef2e.com/tjd101/g2/api/checkoutDonate.php', {  // 正式版
             method: 'POST',
             body: formData
         })

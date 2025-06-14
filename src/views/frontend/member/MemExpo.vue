@@ -1,109 +1,85 @@
 <template>
- <div class="memWrap">
-        <h2>個人展覽資訊</h2>
-    <div class="exhibition-details">
-     <div class="detail-table">
-      <div class="detail-row">
-        <div class="detail-label">展覽名稱</div>
-        <div class="detail-value">{{ exhibitionData.exhibitionName }}</div>
-      </div>
+  <div class="memWrap">
+    <h2>個人展覽資訊</h2>
+    <div v-if="exhibitionData" v-for="exhibitionData in exhibitionData" class="exhibition-details">
+      <div class="detail-table">
+        <div class="detail-row">
+          <div class="detail-label">展覽名稱</div>
+          <div class="detail-value">{{ exhibitionData.expo_name }}</div>
+        </div>
 
-      <div class="detail-row">
-        <div class="detail-label">創作者名</div>
-        <div class="detail-value">{{ exhibitionData.creatorName }}</div>
-      </div>
+        <div class="detail-row">
+          <div class="detail-label">展出開始日期</div>
+          <div class="detail-value">{{ exhibitionData.start }}</div>
+        </div>
 
-      <div class="detail-row">
-        <div class="detail-label">帳戶</div>
-        <div class="detail-value">{{ exhibitionData.account }}</div>
-      </div>
+        <div class="detail-row">
+          <div class="detail-label">展出結束日期</div>
+          <div class="detail-value">{{ exhibitionData.end }}</div>
+        </div>
 
-      <div class="detail-row">
-        <div class="detail-label">展出日期</div>
-        <div class="detail-value">{{ exhibitionData.exhibitionDates }}</div>
-      </div>
+        <div class="detail-row">
+          <div class="detail-label">狀態</div>
+          <div class="detail-value">{{ getStatusLabel(exhibitionData.status) }}</div>
+        </div>
 
-      <div class="detail-row">
-        <div class="detail-label">狀態</div>
-        <div class="detail-value">{{ exhibitionData.status }}</div>
+        <div class="detail-row">
+          <div class="detail-label">已獲得贊助金額</div>
+          <div class="detail-value">NT$ {{ exhibitionData.total_donation }}</div>
+        </div>
       </div>
-
-      <div class="detail-row">
-        <div class="detail-label">已獲贊助金額*</div>
-        <div class="detail-value amount">{{ formatCurrency(exhibitionData.sponsoredAmount) }}</div>
+      <div>
+          <p class="note">*贊助金額將會在展期結束後結算，並匯款到您的帳戶。</p>
       </div>
     </div>
-
-    <p class="note">
-      *贊助金額將會在展期結束後結算，並匯款到您填寫的上述帳戶。
-    </p>
-
+    <div v-else>
+      <p>尚無展覽資料</p>
     </div>
-
- </div>
-
+  </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted } from 'vue'
+import { useUserStore } from '@/stores/user'
+import axios from 'axios'
 
-// 使用 ref 建立響應式資料物件，用於綁定展覽資訊
-const exhibitionData = ref({
-  exhibitionName: '',
-  creatorName: '',
-  account: '',
-  exhibitionDates: '',
-  status: '',
-  sponsoredAmount: 0 // 初始化為數字，方便格式化
-});
+const userStore = useUserStore()
+const exhibitionData = ref(null)
 
-// onMounted 是一個生命週期鉤子，組件掛載後會執行
-onMounted(() => {
-  // 在這裡模擬從後端 API 撈取個人展覽資料
-  fetchExhibitionData();
-});
+onMounted(async () => {
+  if (userStore.isArtistMember && userStore.decodedMemberId) {
+    const artistId = userStore.decodedMemberId
 
-// 模擬從後端獲取展覽資料的函數
-const fetchExhibitionData = async () => {
-  try {
-    // 實際應用中，會是類似 axios.get('/api/member/exhibition') 的請求
-    // 這裡使用 setTimeout 模擬非同步請求延遲
-    setTimeout(() => {
-      const fetchedExhibition = {
-        exhibitionName: '《靜界焰光》',
-        creatorName: '艾莉亞',
-        account: 'XXX-XXX-XXX',
-        exhibitionDates: '2025-05-12~2025-08-12',
-        status: '展覽中',
-        sponsoredAmount: 2880
-      };
-      // 將撈到的資料賦值給 exhibitionData
-      exhibitionData.value = fetchedExhibition;
-    }, 0); 
-  } catch (error) {
-    console.error('獲取展覽資料失敗:', error);
-    // 可以在這裡處理錯誤，例如顯示錯誤訊息給用戶
+    try {
+      const { data } = await axios.get(`http://localhost/TIBAART/getMemExpo.php?id=${artistId}`)
+      // const { data } = await axios.get(`https://tibamef2e.com/tjd101/g2/api/getMemExpo.php?id=${artistId}`) // 正式版
+      console.log('展覽資料：', data)
+      if (Array.isArray(data) && data.length > 0) {
+        exhibitionData.value = data
+      }
+    } catch (error) {
+      console.error('取得展覽資料失敗:', error)
+    }
+  } else {
+    console.warn('不是藝術家會員或找不到 ID')
   }
-};
+})
 
-// 格式化貨幣的函數
-const formatCurrency = (amount) => {
-  // 使用 Intl.NumberFormat 進行國際化數字格式化
-  return new Intl.NumberFormat('zh-TW', {
-    style: 'currency',
-    currency: 'TWD', // 台灣新台幣
-    minimumFractionDigits: 0 // 不顯示小數點，如果您的金額沒有小數
-  }).format(amount);
-};
-
-// 如果未來需要編輯功能，可以啟用此函數
-// const editExhibition = () => {
-//   // 導向編輯頁面或顯示編輯表單
-//   console.log('編輯展覽資訊');
-// };
-
-
+// 狀態轉換
+const getStatusLabel = (status) => {
+  switch (status) {
+    case 'expoOn':
+      return '展覽中'
+    case 'expoOff':
+      return '未開展'
+    case 'expoExit':
+      return '已撤展'
+    default:
+      return '未知狀態'
+  }
+}
 </script>
+
 
 <style lang="scss" scoped>
 @import '/style.scss';
