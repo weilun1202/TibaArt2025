@@ -49,12 +49,13 @@ function openModal(row) {
 // 切換狀態
 async function updateStatus(row) {
   try {
-    const resp = await fetch(import.meta.env.VITE_UpdateMemberStatus, {
+    const resp = await fetch(import.meta.env.VITE_UpdatePerStatus, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         id: row.id,
-        per: row.per ? 1 : 0  // 轉換成數字傳給資料庫
+        per: row.per ? 1 : 0,  // 轉換成數字傳給資料庫
+        type: 'member'  //抓資料表
       })
     })
     

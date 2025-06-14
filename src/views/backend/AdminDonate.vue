@@ -3,25 +3,34 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from "vue";
 import AdminTable from '@/components/AdminTable.vue'
 
 // 欄位設定
 const columns = [
-  { key: 'id', label: '筆數', class:'w-100' },
-  { key: 'patron', label: '贊助者' },
-  { key: 'email', label: '贊助者信箱' },
+  { key: 'donate_no', label: '筆數', class:'w-100' },
+  { key: 'd_name', label: '贊助者' },
+  { key: 'd_email', label: '贊助者信箱' },
   { key: 'sponsored', label: '贊助展覽' },
   { key: 'amount', label: '金額' },
-  { key: 'time', label: '贊助時間' },
+  { key: 'created_at', label: '建立時間' },
+  { key: 'updated_at', label: '修改時間' },
+  { key: 'status', label: '狀態', class:'w-100' },
 ]
 
 // 假資料陣列
-const data = [
-  { id: 1, name: '王小明', email: 'ming@example.com', status: '啟用' },
-  { id: 2, name: '陳美麗', email: 'mei@example.com', status: '停權' },
-  { id: 3, name: '林大仁', email: 'lin@example.com', status: '啟用' },
-  { id: 4, name: '張小華', email: 'hua@example.com', status: '啟用' }
-]
+const data = ref([]);
+
+async function fetchProducts() {
+  const resp = await fetch(import.meta.env.VITE_AdminDonate)
+  let artworks = await resp.json()
+
+  data.value = artworks
+}
+
+onMounted(() => {
+  fetchProducts()
+})
 </script>
 
 <style scoped>

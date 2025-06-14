@@ -17,6 +17,7 @@ const columns = [
   { key: 'stock', label: '庫存' },
   { key: 'updated', label: '上架時間'},
   { key: 'status', label: '狀態' , type:'select', options:['上架中', '以下架', '已售完']},
+  { key: 'edit', label: '編輯', type:'edit', class:'w-80'},
 ]
 
 const data = ref([]);

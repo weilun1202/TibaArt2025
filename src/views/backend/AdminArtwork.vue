@@ -83,7 +83,6 @@ function openAddModal() {
 
 function handleFileChange(e) {
   imageFile.value = e.target.files[0]
-  // console.log(imageFile)
 }
 
 // 載入藝術家清單
@@ -252,7 +251,7 @@ onMounted(() => {
     span{
       color: $fontWarn;
     }
-    input{
+    input, select{
       height: 32px;
       font-size: 16px;
     }
