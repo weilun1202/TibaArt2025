@@ -8,14 +8,14 @@
 
                 <!-- Wrapper 不設 1200px 寬（例如展覽、關於我們頁面應該會滿版），想要限制內容在 1200 的再自己包一個 div 限制 1200  -->
                 <!-- 以下供大家編輯 -->
-                <div class="shopTab">
+                <div class="shopTab animate__animated animate__fadeIn animate__slow">
                     <div class="subTitle">
                         <h1>商品資訊</h1>
                         <!-- {{ $router.currentRoute }} -->
                     </div>
                 </div>
 
-                <div class="productContainer" v-if="currentProduct">
+                <div class="productContainer animate__animated animate__fadeIn animate__slow" v-if="currentProduct">
                     <div class="productImg">
                         <img :src="baseUrl + currentProduct.image" alt="currentProduct.name">
                     </div>
@@ -51,7 +51,7 @@
                     <span class="recoTitle">或許您會喜歡</span>
                     <!-- 推薦商品列表 -->
                     <ul class="itemList">
-                        <li class="item" 
+                        <li class="item scroll-trigger-item" 
                             v-for="item in recommendedProducts" 
                             :key="item.id">
                             <router-link :to="{ name: 'product', params: { id: item.id } }" class="itemImage">
@@ -79,15 +79,19 @@
 
 
 <script setup>
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted, computed, watch, nextTick } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import {useCart} from '@/stores/cart.js';
 import { useUserStore } from '@/stores/user'
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger'; 
+
+gsap.registerPlugin(ScrollTrigger);
+
 
 const router = useRouter();
 const route = useRoute();
 const baseUrl = import.meta.env.BASE_URL;
-
 
 const {addToCart} = useCart();
 
@@ -98,7 +102,7 @@ const quantity = ref(1)
 
 onMounted(async () => {
     // const resp = await fetch(import.meta.env.BASE_URL + 'productData.json')
-    const resp = await fetch('http://localhost/TIBAART/product.php')
+    const resp = await fetch(import.meta.env.VITE_Product)
     if (!resp.ok) {
         throw new Error('無法載入商品資料')
     } else {
@@ -108,9 +112,28 @@ onMounted(async () => {
     }
 })
 
+// 監聽路由參數變化，當切換不同商品時，重新載入主商品並初始化 ScrollTrigger
+watch(() => route.params.id, (newId, oldId) => {
+    if (newId !== oldId) {
+        loadCurrentProduct();
+        // 在路由變化，DOM 可能更新後，重新初始化 ScrollTrigger
+        nextTick(() => {
+            // 殺掉所有現有的 ScrollTrigger 實例，避免重複或指向錯誤的元素
+            ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+            initScrollTriggerAnimations();
+        });
+    }
+});
+
 const loadCurrentProduct = () => {
     const productId = route.params.id
     currentProduct.value = products.value.find(product => product.id == productId)
+
+    nextTick(() => {
+        // 殺掉所有現有的 ScrollTrigger 實例
+        ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+        initScrollTriggerAnimations();
+    });
 }
 
 //加商品數量
@@ -126,10 +149,34 @@ const minusQuan = () => {
 const recommendedProducts = computed(() => {
     if (!currentProduct.value) return []
 
-    return products.value
+    const filtered = products.value
         .filter(product => product.id !== currentProduct.value.id)
-        .slice(0, 6)
+        .slice(0, 6); // 取前6個作為推薦
+
+    return filtered;
 })
+
+// 初始化 ScrollTrigger 動畫的函式
+const initScrollTriggerAnimations = () => {
+  const itemsToAnimate = document.querySelectorAll('.scroll-trigger-item');
+
+  itemsToAnimate.forEach((item, index) => {
+    gsap.fromTo(item,
+      { opacity: 0, y: 50 }, // 開始動畫
+      {
+        opacity: 1, // 動畫到這裡
+        y: 0,
+        duration: 0.8, 
+        ease: "power2.out", 
+        scrollTrigger: {
+          trigger: item, 
+          start: "top 85%", //觸發點
+          toggleActions: "play none none none", // 滾入時播放，滾出時不動作
+        }
+      }
+    );
+  });
+};
 
 const userStore = useUserStore()
 const props = defineProps({

@@ -120,7 +120,7 @@ const fetchOrders = async () => {
 
     const memberId = userStore.decodedMemberId // 獲取已解碼的會員 ID
     
-    const response = await fetch('http://localhost/TIBAART/getMemberOrders.php', {
+    const response = await fetch(import.meta.env.VITE_GetMemberOrders, {
     // const response = await fetch('https://tibamef2e.com/tjd101/g2/api/getMemberOrders.php', {
       method: 'POST',
       headers: {

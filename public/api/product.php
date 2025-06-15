@@ -19,7 +19,7 @@ try {
         status
     FROM product 
     WHERE status = 1 
-    ORDER BY updated DESC");
+    ORDER BY RAND()");
     
     $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 

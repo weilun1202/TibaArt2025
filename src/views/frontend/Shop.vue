@@ -9,7 +9,7 @@
 
       <div class="wrap">
         <!-- 商店分類 -->
-        <div class="shopTab" v-if="!searchQuery">
+        <div class="shopTab animate__animated animate__fadeIn animate__slow" v-if="!searchQuery">
           <div class="tibaShopTab" :class="{ active: activeTab == 'tiba' }" @click="setActiveTab('tiba')">
             <h1>緯藝周邊</h1>
           </div>
@@ -45,7 +45,7 @@
 
         <!-- 商品列表 -->
         <ul class="itemList">
-          <li class="item"
+          <li class="item scroll-trigger-item"
                 v-for="item in filterItems" 
                 :key="item.id">
             <router-link :to="{name: 'product', params: {id: item.id}}" class="itemImage">
@@ -74,14 +74,18 @@
 
 <script setup>
 import { ref, onMounted, computed, nextTick } from 'vue';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { useRouter } from 'vue-router';
 import { useCart } from '@/stores/cart.js';
-import { useUserStore } from '@/stores/user'
+import { useUserStore } from '@/stores/user';
+import { gsap } from 'gsap'; 
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 const router = useRouter();
 const baseUrl = import.meta.env.BASE_URL;
 
+// ScrollTrigger 插件
+gsap.registerPlugin(ScrollTrigger)
 
 const activeTab = ref('tiba');
 const searchQuery = ref('');
@@ -93,11 +97,14 @@ const items = ref([]);
 
 // 載入商品資料
 onMounted(() => {
-  fetch('http://localhost/TIBAART/product.php')
+  fetch(import.meta.env.VITE_Product)
     .then(resp => resp.json())
     .then(jsonData => {
       // console.log(jsonData)
       items.value = jsonData;
+      nextTick(() => {
+        initScrollTriggerAnimations();
+      });
   })
   .catch(error => {
     console.error('載入商品資料失敗:', error);
@@ -105,23 +112,40 @@ onMounted(() => {
 });
 
 const filterItems = computed(() => {
-  // 如果有搜尋關鍵字，搜尋所有商品的 name
-  if (searchQuery.value) {
-    return items.value.filter(item =>
-      item.name.toLowerCase().includes(searchQuery.value.toLowerCase())
-    );
-  }
-  // 否則按 activeTab 過濾
-  return items.value.filter(item => item.category === activeTab.value);
+  const filtered = items.value.filter(item => {
+    if (searchQuery.value) {
+      return item.name.toLowerCase().includes(searchQuery.value.toLowerCase());
+    }
+    return item.category === activeTab.value;
+  });
+
+  // filterItems 改變時，清除舊的 ScrollTrigger 重新初始化
+  nextTick(() => {
+    ScrollTrigger.getAll().forEach(trigger => trigger.kill()); // 殺掉所有現有的 ScrollTrigger
+    initScrollTriggerAnimations();
+  });
+
+  return filtered;
 });
 
 const setActiveTab = (tab) => {
   activeTab.value = tab;
+
+  // tab 改變時，重新初始化 ScrollTrigger
+  nextTick(() => {
+    ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    initScrollTriggerAnimations();
+  });
 };
 
 const searchItems = () => {
   console.log('搜尋:', searchQuery.value);
   isSearchInputExpanded.value = false;  // 搜尋後收起輸入框
+
+  nextTick(() => {
+    ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    initScrollTriggerAnimations();
+  });
 };
 
 const toggleSearchInput = () => {
@@ -137,7 +161,33 @@ const toggleSearchInput = () => {
     // 當收起輸入框時，清除目前的輸入內容
     // 但不觸發實際的搜尋
     searchQuery.value = '';
+    nextTick(() => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      initScrollTriggerAnimations();
+    });
   }
+};
+
+// 初始化 ScrollTrigger 動畫的函式
+const initScrollTriggerAnimations = () => {
+  const itemsToAnimate = document.querySelectorAll('.scroll-trigger-item');
+
+  itemsToAnimate.forEach((item, index) => {
+    gsap.fromTo(item,
+      { opacity: 0, y: 50 }, // 開始動畫
+      {
+        opacity: 1, // 動畫到這裡
+        y: 0,
+        duration: 0.8, 
+        ease: "power2.out", 
+        scrollTrigger: {
+          trigger: item, 
+          start: "top 85%", //觸發點
+          toggleActions: "play none none none", // 滾入時播放，滾出時不動作
+        }
+      }
+    );
+  });
 };
 
 const userStore = useUserStore()
@@ -161,8 +211,6 @@ const handleAddToCart = async (item) => {
       } catch (error) {
         console.error('加入購物車失敗:', error);
       }
-
   }
-
 };
 </script>
