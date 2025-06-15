@@ -100,20 +100,6 @@
                                     {{ errors.tel }}
                                 </div>
                             </div>
-                            <!-- <div class="formGroup">
-                                <label for="buyerAddress">
-                                    地址
-                                    <span class="formHint">*</span>
-                                </label>
-                                <input id="buyerAddress" type="text" 
-                                    placeholder="請輸入地址" 
-                                    v-model="orderInfo.address"@blur="validateField('address')"
-                                    @keyup.enter="validateField('address')">
-                                <div class="formError" 
-                                    v-if="errors.address && touchedFields.address">
-                                    {{ errors.address }}
-                                </div>
-                            </div> -->
                             <div class="formGroup">
                                 <label for="invoiceType">
                                     發票類型
@@ -246,19 +232,28 @@
 import{ref, watch, computed } from 'vue';
 import {useCart} from '@/stores/cart.js';
 import { useRouter } from 'vue-router';
+import { useUserStore } from '@/stores/user.js';
 
 
 const { cartItems, updateQuan, removeFromCart, totalPrice, clearCart } = useCart();
 const router = useRouter();
 const baseUrl = import.meta.env.BASE_URL;
+const userStore = useUserStore(); 
 
+const memberId = computed(() => userStore.decodedMemberId);
 
 const orderInfo = ref({
     name: '',
     tel: '',
     invoiceType: '',
     carrier: '',
+    member_id: memberId.value,
 })
+
+// 當 memberId 變化時，更新 orderInfo 中的 member_id
+watch(memberId, (newId) => {
+    orderInfo.value.member_id = newId;
+}, { immediate: true }); // immediate: true 確保在組件初始化時就執行一次
 
 const recipientInfo = ref({
     name: '',
@@ -382,8 +377,9 @@ const validateField = (fieldName) => {
             }
             break;
         case 'tel':
-            if (!/^[0-9]{10}$/.test(orderInfo.value.tel)) {
-                errors.value.tel = '請輸入正確的電話號碼';
+            // 檢查是否為10碼數字且以09開頭
+            if (!/^(09)[0-9]{8}$/.test(orderInfo.value.tel)) {
+                errors.value.tel = '請輸入正確的電話號碼 (須為09開頭的10碼數字)';
             } else {
                 delete errors.value.tel;
             }
@@ -430,8 +426,9 @@ const validateRecipientField = (fieldName) => {
             }
             break;
         case 'tel':
-            if (!/^[0-9]{10}$/.test(recipientInfo.value.tel)) {
-                errors.value.recipientTel = '請輸入正確的電話號碼';
+            // 檢查是否為10碼數字且以09開頭
+            if (!/^(09)[0-9]{8}$/.test(recipientInfo.value.tel)) {
+                errors.value.recipientTel = '請輸入正確的電話號碼 (須為09開頭的10碼數字)';
             } else {
                 delete errors.value.recipientTel;
             }
@@ -447,7 +444,7 @@ const validateRecipientField = (fieldName) => {
     }
 }
 
-// 勾或取消checkbox 時
+// 勾或取消checkbox 
 watch(sameAsOrder, (same) => {
     if(same) {
         recipientInfo.value.name = orderInfo.value.name;
@@ -457,7 +454,7 @@ watch(sameAsOrder, (same) => {
         validateRecipientField('tel');
 
     } else {
-        // 取消勾選時，清空收件人資訊並清除相關錯誤訊息
+        // 取消勾選時，清空收件人資訊
         recipientInfo.value.name = '';
         recipientInfo.value.tel = '';
         delete errors.value.recipientName;
@@ -467,32 +464,24 @@ watch(sameAsOrder, (same) => {
     }
 });
 
-// 即時更新收件人資訊 (當訂購人資訊改變時，如果勾選同訂購人，則同步更新)
+// 訂購人資訊改變時 如果勾選同訂購人 要同步更新)
 watch(orderInfo, (update) => {
     if(sameAsOrder.value) {
         recipientInfo.value.name = update.name;
         recipientInfo.value.tel = update.tel;
-        // 注意：這裡假設 orderInfo 中有 address 屬性。
-        // 如果沒有，您需要考慮如何處理。
-        // 為確保驗證，應將 recipientInfo.value.address = update.address; 替換為
-        // recipientInfo.value.address = update.address || '';
-        // 這樣即使訂購人資訊沒有地址，也能正確賦值並觸發收件人地址的驗證
-        recipientInfo.value.address = update.address || '';
-        // 同步更新時也觸發收件人欄位的驗證
         validateRecipientField('name');
         validateRecipientField('tel');
         validateRecipientField('address');
     }
 }, { deep: true });  //確保能監聽到物件內部屬性的變化
 
-//完整表單驗證（提交時使用）
+//提交表單時驗證
 const validateForm = () => {
-    // 標記所有欄位為已觸碰
     touchedFields.value = {
         name: true,
         tel: true,
         invoiceType: true,
-        carrier: orderInfo.value.invoiceType === 'electronic', // 只有電子發票才需要驗證載具
+        carrier: orderInfo.value.invoiceType === 'electronic', // 有電子發票才需要驗證載具
         recipientName: true,
         recipientTel: true,
         recipientAddress: true
@@ -534,9 +523,9 @@ const submitOrder = async () => {
             orderInfo: orderInfo.value,
             recipientInfo: recipientInfo.value,
             cartItems: cartItems.value,
-            totalPrice: finalPrice.value, // 包含總價
-            shippingFee: shippingFee.value, // 包含運費
-            discount: discount.value // 包含折扣
+            totalPrice: finalPrice.value,
+            shippingFee: shippingFee.value,
+            discount: discount.value 
         };
 
         try {

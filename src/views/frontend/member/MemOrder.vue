@@ -4,19 +4,19 @@
 
     <div class="order-history">
       <!-- Loading State -->
-      <!-- <div v-if="loading" class="loading-container">
+      <div v-if="loading" class="loading-container">
         <div class="spinner"></div>
         <p class="loading-message">載入訂單資料中...</p>
-      </div> -->
+      </div>
 
       <!-- No Orders State -->
-      <!-- <div v-else-if="orders.length === 0" class="no-orders-message">
+      <div v-else-if="orders.length === 0" class="no-orders-message">
         <div class="empty-icon">📦</div>
         <p>目前沒有訂單記錄</p>
-      </div> -->
+      </div>
 
       <!-- Orders List -->
-      <!-- <div v-else class="order-list"> -->
+      <div v-else class="order-list">
       <div class="order-list">
 
         <!-- Desktop Table View -->
@@ -35,7 +35,8 @@
               <div class="row-item order-content-col">
                 <div v-for="(item, index) in order.items" :key="index" class="order-item-detail">
                   <p class="item-name">{{ item.name }}</p>
-                  <p class="item-spec">規格: {{ item.spec }} 數量: {{ item.quantity }}</p>
+                  <!-- <p class="item-spec">規格: {{ item.spec }} 數量: {{ item.quantity }}</p> -->
+                  <p class="item-spec"> 數量: {{ item.quantity }}</p>
                 </div>
               </div>
               <div class="row-item order-amount-col amount">{{ formatCurrency(order.orderAmount) }}</div>
@@ -67,7 +68,8 @@
                 <div class="label">訂單內容</div>
                 <div v-for="(item, index) in order.items" :key="index" class="order-item-detail">
                   <p class="item-name">{{ item.name }}</p>
-                  <p class="item-spec">規格: {{ item.spec }} 數量: {{ item.quantity }}</p>
+                  <!-- <p class="item-spec">規格: {{ item.spec }} 數量: {{ item.quantity }}</p> -->
+                  <p class="item-spec">數量: {{ item.quantity }}</p>
                 </div>
               </div>
               
@@ -87,14 +89,18 @@
       </div>
     </div>
   </div>
+</div>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import { useUserStore } from '@/stores/user'
+
 
 // 響應式資料
 const orders = ref([])
 const loading = ref(true)
+const userStore = useUserStore()
 
 // 組件掛載後執行
 onMounted(async () => {
@@ -105,43 +111,80 @@ onMounted(async () => {
 const fetchOrders = async () => {
   loading.value = true
   try {
+        // 檢查會員是否登入且有會員 ID
+    if (!userStore.isLoggedIn || !userStore.decodedMemberId) {
+      alert('請先登入以查看訂單。')
+      orders.value = [] // 清空訂單
+      return
+    }
+
+    const memberId = userStore.decodedMemberId // 獲取已解碼的會員 ID
+    
+    const response = await fetch('http://localhost/TIBAART/getMemberOrders.php', {
+    // const response = await fetch('https://tibamef2e.com/tjd101/g2/api/getMemberOrders.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        member_id: memberId
+      })
+    })
+
+    const result = await response.json()
+
+     console.log('後端原始回應 (result):', result);
+    console.log('後端原始回應中的第一個訂單 (result.orders[0]):', result.orders[0]);
+    
+    if (result.success) {
+      orders.value = result.orders
+
+      if (orders.value.length > 0) {
+        console.log('第一個訂單的 items 陣列:', orders.value[0].items);
+        console.log('第一個訂單的 items 陣列類型:', typeof orders.value[0].items);
+        console.log('第一個訂單的 items 陣列長度:', orders.value[0].items.length);
+      }   
+    } else {
+      console.error('獲取訂單資料失敗:', result.message)
+      alert(`載入訂單失敗: ${result.message}`)
+      orders.value = [] // 載入失敗時清空訂單
+    }
     // 模擬 API 請求延遲
     // await new Promise(resolve => setTimeout(resolve, 1000))
-    await new Promise(resolve => setTimeout(resolve, 0))
-
+    // await new Promise(resolve => setTimeout(resolve, 0))
     
-    const fetchedOrders = [
-      {
-        orderId: '123456789',
-        items: [
-          { name: '緯藝 A4 資料夾', spec: '紅', quantity: 1 },
-          { name: '緯藝 吉祥物立牌', spec: '紅', quantity: 1 }
-        ],
-        orderAmount: 2046,
-        orderTime: '2025-05-01 00:00',
-        status: '已出貨'
-      },
-      {
-        orderId: '987654321',
-        items: [
-          { name: '緯藝 A4 資料夾', spec: '紅', quantity: 1 }
-        ],
-        orderAmount: 785,
-        orderTime: '2025-05-01 00:00',
-        status: '未出貨'
-      },
-      {
-        orderId: '112233445',
-        items: [
-          { name: '限定版紀念徽章', spec: '藍', quantity: 2 }
-        ],
-        orderAmount: 500,
-        orderTime: '2025-05-02 10:30',
-        status: '處理中'
-      }
-    ]
+    // const fetchedOrders = [
+    //   {
+    //     orderId: '123456789',
+    //     items: [
+    //       { name: '緯藝 A4 資料夾', spec: '紅', quantity: 1 },
+    //       { name: '緯藝 吉祥物立牌', spec: '紅', quantity: 1 }
+    //     ],
+    //     orderAmount: 2046,
+    //     orderTime: '2025-05-01 00:00',
+    //     status: '已出貨'
+    //   },
+    //   {
+    //     orderId: '987654321',
+    //     items: [
+    //       { name: '緯藝 A4 資料夾', spec: '紅', quantity: 1 }
+    //     ],
+    //     orderAmount: 785,
+    //     orderTime: '2025-05-01 00:00',
+    //     status: '未出貨'
+    //   },
+    //   {
+    //     orderId: '112233445',
+    //     items: [
+    //       { name: '限定版紀念徽章', spec: '藍', quantity: 2 }
+    //     ],
+    //     orderAmount: 500,
+    //     orderTime: '2025-05-02 10:30',
+    //     status: '處理中'
+    //   }
+    // ]
     
-    orders.value = fetchedOrders
+    // orders.value = fetchedOrders
   } catch (error) {
     console.error('獲取訂單資料失敗:', error)
     // 可以使用 toast 通知或其他 UI 組件來顯示錯誤
