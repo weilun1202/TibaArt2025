@@ -6,7 +6,7 @@
       </header>
       <!-- Wrapper 不設 1200px 寬（例如展覽、關於我們頁面應該會滿版），想要限制內容在 1200 的再自己包一個 div 限制 1200  -->
       <!-- 以下供大家編輯 -->
-        <div class="wrap">
+        <div class="wrap animate__animated animate__fadeIn animate__slow">
             <div id="cart" class="cartContainer">
                 <!-- 左邊：購物車商品 -->
                 <div class="leftPanel">
@@ -529,7 +529,7 @@ const submitOrder = async () => {
         };
 
         try {
-            const response = await fetch('http://localhost/TIBAART/submitOrder.php', { 
+            const response = await fetch(import.meta.env.VITE_SubmitOrder, { 
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -548,7 +548,7 @@ const submitOrder = async () => {
             const orderNumber = result.orderId;
             sessionStorage.setItem('lastOrderNumber', orderNumber);
 
-            const ecpayResponse = await fetch('http://localhost/TIBAART/ecpayOrder.php', {
+            const ecpayResponse = await fetch(import.meta.env.VITE_EcpayOrder, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ order_number: orderNumber })
