@@ -1,21 +1,21 @@
 <template>
   <div class="memWrap">
     <h2>展覽贊助記錄</h2>
-    <div class="exhibition-details">
+    <div v-if="sponsorData" class="sponsor-details" v-for="sponsorData in sponsorData">
       <div class="detail-table">
         <div class="detail-row">
           <div class="detail-label">贊助展覽名稱</div>
-          <div class="detail-value">{{ sponsorData.exhibitionName }}</div>
+          <div class="detail-value">{{ sponsorData.expo_name }}</div>
         </div>
 
         <div class="detail-row">
           <div class="detail-label">贊助金額</div>
-          <div class="detail-value amount">{{ formatCurrency(sponsorData.amount) }}</div>
+          <div class="detail-value amount">{{ sponsorData.donation }}</div>
         </div>
 
         <div class="detail-row">
           <div class="detail-label">贊助時間</div>
-          <div class="detail-value">{{ sponsorData.date }}</div>
+          <div class="detail-value">{{ sponsorData.donation_date }}</div>
         </div>
       </div>
 
@@ -24,42 +24,50 @@
         *贊助記錄僅供查閱，如有疑問請聯繫客服。
       </p>
     </div>
+    <div v-else class="sponsor-details">
+        <div class="detail-row">
+          <p class="detail-value">目前尚無贊助記錄</p>
+        </div>
+    </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted } from 'vue'
+import { useUserStore } from '@/stores/user'
+import axios from 'axios'
 
-// 贊助資料的響應式變數
-const sponsorData = ref({
-  exhibitionName: '',
-  amount: 0,
-  date: '',
-});
+const userStore = useUserStore()
+const sponsorData = ref();
 
-onMounted(() => {
-  fetchSponsorData();
-});
+onMounted(async () => {
+  const memberId = userStore.decodedMemberId
+  const type = userStore.memberType
+  console.log('會員 ID:', memberId);
+  console.log('會員類型:', type);
+  
+  
 
-// 模擬 API 撈取資料
-const fetchSponsorData = () => {
-  setTimeout(() => {
-    sponsorData.value = {
-      exhibitionName: '《微光中的浪潮》',
-      amount: 1680,
-      date: '2025-05-15 14:35',
-    };
-  }, 0);
-};
-
-// 貨幣格式化函數
-const formatCurrency = (amount) => {
-  return new Intl.NumberFormat('zh-TW', {
-    style: 'currency',
-    currency: 'TWD',
-    minimumFractionDigits: 0
-  }).format(amount);
-};
+  if (memberId) {
+    try {
+      const { data } = await axios.get(`http://localhost/TIBAART/getMemSponsor.php`, {
+      // const { data } = await axios.get(`https://tibamef2e.com/tjd101/g2/api/getMemSponsor.php`, { // 正式版
+        params: {
+          id: memberId,
+          type: type
+        }
+      })
+      console.log('贊助資料：', data)
+      if (Array.isArray(data) && data.length > 0) {
+        sponsorData.value = data;
+      }
+    } catch (error) {
+      console.error('取得贊助資料失敗:', error)
+    }
+  } else {
+    console.warn('找不到 ID')
+  }
+})
 </script>
 
 <style lang="scss" scoped>
@@ -80,7 +88,7 @@ const formatCurrency = (amount) => {
   }
 }
 
-.exhibition-details {
+.sponsor-details {
   max-width: 700px;
   margin: 40px auto;
   padding: 30px;
@@ -145,7 +153,7 @@ const formatCurrency = (amount) => {
 }
 
 .detail-value.amount {
-  color: #007bff;
+  color: $logoYellow;
   font-weight: bold;
 }
 

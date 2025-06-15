@@ -37,7 +37,7 @@
             <li><router-link to="/member">會員基本資料</router-link></li>
             <li v-if="memberData.type === 'artist'"><router-link to="/member/memExpo">個人展覽資訊</router-link></li>
             <li><router-link to="/member/memOrder">商城訂單追蹤</router-link></li>
-            <li><router-link to="/member/memSponsor">展覽贊助記錄</router-link></li>
+            <li v-if="memberData.type === 'general'"><router-link to="/member/memSponsor">展覽贊助記錄</router-link></li>
         </ul>
         </div>
     </div>

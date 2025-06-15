@@ -24,8 +24,8 @@
         </div>
 
         <div class="detail-row">
-          <div class="detail-label">已獲得贊助金額</div>
-          <div class="detail-value">NT$ {{ exhibitionData.total_donation }}</div>
+          <div class="detail-label">已獲得贊助</div>
+          <div class="detail-value amount">NT$ {{ exhibitionData.total_donation }}</div>
         </div>
       </div>
       <div>
@@ -173,7 +173,7 @@ const getStatusLabel = (status) => {
 }
 
 .detail-value.amount {
-  color: #007bff; /* 贊助金額可以特別顏色 */
+  color: $logoYellow;
   font-weight: bold;
 }
 
