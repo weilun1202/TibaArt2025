@@ -243,8 +243,8 @@
     // 到資料庫抓展覽名稱
   onMounted(async () => {
     try {
-      const res = await axios.get('http://localhost/TIBAART/api/expo.php') // 本機測試
-      // const res = await axios.get('https://tibamef2e.com/tjd101/g2/api/expo.php') // 正式版
+      // const res = await axios.get('http://localhost/TIBAART/api/expo.php') // 本機測試
+      const res = await axios.get('https://tibamef2e.com/tjd101/g2/api/expo.php') // 正式版
       if (res.data.success) {
         const exhibitions = res.data.data.map(item => ({
           id: item.id,
@@ -349,8 +349,8 @@ function handleSubmit(e) {         // 把資料送去綠界
         formData.append('d_name', name.value)
         formData.append('email', email.value)
 
-        fetch('http://localhost/TIBAART/api/checkoutdonate.php', {       // 本機測試
-        // fetch('https://tibamef2e.com/tjd101/g2/api/checkoutDonate.php', {  // 正式版
+        // fetch('http://localhost/TIBAART/api/checkoutdonate.php', {       // 本機測試
+        fetch('https://tibamef2e.com/tjd101/g2/api/checkoutDonate.php', {  // 正式版
             method: 'POST',
             body: formData
         })
