@@ -2,11 +2,18 @@
 header('Content-Type: application/json');
 header("Access-Control-Allow-Origin: *");
 
-$host = '127.0.0.1';
-$db   = 'TIBAART';
-$user = 'root';
-$pass = 'password';  // 請改為你的實際密碼
-$charset = 'utf8mb4';  // 改為 utf8mb4 支援更完整的中文
+// $host = '127.0.0.1';
+// $db   = 'TIBAART';
+// $user = 'root';
+// $pass = 'password';
+// $charset = 'utf8mb4';
+
+// Tibame伺服器端
+    $host = "127.0.0.1";
+    $user = "tibamefe_since2021";
+    $pass = "vwRBSb.j&K#E";
+    $db = "tibamefe_tjd101g2";
+    $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
 $options = [

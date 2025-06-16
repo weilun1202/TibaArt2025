@@ -33,19 +33,32 @@
 <script setup>
   import { ref } from 'vue'
   import { useRouter } from 'vue-router'
-
+  const rouret = useRouter()
+  
   const acc = ref('')
   const pwd = ref('')
-  const rouret = useRouter()
 
-  const adminLogin = function(){
-    if(acc.value === '123' && pwd.value === '456'){
-      alert('成功登入')
-      rouret.push('/admin')
-    }else{
-      alert('帳號密碼輸入錯誤')
+  const adminLogin = async function(){
+    const resp = await fetch(import.meta.env.VITE_LoginAdmin, {
+      method: 'POST',
+      headers: {
+        'content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        account: acc.value,
+        password: pwd.value
+      })
+    });
+
+    const result = await resp.json();
+
+    if (result.success) {
+      alert('成功登入');
+      rouret.push('/admin');
+    } else {
+      alert(result.message || '登入失敗');
     }
-  }
+}
 
 </script>
 

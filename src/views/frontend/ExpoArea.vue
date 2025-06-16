@@ -81,6 +81,10 @@ const expoData = ref(null)
 const artistData = ref(null)
 const artworks = ref([])
 
+// console.log('VITE_ExpoDetail:', import.meta.env.VITE_ExpoDetail)
+// console.log('VITE_Artist:', import.meta.env.VITE_Artist)
+// console.log('VITE_Artworks:', import.meta.env.VITE_Artworks)
+
 // 獲取展覽資料
 const fetchExpoData = async () => {
   try {
@@ -94,7 +98,7 @@ const fetchExpoData = async () => {
 
     // 取得展覽詳細資料
     const expoResponse = await fetch(`${import.meta.env.VITE_ExpoDetail}?id=${expoId}`)
-    //const response = await fetch('https://tibamef2e.com/tjd101/g2/api/expoDetail.php?id=${expoId}')  上線用
+    //const expoResponse  = await fetch(`${import.meta.env.VITE_ExpoDetail}?id=${expoId}`)  上線用
     if (!expoResponse.ok) throw new Error(`HTTP 錯誤：${expoResponse.status}`)
 
     const expoResult = await expoResponse.json()
@@ -109,14 +113,14 @@ const fetchExpoData = async () => {
       if (artistResponse.ok) {
         const artistResult = await artistResponse.json()
         if (artistResult.success) {
-          console.log("abc")
+
           artistData.value = artistResult.data
         }
       }
     }
 
     //取得該展覽的作品
-    const artworksResponse = await fetch(`http://localhost/TIBAART/artworks.php?expo_id=${expoId}`)
+    const artworksResponse = await fetch(`${import.meta.env.VITE_Artworks}?expo_id=${expoId}`)
     if (artworksResponse.ok) {
       const artworksResult = await artworksResponse.json()
       if (artworksResult.success) {
