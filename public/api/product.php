@@ -17,7 +17,7 @@ try {
         stock,
         updated,
         status
-    FROM product 
+    FROM PRODUCT 
     WHERE status = 1 
     ORDER BY RAND()");
     
