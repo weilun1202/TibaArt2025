@@ -36,7 +36,7 @@
         <ul>
             <li><router-link to="/member">會員基本資料</router-link></li>
             <li v-if="memberData.type === 'artist'"><router-link to="/member/memExpo">個人展覽資訊</router-link></li>
-            <li><router-link to="/member/memOrder">商城訂單追蹤</router-link></li>
+            <li v-if="memberData.type === 'general'"><router-link to="/member/memOrder">商城訂單追蹤</router-link></li>
             <li v-if="memberData.type === 'general'"><router-link to="/member/memSponsor">展覽贊助記錄</router-link></li>
         </ul>
         </div>
@@ -62,7 +62,7 @@ async function loadMemberData() {
   const type = localStorage.getItem('memberType') || 'general'
   const decodedId = atob(member.id)
 
-  const response = await fetch('http://localhost/TIBAART/getMemberInfo.php', {
+  const response = await fetch(import.meta.env.VITE_GetMemberInfo, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ id: decodedId, type })
@@ -141,7 +141,7 @@ const uploadImage = async () => {
   formData.append('type', type);
 
   try {
-    const response = await fetch('http://localhost/TIBAART/avatarUpload.php', {
+    const response = await fetch(import.meta.env.VITE_AvatarUpload, {
       method: 'POST',
       body: formData,
     });

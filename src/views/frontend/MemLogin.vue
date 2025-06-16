@@ -219,8 +219,7 @@ async function handleSubmitGeneral() {
     }
 
     try {
-      // const response = await fetch('https://tibamef2e.com/tjd101/g2/api/memLogin.php', {
-      const response = await fetch('http://localhost/TIBAART/memLogin.php', {
+      const response = await fetch(import.meta.env.VITE_MemLogin, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -267,7 +266,7 @@ async function handleSubmitArtist() {
     }
 
     try {
-      const response = await fetch('http://localhost/TIBAART/memLogin.php', {
+      const response = await fetch(import.meta.env.VITE_MemLogin, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

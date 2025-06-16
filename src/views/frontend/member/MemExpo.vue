@@ -51,8 +51,12 @@ onMounted(async () => {
     const artistId = userStore.decodedMemberId
 
     try {
-      const { data } = await axios.get(`http://localhost/TIBAART/getMemExpo.php?id=${artistId}`)
-      // const { data } = await axios.get(`https://tibamef2e.com/tjd101/g2/api/getMemExpo.php?id=${artistId}`) // 正式版
+      // const { data } = await axios.get(`http://localhost/TIBAART/getMemExpo.php?id=${artistId}`)
+      const baseUrl = import.meta.env.VITE_GetMemExpo
+      const { data } = await axios.get(`${baseUrl}/getMemExpo.php`, {
+      params: { id: artistId }
+      })
+
       console.log('展覽資料：', data)
       if (Array.isArray(data) && data.length > 0) {
         exhibitionData.value = data

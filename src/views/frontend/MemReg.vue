@@ -252,8 +252,7 @@ async function handleSubmit() {
     }
 
     try {
-      // const response = await fetch('https://tibamef2e.com/tjd101/g2/api/memRegister.php', {
-      const response = await fetch('http://localhost/TIBAART/memRegister.php', {
+      const response = await fetch(import.meta.env.VITE_MemRegister, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

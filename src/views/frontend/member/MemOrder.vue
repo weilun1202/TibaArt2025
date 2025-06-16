@@ -59,7 +59,7 @@
                 <span class="value">{{ order.orderId }}</span>
               </div>
               <span :class="['status-tag', getStatusTagClass(order.status)]">
-                {{ order.status }}
+                {{ getStatusText(order.status) }}
               </span>
             </div>
             
@@ -219,13 +219,28 @@ const formatDate = (dateString) => {
 // 獲取狀態樣式類別
 const getStatusTagClass = (status) => {
   const statusMap = {
-    '已出貨': 'status-shipped',
-    '未出貨': 'status-pending',
-    '處理中': 'status-processing',
-    '已取消': 'status-cancelled'
+    'pending': 'status-pending',
+    'confirmed': 'status-confirmed',
+    'shipped': 'status-shipped',
+    'delivered': 'status-delivered',
+    'cancelled': 'status-cancelled'
   }
   return statusMap[status] || ''
 }
+
+
+const getStatusText = (status) => {
+  const textMap = {
+    'pending': '處理中',
+    'confirmed': '已確認',
+    'shipped': '已出貨',
+    'delivered': '已送達',
+    'cancelled': '已取消'
+  }
+  return textMap[status] || status
+}
+
+
 </script>
 
 <style lang="scss" scoped>
@@ -614,13 +629,18 @@ $tablet: 1024px;
   color: $fontWhite;
 }
 
-.status-processing {
-  background: $logoOrange;
+.status-confirmed {
+  background: $logoDGreen;
   color: white;
 }
 
 .status-cancelled {
   background: $danger-color;
+  color: white;
+}
+
+.status-delivered {
+  background: $logoBlue;
   color: white;
 }
 

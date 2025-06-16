@@ -50,13 +50,13 @@ onMounted(async () => {
 
   if (memberId) {
     try {
-      const { data } = await axios.get(`http://localhost/TIBAART/getMemSponsor.php`, {
-      // const { data } = await axios.get(`https://tibamef2e.com/tjd101/g2/api/getMemSponsor.php`, { // 正式版
-        params: {
-          id: memberId,
-          type: type
-        }
-      })
+        const baseUrl = import.meta.env.VITE_GetMemSponsor
+        const { data } = await axios.get(`${baseUrl}/getMemSponsor.php`, {
+          params: {
+            id: memberId,
+            type: type
+          }
+        })
       console.log('贊助資料：', data)
       if (Array.isArray(data) && data.length > 0) {
         sponsorData.value = data;

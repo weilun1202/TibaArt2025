@@ -193,8 +193,7 @@ export const useUserStore = defineStore('user', {
       this.error = null
 
       try {
-        // const response = await fetch('https://tibamef2e.com/tjd101/g2/api/getMemberInfo.php', {
-        const response = await fetch('http://localhost/TIBAART/getMemberInfo.php', {
+        const response = await fetch(import.meta.env.VITE_GetMemberInfo, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ 
@@ -312,8 +311,7 @@ export const useUserStore = defineStore('user', {
           delete dataToSend.cPassword
         }
 
-        // const response = await fetch('https://tibamef2e.com/tjd101/g2/api/updateMemberInfo.php', {
-        const response = await fetch('http://localhost/TIBAART/updateMemberInfo.php', {
+        const response = await fetch(import.meta.env.VITE_UpdateMemberInfo, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
