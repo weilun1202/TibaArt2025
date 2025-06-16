@@ -81,6 +81,10 @@ const expoData = ref(null)
 const artistData = ref(null)
 const artworks = ref([])
 
+// console.log('VITE_ExpoDetail:', import.meta.env.VITE_ExpoDetail)
+// console.log('VITE_Artist:', import.meta.env.VITE_Artist)
+// console.log('VITE_Artworks:', import.meta.env.VITE_Artworks)
+
 // 獲取展覽資料
 const fetchExpoData = async () => {
   try {
@@ -109,7 +113,7 @@ const fetchExpoData = async () => {
       if (artistResponse.ok) {
         const artistResult = await artistResponse.json()
         if (artistResult.success) {
-          console.log("abc")
+
           artistData.value = artistResult.data
         }
       }
