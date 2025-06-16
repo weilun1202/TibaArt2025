@@ -63,8 +63,8 @@ const fetchExpoData = async () => {
     loading.value = true
     error.value = null
 
-    const response = await fetch('http://localhost/TIBAART/expo.php')
-    // const response = await fetch('https://tibamef2e.com/tjd101/g2/api/expo.php') 
+    const response = await fetch(`${import.meta.env.VITE_Expo}`)
+    // const response = await fetch('https://tibamef2e.com/tjd101/g2/api/expo.php') 上線用
     if (!response.ok) throw new Error(`HTTP 錯誤：${response.status}`)
 
     const jsonData = await response.json()

@@ -87,7 +87,7 @@ const fetchExpoData = async () => {
     
     // 直接用作品 ID 查詢單一作品
     const artworkResponse = await fetch(`http://localhost/TIBAART/expoArtwork.php?id=${artworkId}`)
-    
+    // const artworkResponse = await fetch(`http://tibamef2e.com/tjd101/g2/api/expoArtwork.php?id=${artworkId}`) 上線用
     console.log('API 回應狀態:', artworkResponse.status) // 除錯用
     
     if (artworkResponse.ok) {

@@ -93,7 +93,8 @@ const fetchExpoData = async () => {
     }
 
     // 取得展覽詳細資料
-    const expoResponse = await fetch(`http://localhost/TIBAART/expoDetail.php?id=${expoId}`)
+    const expoResponse = await fetch(`${import.meta.env.VITE_ExpoDetail}?id=${expoId}`)
+    //const response = await fetch('https://tibamef2e.com/tjd101/g2/api/expoDetail.php?id=${expoId}')  上線用
     if (!expoResponse.ok) throw new Error(`HTTP 錯誤：${expoResponse.status}`)
 
     const expoResult = await expoResponse.json()
@@ -103,7 +104,8 @@ const fetchExpoData = async () => {
 
     // 如果有藝術家 ID，取得藝術家資料
     if (expoData.value.artist_id) {
-      const artistResponse = await fetch(`http://localhost/TIBAART/artist.php?id=${expoData.value.artist_id}`)
+      //const artistResponse = await fetch(`${import.meta.env.VITE_Artist}?id=${expoData.value.artist_id}`) 上線用
+      const artistResponse = await fetch(`${import.meta.env.VITE_Artist}?id=${expoData.value.artist_id}`)
       if (artistResponse.ok) {
         const artistResult = await artistResponse.json()
         if (artistResult.success) {
