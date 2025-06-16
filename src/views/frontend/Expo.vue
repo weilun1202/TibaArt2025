@@ -18,18 +18,9 @@
 
       <!-- 主要內容 -->
       <div v-else class="parent" ref="parentRef">
-        <router-link 
-          v-for="item in expoItems" 
-          :key="item.id" 
-          :to="{ name: 'ExpoArea', params: { id: item.id } }"
-          :class="`grid ${item.className} ${item.side}`"
-        >
-          <img 
-            class="has-tooltip" 
-            :data-title="item.titleZh" 
-            :src="baseUrl + item.img" 
-            :alt="item.titleZh" 
-          />
+        <router-link v-for="item in expoItems" :key="item.id" :to="{ name: 'ExpoArea', params: { id: item.id } }"
+          :class="`grid ${item.className} ${item.side}`">
+          <img class="has-tooltip" :data-title="item.titleZh" :src="baseUrl + item.img" :alt="item.titleZh" />
         </router-link>
         <div class="tooltip" ref="tooltipRef"></div>
       </div>
@@ -64,7 +55,7 @@ const fetchExpoData = async () => {
     error.value = null
 
     const response = await fetch(`${import.meta.env.VITE_Expo}`)
-    // const response = await fetch('https://tibamef2e.com/tjd101/g2/api/expo.php') 上線用
+    // const response = await fetch(`${import.meta.env.VITE_Expo}`) 上線用
     if (!response.ok) throw new Error(`HTTP 錯誤：${response.status}`)
 
     const jsonData = await response.json()
@@ -74,7 +65,7 @@ const fetchExpoData = async () => {
 
     // 等 DOM 更新完成後初始化動畫
     await nextTick()
-    
+
     // 稍微延遲確保 DOM 完全渲染
     setTimeout(() => {
       initAnimations()
@@ -91,7 +82,7 @@ const fetchExpoData = async () => {
 // 初始化動畫和 tooltip
 const initAnimations = () => {
   console.log('開始初始化動畫...') // 除錯用
-  
+
   if (!parentRef.value) {
     console.warn('parentRef 不存在')
     return
@@ -132,7 +123,7 @@ const initAnimations = () => {
         }
       }
     )
-    
+
     // 保存 ScrollTrigger 實例
     if (trigger.scrollTrigger) {
       scrollTriggers.value.push(trigger.scrollTrigger)
@@ -146,7 +137,7 @@ const initAnimations = () => {
 // 獨立的 tooltip 初始化函數
 const initTooltip = () => {
   const tooltipEl = tooltipRef.value
-  
+
   if (!tooltipEl) {
     console.warn('tooltip 元素不存在')
     return
@@ -164,14 +155,14 @@ const initTooltip = () => {
 
       tooltipEl.textContent = text
       tooltipEl.style.display = 'block'
-      
+
       gsap.set(tooltipEl, {
         left: e.clientX + 10 + 'px',
         top: e.clientY - 10 + 'px',
         scale: 0.8,
         opacity: 0
       })
-      
+
       gsap.to(tooltipEl, {
         duration: 0.2,
         opacity: 1,
