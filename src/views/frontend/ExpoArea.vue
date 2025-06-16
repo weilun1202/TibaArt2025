@@ -94,7 +94,7 @@ const fetchExpoData = async () => {
 
     // 取得展覽詳細資料
     const expoResponse = await fetch(`${import.meta.env.VITE_ExpoDetail}?id=${expoId}`)
-    //const response = await fetch(`${import.meta.env.VITE_ExpoDetail}?id=${expoId}`)  上線用
+    //const expoResponse  = await fetch(`${import.meta.env.VITE_ExpoDetail}?id=${expoId}`)  上線用
     if (!expoResponse.ok) throw new Error(`HTTP 錯誤：${expoResponse.status}`)
 
     const expoResult = await expoResponse.json()
