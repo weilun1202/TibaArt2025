@@ -46,18 +46,19 @@ if (!$id || !isset($_FILES['img'])) {
 
 // $uploadDir = dirname(__DIR__) . '/TibaUpload/';
 // $uploadDir = __DIR__ . '/AvatarUpload/';
-$ServerRoot = $_SERVER["DOCUMENT_ROOT"] . '/tjd101/g2/upload/avatars/'. $_FILES['img']['tmp_name'];
+$uploadDir = $_SERVER["DOCUMENT_ROOT"] . '/tjd101/g2/upload/avatars/';
+
 // $uploadDir = $ServerRoot."/TibaUpload/";
 // echo $uploadDir
 
 // 網站可訪問的路徑，用於資料庫與前端顯示
-$uploadPathForDB = 'TIBAART/AvatarUpload/'; 
+$uploadPathForDB = 'upload/avatars/'; 
 // $filename = $_FILES["img"]["name"]; 
 
 $ext = pathinfo($_FILES['img']['name'], PATHINFO_EXTENSION);
 $filename = uniqid('img_') . '.' . $ext;
 // $targetPath = $uploadDir . $filename; // 實體路徑
-$targetPath = $ServerRoot . $filename; // 實體路徑
+$targetPath = $uploadDir . $filename; // 實體路徑
 $targetPathForDB = $uploadPathForDB . $filename; // 資料庫用相對路徑
 
 // echo $targetPath
@@ -73,7 +74,8 @@ if (move_uploaded_file($_FILES['img']['tmp_name'], $targetPath)) {
 
     if ($stmt) {
         $stmt->execute([$targetPathForDB, $id]);  // 用相對路徑存資料庫
-        echo json_encode(['success' => true, 'url' => $targetPathForDB]);
+        echo json_encode(['success' => true, 'url' => 'https://tibamef2e.com/tjd101/g2/' . $targetPathForDB]);
+        // echo json_encode(['success' => true, 'url' => $targetPathForDB]);
     } else {
         echo json_encode(['success' => false, 'message' => '無效的會員類型']);
     }

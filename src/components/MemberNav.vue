@@ -3,7 +3,7 @@
     <div class="memSideCon">
         <div class="memAvatarDiv">
             <div class="memAvatarCon avatarUploaded image-uploaded" v-if="memberData.img">
-              <img class="memAvatar" :src="'http://localhost/' + memberData.img" v-if="memberData.img" alt="上傳的頭像">
+              <img class="memAvatar" :src="memberData.img" v-if="memberData.img" alt="上傳的頭像">
             </div>
             <div v-else class="memAvatarCon">
               <img class="memAvatar" src="@/assets/img/TibaArt-Icon.svg" alt="預設頭像" />
@@ -146,9 +146,7 @@ const uploadImage = async () => {
       body: formData,
     });
 
-    const result = await response.json();
-    console.log(result);
-    
+    const result = await response.json();    
     console.log('上傳成功：', result);
     
 
