@@ -3,6 +3,7 @@
     <div class="footerContact">
         <p>TEL：<a href="tel:+886212345678">02-12345678</a></p>
         <p>E-mail：<a href="mailto:your_email@example.com">tibaart101@mail.tw</a></p>
+        <p class="privacy"><router-link to="/front/privacy">隱私權條款</router-link></p>
     </div>
     <p>&copy; 2025 緯藝基金會 TibaArt. All rights reserved.</p>
     <br>
@@ -26,7 +27,7 @@
 }
 
 
-a{
+a, .privacy{
   text-decoration: none;
   
   &:hover{

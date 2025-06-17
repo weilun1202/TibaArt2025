@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { useUserStore } from '@/stores/user' 
 
-
 //layouts
 import FrontLayout from '@/layouts/FrontLayout.vue'
 import AdminLayout from '@/layouts/AdminLayout.vue'
@@ -33,6 +32,9 @@ import MemHome from '@/views/frontend/member/MemHome.vue'
 import MemExpo from '@/views/frontend/member/MemExpo.vue'
 import MemOrder from '@/views/frontend/member/MemOrder.vue'
 import MemSponsor from '@/views/frontend/member/MemSponsor.vue'
+
+//隱私權政策
+import Privacy from '@/views/frontend/Privacy.vue'
 
 //backend
 import Admin from '@/views/backend/Admin.vue'
@@ -77,6 +79,12 @@ const routes = [
         name: 'product',
         component: () => import('@/views/frontend/Product.vue'),
         props: true
+      },
+      { path: 'privacy', name: 'Privacy', component: Privacy },
+      {
+        path: 'lineCallback',
+        name: 'LineCallback',
+        component: () => import('@/views/frontend/LineCallback.vue')
       }
     ]
   },
@@ -87,7 +95,7 @@ const routes = [
       { path: '', name: 'MemHome', component: MemHome },
       { path: 'memExpo', name: 'MemExpo', component: MemExpo },
       { path: 'memOrder', name: 'MemOrder', component: MemOrder },
-      { path: 'memSponsor', name: 'MemSponsor', component: MemSponsor },
+      { path: 'memSponsor', name: 'MemSponsor', component: MemSponsor }
     ]
   },
   {

@@ -117,7 +117,8 @@
             <div class="separator">或使用以下方式登入</div>
             <div class="socialButtons">
               <button class="btn socialBtn google" aria-label="使用 Google 登入"><font-awesome-icon :icon="['fab', 'google']" /></button>
-              <button class="btn socialBtn facebook" aria-label="使用 Facebook 登入"><font-awesome-icon :icon="['fab', 'facebook']" /></button>
+              <!-- <button class="btn socialBtn facebook" aria-label="使用 Facebook 登入"><font-awesome-icon :icon="['fab', 'facebook']" /></button> -->
+              <button class="btn socialBtn line" aria-label="使用 Line 登入" @click="handleLineLogin"><font-awesome-icon :icon="['fab', 'line']" /></button>
             </div>
           </div>
         </div>
@@ -303,6 +304,21 @@ async function handleSubmitArtist() {
   }
 }
 
+function handleLineLogin() {
+  const lineClientId = import.meta.env.VITE_LINE_CLIENT_ID; // 您的 LINE Channel ID
+  const lineRedirectUri = import.meta.env.VITE_LINE_REDIRECT_URI; // 您的回調 URL
+  const lineAuthState = 'your_random_state_string'; // 為了安全，請生成一個隨機的 state 字串
+  const lineScope = 'profile openid email'; // 請求的權限，例如 profile, openid, email
+
+  // 將 state 存儲起來，以便回調時驗證
+  localStorage.setItem('line_auth_state', lineAuthState);
+
+  const lineAuthUrl = `https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=${lineClientId}&redirect_uri=${encodeURIComponent(lineRedirectUri)}&state=${lineAuthState}&scope=${lineScope}`;
+  
+  console.log('Line Auth URL:', lineAuthUrl); // 為了除錯，您可以打印出這個 URL 看看是否正確
+
+  window.location.href = lineAuthUrl;
+}
 
 
 </script>

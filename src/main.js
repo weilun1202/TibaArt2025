@@ -15,6 +15,7 @@ import { faCartShopping, faUser } from '@fortawesome/free-solid-svg-icons'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { faGoogle } from '@fortawesome/free-brands-svg-icons'
 import { faFacebook } from '@fortawesome/free-brands-svg-icons'
+import { faLine } from '@fortawesome/free-brands-svg-icons'
 import { faGlobe } from '@fortawesome/free-solid-svg-icons'
 import { faInstagram, faBehance } from '@fortawesome/free-brands-svg-icons'
 import { faFileArrowDown, faCloudArrowUp } from '@fortawesome/free-solid-svg-icons'
@@ -29,6 +30,7 @@ library.add(faCartShopping);
 library.add(faMagnifyingGlass);
 library.add(faGoogle);
 library.add(faFacebook);
+library.add(faLine);
 library.add(faGlobe);
 library.add(faInstagram, faBehance);
 library.add(faCloudArrowUp);
