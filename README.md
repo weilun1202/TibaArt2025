@@ -12,6 +12,13 @@ vue3 開發目前遇到的狀況(5/22)
 ※※※※※※ 以下更新 ※※※※※※
 
 
+# 日期：2025 / 6 / 18
+## 更新者：偉倫
+## 項目：
+修改贊助成功頁面，贊助編號顯示在頁面上
+
+
+
 
 # 日期：2025 / 6 / 14
 ## 更新者：偉倫
@@ -36,7 +43,7 @@ vue3 開發目前遇到的狀況(5/22)
 ## 更新者：偉倫
 ## 項目：圖片路徑問題
 
-js裡的圖片路徑要加上 → imgSrc: import.meta.env.BASE_URL +..
+js 裡的圖片路徑要加上 → imgSrc: import.meta.env.BASE_URL +..
 Vue3 裡的圖片路徑要改成 → /public/assets/img/..
 需要多張圖片渲染到template
 原本 <img src="/tjd101/g2/assets/img/expoArea-artwork1.png" alt="">

@@ -237,7 +237,7 @@
   import { useUserStore } from '@/stores/user.js'; // 匯入 Pinia 使用者狀態庫
   import axios from 'axios'  // 匯入 展覽作品 
 
-  const router = useRouter()
+  const route = useRouter()
   const userStore = useUserStore()
 
     // 到資料庫抓展覽名稱
