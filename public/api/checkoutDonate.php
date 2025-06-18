@@ -175,7 +175,7 @@ $order = [
     'ItemName' =>   $expo_name .' 贊助藝術家 ',  //          // 商品名稱（可加上 # 結尾）改為從前端取得的商品名稱字串
     'ReturnURL' => 'https://tibamef2e.com/tjd101/g2/api/returnDonate.php',
     // 'ReturnURL' => 'http://localhost/test2/returndonate.php',
-    'ClientBackURL' => 'https://tibamef2e.com/tjd101/g2/front', // 使用者完成付款後會回到這頁
+    'ClientBackURL' => 'https://tibamef2e.com/tjd101/g2/front/SponsorSuccess?donate_no=' . $donate_no, // 使用者完成付款後會回到這頁
     'ChoosePayment' => 'Credit',
     'EncryptType' => 1,
     'Email' => $email

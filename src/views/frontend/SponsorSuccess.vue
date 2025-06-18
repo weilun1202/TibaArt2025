@@ -8,22 +8,15 @@
       <!-- 以下供大家編輯 -->
       
       <div class="wrap">
-
         <div class="reminder">
-          <div class="reminderContent">
-            
-            <img src="@/assets/img/TibaArtLogo.svg" alt="">
-            <p>
-              <h2 class="reminderTitle">贊助成功！</h2>
-              <p class="reminderText">已經將本次贊助資訊保留在您的紀錄，感謝您的支持。</p>
-              <div>
-                <button class="btn reminderBtn" @click="goExpo">回到線上展覽</button>
-              </div>
-            </p>
-          </div>  
-
+          <img src="@/assets/img/TibaArtLogo.svg" alt="">
+          <span>贊助成功！</span>
+          <p>贊助編號：#{{ donateNumber }}<br>
+            已經將本次贊助資訊保留在您的紀錄，感謝您的支持。</p>
+          <div>
+            <button class="btn reminderBtn" @click="goExpo">線上展覽</button>
+          </div>
         </div>
-
       </div>
 
     </div>
@@ -33,10 +26,30 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
-  import { useRouter } from 'vue-router'
+import { ref, onMounted } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+
+const route = useRoute()
+const router = useRouter()
+
+const donateNumber = ref('載入中')
+
+onMounted(() => {
+    // 從網址中取得 donate_no
+    const donateNoFromQuery = route.query.donate_no
+    if (donateNoFromQuery) {
+      donateNumber.value = donateNoFromQuery
+    } else {
+      donateNumber.value = '查無資料'
+    }
+  })
+
+// const goExpo = () => {
+//   router.push('/expoArea') // 依你的路由設定做跳轉
+// }
+
   function goExpo() {
-    window.location.href = '/front/Expo' // 回到線上展覽
+    window.location.href = '/tjd101/g2/front/expo' // 回到線上展覽
   }
   
 </script>
@@ -47,43 +60,31 @@
 
 // 與 MemRegOK style一樣
 .reminder {
-  margin: 0 auto;
-  max-width: 1200px;
-  height: calc(100vh - 192px);
-  padding-top: 60px;
-  .reminderContent{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 40px;
-    gap: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  gap: 40px;
 
-    img{
+  height: calc(100vh - 192px);
+
+  img{
     width: 200px;
-    } 
-    p{
-      max-width: 640px;
+  } 
+  span {
+      font-weight: bold;
+  }
+  p {
       text-align: center;
-      line-height: 1.6;
-      .reminderTitle {
-        font-size: 2rem;
-      }
-      .reminderText{
-        padding: $spacing-5;
-      }
-      .reminderBtn{
-        margin: 0 5px;
-        gap: 20px;
-      }
-    }
+      line-height: 1.5;
   }
 }
+
 @media screen and (max-width:705px){
-  .reminderContent{
-    .reminderBtn{
-      font-size: 1.25rem;
-      line-height: 48px;
-    }
+  .reminderBtn{
+    font-size: 1.25rem;
+    line-height: 48px;
   }
 }
 
