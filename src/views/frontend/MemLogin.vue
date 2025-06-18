@@ -309,7 +309,9 @@ function handleLineLogin() {
   const lineClientId = import.meta.env.VITE_LINE_CLIENT_ID; // 您的 LINE Channel ID
   const lineRedirectUri = import.meta.env.VITE_LINE_REDIRECT_URI; // 您的回調 URL
   const lineAuthState = 'your_random_state_string'; // 為了安全，請生成一個隨機的 state 字串
-  const lineScope = 'profile openid email'; // 請求的權限，例如 profile, openid, email
+  // const lineScope = 'profile openid email'; // 請求的權限，例如 profile, openid, email
+  const lineScope = 'profile openid'; // 請求的權限，例如 profile, openid
+
 
   // 將 state 存儲起來，以便回調時驗證
   localStorage.setItem('line_auth_state', lineAuthState);
