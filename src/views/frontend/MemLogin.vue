@@ -116,8 +116,8 @@
           <div class="thirdPartyLogin">
             <div class="separator">或使用以下方式登入</div>
             <div class="socialButtons">
-              <button class="btn socialBtn google" aria-label="使用 Google 登入"><font-awesome-icon :icon="['fab', 'google']" /></button>
-              <!-- <button class="btn socialBtn facebook" aria-label="使用 Facebook 登入"><font-awesome-icon :icon="['fab', 'facebook']" /></button> -->
+              <button :href="googleLoginUrl" class="btn socialBtn google" aria-label="使用 Google 登入"><font-awesome-icon :icon="['fab', 'google']" /></button>
+              <GoogleLoginButton @google-token-received="handleGoogleToken"/>
               <button class="btn socialBtn line" aria-label="使用 Line 登入" @click="handleLineLogin"><font-awesome-icon :icon="['fab', 'line']" /></button>
             </div>
           </div>
@@ -130,9 +130,10 @@
 
 <script setup>
 
-import { ref, reactive } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import GoogleLoginButton from '@/components/GoogleLoginButton.vue';
 
 const router = useRouter()
 
