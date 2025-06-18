@@ -55,13 +55,13 @@ const imageFile = ref(null)
 const previewUrl = ref('')
 const textareas = ref([])
 
+// 若預設資料一開始就很長，自動調整一次
 function autoResize(event) {
   const textarea = event.target
   textarea.style.height = 'auto'
   textarea.style.height = textarea.scrollHeight + 'px'
 }
 
-// 若預設資料一開始就很長，自動調整一次
 watch(() => props.data, () => {
   editableData.value = { ...props.data }
 

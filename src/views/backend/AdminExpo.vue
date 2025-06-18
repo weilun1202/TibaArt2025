@@ -82,6 +82,7 @@ async function fetchExpos() {
   data.value = expos
 }
 
+
 // 取得藝術家清單
 const artists = ref([]);
 async function fetchArtists() {
