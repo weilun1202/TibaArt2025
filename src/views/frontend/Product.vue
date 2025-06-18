@@ -91,7 +91,9 @@ gsap.registerPlugin(ScrollTrigger);
 
 const router = useRouter();
 const route = useRoute();
-const baseUrl = import.meta.env.BASE_URL;
+// const baseUrl = import.meta.env.BASE_URL;
+const baseUrl = import.meta.env.VITE_showUploadImage;
+
 
 const {addToCart} = useCart();
 
