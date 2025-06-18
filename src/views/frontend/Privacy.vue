@@ -4,7 +4,6 @@
             <header class="animate__animated animate__flipInX">
                 <div class="pageTitle">隱私權條款</div>
             </header>
-        </div>
         <div class="wrap">
             <section>
                 非常歡迎您光臨「緯藝 TibaArt」（以下簡稱本網站），為了讓您能夠安心使用本網站的各項服務與資訊，特此向您說明本網站的隱私權保護政策，以保障您的權益，請您詳閱下列內容：
@@ -74,16 +73,32 @@
                 </h5>
             </section>                   
         </div>     
+        </div>
     </div>
 </template>
 
 <style lang = 'scss' scoped>
 @import '/style.scss';
 
+.wrapper{
+    margin-bottom: 120px;
+
+    header{
+        margin-bottom: 24px;
+    }
+}
+
 .wrap{    
-    letter-spacing: $spacing-1;
+    // letter-spacing: $spacing-1; 
     line-height: 1.6;
     text-align: justify;
+    margin: 0 auto;
+    width: 95vw;
+
+     @media screen and (max-width: 1200px) {
+        width: 85vw;
+    }
+
 }
 
 section {

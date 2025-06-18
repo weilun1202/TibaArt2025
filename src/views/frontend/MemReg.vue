@@ -105,7 +105,7 @@
               <div class="formGroup">
                 <input type="checkbox" id="termsAgreement" v-model="form.termsAgreement" />
                 <label for="termsAgreement" class="terms">
-                  我已詳細閱讀並接受<a href="#" target="_blank">緯藝會員條款</a>
+                  我已詳細閱讀並接受<router-link to="/front/privacy" target="_blank">緯藝隱私權條款</router-link>
                 </label>
                 <br>
                 <span class="formError" :class="{ hidden: !errors.termsAgreement }">{{ errors.termsAgreement }}</span>
