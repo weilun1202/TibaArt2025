@@ -107,8 +107,8 @@ async function fetchArtists() {
 }
 
 // 轉換性別顯示
-function convertGender(code) {
-  switch (code) {
+function convertGender(i) {
+  switch (i) {
     case 'M': return '男'
     case 'F': return '女'
     case 'Other': return '不公開'

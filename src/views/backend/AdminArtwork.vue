@@ -140,8 +140,6 @@ async function addData() {
       console.log(pair[0], pair[1]);
     }
 
-    // 檢查http和伺服器回傳邏輯是否錯誤
-    if (!uploadResp.ok) throw new Error('HTTP 錯誤');
     const uploadResult = await uploadResp.json();
     if (!uploadResult.success) throw new Error(uploadResult.message || '圖片上傳失敗');
 
@@ -163,7 +161,6 @@ async function addData() {
 
     const result = await resp.json();
     if (resp.ok) {
-      alert('新增成功');
       showAdd.value = false;
       cleanForm();              // 清空表單
       imageFile.value = null;   // 清空圖片
