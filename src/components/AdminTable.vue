@@ -77,9 +77,8 @@
               </template>
             
               <template v-else-if="col.type === 'image'">
-              <!-- *圖片路徑要改* -->
               <img 
-                :src="baseURL + (row[col.key])"  
+                :src="imageURL + (row[col.key])"  
                 alt="圖片" 
                 style="max-height: 80px; max-width: 100px; object-fit: cover;" 
               />
@@ -125,7 +124,8 @@ const keyword = ref('')
 const currentPage = ref(1)
 const itemsPerPage = 10
 
-const baseURL = import.meta.env.BASE_URL
+// const baseURL = import.meta.env.BASE_URL
+const imageURL = import.meta.env.VITE_showUploadImage
 
 // 篩選後的資料
 const filteredData = computed(() => {
