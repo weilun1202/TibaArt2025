@@ -150,7 +150,7 @@ const uploadImage = async () => {
     console.log('上傳成功：', result);
     
 
-    memberData.img  = result.url || URL.createObjectURL(selectedFile.value);
+    memberData.img  = result.url 
     
     // 釋放預覽 URL
     URL.revokeObjectURL(previewUrl.value);

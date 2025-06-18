@@ -59,7 +59,7 @@ $ext = pathinfo($_FILES['img']['name'], PATHINFO_EXTENSION);
 $filename = uniqid('img_') . '.' . $ext;
 // $targetPath = $uploadDir . $filename; // 實體路徑
 $targetPath = $uploadDir . $filename; // 實體路徑
-$targetPathForDB = $uploadPathForDB . $filename; // 資料庫用相對路徑
+$targetPathForDB = 'https://tibamef2e.com/tjd101/g2/' . $uploadPathForDB . $filename; 
 
 // echo $targetPath
 
@@ -74,8 +74,8 @@ if (move_uploaded_file($_FILES['img']['tmp_name'], $targetPath)) {
 
     if ($stmt) {
         $stmt->execute([$targetPathForDB, $id]);  // 用相對路徑存資料庫
-        echo json_encode(['success' => true, 'url' => 'https://tibamef2e.com/tjd101/g2/' . $targetPathForDB]);
-        // echo json_encode(['success' => true, 'url' => $targetPathForDB]);
+        // echo json_encode(['success' => true, 'url' => 'https://tibamef2e.com/tjd101/g2/' . $targetPathForDB]);
+        echo json_encode(['success' => true, 'url' => $targetPathForDB]);
     } else {
         echo json_encode(['success' => false, 'message' => '無效的會員類型']);
     }

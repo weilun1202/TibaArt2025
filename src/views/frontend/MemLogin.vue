@@ -116,8 +116,7 @@
           <div class="thirdPartyLogin">
             <div class="separator">或使用以下方式登入</div>
             <div class="socialButtons">
-              <button :href="googleLoginUrl" class="btn socialBtn google" aria-label="使用 Google 登入"><font-awesome-icon :icon="['fab', 'google']" /></button>
-              <GoogleLoginButton @google-token-received="handleGoogleToken"/>
+              <button class="btn socialBtn google" aria-label="使用 Google 登入" @click="handleGoogleLoginClick"><font-awesome-icon :icon="['fab', 'google']" /></button>
               <button class="btn socialBtn line" aria-label="使用 Line 登入" @click="handleLineLogin"><font-awesome-icon :icon="['fab', 'line']" /></button>
             </div>
           </div>
@@ -133,7 +132,6 @@
 import { ref, reactive, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import GoogleLoginButton from '@/components/GoogleLoginButton.vue';
 
 const router = useRouter()
 
@@ -320,6 +318,87 @@ function handleLineLogin() {
 
   window.location.href = lineAuthUrl;
 }
+
+
+import axios from 'axios'; // 假設你使用 axios
+
+const CLIENT_ID = '360104213341-jfogr4douuub3tj81tldrdotgqs7ga1c.apps.googleusercontent.com'; // 從 GCP 獲取的用戶端 ID
+const loading = ref(false);
+const error = ref(null);
+
+// 這個函數由 Google SDK 調用，處理返回的憑證
+// 確保它在全局範圍內可訪問，因為 Google SDK 會直接調用它
+window.handleCredentialResponse = async (response) => {
+  if (response.credential) {
+    console.log('Received Google ID Token:', response.credential);
+    // 直接調用你處理令牌的函數
+    await handleGoogleToken(response.credential);
+  } else {
+    console.error('Google 登入失敗：未收到憑證');
+    error.value = 'Google 登入失敗，請重試。';
+  }
+};
+
+onMounted(() => {
+  // 初始化 Google Identity Services
+  if (window.google && window.google.accounts) {
+    window.google.accounts.id.initialize({
+      client_id: CLIENT_ID,
+      callback: window.handleCredentialResponse, // 將回調函數設定為全局函數
+      auto_prompt: false // 這裡設置為 false，因為我們要通過自定義按鈕觸發
+    });
+
+    // 如果你不想要 One Tap 彈窗，可以不調用 prompt()
+    // 如果你想要在頁面載入時自動顯示 One Tap，可以調用 window.google.accounts.id.prompt();
+  } else {
+    console.error('Google Identity Services SDK 未載入或初始化失敗');
+  }
+});
+
+// 當用戶點擊你的自定義 Google 按鈕時觸發
+const handleGoogleLoginClick = () => {
+  if (window.google && window.google.accounts) {
+    // 觸發 Google 登入流程（會彈出視窗）
+    window.google.accounts.id.prompt(); // 這是最簡潔的方法，Google 會處理彈窗
+    // 或者使用更具體的 OAuth2 流程，但通常 prompt() 足夠了
+    // const client = window.google.accounts.oauth2.initCodeClient({
+    //   client_id: CLIENT_ID,
+    //   scope: 'profile email', // 請求的權限
+    //   callback: handleAuthCode, // 處理授權碼的回調
+    // });
+    // client.requestCode(); // 請求授權碼，會打開一個新窗口
+  } else {
+    error.value = 'Google 登入功能尚未準備好，請稍後再試。';
+  }
+};
+
+// 處理從 Google 接收到的 ID Token 並發送到後端
+const handleGoogleToken = async (idToken) => {
+  loading.value = true;
+  error.value = null;
+  try {
+    const response = await axios.post('http://localhost/TIBAART/api/googleVerifyToken', {
+      idToken: idToken
+    });
+
+    if (response.data.success) {
+      console.log('後端驗證成功，用戶已登入:', response.data.user);
+      // 處理登入成功後的邏輯：
+      // - 儲存後端返回的 JWT 或 Session Token
+      // - 導向會員中心頁面
+      // 例如: localStorage.setItem('authToken', response.data.token);
+      // router.push('/dashboard');
+    } else {
+      error.value = response.data.message || 'Google 登入失敗。';
+    }
+  } catch (err) {
+    console.error('Google 登入 API 請求錯誤:', err);
+    error.value = '登入過程中發生錯誤，請稍後再試。';
+  } finally {
+    loading.value = false;
+  }
+};
+
 
 
 </script>

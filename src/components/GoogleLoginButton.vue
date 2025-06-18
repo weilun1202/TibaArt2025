@@ -12,7 +12,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
 
-const CLIENT_ID = '您的用戶端 ID'; // 從 GCP 獲取的用戶端 ID
+const CLIENT_ID = '360104213341-jfogr4douuub3tj81tldrdotgqs7ga1c.apps.googleusercontent.com'; // 從 GCP 獲取的用戶端 ID
 const emit = defineEmits(['google-token-received']); // 定義一個事件，用於將 ID Token 發送給父組件
 
 // 這裡我們將 handleCredentialResponse 定義為全局函數，因為 Google SDK 是這樣調用的
@@ -70,6 +70,7 @@ onUnmounted(() => {
 <style scoped>
 /* 可以為按鈕容器添加樣式 */
 #g_id_signin {
-  display: inline-block; /* 確保按鈕正確顯示 */
+  /* display: inline-block;  */
+  
 }
 </style>
