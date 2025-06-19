@@ -246,7 +246,14 @@ async function handleSubmitGeneral() {
       // }))
 
         alert('登入成功！');
-        router.replace('/member')
+
+        // 檢查是否有 redirect 查詢參數
+        const redirectPath = router.currentRoute.value.query.redirect;
+        if (redirectPath) {
+          router.replace(redirectPath); // 導航回之前頁面
+        } else {
+          router.replace('/member'); // 否則導航到會員主頁
+        }      
       } else {
         alert('登入失敗：' + result.message)
       }

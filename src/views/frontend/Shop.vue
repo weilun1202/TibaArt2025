@@ -199,8 +199,12 @@ const props = defineProps({
 const handleAddToCart = async (item) => {
   if (!userStore.requireLogin()) {
     alert('請先登入會員')
-    router.push('/front/memLogin')
+    router.push({
+      path: '/front/memLogin',
+      query: { redirect: router.currentRoute.value.fullPath } // 記錄當前頁面完整路徑
+    });
     return
+    
   } else {
     
       try {
