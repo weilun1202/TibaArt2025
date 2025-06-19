@@ -82,7 +82,8 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 const router = useRouter();
-const baseUrl = import.meta.env.BASE_URL;
+// const baseUrl = import.meta.env.BASE_URL;
+const baseUrl = import.meta.env.VITE_showUploadImage;
 
 // ScrollTrigger 插件
 gsap.registerPlugin(ScrollTrigger)

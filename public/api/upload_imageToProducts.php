@@ -1,23 +1,25 @@
 <?php
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
 
 include('cross_domain.php');
 include ('conn.php');
         
 //---------------------------------------------------
-// 上傳圖片至 expos 的資料夾
+// 上傳圖片至 products 的資料夾
 if (!isset($_FILES['img'])) {
     echo json_encode(['success' => false, 'message' => '缺少圖片']);
     exit;
 }
 
 
-$uploadDir = $_SERVER["DOCUMENT_ROOT"] . '/tjd101/g2/upload/expos/';
-// $uploadDir = __DIR__ . '/upload/expos/';
+$uploadDir = $_SERVER["DOCUMENT_ROOT"] . '/tjd101/g2/upload/products/';
+// $uploadDir = __DIR__ . '/upload/products/';
+echo $_SERVER["DOCUMENT_ROOT"];
+echo __DIR__;
 
-// 網站可訪問的路徑，用於資料庫與前端顯示
-// $uploadPathForDB = __DIR__ . '/upload/expos'; 
-// $uploadPathForDB = $_SERVER["DOCUMENT_ROOT"] . '/upload/expos/'; 
-$uploadPathForDB = '/upload/expos/'; 
+$uploadPathForDB ='/upload/products/'; 
 
 $allowedExts = ['jpg', 'jpeg', 'png'];
 $ext = pathinfo($_FILES['img']['name'], PATHINFO_EXTENSION);

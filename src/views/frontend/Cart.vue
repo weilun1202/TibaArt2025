@@ -237,7 +237,8 @@ import { useUserStore } from '@/stores/user.js';
 
 const { cartItems, updateQuan, removeFromCart, totalPrice, clearCart } = useCart();
 const router = useRouter();
-const baseUrl = import.meta.env.BASE_URL;
+// const baseUrl = import.meta.env.BASE_URL;
+const baseUrl = import.meta.env.VITE_showUploadImage;
 const userStore = useUserStore(); 
 
 const memberId = computed(() => userStore.decodedMemberId);
