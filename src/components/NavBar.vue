@@ -53,7 +53,7 @@
     <!-- 會員中心 已登入-->
     <div class="memberIconY" v-if="userStore.isLoggedIn">
       <router-link to="/member" @click="closeMenu">
-        <img v-if="userStore.memberData.img" :src="userStore.memberData.img" alt="會員頭像">
+        <img v-if="userStore.memberData.img" :src="MemURL + userStore.memberData.img" alt="會員頭像">
         <img v-else src="@/assets/img/TibaArt-Icon.svg" alt="會員預設頭像">
       </router-link>
     </div>
@@ -76,6 +76,9 @@ import { useUserStore } from '@/stores/user'
 import { useCart } from '@/stores/cart.js';
 
 defineProps()
+
+const MemURL = import.meta.env.VITE_MemURL
+
 
 const router = useRouter()
 const goToLogin = () => {

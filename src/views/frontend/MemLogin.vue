@@ -116,7 +116,9 @@
           <div class="thirdPartyLogin">
             <div class="separator">或使用以下方式登入</div>
             <div class="socialButtons">
-              <button class="btn socialBtn google" aria-label="使用 Google 登入" @click="handleGoogleLoginClick"><font-awesome-icon :icon="['fab', 'google']" /></button>
+              <button class="btn socialBtn google" aria-label="使用 Google 登入" @click="handleGoogleLogin">
+                <font-awesome-icon :icon="['fab', 'google']" />
+              </button>
               <button class="btn socialBtn line" aria-label="使用 Line 登入" @click="handleLineLogin"><font-awesome-icon :icon="['fab', 'line']" /></button>
             </div>
           </div>
@@ -129,8 +131,9 @@
 
 <script setup>
 
-import { ref, reactive, onMounted } from 'vue'
+import { ref, reactive, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
+import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 const router = useRouter()
@@ -322,7 +325,6 @@ function handleLineLogin() {
 }
 
 
-import axios from 'axios'; // 假設你使用 axios
 
 const CLIENT_ID = '360104213341-jfogr4douuub3tj81tldrdotgqs7ga1c.apps.googleusercontent.com'; // 從 GCP 獲取的用戶端 ID
 const loading = ref(false);
@@ -358,7 +360,7 @@ onMounted(() => {
 });
 
 // 當用戶點擊你的自定義 Google 按鈕時觸發
-const handleGoogleLoginClick = () => {
+const handleGoogleLogin = () => {
   if (window.google && window.google.accounts) {
     // 觸發 Google 登入流程（會彈出視窗）
     window.google.accounts.id.prompt(); // 這是最簡潔的方法，Google 會處理彈窗
@@ -379,7 +381,7 @@ const handleGoogleToken = async (idToken) => {
   loading.value = true;
   error.value = null;
   try {
-    const response = await axios.post('http://localhost/TIBAART/api/googleVerifyToken', {
+    const response = await axios.post('http://localhost/TIBAART/api/googleVerifyToken.php', {
       idToken: idToken
     });
 

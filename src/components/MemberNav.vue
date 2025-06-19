@@ -3,8 +3,8 @@
     <div class="memSideCon">
         <div class="memAvatarDiv">
             <div class="memAvatarCon avatarUploaded image-uploaded" v-if="memberData.img">
-              <img class="memAvatar" :src="memberData.img" v-if="memberData.img" alt="上傳的頭像">
-            </div>
+              <img class="memAvatar" :src="MemURL + memberData.img" v-if="memberData.img" alt="上傳的頭像">
+            </div>                          
             <div v-else class="memAvatarCon">
               <img class="memAvatar" src="@/assets/img/TibaArt-Icon.svg" alt="預設頭像" />
             </div>
@@ -50,6 +50,8 @@ import { ref, reactive, onMounted } from 'vue';
 import Modal from '@/components/Modal.vue';
 import { useUserStore } from '@/stores/user'
 import { useRouter } from 'vue-router'
+
+const MemURL = import.meta.env.VITE_MemURL
 
 const memberData = reactive({
   name: '',
