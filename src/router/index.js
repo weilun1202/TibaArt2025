@@ -57,7 +57,7 @@ const routes = [
       { path: 'expo', name: 'Expo', component: Expo },
       { path: 'expoArea/:id', name: 'ExpoArea', component: ExpoArea },
       { path: 'expoAreaPage/:id', name: 'ExpoAreaPage', component: ExpoAreaPage },
-      { path: 'sponsor', name: 'Sponsor', component: Sponsor },
+      { path: 'sponsor/:id?', name: 'Sponsor', component: Sponsor },
       { path: 'application', name: 'Application', component: Application },
       { path: 'shop', name: 'Shop', component: Shop },
       { path: 'cart', name: 'Cart', component: Cart },
