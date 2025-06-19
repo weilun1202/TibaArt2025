@@ -46,7 +46,7 @@
                   {{ amount }} 元
                 </button>
               </div>
-              <label for="cost" class="formLabel">
+              <label for="amount" class="formLabel">
                 新臺幣
                 <span class="formHint">*</span>
               </label>
@@ -233,11 +233,33 @@
 
 <script setup>
   import { ref, onMounted } from 'vue'
-  import { useRouter } from 'vue-router'
+  import { useRoute } from 'vue-router'
   import { useUserStore } from '@/stores/user.js'; // 匯入 Pinia 使用者狀態庫
   import axios from 'axios'  // 匯入 展覽作品 
 
-  const route = useRouter()
+ // 表單資料
+  const expoList = ref([
+    { id: 0, title: '請選擇' }, // 預設 id: 0，讓 const subject = ref(0) 吃到預設值
+    // 測試用，固定資料
+    // { id: 'expo1', title: '《 靜界焰光 》' },
+    // { id: 'expo2', title: '《 雪白世界 》' },
+    // { id: 'expo3', title: '《 白陽落櫻 》' },
+    // { id: 'expo4', title: '《 撕裂極光 》' },
+  ])
+  const subject = ref(0)                  // 展覽選項
+  const amounts = [500, 1000, 1500, 2000]  // 所有金額選項
+  const selectedAmount = ref('')           // 被選擇的金額
+  const name = ref('')                     // 贊助人名字
+  const email = ref('')                    // 電子郵件
+
+  // 錯誤訊息狀態
+  const errors = ref({
+    subject: '',
+    amount: '',
+    name: '',
+    email: ''
+  })
+  const route = useRoute()
   const userStore = useUserStore()
 
     // 到資料庫抓展覽名稱
@@ -251,6 +273,31 @@
           title: item.titleZh // 對應 PHP 加的 titleZh(展覽中文名稱)
         }))
         expoList.value.push(...exhibitions)
+
+      // --- 利用 網址 讓 Select 更新成相對應的選項 ---
+      
+        const expoIdFromUrl = route.params.id; // 從路由參數中獲取 ID
+        
+        if (expoIdFromUrl) {
+          // 將 網址 中的 ID 轉換為數字，因為 expo.id 是數字
+          const numericExpoId = parseInt(expoIdFromUrl);
+          // 尋找 expoList 中與 URL ID 相符的展覽
+          const foundExpo = expoList.value.find(expo => expo.id == numericExpoId);
+          if (foundExpo) {
+            console.log(foundExpo);
+            
+            subject.value = foundExpo.id; // 設定 v-model，選中對應的選項
+            console.log(subject);
+            
+          }else{
+
+          }
+        }else{
+          
+        }
+      // --- 邏輯結束 ---
+
+
       } else {
         console.error('API 回傳錯誤', res.data.error)
       }
@@ -271,29 +318,6 @@
       email.value = atob(userStore.memberInfo.email)  // 避免亂碼出現
     }
   })
-  
-  // 表單資料
-  const expoList = ref([
-    { id: '', title: '請選擇' }, // 預設
-    // 測試用，固定資料
-    // { id: 'expo1', title: '《 靜界焰光 》' },
-    // { id: 'expo2', title: '《 雪白世界 》' },
-    // { id: 'expo3', title: '《 白陽落櫻 》' },
-    // { id: 'expo4', title: '《 撕裂極光 》' },
-  ])
-  const subject = ref('')                  // 展覽選項
-  const amounts = [500, 1000, 1500, 2000]  // 所有金額選項
-  const selectedAmount = ref('')           // 被選擇的金額
-  const name = ref('')                     // 贊助人名字
-  const email = ref('')                    // 電子郵件
-
-  // 錯誤訊息狀態
-  const errors = ref({
-    subject: '',
-    amount: '',
-    name: '',
-    email: ''
-  })
 
   // 點按鈕時設定金額
   function selectAmount(amount) {
@@ -313,6 +337,7 @@
     
     if (!subject.value) {
       errors.value.subject = '請選擇一個展覽'
+      isValid = false; // 與自動填入相關
     }
 
     if (!name.value.trim()) {
@@ -336,7 +361,8 @@
     }
 
     // return Object.keys(errors.value).length === 0
-    return Object.values(errors.value).every(error => error === '')
+    // return Object.values(errors.value).every(error => error === '')
+    return isValid && Object.values(errors.value).every(error => error === '');
   }
 
 function handleSubmit(e) {         // 把資料送去綠界

@@ -3,7 +3,9 @@
     <div class="memSideCon">
         <div class="memAvatarDiv">
             <div class="memAvatarCon avatarUploaded image-uploaded" v-if="memberData.img">
-              <img class="memAvatar" :src="MemURL + memberData.img" v-if="memberData.img" alt="上傳的頭像">
+              <img class="memAvatar" 
+              :src="getAvatarUrl(memberData.img)" 
+              alt="上傳的頭像">
             </div>                          
             <div v-else class="memAvatarCon">
               <img class="memAvatar" src="@/assets/img/TibaArt-Icon.svg" alt="預設頭像" />
@@ -52,6 +54,13 @@ import { useUserStore } from '@/stores/user'
 import { useRouter } from 'vue-router'
 
 const MemURL = import.meta.env.VITE_MemURL
+
+const getAvatarUrl = (img) => {
+  if (!img) return '';
+  return (img.startsWith('http://') || img.startsWith('https://')) 
+    ? img 
+    : MemURL + img;
+};
 
 const memberData = reactive({
   name: '',
@@ -152,7 +161,7 @@ const uploadImage = async () => {
     console.log('上傳成功：', result);
     
 
-    memberData.img  = result.url 
+    memberData.img  = result.url + '?t=' + new Date().getTime();
     
     // 釋放預覽 URL
     URL.revokeObjectURL(previewUrl.value);

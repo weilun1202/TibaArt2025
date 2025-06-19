@@ -20,7 +20,7 @@
             <h1>{{ expoData.name }}</h1>
             <p>{{ expoData.name_en }}</p>
             <p>{{ expoData.note }}</p>
-            <router-link to="/front/Sponsor">
+            <router-link :to="{ name: 'Sponsor', params: { id: expoData.id } }">
               <button>贊助</button>
             </router-link>
           </div>
