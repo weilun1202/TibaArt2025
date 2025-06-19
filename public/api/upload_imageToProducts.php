@@ -1,13 +1,17 @@
 <?php
-ini_set('display_errors', '1');
-ini_set('display_startup_errors', '1');
-error_reporting(E_ALL);
+// ini_set('display_errors', '1');
+// ini_set('display_startup_errors', '1');
+// error_reporting(E_ALL);
 
 include('cross_domain.php');
 include ('conn.php');
         
 //---------------------------------------------------
 // 上傳圖片至 products 的資料夾
+echo $_SERVER["DOCUMENT_ROOT"];
+echo '<br>'
+echo __DIR__;
+echo '<br>'
 if (!isset($_FILES['img'])) {
     echo json_encode(['success' => false, 'message' => '缺少圖片']);
     exit;
