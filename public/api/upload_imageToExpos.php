@@ -11,7 +11,7 @@ if (!isset($_FILES['img'])) {
 }
 
 
-$uploadDir = $_SERVER["DOCUMENT_ROOT"] . '/upload/expos/';
+$uploadDir = $_SERVER["DOCUMENT_ROOT"] . '/tjd101/g2/upload/expos/';
 // $uploadDir = __DIR__ . '/upload/expos/';
 
 // 網站可訪問的路徑，用於資料庫與前端顯示

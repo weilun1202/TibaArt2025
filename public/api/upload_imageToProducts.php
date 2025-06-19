@@ -14,8 +14,10 @@ if (!isset($_FILES['img'])) {
 }
 
 
-$uploadDir = $_SERVER["DOCUMENT_ROOT"] . '/upload/products/';
+$uploadDir = $_SERVER["DOCUMENT_ROOT"] . '/tjd101/g2/upload/products/';
 // $uploadDir = __DIR__ . '/upload/products/';
+echo $_SERVER["DOCUMENT_ROOT"];
+echo __DIR__;
 
 $uploadPathForDB ='/upload/products/'; 
 
