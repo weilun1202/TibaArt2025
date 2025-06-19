@@ -325,83 +325,279 @@ function handleLineLogin() {
 }
 
 
+const CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID || '360104213341-jfogr4douuub3tj81tldrdotgqs7ga1c.apps.googleusercontent.com'
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost/TIBAART/api'
 
-const CLIENT_ID = '360104213341-jfogr4douuub3tj81tldrdotgqs7ga1c.apps.googleusercontent.com'; // 從 GCP 獲取的用戶端 ID
-const loading = ref(false);
-const error = ref(null);
 
-// 這個函數由 Google SDK 調用，處理返回的憑證
-// 確保它在全局範圍內可訪問，因為 Google SDK 會直接調用它
-window.handleCredentialResponse = async (response) => {
+const loading = ref(false)
+const error = ref(null)
+const isGoogleReady = ref(false)
+
+
+// Google SDK 載入檢查
+const checkGoogleSDK = () => {
+  return new Promise((resolve) => {
+    const checkInterval = setInterval(() => {
+      if (window.google && window.google.accounts) {
+        clearInterval(checkInterval)
+        resolve(true)
+      }
+    }, 100)
+    
+    // 超時處理 (10秒)
+    setTimeout(() => {
+      clearInterval(checkInterval)
+      resolve(false)
+    }, 10000)
+  })
+}
+
+// 動態載入 Google Identity Services SDK
+const loadGoogleSDK = () => {
+  return new Promise((resolve, reject) => {
+    // 檢查是否已經載入
+    if (window.google && window.google.accounts) {
+      resolve(true)
+      return
+    }
+
+    // 檢查是否已經有 script 標籤
+    if (document.querySelector('script[src*="accounts.google.com"]')) {
+      checkGoogleSDK().then(resolve)
+      return
+    }
+
+    const script = document.createElement('script')
+    script.src = 'https://accounts.google.com/gsi/client'
+    script.async = true
+    script.defer = true
+    
+    script.onload = async () => {
+      const isReady = await checkGoogleSDK()
+      resolve(isReady)
+    }
+    
+    script.onerror = () => {
+      reject(new Error('Failed to load Google SDK'))
+    }
+    
+    document.head.appendChild(script)
+  })
+}
+
+// Google 登入回調函數
+const handleCredentialResponse = async (response) => {
+  console.log('Google login response received')
+  
   if (response.credential) {
-    console.log('Received Google ID Token:', response.credential);
-    // 直接調用你處理令牌的函數
-    await handleGoogleToken(response.credential);
+    console.log('Received Google ID Token:', response.credential)
+    await handleGoogleToken(response.credential)
   } else {
-    console.error('Google 登入失敗：未收到憑證');
-    error.value = 'Google 登入失敗，請重試。';
+    console.error('Google 登入失敗：未收到憑證')
+    error.value = 'Google 登入失敗，請重試。'
   }
-};
+}
 
-onMounted(() => {
-  // 初始化 Google Identity Services
-  if (window.google && window.google.accounts) {
+// 初始化 Google Identity Services
+const initializeGoogle = async () => {
+  try {
+    const isLoaded = await loadGoogleSDK()
+    
+    if (!isLoaded) {
+      throw new Error('Google SDK 載入失敗')
+    }
+
+    // 設定全域回調函數
+    window.handleCredentialResponse = handleCredentialResponse
+
+    // 初始化 Google Identity Services
     window.google.accounts.id.initialize({
       client_id: CLIENT_ID,
-      callback: window.handleCredentialResponse, // 將回調函數設定為全局函數
-      auto_prompt: false // 這裡設置為 false，因為我們要通過自定義按鈕觸發
-    });
+      callback: handleCredentialResponse,
+      auto_prompt: false,
+      cancel_on_tap_outside: true,
+      context: 'signin',
+      itp_support: true
+    })
 
-    // 如果你不想要 One Tap 彈窗，可以不調用 prompt()
-    // 如果你想要在頁面載入時自動顯示 One Tap，可以調用 window.google.accounts.id.prompt();
-  } else {
-    console.error('Google Identity Services SDK 未載入或初始化失敗');
+    isGoogleReady.value = true
+    console.log('Google Identity Services 初始化成功')
+    
+  } catch (err) {
+    console.error('Google Identity Services 初始化失敗:', err)
+    error.value = 'Google 登入功能初始化失敗，請重新整理頁面重試。'
   }
-});
+}
 
-// 當用戶點擊你的自定義 Google 按鈕時觸發
+// 處理 Google 登入按鈕點擊
 const handleGoogleLogin = () => {
-  if (window.google && window.google.accounts) {
-    // 觸發 Google 登入流程（會彈出視窗）
-    window.google.accounts.id.prompt(); // 這是最簡潔的方法，Google 會處理彈窗
-    // 或者使用更具體的 OAuth2 流程，但通常 prompt() 足夠了
-    // const client = window.google.accounts.oauth2.initCodeClient({
-    //   client_id: CLIENT_ID,
-    //   scope: 'profile email', // 請求的權限
-    //   callback: handleAuthCode, // 處理授權碼的回調
-    // });
-    // client.requestCode(); // 請求授權碼，會打開一個新窗口
-  } else {
-    error.value = 'Google 登入功能尚未準備好，請稍後再試。';
+  if (!isGoogleReady.value) {
+    error.value = 'Google 登入功能尚未準備好，請稍後再試。'
+    return
   }
-};
 
-// 處理從 Google 接收到的 ID Token 並發送到後端
-const handleGoogleToken = async (idToken) => {
-  loading.value = true;
-  error.value = null;
+  error.value = null
+  
   try {
-    const response = await axios.post('http://localhost/TIBAART/api/googleVerifyToken.php', {
-      idToken: idToken
-    });
+    // 方法1: 使用 One Tap 彈窗
+    window.google.accounts.id.prompt((notification) => {
+      console.log('Prompt notification:', notification)
+      
+      if (notification.isNotDisplayed()) {
+        console.log('One Tap 無法顯示，改用 OAuth2 流程')
+        // 如果 One Tap 無法顯示，使用 OAuth2 流程
+        initiateOAuth2Flow()
+      }
+    })
+    
+  } catch (err) {
+    console.error('Google 登入流程錯誤:', err)
+    error.value = '啟動 Google 登入時發生錯誤。'
+  }
+}
 
+// OAuth2 流程 (備用方法)
+const initiateOAuth2Flow = () => {
+  const client = window.google.accounts.oauth2.initCodeClient({
+    client_id: CLIENT_ID,
+    scope: 'openid email profile',
+    ux_mode: 'popup',
+    callback: (response) => {
+      console.log('OAuth2 response:', response)
+      if (response.code) {
+        // 處理授權碼
+        handleAuthCode(response.code)
+      }
+    },
+  })
+  
+  client.requestCode()
+}
+
+// 處理授權碼 (OAuth2 流程)
+const handleAuthCode = async (code) => {
+  loading.value = true
+  error.value = null
+  
+  try {
+    const response = await axios.post(`${API_BASE_URL}/googleAuthCode.php`, {
+      code: code
+    })
+    
     if (response.data.success) {
-      console.log('後端驗證成功，用戶已登入:', response.data.user);
-      // 處理登入成功後的邏輯：
-      // - 儲存後端返回的 JWT 或 Session Token
-      // - 導向會員中心頁面
-      // 例如: localStorage.setItem('authToken', response.data.token);
-      // router.push('/dashboard');
+      console.log('OAuth2 授權成功:', response.data.user)
+      await handleLoginSuccess(response.data)
     } else {
-      error.value = response.data.message || 'Google 登入失敗。';
+      error.value = response.data.message || 'Google 登入失敗。'
     }
   } catch (err) {
-    console.error('Google 登入 API 請求錯誤:', err);
-    error.value = '登入過程中發生錯誤，請稍後再試。';
+    console.error('OAuth2 授權處理錯誤:', err)
+    error.value = '登入過程中發生錯誤，請稍後再試。'
   } finally {
-    loading.value = false;
+    loading.value = false
   }
-};
+}
+
+// 處理 Google ID Token
+const handleGoogleToken = async (idToken) => {
+  loading.value = true
+  error.value = null
+  
+  try {
+    const response = await axios.post(`${API_BASE_URL}/googleVerifyToken.php`, {
+      idToken: idToken
+    }, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      timeout: 10000 // 10秒超時
+    })
+
+    if (response.data.success) {
+      console.log('後端驗證成功，用戶已登入:', response.data.user)
+      await handleLoginSuccess(response.data)
+    } else {
+      error.value = response.data.message || 'Google 登入失敗。'
+    }
+  } catch (err) {
+    console.error('Google 登入 API 請求錯誤:', err)
+    
+    if (err.code === 'ECONNABORTED') {
+      error.value = '登入請求超時，請檢查網路連線。'
+    } else if (err.response?.status === 401) {
+      error.value = 'Google 登入驗證失敗，請重試。'
+    } else if (err.response?.status >= 500) {
+      error.value = '伺服器錯誤，請稍後再試。'
+    } else {
+      error.value = '登入過程中發生錯誤，請稍後再試。'
+    }
+  } finally {
+    loading.value = false
+  }
+}
+
+// 處理登入成功
+const handleLoginSuccess = async (data) => {
+  try {
+    // 儲存認證資訊
+    if (data.token) {
+      localStorage.setItem('authToken', data.token)
+    }
+    
+    if (data.refreshToken) {
+      localStorage.setItem('refreshToken', data.refreshToken)
+    }
+    
+    if (data.user) {
+      localStorage.setItem('user', JSON.stringify(data.user))
+    }
+    
+    // 設定 axios 預設 header
+    if (data.token) {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${data.token}`
+    }
+    
+    // 發出登入成功事件 (如果有使用 event bus 或 store)
+    // this.$emit('login-success', data.user)
+    
+    console.log('登入成功，準備跳轉')
+    
+    // 跳轉到指定頁面
+    const redirect = new URLSearchParams(window.location.search).get('redirect') || '/dashboard'
+    await router.push(redirect)
+    
+  } catch (err) {
+    console.error('處理登入成功資料時發生錯誤:', err)
+    error.value = '登入後處理發生錯誤。'
+  }
+}
+
+// 清理錯誤訊息
+const clearError = () => {
+  error.value = null
+}
+
+// 組件掛載
+onMounted(async () => {
+  console.log('開始初始化 Google 登入')
+  await initializeGoogle()
+})
+
+// 組件卸載清理
+onUnmounted(() => {
+  // 清理全域變數
+  if (window.handleCredentialResponse) {
+    delete window.handleCredentialResponse
+  }
+})
+
+// 導出方法供父組件使用
+defineExpose({
+  handleGoogleLogin,
+  clearError,
+  isGoogleReady: isGoogleReady.value
+})
 
 
 

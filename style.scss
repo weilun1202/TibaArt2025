@@ -67,6 +67,7 @@ body {
   list-style: none;
   /* 保證 body 撐滿畫面高度 */
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 
