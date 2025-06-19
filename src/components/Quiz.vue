@@ -62,6 +62,8 @@ const emit = defineEmits(['update:isOpen', 'file-selected', 'click']);
 //   emit('click'); 
 // };
 
+import image1 from '@/assets/img/aboutBanner.jpg'
+
 const currentQuestionIndex = ref(0);
 const userAnswers = ref([]);
 const score = ref(0);
@@ -70,74 +72,87 @@ const quizCompleted = ref(false);
 // 計算當前顯示的問題
 const currentQuestion = computed(() => quizQuestions[currentQuestionIndex.value]);
 
-
+// const import_image = (asset_url)=>{
+//   return new URL('@/'+asset_url,import.meta.url).href
+// }
 const quizQuestions = [
   {
     id: 1,
-    image: './src/assets/img/aboutBanner.jpg',
+    image: new URL('@/assets/img/aboutBanner.jpg',import.meta.url).href,
+    // image:image1,
+    // image:import_image('assets/img/aboutBanner.jpg'),
     question: '緯藝基金會創立於西元幾年？',
     options: ['1920', '1925', '1930', '1935'],
     answer: '1925'
   },
   {
     id: 2,
-    image: './src/assets/img/about-2000.png',
+    image: new URL('@/assets/img/about-2000.png',import.meta.url).href,
+    // image: './src/assets/img/about-2000.png',
     question: '1953年，緯藝與哪國水彩大會合辦「青年藝術家交流展」？',
     options: ['美國', '法國', '日本', '德國'],
     answer: '日本'
   },
   {
     id: 3,
-    image: './src/assets/img/monet.jpg',
+    image: new URL('@/assets/img/monet.jpg',import.meta.url).href,
+    // image: './src/assets/img/monet.jpg',
     question: '印象派的代表畫家是誰？',
     options: ['莫內', '達利', '安迪・沃荷', '高更'],
     answer: '莫內'
   },
   {
     id: 4,
-    image: './src/assets/img/Mona_Lisa.webp',
+    image: new URL('@/assets/img/Mona_Lisa.webp',import.meta.url).href,
+    // image: './src/assets/img/Mona_Lisa.webp',
     question: '蒙娜麗莎的微笑是哪位藝術家的作品？',
     options: ['達文西', '梵谷', '畢卡索', '米開朗基羅'],
     answer: '達文西'
   },
   {
     id: 5,
-    image: './src/assets/img/dora_maar.jpg',
+    image: new URL('@/assets/img/dora_maar.jpg',import.meta.url).href,
+    // image: './src/assets/img/dora_maar.jpg',
     question: '下列哪一項是畢卡索所創的藝術風格？',
     options: ['超現實主義', '立體主義', '印象派', '表現主義'],
     answer: '立體主義'
   },
   {
     id: 6,
-    image: './src/assets/img/dali.webp',
+    image: new URL('@/assets/img/dali.webp',import.meta.url).href,
+    // image: './src/assets/img/dali.webp',
     question: '下列哪位藝術家以「融化的時鐘」而聞名？',
     options: ['馬蒂斯', '達利', '波提切利', '高第'],
     answer: '達利'
   },
   {
     id: 7,
-    image: './src/assets/img/van.png',
+    image: new URL('@/assets/img/van.png',import.meta.url).href,
+    // image: './src/assets/img/van.png',
     question: '「星夜」這幅作品是出自哪位畫家之手？',
     options: ['莫內', '梵谷', '雷諾瓦', '秀拉'],
     answer: '梵谷'
   },
   {
     id: 8,
-    image: './src/assets/img/sixtin.avif',
+    image: new URL('@/assets/img/sixtin.avif',import.meta.url).href,
+    // image: './src/assets/img/sixtin.avif',
     question: '米開朗基羅參與設計並繪製了哪座教堂的天頂畫？',
     options: ['巴黎聖母院', '梵蒂岡聖彼得大教堂', '威尼斯聖馬可大教堂', '梵蒂岡西斯汀禮拜堂'],
     answer: '梵蒂岡西斯汀禮拜堂'
   },
   {
     id: 9,
-    image: './src/assets/img/Andy.jpg',
+    image: new URL('@/assets/img/Andy.jpg',import.meta.url).href,
+    // image: './src/assets/img/Andy.jpg',
     question: '安迪・沃荷是哪個藝術運動的代表人物？',
     options: ['現代主義', '達達主義', '普普藝術', '文藝復興'],
     answer: '普普藝術'
   },
   {
     id: 10,
-    image: './src/assets/img/ba_eaten.jpg',
+    image: new URL('@/assets/img/ba_eaten.jpg',import.meta.url).href,
+    // image: './src/assets/img/ba_eaten.jpg',
     question: '2019年，義大利藝術家毛里齊奧．卡泰蘭（Maurizio Cattelan）以一根香蕉和一條銀色膠帶創作了名為《喜劇演員》（Comedian）的作品，以下哪位不是後來把它吃掉的人？',
     options: ['藝術系學生盧賢秀（Noh Huyn-soo）', '加密貨幣企業家孫宇晨（Justin Sun）', '緯藝基金會執行長', '行為藝術家大衛・達圖納（David Datuna）'],
     answer: '緯藝基金會執行長'
