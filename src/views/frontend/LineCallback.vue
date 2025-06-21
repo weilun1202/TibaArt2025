@@ -20,11 +20,29 @@ onMounted(async () => {
   const storedState = localStorage.getItem('line_auth_state');
   localStorage.removeItem('line_auth_state'); // 使用後移除 state
 
-  // 驗證 state 以防止 CSRF 攻擊
+  let finalRedirectPath = '/member'; // 預設的跳轉路徑
+
+  // 1. 驗證 state 以防止 CSRF 攻擊。
+  //    state 必須存在且與 localStorage 中存儲的 state 完全匹配。
   if (!state || state !== storedState) {
-    alert('LINE 登入失敗：狀態驗證錯誤！');
+    alert('LINE 登入失敗：狀態驗證錯誤或過期！');
     router.replace('/front/memLogin'); // 導回登入頁
     return;
+  }
+
+  // 2. 如果 state 驗證通過，從 state 中解析出 redirect 路徑。
+  try {
+      const parts = state.split('_'); // 根據 MemLogin.vue 中的_分隔符號拆分
+      if (parts.length > 1) {
+          const encodedRedirect = parts[parts.length - 1]; // 最後一部分是 Base64 編碼的路徑
+          const decodedRedirect = atob(encodedRedirect); // Base64 解碼
+          if (decodedRedirect) {
+              finalRedirectPath = decodedRedirect; // 更新最終跳轉路徑
+          }
+      }
+  } catch (e) {
+      console.error('從 LINE state 中解碼重定向路徑失敗:', e);
+      // 如果解碼失敗，則使用預設的 /member 路徑，並繼續處理登入
   }
 
   if (!code) {
@@ -43,6 +61,8 @@ onMounted(async () => {
       body: JSON.stringify({
         code,
         redirect_uri: import.meta.env.VITE_LINE_REDIRECT_URI,
+        // 無需將 state 傳遞給 lineLogin.php，因為後端不需要它進行登入處理。
+        // state 僅用於前端 CSRF 驗證和導航。
       }),
     });
 
@@ -57,7 +77,9 @@ onMounted(async () => {
       }
 
       alert('LINE 登入成功！');
-      router.replace('/member');
+      // 3. 使用解析出的 finalRedirectPath 進行導航
+      router.replace(finalRedirectPath);
+      
     } else {
       // 根據不同錯誤代碼處理
       switch (result.errorCode) {

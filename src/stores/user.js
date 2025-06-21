@@ -74,7 +74,7 @@ export const useUserStore = defineStore('user', {
 
     // 檢查是否已登入
     isLoggedIn: (state) => {
-      return !!(state.memberInfo.id && state.memberInfo.email)
+      return !!(state.memberInfo.id || state.memberInfo.email)
     },
 
     // 檢查會員類型

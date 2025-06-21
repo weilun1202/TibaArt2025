@@ -316,7 +316,18 @@ async function handleSubmitArtist() {
 function handleLineLogin() {
   const lineClientId = import.meta.env.VITE_LINE_CLIENT_ID; // 您的 LINE Channel ID
   const lineRedirectUri = import.meta.env.VITE_LINE_REDIRECT_URI; // 您的回調 URL
-  const lineAuthState = 'your_random_state_string'; // 為了安全，請生成一個隨機的 state 字串
+  // const lineAuthState = 'your_random_state_string'; // 為了安全，請生成一個隨機的 state 字串
+    // 1. 獲取當前路由的完整路徑，作為登入後的重定向目標。
+  //    如果 MemLogin.vue 的 URL 中有 redirect 參數，則使用它，否則預設跳轉到 /member
+  const redirectPath = router.currentRoute.value.query.redirect || '/member';
+
+  // 2. 生成一個隨機字串用於 CSRF 保護。
+  const csrfState = Math.random().toString(36).substring(2) + Date.now(); // 增加時間戳以確保唯一性
+
+  // 3. 將 csrfState 和 redirectPath 組合成一個 state 字串，並對 redirectPath 進行 Base64 編碼，
+  //    以確保路徑中的特殊字元不會破壞 URL。
+  const lineAuthState = `${csrfState}_${btoa(redirectPath)}`;
+  
   // const lineScope = 'profile openid email'; // 請求的權限，例如 profile, openid, email
   const lineScope = 'profile openid'; // 請求的權限，例如 profile, openid
 
