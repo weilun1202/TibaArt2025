@@ -11,7 +11,7 @@ if (!isset($_FILES['img'])) {
 }
 
 
-$uploadDir = $_SERVER["DOCUMENT_ROOT"] . '/upload/expos/headshot/';
+$uploadDir = $_SERVER["DOCUMENT_ROOT"] . '/tjd101/g2/upload/expos/headshot/';
 // $uploadDir = __DIR__ . '/upload/expos/headshot/';
 
 
