@@ -30,6 +30,7 @@
         <!-- 藝術家介紹 -->
         <div class="expoArea-intro" v-if="artistData">
           <h2>藝術家介紹</h2>
+          <div class="expoArea-artist-name" v-html="artistData.name"></div>
           <div class="expoArea-artist">
             <img :src="baseUrl + artistData.img" alt="artist" />
             <div class="artist-text">

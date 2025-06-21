@@ -1715,6 +1715,9 @@ header .pageTitle {
      object-fit: cover;
   height: auto;
 }
+.expoArea .expoArea-artist-name {
+  font-size: 1.5rem;
+}
 .expoArea .expoArea-intro {
   margin: 0 auto;
   padding: 32px 16px;
@@ -2238,6 +2241,7 @@ body {
   list-style: none;
   /* 保證 body 撐滿畫面高度 */
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 h1 {

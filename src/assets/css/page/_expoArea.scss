@@ -1,5 +1,5 @@
 .expoArea {
-    
+
 
     max-width: 1200px;
     margin: 0 auto;
@@ -31,6 +31,8 @@
             .banner-text button {
                 align-self: center;
             }
+
+
 
             .expoArea-artist {
                 flex-direction: column;
@@ -91,7 +93,9 @@
         height: auto;
     }
 
-
+    .expoArea-artist-name {
+        font-size: map-get($font, h4);
+    }
 
     .expoArea-intro {
         margin: 0 auto;
