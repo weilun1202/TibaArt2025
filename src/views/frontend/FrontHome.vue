@@ -38,6 +38,7 @@
         
         <!-- 中間垂直畫作內容 -->
         <!-- 深色背景 -->
+        <path id="Curve1" d="M326 136 L394 136 L394 Z"/>
         <path d="M326 156 L394 156 L394 264 L326 264 Z" fill="#4a4266"/>
         
         <!-- 綠色流線 -->
@@ -50,6 +51,12 @@
         <circle cx="340" cy="170" r="8" fill="#6ba3d6"/>
       </g>
 
+      <text>
+        <textPath href="#Curve1">
+          申請辦展
+        </textPath>
+      </text>
+
       <g 
       class="paint paint1 painting1" 
       ref="paint1"
@@ -60,6 +67,7 @@
       
       <!-- 左側大型畫作內容 -->
       <!-- 深紫色背景 -->
+      <path id="Curve2" d="M58 62 L262 62 L262 Z"/>
       <path d="M58 88 L262 88 L262 252 L58 252 Z" fill="#4a4266"/>
       
       <!-- 橙紅色圓形 -->
@@ -69,7 +77,7 @@
       <path d="M140 88 Q180 120 220 150 Q240 170 262 200 L262 88 Z" fill="#6ba3d6"/>
       
       <!-- 橙紅色區塊 -->
-      <path d="M220 88 L262 88 L262 160 Q240 140 220 120 Z" fill="#e55a4e"/>
+      <path  d="M220 88 L262 88 L262 160 Q240 140 220 120 Z" fill="#e55a4e"/>
       
       <!-- 白色流線 -->
       <path d="M58 200 Q100 180 140 200 Q180 220 220 200 Q240 190 262 200 L262 252 L58 252 Z" fill="#f5f5f5"/>
@@ -77,12 +85,19 @@
       <!-- 深色圓弧 -->
       <path d="M80 120 Q120 100 160 120 Q180 130 200 140 Q180 160 160 180 Q120 200 80 180 Q60 160 60 140 Q60 130 80 120 Z" fill="#2d2d2d"/>
       </g>
-      
+
+      <text>
+        <textPath href="#Curve2" startOffset="50%" text-anchor="middle">
+        贊助藝術家
+        </textPath>
+      </text>
+
         <g class="paint paint3" ref="paint3">
         <!-- 小型幾何畫作框架1 -->
         <rect x="450" y="120" width="70" height="70" fill="#f0e6d2" stroke="#d4c4a8" stroke-width="4"/>
         
         <!-- 小型幾何畫作內容1 -->
+        <path id="Curve3" d="M454 110 L516 110 L516 Z"/>
         <path d="M454 124 L516 124 L516 186 L454 186 Z" fill="#f5f5f5"/>
         <!-- 深藍色線條 -->
         <path d="M454 130 L470 124 L486 130 L502 124 L516 130" stroke="#2d2d2d" stroke-width="3" fill="none"/>
@@ -93,11 +108,20 @@
         <rect x="480" y="155" width="12" height="6" fill="#7fb069"/>
         </g>
 
+
+        <text>
+          <textPath href="#Curve3" >
+          關於緯藝
+          </textPath>
+        </text>
+
+
         <g class="paint paint4" ref="paint4">
         <!-- 小型畫作框架2 -->
-        <rect x="540" y="120" width="60" height="90" fill="#f0e6d2" stroke="#d4c4a8" stroke-width="4"/>
+        <rect  x="540" y="120" width="60" height="90" fill="#f0e6d2" stroke="#d4c4a8" stroke-width="4"/>
         
         <!-- 小型畫作內容2 -->
+        <path id="Curve4" d="M544 110 L620 110 Z"/>
         <path d="M544 124 L596 124 L596 206 L544 206 Z" fill="#f5f5f5"/>
         <!-- 深藍色垂直區塊 -->
         <rect x="544" y="124" width="20" height="82" fill="#4a4266"/>
@@ -105,12 +129,19 @@
         <circle cx="575" cy="140" r="6" fill="#e55a4e"/>
         </g>
 
+        <text>
+          <textPath href="#Curve4" >
+          會員中心
+          </textPath>
+        </text>
+
         <g class="paint paint5" ref="paint5">
         <!-- 右側大型畫作框架 -->
         <rect x="680" y="100" width="280" height="200" fill="#f0e6d2" stroke="#d4c4a8" stroke-width="8"/>
         
         <!-- 右側大型畫作內容 -->
         <!-- 背景 -->
+        <path id="Curve5" d="M688 88 L952 88 L952 Z" fill="#f5f5f5"/>
         <path d="M688 108 L952 108 L952 292 L688 292 Z" fill="#f5f5f5"/>
         
         <!-- 橙紅色流線區域 -->
@@ -131,6 +162,12 @@
         <!-- 深紅色有機形狀 -->
         <path d="M750 220 Q780 210 800 230 Q820 250 800 270 Q780 280 760 270 Q740 250 750 220 Z" fill="#a64253"/>
         </g>
+
+        <text>
+          <textPath href="#Curve5" startOffset="35%" text-anchor="middle">
+          線上商城
+          </textPath>
+        </text>
 
         <!-- 展館照明效果 -->
         <defs>
@@ -220,6 +257,13 @@
               @mouseleave="hideTooltip"
               />
 
+        <path id="Curve6" d="M562 240 L618 320 Z"/>
+        <text>
+          <textPath href="#Curve6">
+            線上展覽
+          </textPath>
+        </text>
+
         <image id="artwork-7" class="banana painting7 parallax-layer-7" 
               ref="paint7"
               style="cursor: pointer"
@@ -229,7 +273,16 @@
               @mouseenter="event => showTooltip(event, '是誰把我吃掉了？')"
               @mousemove="moveTooltip"
               @mouseleave="hideTooltip"
-              />              
+              />  
+              
+        <path id="Curve7" d="M280 350 L400 350 Z"/>
+        <text>
+          <textPath href="#Curve7">
+            緯藝小測驗
+          </textPath>
+        </text>
+
+
     </svg>
 
     <Quiz v-model:isOpen="showQuiz" title="緯藝小測驗" @click="closeQuiz">
