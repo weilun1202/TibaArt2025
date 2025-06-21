@@ -43,7 +43,7 @@
               <div class="row-item order-time-col">{{ formatDate(order.orderTime) }}</div>
               <div class="row-item order-status-col">
                 <span :class="['status-tag', getStatusTagClass(order.status)]">
-                  {{ order.status }}
+                  {{ getStatusText(order.status) }}
                 </span>
               </div>
             </div>
