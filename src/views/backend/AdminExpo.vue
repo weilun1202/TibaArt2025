@@ -24,6 +24,16 @@
           <label><span>*</span>開始時間：<input v-model="newData.start" type="date"/></label>
           <label><span>*</span>結束時間：<input v-model="newData.end" type="date"/></label>
           <label><span>*</span>備註：<input v-model="newData.note" /></label>
+          <label><span>*</span>選擇作品：
+            <label v-for="artwork in artworks" :key="artwork.id">
+              <input 
+                type="checkbox"
+                :value="artwork.id" 
+                v-model="selectedArtworkIds" 
+              />
+              {{ artwork.name }}
+            </label>
+          </label>  
 
           <div class="btn-content">
             <button class="btn" @click="addData">送出</button>
@@ -53,6 +63,7 @@ const columns = [
 const data = ref([]);
 const showAdd = ref(false)
 const imageFile = ref(null);
+const selectedArtworkIds = ref([]);
 
 // 新增表單資料
 const newData = ref({
@@ -62,6 +73,7 @@ const newData = ref({
   start: '',
   end: '',
   note: '',
+  artwork_id: '',
 })
 
 function openAddModal() {
@@ -85,9 +97,16 @@ async function fetchExpos() {
 
 // 取得藝術家清單
 const artists = ref([]);
-async function fetchArtists() {
+async function fetchArtistsList() {
   const resp = await fetch(import.meta.env.VITE_GetArtists);
   artists.value = await resp.json();
+}
+
+// 取得作品清單
+const artworks = ref([]);
+async function fetchArtworks() {
+  const resp = await fetch(import.meta.env.VITE_GetAllArtworks);
+  artworks.value = await resp.json();
 }
 
 function cleanForm() {
@@ -98,8 +117,10 @@ function cleanForm() {
     start: '',
     end: '',
     note: '',
+    artwork_id: '',
   }
   imageFile.value = null;
+  selectedArtworkIds.value = [];
 }
 
 // 新增資料
@@ -152,7 +173,20 @@ async function addData() {
     }
 
     const result = await resp.json();
-    if (resp.ok) {
+    console.log(result);
+    if (result.success) {
+      const expoId = result.id
+      await fetch(import.meta.env.VITE_AddExpoArtwork, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          expo_id: expoId,
+          artwork_ids: selectedArtworkIds.value
+        })
+      })
+
       alert('新增成功');
       showAdd.value = false;
       cleanForm();              // 清空表單
@@ -169,7 +203,8 @@ async function addData() {
 
 onMounted(() => {
   fetchExpos()
-  fetchArtists()
+  fetchArtistsList()
+  fetchArtworks()
 })
 
 </script>
@@ -204,6 +239,7 @@ onMounted(() => {
   }
   label{
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     padding: $spacing-3;
     span{

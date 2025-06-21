@@ -26,7 +26,7 @@
       <div v-if="showAdd" class="modal-overlay" @click.self="showAdd = false">
         <div class="modal-content">
           <h3>新增藝術家會員資料</h3>
-          <label><input type="file" /></label>
+          <label><span>*</span>藝術家簡介頭像：<input type="file" name="img" @change="handleFileChange" /></label>
           <label><span>*</span>藝術家名稱：<input v-model="newData.name" /></label>
           <label><span>*</span>Email：<input v-model="newData.email" /></label>
           <label><span>*</span>連絡電話：<input v-model="newData.phone" /></label>
@@ -68,8 +68,9 @@ const columns = [
 ]
 
 // 狀態變數
-const showAdd = ref(false)
 const showMore = ref(false)
+const showAdd = ref(false)
+const imageFile = ref(null);
 const data = ref([])
 const selectedArtist = ref({})
 
@@ -89,6 +90,10 @@ const newData = ref({
 // 開啟新增 modal
 function openAddModal() {
   showAdd.value = true
+}
+
+function handleFileChange(e) {
+  imageFile.value = e.target.files[0]
 }
 
 // 新增時同步畫面呈現
@@ -115,7 +120,7 @@ function convertGender(i) {
   }
 }
 
-function claenForm() {
+function cleanForm() {
   newData.value = {
     name: '',
     email: '',
@@ -127,11 +132,13 @@ function claenForm() {
     account: '',
     password: ''
   }
+  imageFile.value = null;
 }
 
-// 新增資料：送出至後端
+// 新增資料
 async function addData() {
-  if (!newData.value.name ||
+  if (!imageFile.value || 
+      !newData.value.name ||
       !newData.value.email ||
       !newData.value.phone ||
       !newData.value.bank_account ||
@@ -144,12 +151,31 @@ async function addData() {
   }
 
   try {
+    //  上傳圖片
+    const formData = new FormData()
+    formData.append('img', imageFile.value)
+
+    const uploadResp = await fetch(import.meta.env.VITE_UploadArtistHeadshot, {
+      method: 'POST',
+      body: formData
+    })
+    console.log(formData)
+    for (let pair of formData.entries()) {
+      console.log(pair[0], pair[1]);
+    }
+
+    const uploadResult = await uploadResp.json();
+    if (!uploadResult.success) throw new Error(uploadResult.message || '圖片上傳失敗');
+
     const resp = await fetch(import.meta.env.VITE_AddArtist, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(newData.value)
+      body: JSON.stringify({
+        ...newData.value,
+        img: uploadResult.url,
+      })
     })
 
     if (!resp.ok) {
@@ -157,12 +183,15 @@ async function addData() {
       throw new Error(`新增失敗：${errText}`)
     }
 
-    // 新增成功後重新從資料庫取得資料
-    await fetchArtists()
-
-    // 關閉 modal & 清空表單
-    showAdd.value = false
-    claenForm()
+    const result = await resp.json();
+    if (resp.ok) {
+      showAdd.value = false;
+      cleanForm();              // 清空表單
+      imageFile.value = null;   // 清空圖片
+      fetchArtists(); 
+    } else {
+      throw new Error(result.error || '新增失敗');
+    }
 
   } catch (err) {
     alert(`新增失敗：${err.message}`)

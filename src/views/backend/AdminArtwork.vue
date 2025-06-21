@@ -3,10 +3,10 @@
       :columns="columns" 
       :data="data"
       @add="openAddModal"
-      @edit="openEditModal"
-     />
+      />
+      <!-- @edit="openEditModal" -->
 
-     <transition name="fade">
+    <transition name="fade">
       <div v-if="showAdd" class="modal-overlay" @click.self="showAdd = false">
         <div class="modal-content">
           <h3>新增作品資料</h3>
@@ -34,20 +34,20 @@
       </div>
     </transition>
 
-     <EditModal
+    <!-- <EditModal
       :show="showEdit"
       :data="selectedRow"
       :fields="editFields"
       title="編輯作品"
       @close="showEdit = false"
       @update="updateData"
-    />
+    /> -->
 </template>
 
 <script setup>
 import { ref, onMounted } from "vue";
 import AdminTable from '@/components/AdminTable.vue'
-import EditModal from '@/components/AdminEditModal.vue'
+// import EditModal from '@/components/AdminEditModal.vue'
 
 
 // 欄位設定
@@ -64,8 +64,8 @@ const columns = [
 const data = ref([]);
 const showAdd = ref(false)
 const imageFile = ref(null);
-const showEdit = ref(false)
-const selectedRow = ref({})
+// const showEdit = ref(false)
+// const selectedRow = ref({})
 
 // 新增表單資料
 const newData = ref({
@@ -87,7 +87,7 @@ function handleFileChange(e) {
 
 // 載入藝術家清單
 const artists = ref([]);
-async function fetchArtists() {
+async function fetchArtistsList() {
   const resp = await fetch(import.meta.env.VITE_GetArtists);
   artists.value = await resp.json();
 }
@@ -174,41 +174,41 @@ async function addData() {
 }
 
 // 編輯資料
-const editFields = [
-  { key: 'name', label: '作品名稱' },
-  { key: 'name_en', label: '作品名稱' },
-  { key: 'artist_id', label: '作者' },
-  { key: 'stuff', label: '媒材'  },
-  { key: 'size', label: '尺寸'  },
-  { key: 'note', label: '備註', type: 'textarea'},
-  { key: 'img', label: '作品圖片',type: 'file' },
-]
+// const editFields = [
+//   { key: 'name', label: '作品名稱' },
+//   { key: 'name_en', label: '作品名稱' },
+//   { key: 'artist_id', label: '作者' },
+//   { key: 'stuff', label: '媒材'  },
+//   { key: 'size', label: '尺寸'  },
+//   { key: 'note', label: '備註', type: 'textarea'},
+//   { key: 'img', label: '作品圖片',type: 'file' },
+// ]
 
-function openEditModal(row) {
-  selectedRow.value = { ...row }
-  showEdit.value = true
-}
+// function openEditModal(row) {
+//   selectedRow.value = { ...row }
+//   showEdit.value = true
+// }
 
-async function updateData(formData, id) {
-  const resp = await fetch(`${import.meta.env.VITE_UpdateArtwork}/${id}`, {
-    method: 'POST',
-    body: formData
-  })
+// async function updateData(formData, id) {
+//   const resp = await fetch(`${import.meta.env.VITE_UpdateArtwork}/${id}`, {
+//     method: 'POST',
+//     body: formData
+//   })
 
-  if (resp.ok) {
-    const updated = await resp.json()
-    const index = data.value.findIndex(d => d.id === id)
-    if (index !== -1) {
-      data.value[index] = updated
-    }
-  } else {
-    alert('更新失敗')
-  }
-}
+//   if (resp.ok) {
+//     const updated = await resp.json()
+//     const index = data.value.findIndex(d => d.id === id)
+//     if (index !== -1) {
+//       data.value[index] = updated
+//     }
+//   } else {
+//     alert('更新失敗')
+//   }
+// }
 
 onMounted(() => {
   fetchArtworks()
-  fetchArtists()
+  fetchArtistsList()
 })
 
 </script>

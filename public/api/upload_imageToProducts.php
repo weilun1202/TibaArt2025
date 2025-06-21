@@ -8,10 +8,10 @@ include ('conn.php');
         
 //---------------------------------------------------
 // 上傳圖片至 products 的資料夾
-echo $_SERVER["DOCUMENT_ROOT"];
-echo '<br>'
-echo __DIR__;
-echo '<br>'
+// echo $_SERVER["DOCUMENT_ROOT"];
+// echo '<br>'
+// echo __DIR__;
+// echo '<br>'
 if (!isset($_FILES['img'])) {
     echo json_encode(['success' => false, 'message' => '缺少圖片']);
     exit;
@@ -20,8 +20,6 @@ if (!isset($_FILES['img'])) {
 
 $uploadDir = $_SERVER["DOCUMENT_ROOT"] . '/tjd101/g2/upload/products/';
 // $uploadDir = __DIR__ . '/upload/products/';
-echo $_SERVER["DOCUMENT_ROOT"];
-echo __DIR__;
 
 $uploadPathForDB ='/upload/products/'; 
 

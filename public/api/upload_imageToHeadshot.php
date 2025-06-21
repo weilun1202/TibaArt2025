@@ -11,10 +11,12 @@ if (!isset($_FILES['img'])) {
 }
 
 
-$uploadDir = $_SERVER["DOCUMENT_ROOT"] . '/upload/products/';
+$uploadDir = $_SERVER["DOCUMENT_ROOT"] . '/tjd101/g2/upload/expos/headshot/';
+// $uploadDir = __DIR__ . '/upload/expos/headshot/';
+
 
 // 網站可訪問的路徑，用於資料庫與前端顯示
-$uploadPathForDB = '/upload/products/'; 
+$uploadPathForDB = '/upload/expos/headshot/'; 
 
 $allowedExts = ['jpg', 'jpeg', 'png'];
 $ext = pathinfo($_FILES['img']['name'], PATHINFO_EXTENSION);
