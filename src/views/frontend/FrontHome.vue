@@ -2,13 +2,16 @@
 
 <div class="frontHomeW">
 
-    <div class="split-text-container">
-            <h1 ref="splitTextElement" class="animated-heading">
-            TibaArt 緯藝基金會
-            </h1>
-    </div>
+  <FrontLoad/>
+  <FrontNames/>
+
+  <div class="split-text-container">
+    <h1 ref="splitTextElement" class="animated-heading">
+      TibaArt 緯藝基金會
+    </h1>
+  </div>
     <div>
-        <p class="animate__animated animate__tada">點選下方作品，開始悠遊緯藝！</p>
+        <!-- <p class="animate__animated animate__tada">點選下方圖片，開始悠遊緯藝！</p> -->
     </div>
 
     <!-- tooltip（在 svg 外） -->
@@ -52,7 +55,7 @@
       </g>
 
       <text>
-        <textPath href="#Curve1">
+        <textPath class="curve" href="#Curve1">
           申請辦展
         </textPath>
       </text>
@@ -87,7 +90,7 @@
       </g>
 
       <text>
-        <textPath href="#Curve2" startOffset="50%" text-anchor="middle">
+        <textPath class="curve" href="#Curve2" startOffset="50%" text-anchor="middle">
         贊助藝術家
         </textPath>
       </text>
@@ -110,7 +113,7 @@
 
 
         <text>
-          <textPath href="#Curve3" >
+          <textPath class="curve" href="#Curve3" >
           關於緯藝
           </textPath>
         </text>
@@ -130,7 +133,7 @@
         </g>
 
         <text>
-          <textPath href="#Curve4" >
+          <textPath class="curve" href="#Curve4" >
           會員中心
           </textPath>
         </text>
@@ -164,7 +167,7 @@
         </g>
 
         <text>
-          <textPath href="#Curve5" startOffset="35%" text-anchor="middle">
+          <textPath class="curve" href="#Curve5" startOffset="35%" text-anchor="middle">
           線上商城
           </textPath>
         </text>
@@ -259,7 +262,7 @@
 
         <path id="Curve6" d="M562 240 L618 320 Z"/>
         <text>
-          <textPath href="#Curve6">
+          <textPath class="curve" href="#Curve6">
             線上展覽
           </textPath>
         </text>
@@ -277,11 +280,10 @@
               
         <path id="Curve7" d="M280 350 L400 350 Z"/>
         <text>
-          <textPath href="#Curve7">
+          <textPath class="curve" href="#Curve7">
             緯藝小測驗
           </textPath>
         </text>
-
 
     </svg>
 
@@ -293,6 +295,7 @@
                 </div>              
     </Quiz>
 
+
 </div>
 </template>
 
@@ -300,6 +303,8 @@
 import router from '@/router';
 import { ref, onMounted, onUnmounted } from 'vue'
 import Quiz from '@/components/Quiz.vue';
+import FrontLoad from '@/components/FrontLoad.vue';
+import FrontNames from '@/components/FrontNames.vue';
 import { gsap } from 'gsap'
 import { SplitText } from 'gsap/SplitText'; 
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -350,7 +355,27 @@ function hideTooltip() {
   tooltipVisible.value = false
 }
 
+const sectionRefs = ref([])
+
+
+
 onMounted(() => {
+  sectionRefs.value.forEach((el, i) => {
+    gsap.set(el, { rotateX: 90, opacity: 0, transformOrigin: 'top center' })
+    gsap.to(el, {
+      scrollTrigger: {
+        trigger: el,
+        start: 'top 80%',
+        toggleActions: 'play none none reverse',
+      },
+      rotateX: 0,
+      opacity: 1,
+      duration: 1.2,
+      ease: 'power4.out',
+    })
+  })
+
+
   // 文字分割動畫
   if (splitTextElement.value) {
     mySplitText = new SplitText(splitTextElement.value, { type: 'chars' });
@@ -677,8 +702,8 @@ svg {
   }
 
 h1{
-    font-size: 60px;
-    font-weight: 450;
+    font-size: 72px;
+    font-weight: bold;
     text-align: center;
     color: $fontBlack;
     margin-bottom: 20px;  
@@ -730,6 +755,36 @@ p{
 
   font-size: map-get($font, p); 
 }
+
+.curve{
+  opacity: 0;
+  animation: PopIn 5s ease forwards;
+}
+
+@keyframes PopIn   {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+.container {
+  perspective: 1200px;
+}
+.panel {
+  background: white;
+  margin: 100px 0;
+  padding: 80px;
+  border-radius: 20px;
+  transform: rotateX(90deg);
+  opacity: 0;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  transition: transform 1s ease;
+}
+
+
 
 
 </style>
