@@ -47,7 +47,7 @@ import { gsap } from 'gsap'
 
 // 加入路由
 const route = useRoute()
-const baseUrl = import.meta.env.BASE_URL
+const baseUrl = import.meta.env.VITE_showUploadImage
 
 // 修改變數宣告
 const loading = ref(false)

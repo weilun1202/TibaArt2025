@@ -73,7 +73,7 @@ import { useRoute } from 'vue-router'
 import { gsap } from 'gsap'
 
 const route = useRoute()
-const baseUrl = import.meta.env.BASE_URL
+const baseUrl = import.meta.env.VITE_showUploadImage
 
 // 響應式資料
 const loading = ref(true)
