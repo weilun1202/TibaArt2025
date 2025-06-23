@@ -1,7 +1,7 @@
 <template>
   <div class="loading-screen" v-if="show">
     <div class="block block-1">歡迎來到緯藝基金會 <br> Welcome To TibaArt Foundation</div>
-    <div class="block block-2">致力於提拔新興藝術家 <br> Promoting Emerging Artists</div>
+    <div class="block block-2">我們致力於提拔新興藝術家 <br> Promoting Emerging Artists</div>
     <div class="block block-3">迄今已有100年的歷史 <br> Since 1925 </div>
   </div>
 </template>

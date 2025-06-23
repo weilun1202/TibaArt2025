@@ -5,25 +5,30 @@
   <FrontLoad/>
   <FrontNames/>
 
-  <div class="split-text-container">
-    <h1 ref="splitTextElement" class="animated-heading">
-      TibaArt 緯藝基金會
-    </h1>
-  </div>
+  <section class="animate-on-scroll section-1">
+    <div class="split-text-container">
+      <h1 ref="splitTextElement" class="animated-heading">
+        TibaArt 緯藝基金會
+      </h1>
+    </div>
+  </section>
+
     <div>
         <!-- <p class="animate__animated animate__tada">點選下方圖片，開始悠遊緯藝！</p> -->
     </div>
 
     <!-- tooltip（在 svg 外） -->
-      <div 
+      <!-- <div 
         class="tooltip animate__animated animate__pulse" 
         v-if="tooltipVisible"
         :style="{ top: tooltipY + 'px', left: tooltipX + 'px' }"
       >
         {{ tooltipText }}
-      </div>
+      </div> -->
 
-      <svg ref="svgRef" width="1000" height="600" viewBox="0 0 1000 600" xmlns="http://www.w3.org/2000/svg">
+
+      <section class="animate-on-scroll section-2">
+        <svg ref="svgRef" width="1000" height="600" viewBox="0 0 1000 600" xmlns="http://www.w3.org/2000/svg">
 
         <!-- 展館地板 -->
         <!-- <path d="M0 450 L1000 450 L1000 600 L0 600 Z" fill="#e8e8e8"/> -->
@@ -41,7 +46,7 @@
         
         <!-- 中間垂直畫作內容 -->
         <!-- 深色背景 -->
-        <path id="Curve1" d="M326 136 L394 136 L394 Z"/>
+        <path id="Curve1" d="M326 136 L394 136 Z"/>
         <path d="M326 156 L394 156 L394 264 L326 264 Z" fill="#4a4266"/>
         
         <!-- 綠色流線 -->
@@ -70,7 +75,7 @@
       
       <!-- 左側大型畫作內容 -->
       <!-- 深紫色背景 -->
-      <path id="Curve2" d="M58 62 L262 62 L262 Z"/>
+      <path id="Curve2" d="M150 62 L300 62 Z"/>
       <path d="M58 88 L262 88 L262 252 L58 252 Z" fill="#4a4266"/>
       
       <!-- 橙紅色圓形 -->
@@ -90,7 +95,7 @@
       </g>
 
       <text>
-        <textPath class="curve" href="#Curve2" startOffset="50%" text-anchor="middle">
+        <textPath class="curve" href="#Curve2">
         贊助藝術家
         </textPath>
       </text>
@@ -100,7 +105,7 @@
         <rect x="450" y="120" width="70" height="70" fill="#f0e6d2" stroke="#d4c4a8" stroke-width="4"/>
         
         <!-- 小型幾何畫作內容1 -->
-        <path id="Curve3" d="M454 110 L516 110 L516 Z"/>
+        <path id="Curve3" d="M454 110 L516 110 Z"/>
         <path d="M454 124 L516 124 L516 186 L454 186 Z" fill="#f5f5f5"/>
         <!-- 深藍色線條 -->
         <path d="M454 130 L470 124 L486 130 L502 124 L516 130" stroke="#2d2d2d" stroke-width="3" fill="none"/>
@@ -144,7 +149,7 @@
         
         <!-- 右側大型畫作內容 -->
         <!-- 背景 -->
-        <path id="Curve5" d="M688 88 L952 88 L952 Z" fill="#f5f5f5"/>
+        <path id="Curve5" d="M558 88 L852 88 Z" fill="#f5f5f5"/>
         <path d="M688 108 L952 108 L952 292 L688 292 Z" fill="#f5f5f5"/>
         
         <!-- 橙紅色流線區域 -->
@@ -278,14 +283,15 @@
               @mouseleave="hideTooltip"
               />  
               
-        <path id="Curve7" d="M280 350 L400 350 Z"/>
+        <path id="Curve7" d="M250 350 L400 350 Z"/>
         <text>
           <textPath class="curve" href="#Curve7">
-            緯藝小測驗
+            是誰把我吃掉了？
           </textPath>
         </text>
 
     </svg>
+    </section>
 
     <Quiz v-model:isOpen="showQuiz" title="緯藝小測驗" @click="closeQuiz">
                 <div class="QuizDIY">
@@ -324,10 +330,10 @@ const paint7 = ref(null)
 const parallaxBg = ref(null)
 const contentSection = ref(null)
 
-const tooltipVisible = ref(false)
-const tooltipText = ref('')
-const tooltipX = ref(0)
-const tooltipY = ref(0)
+// const tooltipVisible = ref(false)
+// const tooltipText = ref('')
+// const tooltipX = ref(0)
+// const tooltipY = ref(0)
 
 const showQuiz = ref(false);
 const openQuiz = () => {
@@ -337,88 +343,107 @@ const closeQuiz = () => {
   showQuiz.value = false;
 };
 
-function showTooltip(event, text, artworkCenterX, artworkCenterY) {
-  tooltipText.value = text
-  tooltipVisible.value = true
+// function showTooltip(event, text, artworkCenterX, artworkCenterY) {
+//   tooltipText.value = text
+//   tooltipVisible.value = true
+// }
 
-}
+// function moveTooltip(event) {
+//   if (!tooltipVisible.value) return
 
-function moveTooltip(event) {
-  if (!tooltipVisible.value) return
+//   tooltipX.value = event.clientX + 20
+//   tooltipY.value = event.clientY - 20
 
-  tooltipX.value = event.clientX + 20
-  tooltipY.value = event.clientY - 20
+// }
 
-}
-
-function hideTooltip() {
-  tooltipVisible.value = false
-}
-
-const sectionRefs = ref([])
-
+// function hideTooltip() {
+//   tooltipVisible.value = false
+// }
 
 
 onMounted(() => {
-  sectionRefs.value.forEach((el, i) => {
-    gsap.set(el, { rotateX: 90, opacity: 0, transformOrigin: 'top center' })
-    gsap.to(el, {
-      scrollTrigger: {
-        trigger: el,
-        start: 'top 80%',
-        toggleActions: 'play none none reverse',
-      },
-      rotateX: 0,
-      opacity: 1,
-      duration: 1.2,
-      ease: 'power4.out',
+
+  const observer = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target
+
+          // 根據不同 class 或 data-* 做不同動畫（可客製化）
+          if (el.classList.contains('section-1')) {
+            gsap.fromTo(el, { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 1 });
+            playSplitTextAnimation();
+          } else if (el.classList.contains('section-2')) {
+            gsap.fromTo(el, { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, duration: 1.2 });
+            playSvgAnimations(); 
+          } else {
+            // 預設動畫
+            gsap.fromTo(el, { opacity: 0 }, { opacity: 1, duration: 1 })
+          }
+
+          observer.unobserve(el) // 滑入後只觸發一次
+        }
+      })
+    },
+    {
+      threshold: 0.3 // 進入視窗 30% 時觸發
+    }
+  )
+    const sections = document.querySelectorAll('.animate-on-scroll')
+    sections.forEach(section => {
+    observer.observe(section)
     })
-  })
+
+
 
 
   // 文字分割動畫
-  if (splitTextElement.value) {
-    mySplitText = new SplitText(splitTextElement.value, { type: 'chars' });
-    gsap.from(mySplitText.chars, {
-      opacity: 0,
-      y: 20,
-      rotationX: -245,
-      transformOrigin: '50% 50% -20px',
-      stagger: 0.2,
-      duration: 1,
-      ease: 'back.out(1.7)',
-      delay: 0.5
-    });
+  const playSplitTextAnimation = () => {
+    if (splitTextElement.value) {
+      mySplitText = new SplitText(splitTextElement.value, { type: 'chars' });
+      gsap.from(mySplitText.chars, {
+        opacity: 0,
+        y: 20,
+        rotationX: -245,
+        transformOrigin: '50% 50% -20px',
+        stagger: 0.2,
+        duration: 1,
+        ease: 'back.out(1.7)',
+        delay: 0.5
+      });
+    }
   }
-    
-  // 初始設定所有元素為「在畫面外」
-  gsap.set([paint1.value, paint2.value], { x: -200, opacity: 0 })
-  gsap.set([paint3.value], { y: 200, opacity: 0 })
-  gsap.set([paint4.value], { y: -200, opacity: 0 })
-  gsap.set([paint5.value], { x: 200, opacity: 0 })
-  gsap.set(paint6.value, { x: window.innerWidth / 2, y: window.innerHeight / 4, opacity: 0, scale: 2 }); // 從視窗右下方開始
-  gsap.set([paint7.value], { x: -200, opacity: 0 })
 
 
-  // 順序滑入動畫
-  gsap.timeline()
-    .to(paint1.value, { x: 0, opacity: 1, duration: 0.75, ease: 'power3.out' })
-    .to(paint2.value, { x: 0, opacity: 1, duration: 0.75, ease: 'circ.out' }, '0.5')
-    .to(paint3.value, { y: 0, opacity: 1, duration: 0.75, ease: 'bounce.out' }, '0.7')
-    .to(paint4.value, { y: 0, opacity: 1, duration: 0.75, ease: 'elastic.out(1, 0.3)' }, '1.2')
-    .to(paint5.value, { x: 0, opacity: 1, duration: 0.75, ease: 'power3.out' }, '0.4')
+  const playSvgAnimations = () => {
+    // 初始設定所有元素為「在畫面外」
+    gsap.set([paint1.value, paint2.value], { x: -200, opacity: 0 })
+    gsap.set([paint3.value], { y: 200, opacity: 0 })
+    gsap.set([paint4.value], { y: -200, opacity: 0 })
+    gsap.set([paint5.value], { x: 200, opacity: 0 })
+    gsap.set(paint6.value, { x: window.innerWidth / 2, y: window.innerHeight / 4, opacity: 0, scale: 2 }); // 從視窗右下方開始
+    gsap.set([paint7.value], { x: -200, opacity: 0 })
 
-    .to(paint6.value, {
-      x: 410,
-      y: 200,
-      opacity: 1,
-      scale: 1,
-      duration: 1.5,
-      ease: 'back.out(1.7)'
-    }, '1.4')
 
-    .to(paint7.value, { x: 350, y: 300, opacity: 1, duration: 0.75, ease: 'power3.out' }, '0.4');
-    
+    // 順序滑入動畫
+    gsap.timeline()
+      .to(paint1.value, { x: 0, opacity: 1, duration: 0.75, ease: 'power3.out' })
+      .to(paint2.value, { x: 0, opacity: 1, duration: 0.75, ease: 'circ.out' }, '0.5')
+      .to(paint3.value, { y: 0, opacity: 1, duration: 0.75, ease: 'bounce.out' }, '0.7')
+      .to(paint4.value, { y: 0, opacity: 1, duration: 0.75, ease: 'elastic.out(1, 0.3)' }, '1.2')
+      .to(paint5.value, { x: 0, opacity: 1, duration: 0.75, ease: 'power3.out' }, '0.4')
+
+      .to(paint6.value, {
+        x: 410,
+        y: 200,
+        opacity: 1,
+        scale: 1,
+        duration: 1.5,
+        ease: 'back.out(1.7)'
+      }, '1.4')
+
+      .to(paint7.value, { x: 350, y: 300, opacity: 1, duration: 0.75, ease: 'power3.out' }, '0.4');
+  }
 
   // Hover 效果 for painting1 to painting5
   const paintings = [paint1.value, paint2.value, paint3.value, paint4.value, paint5.value, null, paint7.value];
@@ -703,7 +728,7 @@ svg {
 
 h1{
     font-size: 72px;
-    font-weight: bold;
+    font-weight: 450;
     text-align: center;
     color: $fontBlack;
     margin-bottom: 20px;  
@@ -782,6 +807,11 @@ p{
   opacity: 0;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
   transition: transform 1s ease;
+}
+
+.animate-on-scroll {
+  opacity: 0; 
+  transition: all 0.5s ease-out;
 }
 
 

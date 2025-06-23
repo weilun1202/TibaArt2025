@@ -1,25 +1,42 @@
 <template>
 
 
+<section class="text-on-scroll section-3">
+  <div class="NameTitle">
+      <div class="TitleText">現正展出藝術家 Current Artists</div>
+  </div>
+</section>
 
-<div class="NameTitle">
-    <div class="TitleText">現正展出的藝術家 Current Artists</div>
+
+<div class="artist">
+  <div class="artist-name">
+    <div class="artist-name-text animate__animated animate__slideInUp" 
+    v-for="(artist, index) in artists" 
+    :key="index" 
+    ref="nameRefs" 
+    :class="{ hovered: hoverIndex === index }"
+    >{{ artist.name }}</div>
+  </div>
+  <div class="artist-photo">
+    <img 
+    :src="artist.img" 
+    :alt="artist.name" 
+    class="artist-img" 
+    v-for="(artist, index) in artists" 
+    :key="index" 
+    ref="photoRefs" 
+    @mouseenter="handleMouseEnter(index)"
+    @mouseleave="handleMouseLeave"
+    />
+  </div>
 </div>
 
 
-<div
-      v-for="(artist, index) in artists"
-      :key="index"
-      ref="artistRefs"
-      class="artist"
-    >
-      <img :src="artist.img" :alt="artist.name" class="artist-img" />
-      <div class="artist-name animate__animated animate__slideInUp" >{{ artist.name }}</div>
-</div>
-
-<div class="NameTitle">
-    <div class="TitleText">開始逛逛緯藝 Start Visiting</div>
-</div>
+<section class="text-on-scroll section-4">
+  <div class="NameTitle">
+      <div class="TitleText">開始逛逛緯藝 Start Visiting</div>
+  </div>
+</section>
 
 
 </template>
@@ -45,21 +62,49 @@ const artists = [
   { name: 'Lukas Wiedmann 路卡斯維德曼', img: 'src/assets/img/13.png' }
 ]
 
-const artistRefs = ref([])
+const nameRefs = ref([])
+const photoRefs = ref([])
+
+
+const hoverIndex = ref(null);
+const handleMouseEnter = (index) => {
+  hoverIndex.value = index;
+}
+const handleMouseLeave = () => {
+  hoverIndex.value = null;
+}
+
 
 onMounted(() => {
 
-const tl = gsap.timeline()
+  const animateTitle = (sectionEl) => {
+    const titleEl = sectionEl.querySelector('.TitleText');
+    if(!titleEl) return
+  
+    gsap.to(titleEl, {
+      width: '45vw',
+      height: '10vh',
+      duration: 3.5,
+      ease: 'power3.out',
+    })
+}
 
-  tl.to('.TitleText', {
-    width: '40vw',
-    height: '10vh',
-    duration: 3.5,
-    ease: 'power3.out',
+  nameRefs.value.forEach((el, index) => {
+    gsap.from(el, {
+      scrollTrigger: {
+        trigger: el,
+        start: 'top 100%',
+        toggleActions: 'play none none reverse'
+      },
+      y: 50,
+      opacity: 0,
+      duration: 1,
+      ease: 'power3.out',
+      delay: index * 0.03
+    })
   })
 
-
-  artistRefs.value.forEach((el, index) => {
+    photoRefs.value.forEach((el, index) => {
     gsap.from(el, {
       scrollTrigger: {
         trigger: el,
@@ -73,6 +118,32 @@ const tl = gsap.timeline()
       delay: index * 0.05
     })
   })
+
+
+  const observer = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target
+
+          if (el.classList.contains('text-on-scroll')) {
+            gsap.fromTo(el, { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 1 });
+            animateTitle(el);
+          }
+          observer.unobserve(el) 
+        }
+      })
+    },
+    {
+      threshold: 0.5 
+    }
+  )
+    const sections = document.querySelectorAll('.text-on-scroll')
+    sections.forEach(section => {
+    observer.observe(section)
+    })
+
+
 })
 
 </script>
@@ -86,9 +157,9 @@ const tl = gsap.timeline()
 
     width: 50vw;
     height: 50vh;
-    margin: 120px auto 60px;
+    margin: 60px auto 60px;
 
-    font-size: 36px;
+    font-size: 32px;
     font-weight: bold;
     color: #fff;
     text-align: left;
@@ -101,7 +172,7 @@ const tl = gsap.timeline()
     overflow: hidden;
     display: flex;
     align-items: center;
-    padding: 0 12px;
+    justify-content: center;
     background: $logoBlue; 
 }
 
@@ -111,21 +182,46 @@ const tl = gsap.timeline()
     color: $fontBlack;
     margin: 0 auto;
     width: 90vw;
-    border: 1.5px solid $fontBlack;
-    padding: 24px;
+    border: 3px solid $fontBlack;
+    padding: 32px;
 
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
-    gap: 24px;
+    gap: 80px;
     margin-bottom: 32px;
+    
+    .artist-photo{
+      order: 0;
+      width: 100%;
+    }
+
+    .artist-name {
+      order: 1;
+      width: 100%;
+    }
+
+    .artist-name-text {
+      line-height: 1.05;
+    }
+
+    .artist-name-text.hovered {
+        color: $logoYellow;
+        transition: color 0.35s ease;
+      }
 
     .artist-img {
-      order: 1;
-      width: 10%;
+      width: 20%;
       aspect-ratio: 1/1;
       border-radius: 50%;
       object-fit: cover;
+      border: 3px solid $logoBrown;
+
+      &:hover {
+        border: 5px solid $logoYellow;
+        cursor: pointer;
+      }
+
     }
 }
 
