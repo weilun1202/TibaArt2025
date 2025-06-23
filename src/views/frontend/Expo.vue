@@ -48,6 +48,10 @@ const tooltipRef = ref(null)
 // 用來存儲 ScrollTrigger 實例，方便清理
 const scrollTriggers = ref([])
 
+// 添加 tooltip 相關的響應式變數
+const currentTooltipTarget = ref(null)
+const tooltipTimeout = ref(null)
+
 // 撈取資料
 const fetchExpoData = async () => {
   try {
@@ -134,7 +138,41 @@ const initAnimations = () => {
   initTooltip()
 }
 
-// 獨立的 tooltip 初始化函數
+// 更新 tooltip 位置的輔助函數
+const updateTooltipPosition = (e) => {
+  const tooltipEl = tooltipRef.value
+  if (!tooltipEl) return
+
+  gsap.set(tooltipEl, {
+    left: e.clientX + 10 + 'px',
+    top: e.clientY - 10 + 'px'
+  })
+}
+
+// 隱藏 tooltip 的輔助函數
+const hideTooltip = () => {
+  const tooltipEl = tooltipRef.value
+  if (!tooltipEl) return
+
+  currentTooltipTarget.value = null
+  
+  if (tooltipTimeout.value) {
+    clearTimeout(tooltipTimeout.value)
+    tooltipTimeout.value = null
+  }
+
+  gsap.to(tooltipEl, {
+    duration: 0.15,
+    opacity: 0,
+    scale: 0.8,
+    ease: 'power2.in',
+    onComplete: () => {
+      tooltipEl.style.display = 'none'
+    }
+  })
+}
+
+// 優化後的 tooltip 初始化函數
 const initTooltip = () => {
   const tooltipEl = tooltipRef.value
 
@@ -151,6 +189,21 @@ const initTooltip = () => {
       const text = img.getAttribute('data-title') || ''
       if (!text) return
 
+      // 清除任何待執行的隱藏動畫
+      if (tooltipTimeout.value) {
+        clearTimeout(tooltipTimeout.value)
+        tooltipTimeout.value = null
+      }
+
+      // 如果當前目標相同，只更新位置
+      if (currentTooltipTarget.value === img) {
+        updateTooltipPosition(e)
+        return
+      }
+
+      // 設定新的目標
+      currentTooltipTarget.value = img
+      
       console.log('顯示 tooltip:', text) // 除錯用
 
       tooltipEl.textContent = text
@@ -172,23 +225,29 @@ const initTooltip = () => {
     })
 
     img.addEventListener('mousemove', (e) => {
-      gsap.set(tooltipEl, {
-        left: e.clientX + 10 + 'px',
-        top: e.clientY - 10 + 'px'
-      })
+      // 只有當前目標才更新位置
+      if (currentTooltipTarget.value === img) {
+        updateTooltipPosition(e)
+      }
     })
 
-    img.addEventListener('mouseleave', () => {
-      gsap.to(tooltipEl, {
-        duration: 0.15,
-        opacity: 0,
-        scale: 0.8,
-        ease: 'power2.in',
-        onComplete: () => {
-          tooltipEl.style.display = 'none'
+    img.addEventListener('mouseleave', (e) => {
+      // 延遲隱藏，給其他圖片 mouseenter 事件時間
+      tooltipTimeout.value = setTimeout(() => {
+        // 檢查滑鼠是否移動到其他有 tooltip 的元素
+        const newTarget = document.elementFromPoint(e.clientX, e.clientY)
+        const hasTooltipParent = newTarget?.closest('.has-tooltip')
+        
+        if (!hasTooltipParent) {
+          hideTooltip()
         }
-      })
+      }, 50) // 50ms 延遲
     })
+  })
+
+  // 監聽整個 parent 容器的 mouseleave
+  parentRef.value.addEventListener('mouseleave', () => {
+    hideTooltip()
   })
 }
 
@@ -198,8 +257,11 @@ onMounted(async () => {
   await fetchExpoData()
 })
 
-// 清理 ScrollTriggers
+// 清理 ScrollTriggers 和 timeout
 onUnmounted(() => {
+  if (tooltipTimeout.value) {
+    clearTimeout(tooltipTimeout.value)
+  }
   scrollTriggers.value.forEach(trigger => trigger.kill())
   ScrollTrigger.getAll().forEach(trigger => trigger.kill())
 })
@@ -241,7 +303,7 @@ onUnmounted(() => {
 } */
 
 /* Tooltip 樣式 */
-/* .tooltip {
+.tooltip {
   position: fixed;
   background: rgba(0, 0, 0, 0.8);
   color: white;
@@ -252,12 +314,19 @@ onUnmounted(() => {
   z-index: 1000;
   display: none;
   white-space: nowrap;
-} */
+  backdrop-filter: blur(4px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
 
 /* 確保圖片可以觸發 hover */
-/* .has-tooltip {
+.has-tooltip {
   cursor: pointer;
-} */
+  transition: transform 0.2s ease;
+}
+
+.has-tooltip:hover {
+  transform: scale(1.02);
+}
 
 /* 確保 grid 元素有基本樣式 */
 /* .grid {
