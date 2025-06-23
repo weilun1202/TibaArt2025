@@ -47,7 +47,7 @@
         class="artist artist-mobile"
       >
         <img :src="artist.img" :alt="artist.name" class="artist-img" />
-        <div class="artist-name animate__animated animate__slideInUp" >{{ artist.name }}</div>
+        <div class="artist-name animate__animated animate__slideInUp" >{{ artist.displayName }}</div>
   </div>
 </div>
 
@@ -66,6 +66,15 @@ import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 import router from '@/router'
 gsap.registerPlugin(ScrollTrigger)
+
+const screenWidth = window.innerWidth;
+
+
+const isPhone = screenWidth <= 768; // 判斷是否為手機
+const getChineseName = (name) => {
+  const match = name.match(/[\u4e00-\u9fa5]+.*$/); // 抓中文段落
+  return match ? match[0] : name;
+}
 
 const artists = [
   { name: 'Elia Nova 艾莉亞諾瓦', img: new URL('@/assets/img/1.png',import.meta.url).href },
@@ -87,7 +96,10 @@ const artists = [
   { name: 'Noé Sauvage 諾耶索瓦奇', img: new URL('@/assets/img/17.png',import.meta.url).href },
   { name: 'Tahanan Whitecloud 塔哈南懷特雲', img: new URL('@/assets/img/18.png',import.meta.url).href },
   { name: 'Yamamoto Ichiyo 山本一葉', img: new URL('@/assets/img/19.png',import.meta.url).href }
-]
+].map(artist => ({
+  ...artist,
+  displayName: isPhone ? getChineseName(artist.name) : artist.name
+}));
 
 const nameRefs = ref([])
 const photoRefs = ref([])
@@ -118,7 +130,6 @@ onMounted(() => {
     const titleEl = sectionEl.querySelector('.TitleText');
     if (!titleEl) return
 
-    const screenWidth = window.innerWidth;
     let targetWidth;
     let targetHeight;
 
@@ -140,7 +151,9 @@ onMounted(() => {
       duration: 3.5,
       ease: 'power3.out',
     })
-}
+  }
+
+  
 
   nameRefs.value.forEach((el, index) => {
     gsap.from(el, {
@@ -327,7 +340,7 @@ onUnmounted(() => {
 .artist-mobile{
   width: 80vw;
   margin: 12px auto; 
-  height: 20vh;
+  height: 20%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -338,12 +351,12 @@ onUnmounted(() => {
     align-items: center;
 
     @media (max-width: 1000px) {
-      height: 15vh;
+      height: 15%;
       
     }
 
     @media (max-width: 768px) {
-      height: 10vh;
+      height: 10%;
 
     }
 
