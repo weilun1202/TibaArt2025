@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { useUserStore } from '@/stores/user' 
+import { useUserStore } from '@/stores/user'
 
 //layouts
 import FrontLayout from '@/layouts/FrontLayout.vue'
@@ -61,10 +61,10 @@ const routes = [
       { path: 'application', name: 'Application', component: Application },
       { path: 'shop', name: 'Shop', component: Shop },
       { path: 'cart', name: 'Cart', component: Cart },
-      { 
+      {
         path: 'orderConfirm',
-        name: 'OrderConfirm',  
-        component: () => import('@/views/frontend/OrderConfirm.vue') 
+        name: 'OrderConfirm',
+        component: () => import('@/views/frontend/OrderConfirm.vue')
       },
       { path: 'about', name: 'About', component: About },
       { path: 'memLogin', name: 'MemLogin', component: MemLogin },
@@ -99,6 +99,7 @@ const routes = [
   {
     path: '/admin',
     component: AdminLayout,
+    meta: { requiresAuth: true }, //後台登入驗證
     children: [
       { path: '', name: 'Admin', component: Admin, meta: { title: '後台首頁' } },
       { path: 'member', name: 'AdminMember', component: AdminMember, meta: { title: '一般會員管理' } },
@@ -137,35 +138,57 @@ const router = createRouter({
 })
 
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   const userStore = useUserStore();
-  
+
   // 如果 store 還沒有登入狀態，嘗試從 localStorage 讀取
   if (!userStore.isLoggedIn) {
     const token = localStorage.getItem('token');
     const memberData = localStorage.getItem('memberData');
-    
+
     if (token && memberData) {
       // 如果你的 store 有設置登入狀態的方法，調用它
       // userStore.setLoginState(JSON.parse(memberData));
-      
+
       // 或者直接設置（如果你的 store 允許直接修改）
       userStore.isLoggedIn = true;
       userStore.memberData = JSON.parse(memberData);
     }
   }
-  
+
   console.log('路由守衛執行');
   console.log('目標路徑:', to.path);
   console.log('登入狀態:', userStore.isLoggedIn);
-  
+
   if ((to.path === '/front/memLogin' || to.path === '/front/memReg') && userStore.isLoggedIn) {
     console.log('重定向到會員中心');
     next('/member');
-  } else {
-    console.log('正常繼續');
-    next();
   }
+
+  // ===== 後台登入判斷 =====
+  const isAdminRoute = to.path.startsWith('/admin') && to.path !== '/admin/login';
+
+  if (isAdminRoute) {
+    try {
+      const resp = await fetch(import.meta.env.VITE_CheckAdminLogin, {
+        credentials: 'include'
+      });
+      const result = await resp.json();
+
+      if (!result.loggedAdmin) {
+        console.log('尚未登入後台');
+        alert('尚未登入後台系統');
+        return next('/admin/login');
+      }
+    } catch (error) {
+      console.error('檢查後台登入狀態失敗', error);
+      alert('檢查後台登入狀態失敗');
+      return next('/admin/login');
+    }
+  }
+
+  // ====== 放行其他路由 ======
+  next();
 
 });
 

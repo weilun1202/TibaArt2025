@@ -44,6 +44,7 @@
       headers: {
         'content-Type': 'application/json'
       },
+      credentials: 'include',
       body: JSON.stringify({
         account: acc.value,
         password: pwd.value
