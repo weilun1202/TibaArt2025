@@ -37,7 +37,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
 
 // 響應式資料
-const baseUrl = import.meta.env.BASE_URL
+const baseUrl = import.meta.env.VITE_showUploadImage
 const expoItems = ref([])
 const loading = ref(true)
 const error = ref(null)
