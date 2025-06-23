@@ -45,4 +45,4 @@ try {
     echo json_encode(['error' => $e->getMessage()]);
 }
 
-file_put_contents('debug.log', print_r($artwork, true));
+// file_put_contents('debug.log', print_r($artwork, true));

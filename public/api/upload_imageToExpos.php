@@ -11,13 +11,10 @@ if (!isset($_FILES['img'])) {
 }
 
 
-$uploadDir = $_SERVER["DOCUMENT_ROOT"] . '/tjd101/g2/upload/expos/';
-// $uploadDir = __DIR__ . '/upload/expos/';
+$uploadDir = __DIR__ . '/upload/expos/';
 
 // 網站可訪問的路徑，用於資料庫與前端顯示
-// $uploadPathForDB = __DIR__ . '/upload/expos'; 
-// $uploadPathForDB = $_SERVER["DOCUMENT_ROOT"] . '/upload/expos/'; 
-$uploadPathForDB = '/upload/expos/'; 
+$uploadPathForDB = 'TIBAART/api/upload/expos/'; 
 
 $allowedExts = ['jpg', 'jpeg', 'png'];
 $ext = pathinfo($_FILES['img']['name'], PATHINFO_EXTENSION);

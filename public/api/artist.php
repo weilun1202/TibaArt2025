@@ -5,18 +5,11 @@ header("Access-Control-Allow-Origin: http://localhost:5173");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, X-Requested-With");
 
-// $host = '127.0.0.1';
-// $db   = 'TIBAART';
-// $user = 'root';
-// $pass = 'password';
-// $charset = 'utf8mb4';
-
-// Tibame伺服器端
-    $host = "127.0.0.1";
-    $user = "tibamefe_since2021";
-    $pass = "vwRBSb.j&K#E";
-    $db = "tibamefe_tjd101g2";
-    $charset = 'utf8mb4';
+$host = '127.0.0.1';
+$db   = 'TIBAART';
+$user = 'root';
+$pass = 'password';  // 請改為你的實際密碼
+$charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
 $options = [
