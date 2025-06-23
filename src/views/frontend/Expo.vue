@@ -113,8 +113,8 @@ const initAnimations = () => {
         delay: index * 0.2,
         scrollTrigger: {
           trigger: el,
-          start: 'top 90%', // 調整觸發點
-          end: 'bottom 10%',
+          start: 'top 120%', // 調整觸發點
+          end: 'bottom -20%',
           toggleActions: 'play none none reverse',
           // markers: true, // 開發時可以開啟來看觸發點
           onToggle: (self) => {

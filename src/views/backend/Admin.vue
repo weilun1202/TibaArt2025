@@ -57,6 +57,7 @@
   display: flex;
   flex-direction: column;
   gap: $spacing-5;
+  padding-right: 25px;
   .Admin_underItem{
     border: 1px solid $primaryGreen;
     border-top: 5px solid $primaryGreen;

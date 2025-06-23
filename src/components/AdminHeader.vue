@@ -23,7 +23,10 @@ function goHome() {
 router.push('/admin')
 }
 
-function adminLogout(){
+async function adminLogout(){
+  await fetch(import.meta.env.VITE_LogoutAdmin , {
+  credentials: 'include'
+});
   router.push('/admin/login')
 }
 </script>
