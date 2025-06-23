@@ -24,16 +24,18 @@
           <label><span>*</span>開始時間：<input v-model="newData.start" type="date"/></label>
           <label><span>*</span>結束時間：<input v-model="newData.end" type="date"/></label>
           <label><span>*</span>備註：<input v-model="newData.note" /></label>
-          <label><span>*</span>選擇作品：
-            <label v-for="artwork in artworks" :key="artwork.id">
-              <input 
-                type="checkbox"
-                :value="artwork.id" 
-                v-model="selectedArtworkIds" 
-              />
-              {{ artwork.name }}
-            </label>
-          </label>  
+          <label><span>*</span>選擇作品：</label> 
+            <div class="checkbox-scroll">
+              <label v-for="artwork in artworks" :key="artwork.id">
+                <input 
+                  type="checkbox"
+                  :value="artwork.id" 
+                  v-model="selectedArtworkIds" 
+                />
+                {{ artwork.name }}
+              </label>
+            </div>
+           
 
           <div class="btn-content">
             <button class="btn" @click="addData">送出</button>
@@ -239,7 +241,6 @@ onMounted(() => {
   }
   label{
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
     padding: $spacing-3;
     span{
@@ -250,6 +251,21 @@ onMounted(() => {
       font-size: 16px;
     }
 
+  }
+  .checkbox-scroll {
+    max-height: 200px;
+    overflow-y: auto;
+    margin: $spacing-2;
+    border: 1px solid #ccc;
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-2;
+
+    label {
+      display: flex;
+      align-items: center;
+      gap: $spacing-2;
+    }
   }
   .btn-content{
     display: flex;
