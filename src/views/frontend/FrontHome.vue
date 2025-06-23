@@ -2,9 +2,6 @@
 
 <div class="frontHomeW">
 
-  <FrontLoad/>
-  <FrontNames/>
-
   <section class="animate-on-scroll section-1">
     <div class="split-text-container">
       <h1 ref="splitTextElement" class="animated-heading">
@@ -301,6 +298,8 @@
                 </div>              
     </Quiz>
 
+    <FrontLoad/>
+    <FrontNames/>
 
 </div>
 </template>
@@ -369,7 +368,6 @@ onMounted(() => {
         if (entry.isIntersecting) {
           const el = entry.target
 
-          // 根據不同 class 或 data-* 做不同動畫（可客製化）
           if (el.classList.contains('section-1')) {
             gsap.fromTo(el, { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 1 });
             playSplitTextAnimation();
@@ -723,7 +721,7 @@ svg {
     display: block;
     margin: 0 auto;
     aspect-ratio: 5/5; 
-    perspective: 1000px
+    perspective: 1000px;
   }
 
 h1{
