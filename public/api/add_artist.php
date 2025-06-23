@@ -14,7 +14,8 @@ if (
     empty($artist['name']) ||
     empty($artist['phone']) ||
     empty($artist['bank_account']) ||
-    empty($artist['intro'])
+    empty($artist['intro']) ||
+    empty($artist['img'])
 ) {
     http_response_code(400);
     echo json_encode(['error' => '缺少必要欄位']);
@@ -28,8 +29,8 @@ $birthday = empty($artist['birthday']) ? null : $artist['birthday'];
 $hashedPassword = password_hash($artist['password'], PASSWORD_DEFAULT);
 
 $sql = "
-    INSERT INTO ARTIST (account, password, email, name, phone, bank_account, gender, birthday, intro)
-    VALUES (:account, :password, :email, :name, :phone, :bank_account, :gender, :birthday, :intro)
+    INSERT INTO ARTIST (account, password, email, name, phone, bank_account, gender, birthday, intro, img)
+    VALUES (:account, :password, :email, :name, :phone, :bank_account, :gender, :birthday, :intro, :img)
 ";
 
 $stmt = $pdo->prepare($sql);
@@ -42,6 +43,7 @@ $stmt->bindValue(':bank_account', $artist['bank_account']);
 $stmt->bindValue(':gender', $gender);
 $stmt->bindValue(':birthday', $birthday);
 $stmt->bindValue(':intro', $artist['intro']);
+$stmt->bindValue(':img', $artist['img']);
 
 // 執行資料庫操作
 try {
