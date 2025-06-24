@@ -45,6 +45,13 @@
                   </span>
                 </a>
 
+                <a href="https://docs.google.com/document/d/1VhNKxNoe1bmUCZoSbw7WWbU9GmpQJQun/export?format=docx" download class="applicationBtn">
+                  <span class="text">
+                    空白申請書 &nbsp;
+                    <font-awesome-icon :icon="['fas', 'file-arrow-down']" class="appIconDown"/>
+                  </span>
+                </a>
+
                 <a href="https://script.google.com/macros/s/AKfycbx4F2Ldzyj02D9S3OEmJyL55Fc1xmq0ZbF9C9pWeW3GBbCNh9a18-rFELixP5SUJmu2aw/exec" class="applicationBtn" Target="_blank">
                   <span class="text">
                     申請檔上傳&nbsp;
