@@ -94,8 +94,7 @@ const artists = [
   { name: 'ZENO 澤諾', img: new URL('@/assets/img/15.png',import.meta.url).href },
   { name: 'Nakamura Tomoya 中村朋也', img: new URL('@/assets/img/16.png',import.meta.url).href },
   { name: 'Noé Sauvage 諾耶索瓦奇', img: new URL('@/assets/img/17.png',import.meta.url).href },
-  { name: 'Tahanan Whitecloud 塔哈南懷特雲', img: new URL('@/assets/img/18.png',import.meta.url).href },
-  { name: 'Yamamoto Ichiyo 山本一葉', img: new URL('@/assets/img/19.png',import.meta.url).href }
+  { name: 'Tahanan Whitecloud 塔哈南懷特雲', img: new URL('@/assets/img/18.png',import.meta.url).href }
 ].map(artist => ({
   ...artist,
   displayName: isPhone ? getChineseName(artist.name) : artist.name

@@ -79,6 +79,8 @@ import { useCart } from '@/stores/cart.js';
 
 defineProps()
 
+
+
 const MemURL = import.meta.env.VITE_MemURL
 
 const getAvatarUrl = (img) => {
@@ -87,6 +89,9 @@ const getAvatarUrl = (img) => {
     ? img 
     : MemURL + img;
 };
+
+
+
 
 const router = useRouter()
 const goToLogin = () => {
