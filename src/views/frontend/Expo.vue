@@ -97,6 +97,7 @@ const initAnimations = () => {
   scrollTriggers.value = []
 
   const grids = parentRef.value.querySelectorAll('.grid')
+  // const grids = parentRef.value.querySelectorAll('.has-tooltip')
   console.log('找到的 grid 元素數量:', grids.length) // 除錯用
 
   if (grids.length === 0) {
@@ -104,8 +105,10 @@ const initAnimations = () => {
     return
   }
 
+
   // ScrollTrigger 動畫
   grids.forEach((el, index) => {
+
     const trigger = gsap.fromTo(
       el,
       { opacity: 0, y: 50 },
@@ -114,11 +117,13 @@ const initAnimations = () => {
         y: 0,
         duration: 0.8,
         ease: 'power1.out',
-        delay: index * 0.2,
+        delay: (index%4) * 0.2,
         scrollTrigger: {
           trigger: el,
           start: 'top 120%', // 調整觸發點
+          // start: 'top', // 調整觸發點
           end: 'bottom -20%',
+          // end: 'bottom',
           toggleActions: 'play none none reverse',
           // markers: true, // 開發時可以開啟來看觸發點
           onToggle: (self) => {
