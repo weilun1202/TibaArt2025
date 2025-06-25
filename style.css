@@ -2088,7 +2088,7 @@ body {
 
 .applicationArea {
   margin: 0 auto;
-  width: 500px;
+  max-width: 500px;
   display: flex;
   /* 水平置中 applicationAreaBtn */
   justify-content: center;
@@ -2118,6 +2118,7 @@ body {
   font-size: 0.75rem;
   color: #2F2F2F;
   opacity: 0.5;
+  max-width: 200px;
   margin-right: 355px;
   padding: 8px 0;
 }
@@ -2133,12 +2134,12 @@ body {
   flex-direction: column;
   justify-content: center; /* 水平置中 */
   align-items: center; /* 垂直置中 */
-  width: 500px;
+  max-width: 500px;
   padding-bottom: 20px;
 }
 
 .faqItem {
-  width: 500px;
+  max-width: 500px;
   padding: 0.5rem;
   border-bottom: 1px solid #ffffff;
 }

@@ -92,7 +92,6 @@
     margin-bottom: 120px;
 }
 
-
 .appIconDown{
   font-size: map-get($font, h3);
 }
@@ -107,16 +106,6 @@
   .applicationSection{
     margin: 0 auto;
     padding: $spacing-2;
-  }
-}
-@media screen and (max-width: 540px) {
-  .applicationArea{
-    width: 350px;
-  }
-}
-@media screen and (max-width: 390px) {
-  .applicationArea{
-    width: 280px;
   }
 }
 
