@@ -5,7 +5,11 @@
       <label>搜尋欄位：</label>
       <select v-model="selectedKey">
         <option disabled value="">請選擇欄位</option>
-        <option v-for="col in columns" :key="col.key" :value="col.key">
+        <option 
+          v-for="col in columns.filter(col => !['edit', 'delete', 'more', 'switch', 'select'].includes(col.type))" 
+          :key="col.key" 
+          :value="col.key"
+        >
           {{ col.label }}
         </option>
       </select>

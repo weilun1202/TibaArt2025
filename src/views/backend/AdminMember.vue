@@ -1,7 +1,7 @@
 <template>
     <AdminTable :columns="columns" :data="data " 
     :showAddButton="false"
-    @view-more="openModal" 
+    @more="openModal" 
     @toggle-status="updateStatus"
     />
 

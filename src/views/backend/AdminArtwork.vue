@@ -4,8 +4,8 @@
       :data="data"
       @add="openAddModal"
       @delete="handleDelete"
+      @edit="openEditModal"
       />
-      <!-- @edit="openEditModal" -->
 
     <transition name="fade">
       <div v-if="showAdd" class="modal-overlay" @click.self="showAdd = false">
@@ -209,6 +209,9 @@ async function handleDelete(id) {
 //   { key: 'img', label: '作品圖片',type: 'file' },
 // ]
 
+function openEditModal(){
+  alert('功能尚未開放');
+}
 // function openEditModal(row) {
 //   selectedRow.value = { ...row }
 //   showEdit.value = true

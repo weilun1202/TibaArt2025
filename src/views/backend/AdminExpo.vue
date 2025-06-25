@@ -3,6 +3,7 @@
       :columns="columns" 
       :data="data"
       @add="openAddModal"
+      @edit="openEditModal"
      />
 
       <transition name="fade">
@@ -195,6 +196,10 @@ async function addData() {
   } catch (err) {
     alert(`新增失敗：${err.message}`);
   }
+}
+
+function openEditModal(){
+  alert('功能尚未開放');
 }
 
 

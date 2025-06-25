@@ -1,6 +1,6 @@
 <template>
     <AdminTable :columns="columns" :data="data" 
-    @view-more="openModal"
+    @more="openModal"
     @add="openAddModal"
     @toggle-status="updateStatus"
     />
