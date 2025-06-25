@@ -169,11 +169,6 @@ async function addData() {
       })
     })
 
-    if (!resp.ok) {
-      const errText = await resp.text()
-      throw new Error(`新增失敗：${errText}`)
-    }
-
     const result = await resp.json();
     console.log(result);
     if (result.success) {
@@ -253,18 +248,17 @@ onMounted(() => {
 
   }
   .checkbox-scroll {
-    max-height: 200px;
+    max-height: 100px;
     overflow-y: auto;
     margin: $spacing-2;
     border: 1px solid #ccc;
     display: flex;
     flex-wrap: wrap;
-    gap: $spacing-2;
 
     label {
       display: flex;
       align-items: center;
-      gap: $spacing-2;
+      padding: $spacing-2;
     }
   }
   .btn-content{
