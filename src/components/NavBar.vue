@@ -79,6 +79,8 @@ import { useCart } from '@/stores/cart.js';
 
 defineProps()
 
+
+
 const MemURL = import.meta.env.VITE_MemURL
 
 const getAvatarUrl = (img) => {
@@ -87,6 +89,9 @@ const getAvatarUrl = (img) => {
     ? img 
     : MemURL + img;
 };
+
+
+
 
 const router = useRouter()
 const goToLogin = () => {
@@ -416,7 +421,7 @@ onUnmounted(() => {
             flex-direction: column;
             justify-content: center;
             align-items: stretch;
-            padding: 80px 0 40px;
+            padding: 80px 0;
             margin: 0;
             list-style: none;
 

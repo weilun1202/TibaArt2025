@@ -2,7 +2,7 @@
   <div>
     <div class="wrapper">
       <header class="animate__animated animate__flipInX">
-        <div class="pageTitle">展覽申請</div>
+        <div class="pageTitle">申請辦展</div>
       </header>
       
       <!-- Wrapper 不設 1200px 寬（例如展覽、關於我們頁面應該會滿版），想要限制內容在 1200 的再自己包一個 div 限制 1200  -->
@@ -41,6 +41,13 @@
                 <a href="https://docs.google.com/document/d/1p76XVYbjVrUj4EiRHDsrNW1XIhKQzzRX/export?format=docx" download class="applicationBtn">
                   <span class="text">
                     申請檔範例 &nbsp;
+                    <font-awesome-icon :icon="['fas', 'file-arrow-down']" class="appIconDown"/>
+                  </span>
+                </a>
+
+                <a href="https://docs.google.com/document/d/1VhNKxNoe1bmUCZoSbw7WWbU9GmpQJQun/export?format=docx" download class="applicationBtn">
+                  <span class="text">
+                    空白申請書 &nbsp;
                     <font-awesome-icon :icon="['fas', 'file-arrow-down']" class="appIconDown"/>
                   </span>
                 </a>
@@ -85,7 +92,6 @@
     margin-bottom: 120px;
 }
 
-
 .appIconDown{
   font-size: map-get($font, h3);
 }
@@ -100,16 +106,6 @@
   .applicationSection{
     margin: 0 auto;
     padding: $spacing-2;
-  }
-}
-@media screen and (max-width: 540px) {
-  .applicationArea{
-    width: 350px;
-  }
-}
-@media screen and (max-width: 390px) {
-  .applicationArea{
-    width: 280px;
   }
 }
 

@@ -161,7 +161,9 @@ const uploadImage = async () => {
     console.log('上傳成功：', result);
     
 
-    memberData.img  = result.url + '?t=' + new Date().getTime();
+    memberData.img = result.url + '?t=' + new Date().getTime();
+    userStore.memberData.img = memberData.img;
+
     
     // 釋放預覽 URL
     URL.revokeObjectURL(previewUrl.value);

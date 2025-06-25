@@ -2087,7 +2087,7 @@ body {
 
 .applicationArea {
   margin: 0 auto;
-  width: 500px;
+  max-width: 500px;
   display: flex;
   /* 水平置中 applicationAreaBtn */
   justify-content: center;
@@ -2117,7 +2117,9 @@ body {
   font-size: 0.75rem;
   color: #2F2F2F;
   opacity: 0.5;
-  margin-right: 355px;
+  display: block;
+  text-align: left;
+  max-width: 360px;
   padding: 8px 0;
 }
 
@@ -2134,6 +2136,7 @@ body {
   align-items: center; /* 垂直置中 */
   width: 500px;
   padding-bottom: 20px;
+  margin-bottom: 120px;
 }
 
 .faqItem {
@@ -2169,6 +2172,7 @@ body {
   display: grid;
   grid-template-rows: 0fr;
   transition: 0.4s ease-in-out;
+  line-height: 1.6;
 }
 .faqText > * {
   overflow: hidden;

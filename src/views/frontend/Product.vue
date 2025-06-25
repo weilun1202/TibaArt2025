@@ -73,6 +73,16 @@
 
                 </div>
             </div>
+
+            <div>
+                <CartPopup
+                :item="itemInPopup"
+                :show="showCartPopup"
+                :quantity="quantityInPopup"
+                @close="showCartPopup = false"
+                />
+            </div>
+
         </div>
     </div>
 </template>
@@ -85,6 +95,7 @@ import {useCart} from '@/stores/cart.js';
 import { useUserStore } from '@/stores/user'
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger'; 
+import CartPopup from '@/components/CartPopup.vue';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -180,6 +191,10 @@ const initScrollTriggerAnimations = () => {
   });
 };
 
+const showCartPopup = ref(false); 
+const itemInPopup = ref(null); 
+const quantityInPopup = ref(1); 
+
 const userStore = useUserStore()
 const props = defineProps({
   product: Object
@@ -202,8 +217,12 @@ const handleAddToCart = async () => {
           await new Promise(resolve => requestAnimationFrame(resolve));
           const success = addToCart(currentProduct.value, quantity.value)
           if(success){
-              alert(`已將「${currentProduct.value.name}」x ${quantity.value} 加入購物車`);
-              quantity.value = 1
+            //   alert(`已將「${currentProduct.value.name}」x ${quantity.value} 加入購物車`);
+            itemInPopup.value = currentProduct.value;
+            quantityInPopup.value = quantity.value;
+            showCartPopup.value = true;
+            
+            quantity.value = 1
           }
       } catch (error) {
           console.error('加入購物車失敗:', error);
@@ -226,7 +245,10 @@ const handleRecommendedAddToCart = async (item) => {
             await new Promise(resolve => requestAnimationFrame(resolve));
             const success = addToCart(item, 1)
             if(success){
-                alert(`已將「${item.name}」加入購物車`);
+                // alert(`已將「${item.name}」加入購物車`);
+                itemInPopup.value = item;
+                quantityInPopup.value = 1;
+                showCartPopup.value = true;
             }
         } catch (error) {
             console.error('加入購物車失敗:', error);
