@@ -116,7 +116,7 @@
           </div>
 
 
-          <div class="thirdPartyRegister">
+          <!-- <div class="thirdPartyRegister">
             <div class="separator">或使用以下方式註冊</div>
             <div class="socialButtons">
               <button class="btn socialBtn google" aria-label="使用 Google 註冊">
@@ -126,7 +126,7 @@
                 <font-awesome-icon :icon="['fab', 'facebook']" />
               </button>
             </div>
-          </div>
+          </div> -->
 
         </div>
 
