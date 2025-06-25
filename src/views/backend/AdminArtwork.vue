@@ -3,6 +3,7 @@
       :columns="columns" 
       :data="data"
       @add="openAddModal"
+      @delete="handleDelete"
       />
       <!-- @edit="openEditModal" -->
 
@@ -24,7 +25,7 @@
           <label><span>*</span>英文名稱：<input v-model="newData.name_en" /></label>
           <label><span>*</span>媒材：<input v-model="newData.stuff" /></label>
           <label><span>*</span>尺寸：<input v-model="newData.size" /></label>
-          <label><span>*</span>備註：<input v-model="newData.note" /></label>
+          <label><span>*</span>備註：<textarea v-model="newData.note"></textarea></label>
 
           <div class="btn-content">
             <button class="btn" @click="addData">送出</button>
@@ -58,7 +59,8 @@ const columns = [
   { key: 'artist', label: '作者' },
   { key: 'size', label: '尺寸' },
   { key: 'note', label: '備註' },
-  { key: 'edit', label: '操作', type: 'edit', buttonLabel: '編輯', class:'w-80' }
+  { key: 'edit', label: '操作', type: 'edit', buttonLabel: '編輯', class:'w-80' },
+  { key: 'delete', label: '操作', type: 'delete', buttonLabel: '刪除', class:'w-80' }
 ]
 
 const data = ref([]);
@@ -85,7 +87,7 @@ function handleFileChange(e) {
   imageFile.value = e.target.files[0]
 }
 
-// 載入藝術家清單
+// 取得藝術家清單
 const artists = ref([]);
 async function fetchArtistsList() {
   const resp = await fetch(import.meta.env.VITE_GetArtists);
@@ -154,22 +156,45 @@ async function addData() {
       })
     })
 
-    if (!resp.ok) {
-      const errText = await resp.text()
-      throw new Error(`新增失敗：${errText}`)
-    }
-
     const result = await resp.json();
     if (resp.ok) {
+      alert(`新增成功`);
       showAdd.value = false;
       cleanForm();              // 清空表單
       imageFile.value = null;   // 清空圖片
-      fetchArtworks(); 
+      fetchArtworks(); // 重新載入資料
     } else {
       throw new Error(result.error || '新增失敗');
     }
   } catch (err) {
     alert(`新增失敗：${err.message}`);
+  }
+}
+
+// 刪除資料
+async function handleDelete(id) {
+  if (!confirm('確定要刪除這筆資料嗎？')) return;
+
+  try {
+    const resp = await fetch(import.meta.env.VITE_DeleteArtwork, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ id })
+    });
+
+    const result = await resp.json();
+
+    if (result.success) {
+      alert('刪除成功');
+      fetchArtworks(); // 重新載入資料
+    } else {
+      alert('刪除失敗：' + result.message);
+    }
+  } catch (err) {
+    console.error(err);
+    alert('發生錯誤：' + err.message);
   }
 }
 

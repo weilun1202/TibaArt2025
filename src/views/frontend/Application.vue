@@ -2,7 +2,7 @@
   <div>
     <div class="wrapper">
       <header class="animate__animated animate__flipInX">
-        <div class="pageTitle">展覽申請</div>
+        <div class="pageTitle">申請辦展</div>
       </header>
       
       <!-- Wrapper 不設 1200px 寬（例如展覽、關於我們頁面應該會滿版），想要限制內容在 1200 的再自己包一個 div 限制 1200  -->

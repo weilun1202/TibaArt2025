@@ -59,8 +59,8 @@ const menuItems = [
                 padding-left: 50px;
 
                 &:hover {
-                    background-color: $buttonYellow;
-                    color: $fontBlack;
+                    background-color: darken($buttonYellow, 10%);
+                    // background-color: $buttonYellow;
                 }
             }
             &.active a {

@@ -46,7 +46,7 @@ const columns = [
   { key: 'price', label: '價格' },
   { key: 'stock', label: '庫存' },
   { key: 'updated', label: '上架時間'},
-  { key: 'status', label: '狀態' , type:'select', options:['上架中', '以下架', '已售完']},
+  { key: 'status', label: '狀態' , type:'select', class:'w-120', options:['上架中', '已下架', '已售完']},
   { key: 'edit', label: '編輯', type:'edit', class:'w-80'},
 ]
 
@@ -141,14 +141,10 @@ async function addData() {
         img: uploadResult.url,
       })
     })
-
-    if (!resp.ok) {
-      const errText = await resp.text()
-      throw new Error(`新增失敗：${errText}`)
-    }
-
+    
     const result = await resp.json();
     if (resp.ok) {
+      alert(`新增成功`);
       showAdd.value = false;
       cleanForm();              // 清空表單
       imageFile.value = null;   // 清空圖片

@@ -169,11 +169,6 @@ async function addData() {
       })
     })
 
-    if (!resp.ok) {
-      const errText = await resp.text()
-      throw new Error(`新增失敗：${errText}`)
-    }
-
     const result = await resp.json();
     console.log(result);
     if (result.success) {
