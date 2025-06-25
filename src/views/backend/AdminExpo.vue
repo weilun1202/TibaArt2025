@@ -248,18 +248,17 @@ onMounted(() => {
 
   }
   .checkbox-scroll {
-    max-height: 200px;
+    max-height: 100px;
     overflow-y: auto;
     margin: $spacing-2;
     border: 1px solid #ccc;
     display: flex;
     flex-wrap: wrap;
-    gap: $spacing-2;
 
     label {
       display: flex;
       align-items: center;
-      gap: $spacing-2;
+      padding: $spacing-2;
     }
   }
   .btn-content{
