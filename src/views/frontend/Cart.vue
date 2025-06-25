@@ -224,6 +224,12 @@
                 </div>
             </div>
         </div>
+
+        <OrderConfirmPopup 
+            :show="showErrorPopup" 
+            :message="errorMessage" 
+            @close="closeErrorPopup" 
+            />
     </div>
   </div>
 </template>
@@ -233,7 +239,7 @@ import{ref, watch, computed } from 'vue';
 import {useCart} from '@/stores/cart.js';
 import { useRouter } from 'vue-router';
 import { useUserStore } from '@/stores/user.js';
-
+import OrderConfirmPopup from '@/components/OrderConfirmPopup.vue';
 
 const { cartItems, updateQuan, removeFromCart, totalPrice, clearCart } = useCart();
 const router = useRouter();
@@ -511,6 +517,21 @@ const validateForm = () => {
     return Object.keys(errors.value).length === 0;
 };
 
+
+// 彈窗
+const showErrorPopup = ref(false);
+const errorMessage = ref('');
+
+const showError = (message) => {
+  errorMessage.value = message;
+  showErrorPopup.value = true;
+};
+
+const closeErrorPopup = () => {
+  showErrorPopup.value = false;
+  errorMessage.value = '';
+};
+
 const submitOrder = async () => {
     if (validateForm()) {
         console.log('送出訂單:', {
@@ -572,36 +593,17 @@ const submitOrder = async () => {
         }
 
     } else {
-        // 驗證失敗，顯示警告彈窗
-        const errorMessages = [];
+        // 驗證失敗，顯示簡化的警告彈窗
         if (cartItems.value.length === 0) {
-            errorMessages.push('• 購物車不能為空');
-        }
-        if (errors.value.name) {
-            errorMessages.push('• ' + errors.value.name);
-        }
-        if (errors.value.tel) {
-            errorMessages.push('• ' + errors.value.tel);
-        }
-        if (errors.value.invoiceType) {
-            errorMessages.push('• ' + errors.value.invoiceType);
-        }
-        if (errors.value.carrier) {
-            errorMessages.push('• ' + errors.value.carrier);
-        }
-        if (errors.value.recipientName) {
-            errorMessages.push('• ' + errors.value.recipientName);
-        }
-        if (errors.value.recipientTel) {
-            errorMessages.push('• ' + errors.value.recipientTel);
-        }
-        if (errors.value.recipientAddress) {
-            errorMessages.push('• ' + errors.value.recipientAddress);
-        }
+            // alert('購物車不能為空');
+            showError('購物車不能為空');
 
-        const alertMessage = '請修正以下錯誤後再提交：\n\n' + errorMessages.join('\n');
-        alert(alertMessage);
+        } else {
+            // alert('資訊輸入有誤，請檢查');
+            showError('資訊輸入有誤，請檢查');
 
+        }
+        
         console.log('表單驗證失敗:', errors.value);
     }
 };
