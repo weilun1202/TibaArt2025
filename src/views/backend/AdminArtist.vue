@@ -64,7 +64,7 @@ const columns = [
   { key: 'phone', label: '連絡電話'},
   { key: 'updated', label: '修改時間'},
   { key: 'per', label: '狀態', type:'switch', class:'w-80'},
-  { key: 'more', label: '詳細', type: 'button', buttonLabel: '查看', class:'w-80'}
+  { key: 'more', label: '詳細', type: 'more', buttonLabel: '查看', class:'w-80'}
 ]
 
 // 狀態變數
@@ -178,13 +178,9 @@ async function addData() {
       })
     })
 
-    if (!resp.ok) {
-      const errText = await resp.text()
-      throw new Error(`新增失敗：${errText}`)
-    }
-
     const result = await resp.json();
     if (resp.ok) {
+      alert(`新增成功`);
       showAdd.value = false;
       cleanForm();              // 清空表單
       imageFile.value = null;   // 清空圖片

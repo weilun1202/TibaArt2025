@@ -34,7 +34,7 @@ const columns = [
   { key: 'register', label: '註冊時間'},
   { key: 'updated', label: '修改時間' },
   { key: 'status', label: '狀態', type:'switch', class:'w-80'},
-  { key: 'more', label: '詳細', type: 'button', buttonLabel: '查看', class:'w-80' }
+  { key: 'more', label: '詳細', type: 'more', buttonLabel: '查看', class:'w-80' }
 ]
 
 // 查看

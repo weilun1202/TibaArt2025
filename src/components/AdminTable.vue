@@ -60,9 +60,9 @@
                 </select>
               </template>
               <!-- 詳細按鈕 -->
-              <template v-else-if="col.type === 'button'">
+              <template v-else-if="col.type === 'more'">
                 <button 
-                @click="emit('view-more', row)"
+                @click="emit('more', row)"
                 class="more-btn">
                   {{ col.buttonLabel || '查看' }}
                 </button>
@@ -73,6 +73,14 @@
                   @click="emit('edit', row)"
                   class="edit-btn">
                   {{ col.buttonLabel || '編輯' }}
+                </button>
+              </template>
+              <!-- 刪除按鈕 -->
+              <template v-else-if="col.type === 'delete'">
+                <button 
+                  @click="emit('delete', row.id)"
+                  class="delete-btn">
+                  {{ col.buttonLabel || '刪除' }}
                 </button>
               </template>
             
@@ -117,7 +125,7 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['add', 'toggle-status', 'status-change', 'view-more', 'edit'])
+const emit = defineEmits(['add', 'toggle-status', 'status-change', 'more', 'edit', 'delete'])
 
 const selectedKey = ref('')
 const keyword = ref('')
@@ -168,7 +176,7 @@ watch([selectedKey, keyword], () => {
 // 狀態按鈕開關
 function toggleStatus(row) {
   row.per = !row.per
-  emit('toggle-status', row)  // 通知外層
+  emit('toggle-status', row)
 }
 
 function handleStatusChange(row) {
@@ -302,15 +310,30 @@ function handleStatusChange(row) {
 }
 
 // 編輯按鈕
-.edit-btn {
+.edit-btn{
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
   background-color: $logoColor3;
   color: white;
-  border: none;
-  padding: 4px 8px;
-  border-radius: 4px;
-  cursor: pointer;
-  &:hover {
+  &:hover{
     background-color: lighten($logoColor3, 10%);
+  }
+}
+
+// 刪除按鈕
+.delete-btn{
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  background-color: $fontWarn;
+  color: white;
+  &:hover{
+    background-color: lighten($fontWarn, 10%);
   }
 }
 
