@@ -68,6 +68,15 @@
 
       </div>
 
+      <div>
+        <CartPopup
+          :item="itemInPopup"
+          :show="showCartPopup"
+          :quantity="quantityInPopup"
+          @close="showCartPopup = false"
+        />
+      </div>
+
     </div>
   </div>
 </template>
@@ -79,7 +88,8 @@ import { useRouter } from 'vue-router';
 import { useCart } from '@/stores/cart.js';
 import { useUserStore } from '@/stores/user';
 import { gsap } from 'gsap'; 
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import CartPopup from '@/components/CartPopup.vue';
 
 const router = useRouter();
 // const baseUrl = import.meta.env.BASE_URL;
@@ -191,6 +201,12 @@ const initScrollTriggerAnimations = () => {
   });
 };
 
+
+// 彈窗
+const showCartPopup = ref(false); 
+const itemInPopup = ref(null); 
+const quantityInPopup = ref(1); 
+
 const userStore = useUserStore()
 const props = defineProps({
   product: Object
@@ -211,7 +227,9 @@ const handleAddToCart = async (item) => {
         await new Promise(resolve => requestAnimationFrame(resolve));
         const success = addToCart(item);
         if (success) {
-          alert(`已將「${item.name}」加入購物車`);
+          // alert(`已將「${item.name}」加入購物車`);
+          itemInPopup.value = item; // 設定要顯示的商品
+          showCartPopup.value = true; // 顯示彈窗
         }
       } catch (error) {
         console.error('加入購物車失敗:', error);
