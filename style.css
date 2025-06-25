@@ -353,7 +353,6 @@ header .pageTitle {
   margin-left: auto;
 }
 .frontNav ul {
-  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1617,10 +1616,10 @@ header .pageTitle {
     -o-object-fit: cover;
        object-fit: cover;
   }
-  .expo .grid.left {
+  .expo .grid:nth-child(4n+1), .expo .grid:nth-child(4n) {
     width: calc(60% - 2px);
   }
-  .expo .grid.right {
+  .expo .grid:nth-child(4n+3), .expo .grid:nth-child(4n+2) {
     width: calc(40% - 2px);
   }
 }
