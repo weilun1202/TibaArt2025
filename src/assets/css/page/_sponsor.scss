@@ -19,7 +19,9 @@
     font-size: map-get($font, pwar);  // 12px
     color: $fontBlack;
     opacity: .5;
-    margin-right: 355px;
+    display: block;
+    text-align: left;
+    max-width: 360px;
     padding: $spacing-2 0;
 }
 .pay{
@@ -36,6 +38,7 @@
     align-items: center;     /* 垂直置中 */ 
     width: 500px;
     padding-bottom: 20px;
+    margin-bottom: 120px;
 }
 
 // ------ 常見問題 -----
@@ -76,6 +79,7 @@
     display: grid;
     grid-template-rows: 0fr;
     transition: .4s ease-in-out;
+    line-height: 1.6;
     > * {
         overflow: hidden;
     }

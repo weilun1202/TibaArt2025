@@ -401,16 +401,12 @@ function handleSubmit(e) {         // 把資料送去綠界
 /* 可以把額外的 CSS 加在這裡或保留在全域 */
 @import '/style.scss';
 
-
-.faq{
-  margin-bottom: 120px;
-}
-
 .formGroup .formError{
   display: block;
   min-height: 1.2em;
   color: #C34E4E;
   font-size: map-get($font, pwar);
+  font-weight: bold;
   margin-top: 4px;
   .formCostChoice{
     .formCostChoiceBtn{
@@ -420,9 +416,6 @@ function handleSubmit(e) {         // 把資料送去綠界
       }
     }
   }
-}
-.formError{
-  font-weight: bold;
 }
 
 .formCostChoice{
@@ -457,7 +450,7 @@ function handleSubmit(e) {         // 把資料送去綠界
 @media screen and (max-width: 540px) {
   .formA{
     .formGroup{
-      width: 390px;
+      max-width: 390px;
     }
     input[type="text"],
     input[type="tel"],
@@ -465,15 +458,10 @@ function handleSubmit(e) {         // 把資料送去綠界
       width: 100%;
     }
     #cost{
-      width: 390px;
+      max-width: 390px;
     }
     .formCostChoice{
       margin: 0 auto;
-    }
-    .formReceipt{
-      display: block;
-      text-align: left;
-      width: 360px;
     }
     .formCostChoiceBtn{
       display: flex;
@@ -486,17 +474,17 @@ function handleSubmit(e) {         // 把資料送去綠界
     }
   }
   .faq{
-    width: 390px;
+    max-width: 390px;
   }
   .faqItem{
-    width: 390px;
+    max-width: 390px;
   }
 }
 @media screen and (max-width: 430px){
   .formA{
-    width: 350px;
+    max-width: 350px;
     .formGroup{
-      width: 350px;
+      max-width: 350px;
     }
     #cost{
       width: 350px;
@@ -507,7 +495,7 @@ function handleSubmit(e) {         // 把資料送去綠界
     }
   }
   .faq{
-    width: 350px;
+    width: 280px;
   }
   .faqItem{
     width: 330px;
@@ -520,9 +508,6 @@ function handleSubmit(e) {         // 把資料送去綠界
     .formGroup{
       width: 320px;
     }
-    .formReceipt{
-      width: 200px;
-    }
     input[type="text"],
     input[type="tel"],
     select{
@@ -533,9 +518,6 @@ function handleSubmit(e) {         // 把資料送去綠界
     }
   }
   .donateForm{
-    width: 280px;
-  }
-  .faq{
     width: 280px;
   }
 }
