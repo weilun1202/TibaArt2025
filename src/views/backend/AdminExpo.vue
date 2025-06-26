@@ -96,10 +96,7 @@ function handleFileChange(e) {
 async function fetchExpos() {
   const resp = await fetch(import.meta.env.VITE_AdminExpo)
   let expos = await resp.json()
-
-  expos = expos.map(expo => ({
-    ...expo,
-  }))
+  
   data.value = expos
 }
 
