@@ -56,10 +56,10 @@
                 <select v-model="row[col.key]" @change="handleStatusChange(row)">
                   <option
                     v-for="option in col.options || []"
-                    :key="option"
-                    :value="option"
+                    :key="option.value"
+                    :value="option.value"
                   >
-                    {{ option }}
+                    {{ option.label }}
                   </option>
                 </select>
               </template>

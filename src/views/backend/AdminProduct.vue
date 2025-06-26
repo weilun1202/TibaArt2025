@@ -47,7 +47,13 @@ const columns = [
   { key: 'price', label: '價格' },
   { key: 'stock', label: '庫存' },
   { key: 'updated', label: '上架時間'},
-  { key: 'status', label: '狀態' , type:'select', class:'w-120', options:['上架中', '已下架', '已售完']},
+  { key: 'status', label: '狀態' , type:'select', class:'w-120', 
+    options:[
+      { value: '上架中', label: '上架中' },
+      { value: '已下架', label: '已下架' },
+      { value: '已售完', label: '已售完' }
+    ]
+  },
   { key: 'edit', label: '編輯', type:'edit', class:'w-80'},
 ]
 

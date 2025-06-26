@@ -15,7 +15,13 @@ const columns = [
   { key: 'total_amount', label: '總金額' },
   { key: 'address', label: '配送地址' },
   { key: 'order_date', label: '訂購時間' },
-  { key: 'payment_status', label: '狀態', type:'select', class:'w-120', options:['unpaid', 'paid', 'refunded'] },
+  { key: 'payment_status', label: '狀態', type:'select', class:'w-120', 
+    options: [
+      { value: 'unpaid', label: '未付款' },
+      { value: 'paid', label: '已付款' },
+      { value: 'refunded', label: '已退款' }
+    ]
+  },
 ]
 
 const data = ref([]);
