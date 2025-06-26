@@ -230,6 +230,12 @@
             :message="errorMessage" 
             @close="closeErrorPopup" 
             />
+        <RemovePopup 
+            :show="showRemovePopup" 
+            :item="itemToRemove" 
+            @close="closeRemovePopup" 
+            @confirm="confirmRemoveItem"
+            />            
     </div>
   </div>
 </template>
@@ -239,7 +245,9 @@ import{ref, watch, computed } from 'vue';
 import {useCart} from '@/stores/cart.js';
 import { useRouter } from 'vue-router';
 import { useUserStore } from '@/stores/user.js';
+import RemovePopup from '@/components/RemovePopup.vue';
 import OrderConfirmPopup from '@/components/OrderConfirmPopup.vue';
+
 
 const { cartItems, updateQuan, removeFromCart, totalPrice, clearCart } = useCart();
 const router = useRouter();
@@ -308,17 +316,33 @@ const updateItemQuan = (productId, newQuan) => {
 }
 
 //移除商品
+const showRemovePopup = ref(false);
+const itemToRemove = ref(null);
+
 const handleRemoveItem = async (productId) => {
     try {
         await new Promise(resolve => requestAnimationFrame(resolve));
 
         const item = cartItems.value.find(item => item.id === productId);
-        if(item && confirm(`確定要移除「${item.name}」嗎？`)){
-            removeFromCart(productId);
+        if(item) {
+            itemToRemove.value = item;
+            showRemovePopup.value = true;
         }
     } catch (error) {
         console.error('移除商品失敗:', error);
     }
+}
+
+// 關閉移除彈窗
+const closeRemovePopup = () => {
+    showRemovePopup.value = false;
+    itemToRemove.value = null;
+}
+
+// 確認移除商品
+const confirmRemoveItem = (productId) => {
+    removeFromCart(productId);
+    closeRemovePopup();
 }
 
 
