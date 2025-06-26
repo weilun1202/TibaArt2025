@@ -10,7 +10,7 @@
     width: 600px;
     
     img{
-        height: 1000px;
+        height: 1150px;
         width: 100%;
         align-items: center;
         text-align: center;
@@ -36,6 +36,15 @@
         font-size: map-get($font, p);
         color: $fontBlack;
         margin: $spacing-6 0;
+        span{
+            font-size: map-get($font, h5);
+            font-weight: bold;
+            color: $primaryGreen;
+        }
+        p{
+            padding-bottom: $spacing-5;
+        }
+
     }
 
 }
