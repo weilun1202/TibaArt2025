@@ -75,7 +75,7 @@ const getStatusLabel = (status) => {
     case 'expoOn':
       return '展覽中'
     case 'expoOff':
-      return '未開展'
+      return '展覽中'
     case 'expoExit':
       return '已撤展'
     default:

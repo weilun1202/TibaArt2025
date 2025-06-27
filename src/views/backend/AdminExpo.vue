@@ -61,8 +61,8 @@ const columns = [
   { key: 'end', label: '結束日期'},
   { key: 'status', label: '狀態', type:'select',class:'w-120', 
     options: [
-      { value: 'expoOff', label: '未開展' },
-      { value: 'expoOn', label: '展覽中' },
+      { value: 'expoOff', label: '展覽中' },
+      { value: 'expoOn', label: '未開展' },
       { value: 'expoExit', label: '已撤展' }
     ]},
   { key: 'edit', label: '操作', type: 'edit', buttonLabel: '編輯', class:'w-80' },
