@@ -6,7 +6,7 @@
       <select v-model="selectedKey">
         <option disabled value="">請選擇欄位</option>
         <option 
-          v-for="col in columns.filter(col => !['edit', 'delete', 'more', 'switch', 'select'].includes(col.type))" 
+          v-for="col in columns.filter(col => !['edit', 'delete', 'more', 'switch', 'select', 'image'].includes(col.type))" 
           :key="col.key" 
           :value="col.key"
         >

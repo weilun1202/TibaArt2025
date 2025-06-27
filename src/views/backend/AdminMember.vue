@@ -57,7 +57,7 @@ async function updateStatus(row) {
       body: JSON.stringify({
         id: row.id,
         per: row.per ? 1 : 0,  // 轉換成數字傳給資料庫
-        type: 'member'  //抓資料表
+        type: 'MEMBER'  //抓資料表
       })
     })
     
