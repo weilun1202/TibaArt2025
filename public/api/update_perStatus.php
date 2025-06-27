@@ -8,9 +8,9 @@ $per = $data['per'];
 $type = strtolower($data['type']);  //大寫會錯誤，需轉成小寫
 
 $table = '';
-if($type === 'MEMBER'){
+if($type === 'member'){
   $table = 'MEMBER';
-}elseif($type === 'ARTIST'){
+}elseif($type === 'artist'){
   $table = 'ARTIST';
 }else{
   http_response_code(400);
