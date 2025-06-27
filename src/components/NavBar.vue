@@ -106,11 +106,11 @@ const menuOpen = ref(false)
 const toggleMenu = () => {
   menuOpen.value = !menuOpen.value
   // Prevent body scroll when menu is open
-  if (menuOpen.value) {
-    document.body.style.overflow = 'hidden'
-  } else {
-    document.body.style.overflow = ''
-  }
+  // if (menuOpen.value) {
+  //   document.body.style.overflow = 'hidden'
+  // } else {
+  //   document.body.style.overflow = ''
+  // }
 }
 
 const closeMenu = () => {
@@ -227,6 +227,7 @@ onUnmounted(() => {
    
 
     ul {
+    overflow: hidden;
         display: flex;
         justify-content: center;
         align-items: center;
