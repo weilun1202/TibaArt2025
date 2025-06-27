@@ -15,13 +15,7 @@ const columns = [
   { key: 'total_amount', label: '總金額' },
   { key: 'address', label: '配送地址' },
   { key: 'order_date', label: '訂購時間' },
-  { key: 'payment_status', label: '狀態', type:'select', class:'w-120', 
-    options: [
-      { value: 'unpaid', label: '未付款' },
-      { value: 'paid', label: '已付款' },
-      { value: 'refunded', label: '已退款' }
-    ]
-  },
+  { key: 'payment_status', label: '狀態', class:'w-120'},
 ]
 
 const data = ref([]);
@@ -30,9 +24,21 @@ async function fetchOrders() {
   const resp = await fetch(import.meta.env.VITE_AdminOrder)
   let orders = await resp.json()
 
+  orders = orders.map(order => ({
+    ...order,
+    payment_status: convertStatus(order.payment_status)
+  }))
+
   data.value = orders
 }
-
+function convertStatus(i) {
+  switch (i) {
+    case 'unpaid': return '未付款'
+    case 'paid': return '已付款'
+    case 'refunded': return '已退款'
+  }
+}
+    
 onMounted(() => {
   fetchOrders()
 })
