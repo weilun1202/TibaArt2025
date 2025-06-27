@@ -8,13 +8,13 @@ $per = $data['per'];
 $type = strtolower($data['type']);  //大寫會錯誤，需轉成小寫
 
 $table = '';
-if($type === 'member'){
+if($type === 'MEMBER'){
   $table = 'MEMBER';
-}elseif($type === 'artist'){
+}elseif($type === 'ARTIST'){
   $table = 'ARTIST';
 }else{
   http_response_code(400);
-  echo json_encode(['error' => '無效的 type，請使用 member 或 artist']);
+  echo json_encode(['error' => '無效的 type，請使用 MEMBER 或 ARTIST']);
   exit;
 }
 
@@ -25,5 +25,6 @@ $stmt->execute([$per, $id]);
 
 echo json_encode(['success' => true]);
 
-file_put_contents('debug.log', print_r($data, true));
+// file_put_contents('debug.log', print_r($data, true));
+file_put_contents('debug.log', "SQL: $sql\nParams: per=$per, id=$id\n", FILE_APPEND);
 ?>

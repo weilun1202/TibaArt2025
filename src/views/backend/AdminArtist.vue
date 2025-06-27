@@ -204,7 +204,7 @@ async function updateStatus(row) {
       body: JSON.stringify({
         id: row.id,
         per: row.per ? 1 : 0,
-        type: 'ARTIST'  //抓資料表
+        type: 'artist'  //抓資料表
       })
     })
     
