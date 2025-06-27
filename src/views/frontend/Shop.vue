@@ -77,6 +77,14 @@
         />
       </div>
 
+      <div>
+        <LoginPopup
+          :show="showLoginPopup"
+          :redirectPath="currentPath"
+          @close="showLoginPopup = false"
+        />
+      </div>
+
     </div>
   </div>
 </template>
@@ -90,6 +98,7 @@ import { useUserStore } from '@/stores/user';
 import { gsap } from 'gsap'; 
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import CartPopup from '@/components/CartPopup.vue';
+import LoginPopup from '@/components/LoginPopup.vue';
 
 const router = useRouter();
 // const baseUrl = import.meta.env.BASE_URL;
@@ -201,8 +210,11 @@ const initScrollTriggerAnimations = () => {
   });
 };
 
+// 登入彈窗
+const showLoginPopup = ref(false);
+const currentPath = ref('');
 
-// 彈窗
+// 加入購物車彈窗
 const showCartPopup = ref(false); 
 const itemInPopup = ref(null); 
 const quantityInPopup = ref(1); 
@@ -214,11 +226,11 @@ const props = defineProps({
 
 const handleAddToCart = async (item) => {
   if (!userStore.requireLogin()) {
-    alert('請先登入會員')
-    router.push({
-      path: '/front/memLogin',
-      query: { redirect: router.currentRoute.value.fullPath } // 記錄當前頁面完整路徑
-    });
+    // alert('請先登入會員')
+    
+    // 記錄當前頁面完整路徑
+    currentPath.value = router.currentRoute.value.fullPath;
+    showLoginPopup.value = true;
     return
     
   } else {

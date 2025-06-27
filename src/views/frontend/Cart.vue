@@ -586,7 +586,7 @@ const submitOrder = async () => {
             const result = await response.json(); // 解析 JSON 回應
 
             if (response.ok && result.success) {
-                alert('訂單送出成功！');
+                // alert('訂單送出成功！');
             }
                 
             

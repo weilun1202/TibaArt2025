@@ -1,16 +1,16 @@
 <template>
-  <div v-if="show" class="remove-popup-overlay" @click.self="closePopup">
-    <div class="remove-popup-content animate__animated animate__fadeInDown">
+  <div v-if="show" class="login-popup-overlay" @click.self="closePopup">
+    <div class="login-popup-content animate__animated animate__fadeInDown">
       <div class="popup-header">
         <button class="close-btn" @click="closePopup">&times;</button>
       </div>
       <div class="popup-body">
-        <p class="remove-message">
-          確定要移除「{{ item?.name }}」嗎？
+        <p class="login-message">
+          請先登入會員
         </p>
         <div class="popup-actions">
-          <button class="cancel-btn" @click="closePopup">取消</button>
-          <button class="confirm-btn" @click="confirmRemove">確定移除</button>
+          <button class="continue-btn" @click="closePopup">繼續瀏覽</button>
+          <button class="login-btn" @click="goToLogin">前往登入</button>
         </div>
       </div>
     </div>
@@ -18,27 +18,38 @@
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router';
+
 const props = defineProps({
-  item: Object, // 接收要移除的商品資訊
   show: Boolean, // 控制彈窗顯示/隱藏的狀態
+  redirectPath: {
+    type: String,
+    default: ''
+  }
 });
 
-const emit = defineEmits(['close', 'confirm']); // 定義發出的事件
+const emit = defineEmits(['close']); // 定義發出的事件
+
+const router = useRouter();
 
 const closePopup = () => {
   emit('close'); // 通知父元件關閉彈窗
 };
 
-const confirmRemove = () => {
-  emit('confirm', props.item?.id); // 通知父元件確認移除
+const goToLogin = () => {
   closePopup(); // 關閉彈窗
+  router.push({
+    path: '/front/memLogin',
+    query: { redirect: props.redirectPath || router.currentRoute.value.fullPath }
+  });
 };
+
 </script>
 
 <style lang="scss" scoped>
 @import '/style.scss';
 
-.remove-popup-overlay {
+.login-popup-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -51,7 +62,7 @@ const confirmRemove = () => {
   z-index: 1000;
 }
 
-.remove-popup-content {
+.login-popup-content {
   background: linear-gradient(to top, #f6eee4, #ffffff);
   padding: 20px;
   border-radius: 12px;
@@ -100,7 +111,7 @@ const confirmRemove = () => {
   line-height: 1.5;
 }
 
-.remove-message {
+.login-message {
   font-size: 1.1rem;
   color: #2F2F2F;
   margin: 15px 0 20px 0;
@@ -118,7 +129,7 @@ const confirmRemove = () => {
   }
 }
 
-.cancel-btn, .confirm-btn {
+.continue-btn, .login-btn {
   padding: 8px 16px;
   border: none;
   border-radius: 6px;
@@ -128,7 +139,7 @@ const confirmRemove = () => {
   min-width: 100px;
 }
 
-.cancel-btn {
+.continue-btn {
   background-color: $fontWhite;
   color: $fontBlack;
   border: 1px solid $primaryGreen;
@@ -137,7 +148,7 @@ const confirmRemove = () => {
   }
 }
 
-.confirm-btn {
+.login-btn {
   background-color: $primaryGreen;
   color: $fontWhite;
 
