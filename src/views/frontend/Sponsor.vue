@@ -251,6 +251,9 @@
   const selectedAmount = ref('')           // 被選擇的金額
   const name = ref('')                     // 贊助人名字
   const email = ref('')                    // 電子郵件
+  
+  // 鎖定前一頁選項
+  const isLocked = ref(false) 
 
   // 錯誤訊息狀態
   const errors = ref({
@@ -287,6 +290,7 @@
             console.log(foundExpo);
             
             subject.value = foundExpo.id; // 設定 v-model，選中對應的選項
+            isLocked.value = true     // 鎖定選項，讓 select 不能選
             console.log(subject);
             
           }else{
