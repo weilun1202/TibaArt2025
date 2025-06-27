@@ -233,6 +233,10 @@ async function handleSubmitGeneral() {
       const result = await response.json()
 
       if (result.success) {
+        if (result.member_info.per === 0) {
+          router.push('/front/MemPerFales');
+        return; // 已停權，終止登入流程
+        }
         localStorage.setItem('member', JSON.stringify(result.member_info))
         localStorage.setItem('memberType', payload.type); // 加這行記錄會員類型
 
@@ -287,6 +291,11 @@ async function handleSubmitArtist() {
       const result = await response.json()
 
       if (result.success) {
+
+        if (result.member_info.per === 0) {
+          router.push('/front/MemPerFales');
+        return; // 已停權，終止登入流程
+        }
         // 成功後導向會員主頁
         localStorage.setItem('member', JSON.stringify(result.member_info))
         localStorage.setItem('memberType', payload.type); // 加這行記錄會員類型
