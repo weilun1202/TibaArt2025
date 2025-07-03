@@ -5,7 +5,7 @@ const cartItems = ref([])
 
 // 初始化時從 localStorage 讀取資料
 const initCart = () => {
-  const savedCart = sessionStorage.getItem('shoppingCart')
+  const savedCart = localStorage.getItem('shoppingCart')
   if (savedCart) {
     try {
       cartItems.value = JSON.parse(savedCart)
@@ -18,7 +18,7 @@ const initCart = () => {
 
 // 儲存購物車到 localStorage
 const saveCartToStorage = () => {
-  sessionStorage.setItem('shoppingCart', JSON.stringify(cartItems.value))
+  localStorage.setItem('shoppingCart', JSON.stringify(cartItems.value))
 }
 
 export function useCart() {
@@ -73,7 +73,7 @@ export function useCart() {
   // 清空購物車
   const clearCart = () => {
     cartItems.value = []
-    sessionStorage.removeItem('shoppingCart')
+    localStorage.removeItem('shoppingCart')
   }
 
   // 計算購物車總數量

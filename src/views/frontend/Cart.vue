@@ -217,13 +217,19 @@
                                 <p class="total"><span>總計</span><span>NT${{ finalPrice }}</span></p>
                             </div>
                             <!-- <button class="btn"><router-link to="orderConfirm>確認購買</router-link></button> -->
-                            <button type="button" class="btn" @click="submitOrder">確認購買</button>
+                            <button type="button" class="btn" @click="handleSubmitOrder">確認購買</button>
                             <img class="ecpay" src="@/assets/img/ecpay_logo.svg" alt="">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <LoginPopup
+            :show="showLoginPopup"
+            :redirectPath="currentPath"
+            @close="showLoginPopup = false"
+            />
 
         <OrderConfirmPopup 
             :show="showErrorPopup" 
@@ -241,13 +247,13 @@
 </template>
 
 <script setup>
-import{ref, watch, computed } from 'vue';
+import{ref, watch, computed, onMounted } from 'vue';
 import {useCart} from '@/stores/cart.js';
 import { useRouter } from 'vue-router';
 import { useUserStore } from '@/stores/user.js';
+import LoginPopup from '@/components/LoginPopup.vue';
 import RemovePopup from '@/components/RemovePopup.vue';
 import OrderConfirmPopup from '@/components/OrderConfirmPopup.vue';
-
 
 const { cartItems, updateQuan, removeFromCart, totalPrice, clearCart } = useCart();
 const router = useRouter();
@@ -268,7 +274,21 @@ const orderInfo = ref({
 // 當 memberId 變化時，更新 orderInfo 中的 member_id
 watch(memberId, (newId) => {
     orderInfo.value.member_id = newId;
+    // 當會員 ID 變更時（表示登入狀態改變或用戶切換），清空購物車
+    if (!newId) { // 如果 newId 為空字串，表示未登入或登出
+        clearCart();
+        console.log('會員登入狀態改變，購物車已清空。');
+    }
 }, { immediate: true }); // immediate: true 確保在組件初始化時就執行一次
+
+// 新增一個 watch 來監聽登入狀態，如果登出則清空購物車
+watch(() => userStore.isLoggedIn, (newStatus, oldStatus) => {
+    // 避免首次載入時就清空，只在狀態從登入變為未登入時執行
+    if (oldStatus === true && newStatus === false) {
+        clearCart();
+        console.log('用戶已登出，購物車已清空。');
+    }
+});
 
 const recipientInfo = ref({
     name: '',
@@ -281,6 +301,9 @@ const shippingFee = ref(60);
 const discount = ref(0);
 const errors = ref({})
 const touchedFields = ref({}); // 追蹤哪些欄位已經被使用者操作過
+
+// 登入彈窗相關
+const showLoginPopup = ref(false);
 
 // 計算總價
 const finalPrice = computed (() => {
@@ -554,6 +577,23 @@ const showError = (message) => {
 const closeErrorPopup = () => {
   showErrorPopup.value = false;
   errorMessage.value = '';
+};
+
+// 關閉登入彈窗
+const closeLoginPopup = () => {
+    showLoginPopup.value = false;
+};
+
+// 處理確認購買按鈕點擊（加入登入檢查）
+const handleSubmitOrder = () => {
+    // 首先檢查是否已登入
+    if (!userStore.isLoggedIn) {
+        showLoginPopup.value = true;
+        return;
+    }
+    
+    // 已登入，執行原本的送出訂單邏輯
+    submitOrder();
 };
 
 const submitOrder = async () => {
