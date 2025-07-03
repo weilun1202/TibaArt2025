@@ -4,6 +4,7 @@
       :data="data"
       @add="openAddModal"
       @edit="openEditModal"
+      @delete="handleDelete"
      />
 
     <transition name="fade">
@@ -55,6 +56,7 @@ const columns = [
     ]
   },
   { key: 'edit', label: '編輯', type:'edit', class:'w-80'},
+  { key: 'delete', label: '操作', type: 'delete', buttonLabel: '刪除', class:'w-80' }
 ]
 
 const data = ref([]);
@@ -166,6 +168,33 @@ async function addData() {
 
 function openEditModal(){
   alert('功能尚未開放');
+}
+
+// 刪除資料
+async function handleDelete(id) {
+  if (!confirm('確定要刪除這筆資料嗎？')) return;
+
+  try {
+    const resp = await fetch(import.meta.env.VITE_DeleteProduct, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ id })
+    });
+
+    const result = await resp.json();
+
+    if (result.success) {
+      alert('刪除成功');
+      fetchProducts(); // 重新載入資料
+    } else {
+      alert('刪除失敗：' + result.message);
+    }
+  } catch (err) {
+    console.error(err);
+    alert('發生錯誤：' + err.message);
+  }
 }
 
 onMounted(() => {
